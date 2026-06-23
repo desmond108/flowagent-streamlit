@@ -81,11 +81,9 @@ def demo_catalog() -> dict[str, str]:
     return out
 
 
-def extract_text(uploaded) -> str:
-    """Pull plain text from an uploaded PDF / txt / md file."""
-    name = uploaded.name.lower()
-    data = uploaded.read()
-    if name.endswith(".pdf"):
+def extract_text(name: str, data: bytes) -> str:
+    """Pull plain text from uploaded PDF / txt / md bytes."""
+    if name.lower().endswith(".pdf"):
         import pdfplumber
 
         text = []
@@ -166,6 +164,14 @@ def show_results(sop_id: str, paths: list[str], source: str | None = None) -> No
         type="primary",
     )
 
+    def _mime(p: str) -> str:
+        pl = p.lower()
+        if pl.endswith(".pdf"):
+            return "application/pdf"
+        if pl.endswith((".txt", ".md")):
+            return "text/plain"
+        return "application/octet-stream"
+
     cols = st.columns(3)
     for i, (label, p) in enumerate(items):
         with cols[i % 3]:
@@ -174,7 +180,7 @@ def show_results(sop_id: str, paths: list[str], source: str | None = None) -> No
                     label,
                     data=fh.read(),
                     file_name=os.path.basename(p),
-                    mime="application/pdf",
+                    mime=_mime(p),
                     key=f"dl_{i}_{os.path.basename(p)}",
                 )
 
@@ -182,14 +188,21 @@ def show_results(sop_id: str, paths: list[str], source: str | None = None) -> No
     by_label = {label: p for label, p in items}
     choice = st.selectbox("Preview", list(by_label), key=f"prev_{sop_id}")
     if choice:
-        try:
-            for n, png in enumerate(pdf_page_images(by_label[choice]), 1):
-                st.image(png, width="stretch", caption=f"Page {n}")
-        except Exception:
-            st.info(
-                "Inline preview unavailable here — use the download button above "
-                "to open the PDF."
-            )
+        p = by_label[choice]
+        if p.lower().endswith(".pdf"):
+            try:
+                for n, png in enumerate(pdf_page_images(p), 1):
+                    st.image(png, width="stretch", caption=f"Page {n}")
+            except Exception:
+                st.info(
+                    "Inline preview unavailable here — use the download button "
+                    "above to open the PDF."
+                )
+        else:  # text upload (txt / md) used as a Live-mode source
+            try:
+                st.text(Path(p).read_text(encoding="utf-8", errors="replace"))
+            except Exception:
+                st.info("Inline preview unavailable — use the download button above.")
 
 
 def remember_results(mode, sop_id, tmp, paths, elapsed=None, payload=None, source=None) -> None:
@@ -286,7 +299,8 @@ else:
         try:
             with st.status("Working …", expanded=True) as status:
                 st.write("Extracting text from the SOP …")
-                text = extract_text(uploaded)
+                data = uploaded.getvalue()
+                text = extract_text(uploaded.name, data)
                 st.write(f"Extracted {len(text):,} characters.")
 
                 st.write("Building the analysis (this can take 30s–2min) …")
@@ -306,9 +320,13 @@ else:
                 st.write("Rendering the six deliverables …")
                 pkg = contract.from_dict(pkg_dict)
                 tmp, paths = render_package(pkg)
+                # Keep the uploaded SOP alongside the outputs so it's previewable.
+                src_path = os.path.join(tmp, uploaded.name)
+                with open(src_path, "wb") as fh:
+                    fh.write(data)
                 status.update(label="Done", state="complete")
 
-            remember_results("live", sop_id, tmp, paths, payload=pkg_dict)
+            remember_results("live", sop_id, tmp, paths, payload=pkg_dict, source=src_path)
         except Exception as e:  # surface SDK / render errors to the user
             st.exception(e)
 
