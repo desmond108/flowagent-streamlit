@@ -55,8 +55,18 @@ SYSTEM = """You are a process-analysis engine for the FlowAgent platform.
 Given the full text of a Standard Operating Procedure, produce a single JSON
 object that decomposes it into a process model (phases, steps, swimlanes), a
 fit-gap analysis against the named reference catalog, and an optimised SOP.
-The JSON MUST conform exactly to the provided schema. Ground every gap and
-score in the SOP text; do not invent systems or roles not implied by it."""
+The JSON MUST conform exactly to the provided JSON Schema. Ground every gap and
+score in the SOP text; do not invent systems or roles not implied by it.
+Respond with ONLY the JSON object — no markdown, no code fences, no commentary."""
+
+
+def _extract_json(text: str) -> dict:
+    """Parse the model's reply as a JSON object, tolerating any stray prose by
+    taking the outermost { ... } span."""
+    start, end = text.find("{"), text.rfind("}")
+    if start == -1 or end == -1 or end < start:
+        raise ValueError("model did not return a JSON object")
+    return json.loads(text[start:end + 1])
 
 
 class LLMAnalyzer:
@@ -76,24 +86,29 @@ class LLMAnalyzer:
         self.max_tokens = max_tokens
 
     def analyze(self, sop_id: str, sop_text: str) -> dict:
-        # Stream because the package JSON is large; structured output via
-        # output_config.format constrains the response to the contract schema.
+        # The canonical schema is too large to compile into a grammar via
+        # output_config.format, so we give the model the schema in the prompt
+        # and validate the returned JSON against the contract ourselves.
+        # Stream because the package JSON is large (avoids HTTP timeouts).
+        schema_text = json.dumps(contract.SCHEMA, indent=2)
+        user = (
+            f"SOP id: {sop_id}\n\n"
+            "Produce the canonical JSON conforming exactly to this JSON Schema:\n\n"
+            f"=== JSON SCHEMA ===\n{schema_text}\n\n"
+            f"=== SOP TEXT ===\n{sop_text}"
+        )
         with self.client.messages.stream(
             model=self.model,
             max_tokens=self.max_tokens,
             system=SYSTEM,
-            output_config={"format": {"type": "json_schema", "schema": contract.SCHEMA}},
-            messages=[{
-                "role": "user",
-                "content": f"SOP id: {sop_id}\n\n=== SOP TEXT ===\n{sop_text}",
-            }],
+            messages=[{"role": "user", "content": user}],
         ) as stream:
             message = stream.get_final_message()
 
         if message.stop_reason == "refusal":
             raise RuntimeError(f"{sop_id}: request refused ({message.stop_details})")
         text = next(b.text for b in message.content if b.type == "text")
-        d = json.loads(text)
+        d = _extract_json(text)
 
         errors = contract.validate(d)
         if errors:
