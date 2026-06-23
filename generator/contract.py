@@ -13,6 +13,7 @@ from __future__ import annotations
 import dataclasses
 import hashlib
 import json
+import re
 
 from . import model as M
 
@@ -72,6 +73,23 @@ def _triple(x):
     return (title, sub, keys if isinstance(keys, list) else [keys])
 
 
+def _num(x, default=0):
+    """Coerce a value to a number — the renderer does arithmetic on fit scores,
+    but LLM output sometimes returns them as strings (e.g. '70', '85%')."""
+    if isinstance(x, (int, float)):
+        return x
+    m = re.search(r"-?\d+(?:\.\d+)?", str(x))
+    if not m:
+        return default
+    s = m.group(0)
+    return float(s) if "." in s else int(s)
+
+
+def _setnum(d, key):
+    if isinstance(d, dict) and key in d:
+        d[key] = _num(d[key])
+
+
 def _swim_phase(d):
     d = dict(d)
     d["nodes"] = _list(M.SwimNode, d["nodes"])
@@ -81,6 +99,15 @@ def _swim_phase(d):
 
 def _fitgap(d):
     d = dict(d)
+    # numeric coercion on nested dataclass rows (LLM may emit numbers as strings)
+    for it in d.get("phase_bars", []):
+        _setnum(it, "value")
+    for it in d.get("phase_cards", []):
+        _setnum(it, "value")
+    for it in d.get("control_bars", []):
+        _setnum(it, "value")
+    for it in d.get("remediations", []):
+        _setnum(it, "rank")
     d["phase_bars"] = _list(M.FitPhaseBar, d["phase_bars"])
     d["phase_cards"] = _list(M.PhaseScoreCard, d["phase_cards"])
     d["items"] = _list(M.FitItem, d["items"])
@@ -88,12 +115,16 @@ def _fitgap(d):
     d["control_bars"] = _list(M.ControlBar, d["control_bars"])
     d["remediations"] = _list(M.Remediation, d["remediations"])
     # These stay as plain lists but the templates unpack them with a fixed arity,
-    # so coerce each row to the exact shape it expects.
+    # so coerce each row to the exact shape it expects (and numbers to numbers).
     d["metrics"] = [_kv(x) for x in d.get("metrics", [])]
     d["groups"] = [_pair(x) for x in d.get("groups", [])]
-    d["risk_impact"] = [_pair(x) for x in d.get("risk_impact", [])]
-    d["radar"] = [_pair(x) for x in d.get("radar", [])]
+    d["risk_impact"] = [(p[0], _num(p[1])) for p in (_pair(x) for x in d.get("risk_impact", []))]
+    d["radar"] = [(p[0], _num(p[1])) for p in (_pair(x) for x in d.get("radar", []))]
     d["detail_slides"] = [_triple(x) for x in d.get("detail_slides", [])]
+    for k in ("overall_fit", "partial_pct", "fits", "gaps", "partials",
+              "steps_analysed", "phases_count", "projected_fit"):
+        if k in d:
+            d[k] = _num(d[k])
     return M.FitGap(**d)
 
 
@@ -114,6 +145,10 @@ def from_dict(d: dict) -> M.SopPackage:
     d["opt_steps"] = _list(M.Step, d["opt_steps"])
     d["opt_swim_phases"] = [_swim_phase(p) for p in d["opt_swim_phases"]]
     d["optimised_doc"] = _doc(d["optimised_doc"])
+    for k in ("n_phases", "n_steps", "n_roles", "n_gateways",
+              "opt_n_phases", "opt_n_steps", "opt_n_gateways", "opt_fit"):
+        if k in d:
+            d[k] = _num(d[k])
     return M.SopPackage(**d)
 
 
