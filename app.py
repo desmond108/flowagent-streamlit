@@ -14,7 +14,6 @@ Deploy:        see DEPLOY.md (Streamlit Community Cloud + chromium via packages.
 """
 from __future__ import annotations
 
-import base64
 import io
 import os
 import shutil
@@ -91,6 +90,24 @@ def render_package(pkg) -> tuple[str, list[str]]:
     return tmp, paths
 
 
+def pdf_page_images(path: str, zoom: float = 1.6, max_pages: int = 12) -> list[bytes]:
+    """Render PDF pages to PNG bytes (reliable preview — browsers won't embed
+    base64 PDFs inside Streamlit's component frame). Uses PyMuPDF; no system libs."""
+    import fitz  # PyMuPDF
+
+    out = []
+    doc = fitz.open(path)
+    try:
+        for i, page in enumerate(doc):
+            if i >= max_pages:
+                break
+            pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom))
+            out.append(pix.tobytes("png"))
+    finally:
+        doc.close()
+    return out
+
+
 def zip_bytes(paths: list[str]) -> bytes:
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
@@ -129,12 +146,15 @@ def show_results(sop_id: str, paths: list[str]) -> None:
         "Preview", sorted(pdfs), format_func=os.path.basename, key=f"prev_{sop_id}"
     )
     if choice:
-        b64 = base64.b64encode(Path(choice).read_bytes()).decode()
-        st.components.v1.html(
-            f'<iframe src="data:application/pdf;base64,{b64}" '
-            f'width="100%" height="640" style="border:none"></iframe>',
-            height=660,
-        )
+        try:
+            pages = pdf_page_images(choice)
+            for n, png in enumerate(pages, 1):
+                st.image(png, use_container_width=True, caption=f"Page {n}")
+        except Exception:
+            st.info(
+                "Inline preview unavailable here — use the download button above "
+                "to open the PDF."
+            )
 
 
 # --- Sidebar ----------------------------------------------------------------
