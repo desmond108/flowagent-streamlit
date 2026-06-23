@@ -1,0 +1,2029 @@
+{
+  "meta": {
+    "sop_id": "SOP-INS-005",
+    "slug": "Licensing_and_Contracting",
+    "title": "Insurance Licensing and Contracting",
+    "short_title": "Licensing & contracting",
+    "version": "1.4",
+    "owner": "Distribution & Licensing",
+    "org": "Meridian Insurance Group",
+    "catalog": "Sircon (Vertafore) — Producer Lifecycle Management Best-Practice Catalog",
+    "catalog_short": "Sircon PLM",
+    "new_version": "2.0",
+    "effective_date": "01 October 2026",
+    "supersedes": "v1.4 dated 01 February 2025",
+    "approved_by": "Chief Distribution Officer",
+    "classification": "Internal Use Only"
+  },
+  "phases": [
+    {
+      "pid": "1",
+      "name": "New agent appointment",
+      "subtitle": "Verify, screen, train, appoint",
+      "circle": "blue",
+      "roles": "Sales Mgr · Licensing · Compliance · DMS",
+      "step_range": "Steps 1–7",
+      "summary": "7 steps + 1 decision"
+    },
+    {
+      "pid": "2",
+      "name": "Licence renewal",
+      "subtitle": "Alerts, CE, renewal filing",
+      "circle": "green",
+      "roles": "Licensing System · Licensing Specialist",
+      "step_range": "Steps 8–11",
+      "summary": "4 steps"
+    },
+    {
+      "pid": "3",
+      "name": "Termination",
+      "subtitle": "Terminate, file, deactivate",
+      "circle": "amber",
+      "roles": "Sales Mgr · Document Mgr · Licensing",
+      "step_range": "Steps 12–15",
+      "summary": "4 steps"
+    }
+  ],
+  "steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Onboarding request submitted by Regional Sales Manager",
+      "responsible": "Regional Sales Manager",
+      "output": "Candidate details, product lines, territory and proposed date",
+      "timeline": "Day 0",
+      "controls": "Appointment trigger",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Licence verification with regulatory authority",
+      "responsible": "Licensing Specialist",
+      "output": "Status, expiry and CE compliance confirmed via regulator portal; recorded in AgentOS",
+      "timeline": "Day 1–2",
+      "controls": "Regulator verification",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Background check initiated",
+      "responsible": "Licensing Specialist / Compliance",
+      "output": "Criminal, credit and conduct check; Compliance reviews adverse findings within 3 days",
+      "timeline": "Day 1–4",
+      "controls": "Compliance review",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Pre-appointment compliance training assigned",
+      "responsible": "Licensing Specialist",
+      "output": "Code of Conduct, AML and Product Knowledge via LMS; complete before filing",
+      "timeline": "Day 2–6",
+      "controls": "Mandatory training gate",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "5",
+      "phase": "1",
+      "activity": "Distribution agreement executed",
+      "responsible": "Document Manager / Representative",
+      "output": "Standard agreement signed via DocuSign; filed in DMS",
+      "timeline": "Day 6",
+      "controls": "Executed agreement",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "1",
+      "activity": "Appointment filing submitted to regulator",
+      "responsible": "Licensing Specialist",
+      "output": "Filed via regulator portal; confirmation recorded; 5–15 business days processing",
+      "timeline": "Day 6",
+      "controls": "Regulatory filing",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "1",
+      "activity": "Appointment confirmed; agent activated in PAS and CRM",
+      "responsible": "Licensing Specialist",
+      "output": "Agent record created; product authorities, territory and commission tier set",
+      "timeline": "Day 10",
+      "controls": "Activation",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "1",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Compliance disposition",
+      "kind": "decision",
+      "decision": "Adverse background findings?",
+      "branches": [
+        "None / minor (justified) → proceed",
+        "Material → automatic rejection (Sec 6.1)"
+      ]
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Renewal alert triggered 90 days before expiry",
+      "responsible": "Licensing System (auto)",
+      "output": "Agent and Licensing Specialist notified by email",
+      "timeline": "Expiry −90",
+      "controls": "Automated renewal alert",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "2",
+      "activity": "CE credit verification",
+      "responsible": "Licensing Specialist",
+      "output": "CE transcript reviewed; shortfall notified with required hours and providers",
+      "timeline": "Expiry −60",
+      "controls": "CE compliance check",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "2",
+      "activity": "Renewal application filed with regulator",
+      "responsible": "Licensing Specialist",
+      "output": "Filed at least 30 days before expiry; renewal fee paid from licensing budget",
+      "timeline": "Expiry −30",
+      "controls": "Renewal filing SLA",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "2",
+      "activity": "Renewal confirmation recorded",
+      "responsible": "Licensing Specialist",
+      "output": "New expiry date updated in AgentOS and PAS; agent notified",
+      "timeline": "Expiry −15",
+      "controls": "Confirmation",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Termination request initiated (voluntary or for cause)",
+      "responsible": "Sales Manager / Compliance",
+      "output": "Reason code recorded; final commission run initiated; open cases reviewed",
+      "timeline": "Day 0",
+      "controls": "Termination trigger",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "13",
+      "phase": "3",
+      "activity": "Distribution agreement terminated",
+      "responsible": "Document Manager",
+      "output": "Termination notice executed per agreement terms; copy filed in DMS",
+      "timeline": "Day 1–3",
+      "controls": "Agreement termination",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "14",
+      "phase": "3",
+      "activity": "Termination filing submitted to regulator",
+      "responsible": "Licensing Specialist",
+      "output": "Appointment withdrawal filed within 30 days of effective termination",
+      "timeline": "≤30 days",
+      "controls": "Withdrawal filing",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "15",
+      "phase": "3",
+      "activity": "Agent record deactivated in PAS and CRM",
+      "responsible": "Licensing Specialist",
+      "output": "System access revoked; policy book transferred to replacement agent",
+      "timeline": "Day 3–5",
+      "controls": "Deactivation",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "authority": [
+    {
+      "band": "Standard appointment",
+      "first": "Licensing Specialist",
+      "second": "—"
+    },
+    {
+      "band": "Minor adverse history",
+      "first": "Compliance Officer",
+      "second": "Licensing Specialist"
+    },
+    {
+      "band": "Material adverse / rejection",
+      "first": "Compliance Officer",
+      "second": "Chief Distribution Officer"
+    },
+    {
+      "band": "For-cause termination",
+      "first": "Compliance Officer",
+      "second": "Regional Sales Manager"
+    },
+    {
+      "band": "Reinstatement after lapse",
+      "first": "Compliance Officer",
+      "second": "Licensing Specialist"
+    }
+  ],
+  "swim_phases": [
+    {
+      "pid": "1",
+      "name": "New agent appointment",
+      "subtitle": "Steps 1–7 · verify, screen, train, appoint",
+      "lanes": [
+        "Sales / Rep",
+        "Licensing Specialist",
+        "Compliance",
+        "DMS"
+      ],
+      "nodes": [
+        {
+          "nid": "s1",
+          "lane": "Sales / Rep",
+          "col": 0,
+          "title": "Onboarding request",
+          "sub": "Regional Sales Mgr",
+          "kind": "standard"
+        },
+        {
+          "nid": "s2",
+          "lane": "Licensing Specialist",
+          "col": 1,
+          "title": "Licence verification",
+          "sub": "regulator portal",
+          "kind": "standard"
+        },
+        {
+          "nid": "s3",
+          "lane": "Compliance",
+          "col": 1,
+          "title": "Background check",
+          "sub": "criminal · credit · conduct",
+          "kind": "standard"
+        },
+        {
+          "nid": "s4",
+          "lane": "Licensing Specialist",
+          "col": 2,
+          "title": "Assign pre-appointment training",
+          "sub": "AML · conduct",
+          "kind": "standard"
+        },
+        {
+          "nid": "s5",
+          "lane": "Compliance",
+          "col": 2,
+          "title": "Material adverse → reject",
+          "sub": "Sec 6.1",
+          "kind": "exception"
+        },
+        {
+          "nid": "s6",
+          "lane": "DMS",
+          "col": 2,
+          "title": "Execute distribution agreement",
+          "sub": "DocuSign",
+          "kind": "standard"
+        },
+        {
+          "nid": "s7",
+          "lane": "Licensing Specialist",
+          "col": 3,
+          "title": "Appointment filing",
+          "sub": "regulator portal",
+          "kind": "standard"
+        },
+        {
+          "nid": "s8",
+          "lane": "Licensing Specialist",
+          "col": 4,
+          "title": "Activate agent",
+          "sub": "PAS · CRM",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "s1",
+          "dst": "s2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "s2",
+          "dst": "s3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s3",
+          "dst": "s4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s3",
+          "dst": "s5",
+          "label": "adv",
+          "dashed": true,
+          "kind": "exception"
+        },
+        {
+          "src": "s4",
+          "dst": "s6",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s6",
+          "dst": "s7",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s7",
+          "dst": "s8",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Appointments require regulator verification, background screening, mandatory training and an executed agreement before filing."
+    },
+    {
+      "pid": "2",
+      "name": "Licence renewal",
+      "subtitle": "Steps 8–11 · alerts, CE, filing",
+      "lanes": [
+        "Licensing System",
+        "Licensing Specialist",
+        "Regulator"
+      ],
+      "nodes": [
+        {
+          "nid": "a1",
+          "lane": "Licensing System",
+          "col": 0,
+          "title": "Renewal alert (90 days)",
+          "sub": "auto email",
+          "kind": "standard"
+        },
+        {
+          "nid": "a2",
+          "lane": "Licensing Specialist",
+          "col": 1,
+          "title": "CE credit verification",
+          "sub": "transcript review",
+          "kind": "standard"
+        },
+        {
+          "nid": "a3",
+          "lane": "Regulator",
+          "col": 2,
+          "title": "Renewal application filed",
+          "sub": "≥30 days before expiry",
+          "kind": "standard"
+        },
+        {
+          "nid": "a4",
+          "lane": "Licensing Specialist",
+          "col": 3,
+          "title": "Record confirmation",
+          "sub": "new expiry in PAS",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "a1",
+          "dst": "a2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a3",
+          "dst": "a4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Renewals are driven by a 90-day alert; CE shortfalls are notified before the renewal is filed at least 30 days pre-expiry."
+    },
+    {
+      "pid": "3",
+      "name": "Termination",
+      "subtitle": "Steps 12–15 · terminate, file, deactivate",
+      "lanes": [
+        "Sales / Compliance",
+        "Document Manager",
+        "Licensing Specialist"
+      ],
+      "nodes": [
+        {
+          "nid": "d1",
+          "lane": "Sales / Compliance",
+          "col": 0,
+          "title": "Termination request",
+          "sub": "voluntary / for cause",
+          "kind": "standard"
+        },
+        {
+          "nid": "d2",
+          "lane": "Document Manager",
+          "col": 1,
+          "title": "Terminate agreement",
+          "sub": "DMS filed",
+          "kind": "standard"
+        },
+        {
+          "nid": "d3",
+          "lane": "Licensing Specialist",
+          "col": 2,
+          "title": "Termination filing",
+          "sub": "≤30 days",
+          "kind": "standard"
+        },
+        {
+          "nid": "d4",
+          "lane": "Licensing Specialist",
+          "col": 3,
+          "title": "Deactivate agent",
+          "sub": "access revoked",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "d1",
+          "dst": "d2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d2",
+          "dst": "d3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d3",
+          "dst": "d4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Terminations execute the agreement, file the regulator withdrawal within 30 days, and revoke access with book transfer."
+    }
+  ],
+  "n_phases": 3,
+  "n_steps": 15,
+  "n_roles": 5,
+  "n_gateways": 2,
+  "fitgap": {
+    "overall_fit": 72,
+    "partial_pct": 16,
+    "fits": 9,
+    "gaps": 2,
+    "partials": 3,
+    "steps_analysed": 14,
+    "phases_count": 3,
+    "summary_line": "Overall alignment of SOP-INS-005 against the Sircon producer lifecycle catalog",
+    "metrics": [
+      [
+        "Steps analysed",
+        "14 steps across 3 phases"
+      ],
+      [
+        "Fits confirmed",
+        "9 steps aligned to catalog"
+      ],
+      [
+        "Gaps identified",
+        "2 steps — remediation required"
+      ],
+      [
+        "Partial fits",
+        "3 steps — enhancement recommended"
+      ],
+      [
+        "Highest risk area",
+        "Continuous monitoring (missing)"
+      ],
+      [
+        "Automation gap",
+        "Manual regulator filing & CE"
+      ],
+      [
+        "Ref standard",
+        "Sircon Producer Lifecycle Catalog"
+      ]
+    ],
+    "phase_bars": [
+      {
+        "line1": "Phase 1",
+        "line2": "Appointment",
+        "value": 72,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 2",
+        "line2": "Renewal",
+        "value": 70,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 3",
+        "line2": "Termination",
+        "value": 82,
+        "colour": ""
+      },
+      {
+        "line1": "Continuous",
+        "line2": "monitoring",
+        "value": 40,
+        "colour": ""
+      }
+    ],
+    "phase_cards": [
+      {
+        "label": "Phase 1",
+        "value": 72,
+        "sub": "New appointment"
+      },
+      {
+        "label": "Phase 2",
+        "value": 70,
+        "sub": "Renewal"
+      },
+      {
+        "label": "Phase 3",
+        "value": 82,
+        "sub": "Termination"
+      },
+      {
+        "label": "Monitor",
+        "value": 40,
+        "sub": "Continuous compliance"
+      }
+    ],
+    "detail_slides": [
+      [
+        "Phase 1 — New agent appointment",
+        "Steps 1–7 vs Sircon producer lifecycle catalog",
+        [
+          "p1"
+        ]
+      ],
+      [
+        "Phase 2 — Licence renewal",
+        "Steps 8–12 vs Sircon producer lifecycle catalog",
+        [
+          "p2"
+        ]
+      ],
+      [
+        "Phase 3 — Termination",
+        "Steps 13–14 vs Sircon producer lifecycle catalog",
+        [
+          "p3"
+        ]
+      ]
+    ],
+    "items": [
+      {
+        "num": "1",
+        "name": "Onboarding request capture",
+        "status": "FIT",
+        "detail": "Structured onboarding request with product lines and territory aligns with Sircon producer onboarding intake.",
+        "owner": "Regional Sales Manager",
+        "ref": "GW-SIR-ONB-01",
+        "group": "p1"
+      },
+      {
+        "num": "2",
+        "name": "Regulator licence verification",
+        "status": "PARTIAL",
+        "detail": "Licence status is verified at appointment via the regulator portal, but checks are point-in-time. Sircon maintains continuous, real-time licence/appointment synchronisation with regulator (PDB/NIPR) data.",
+        "owner": "Licensing Specialist",
+        "ref": "GW-SIR-LIC-02",
+        "group": "p1"
+      },
+      {
+        "num": "3",
+        "name": "Background screening",
+        "status": "FIT",
+        "detail": "Criminal, credit and conduct screening with Compliance review aligns with Sircon background-check workflow.",
+        "owner": "Licensing Specialist / Compliance",
+        "ref": "GW-SIR-SCR-01",
+        "group": "p1"
+      },
+      {
+        "num": "4",
+        "name": "Continuous compliance monitoring",
+        "status": "GAP",
+        "detail": "Screening occurs only at appointment. Sircon continuously monitors adverse actions, watchlists and licence standing between renewals — without it, mid-term disqualifying events go undetected.",
+        "owner": "Compliance Officer",
+        "ref": "GW-SIR-MON-01",
+        "group": "p1"
+      },
+      {
+        "num": "5",
+        "name": "Pre-appointment training gate",
+        "status": "FIT",
+        "detail": "Mandatory AML/conduct/product training before filing aligns with Sircon readiness requirements.",
+        "owner": "Licensing Specialist",
+        "ref": "GW-SIR-EDU-01",
+        "group": "p1"
+      },
+      {
+        "num": "6",
+        "name": "Distribution agreement execution",
+        "status": "FIT",
+        "detail": "DocuSign execution with DMS filing and version control aligns with Sircon contracting/onboarding.",
+        "owner": "Document Manager",
+        "ref": "GW-SIR-CON-01",
+        "group": "p1"
+      },
+      {
+        "num": "7",
+        "name": "Appointment filing",
+        "status": "PARTIAL",
+        "detail": "Filing is performed manually through the regulator portal. Sircon automates appointment/termination filings via direct NIPR/PDB integration, cutting cycle time and transcription error.",
+        "owner": "Licensing Specialist",
+        "ref": "GW-SIR-FIL-01",
+        "group": "p1"
+      },
+      {
+        "num": "8",
+        "name": "Agent activation & authorities",
+        "status": "FIT",
+        "detail": "Agent activation with product authorities, territory and commission tier aligns with Sircon producer setup.",
+        "owner": "Licensing Specialist",
+        "ref": "GW-SIR-ONB-04",
+        "group": "p1"
+      },
+      {
+        "num": "9",
+        "name": "Renewal alerting",
+        "status": "FIT",
+        "detail": "90-day renewal alerting aligns with Sircon licence-expiry management.",
+        "owner": "Licensing System",
+        "ref": "GW-SIR-REN-01",
+        "group": "p2"
+      },
+      {
+        "num": "10",
+        "name": "CE tracking",
+        "status": "PARTIAL",
+        "detail": "CE transcripts are reviewed manually. Sircon auto-syncs CE completions from providers and flags shortfalls without manual transcript review.",
+        "owner": "Licensing Specialist",
+        "ref": "GW-SIR-EDU-03",
+        "group": "p2"
+      },
+      {
+        "num": "11",
+        "name": "Renewal filing",
+        "status": "FIT",
+        "detail": "Renewal filed at least 30 days before expiry with fee payment aligns with Sircon renewal processing.",
+        "owner": "Licensing Specialist",
+        "ref": "GW-SIR-REN-03",
+        "group": "p2"
+      },
+      {
+        "num": "12",
+        "name": "Ready-to-sell enforcement",
+        "status": "GAP",
+        "detail": "Selling during a lapse is detected after the fact and reviewed for rescission. Sircon enforces a real-time 'ready-to-sell' gate that blocks unlicensed/unappointed sales at point of sale.",
+        "owner": "Licensing Specialist / PAS",
+        "ref": "GW-SIR-RTS-01",
+        "group": "p2"
+      },
+      {
+        "num": "13",
+        "name": "Termination & withdrawal filing",
+        "status": "FIT",
+        "detail": "For-cause/voluntary termination with regulator withdrawal within 30 days aligns with Sircon termination.",
+        "owner": "Licensing Specialist",
+        "ref": "GW-SIR-TRM-01",
+        "group": "p3"
+      },
+      {
+        "num": "14",
+        "name": "Deactivation & book transfer",
+        "status": "FIT",
+        "detail": "Access revocation and policy-book transfer on deactivation align with Sircon offboarding.",
+        "owner": "Licensing Specialist",
+        "ref": "GW-SIR-TRM-03",
+        "group": "p3"
+      }
+    ],
+    "groups": [
+      [
+        "p1",
+        "PHASE 1 — NEW AGENT APPOINTMENT"
+      ],
+      [
+        "p2",
+        "PHASE 2 — LICENCE RENEWAL"
+      ],
+      [
+        "p3",
+        "PHASE 3 — TERMINATION"
+      ]
+    ],
+    "critical_missing": [
+      {
+        "title": "Continuous compliance monitoring",
+        "detail": "Screening and licence checks occur only at appointment and renewal. The catalog monitors adverse actions, watchlists and licence standing continuously, so mid-term disqualifying events are caught early."
+      },
+      {
+        "title": "Ready-to-sell enforcement at point of sale",
+        "detail": "Sales during a lapse are only detected after the fact and reviewed for rescission. The catalog enforces a real-time ready-to-sell gate that blocks unlicensed/unappointed sales."
+      },
+      {
+        "title": "Automated regulator filing (NIPR/PDB)",
+        "detail": "Appointment, renewal and termination filings are manual through the regulator portal; the catalog integrates filings directly with NIPR/PDB, reducing cycle time and transcription error."
+      },
+      {
+        "title": "Automated CE synchronisation",
+        "detail": "CE is verified by manual transcript review; the catalog auto-syncs CE completions from providers."
+      }
+    ],
+    "radar": [
+      [
+        "Onboarding",
+        82
+      ],
+      [
+        "Verification",
+        65
+      ],
+      [
+        "Screening",
+        78
+      ],
+      [
+        "Monitoring",
+        38
+      ],
+      [
+        "Renewal",
+        70
+      ],
+      [
+        "Ready-to-sell",
+        42
+      ],
+      [
+        "Termination",
+        84
+      ]
+    ],
+    "control_bars": [
+      {
+        "name": "Onboarding & contracting",
+        "value": 82,
+        "note": "Structured intake and DocuSign execution"
+      },
+      {
+        "name": "Licence verification",
+        "value": 65,
+        "note": "Point-in-time; no continuous sync"
+      },
+      {
+        "name": "Background screening",
+        "value": 78,
+        "note": "Criminal/credit/conduct at appointment"
+      },
+      {
+        "name": "Continuous monitoring",
+        "value": 38,
+        "note": "No between-renewal adverse-action monitoring"
+      },
+      {
+        "name": "Renewal & CE",
+        "value": 70,
+        "note": "90-day alert; manual CE transcript review"
+      },
+      {
+        "name": "Ready-to-sell",
+        "value": 42,
+        "note": "Lapse detected after the fact"
+      },
+      {
+        "name": "Termination",
+        "value": 84,
+        "note": "For-cause handling and withdrawal filing solid"
+      }
+    ],
+    "remediations": [
+      {
+        "rank": 1,
+        "title": "Implement continuous compliance monitoring",
+        "detail": "Subscribe to adverse-action, watchlist and licence-standing feeds so disqualifying events between renewals are flagged and dispositioned. Effort: 5 weeks (AgentOS + feeds).",
+        "priority": "High"
+      },
+      {
+        "rank": 2,
+        "title": "Enforce a ready-to-sell gate at point of sale",
+        "detail": "Block quote/bind in PAS for any producer not currently licensed and appointed for the product and territory. Effort: 4 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 3,
+        "title": "Automate regulator filings via NIPR/PDB integration",
+        "detail": "Replace manual portal filings with direct appointment/renewal/termination filing integration. Effort: 6 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 4,
+        "title": "Automate CE synchronisation",
+        "detail": "Auto-sync CE completions from approved providers and flag shortfalls without manual transcript review. Effort: 3 weeks.",
+        "priority": "Medium"
+      },
+      {
+        "rank": 5,
+        "title": "Add producer self-service onboarding portal",
+        "detail": "Let producers submit documents, sign agreements and track status in a self-service portal. Effort: 5 weeks.",
+        "priority": "Medium"
+      }
+    ],
+    "risk_impact": [
+      [
+        "Continuous monitoring",
+        85
+      ],
+      [
+        "Ready-to-sell gate",
+        80
+      ],
+      [
+        "Regulator filing",
+        70
+      ],
+      [
+        "CE automation",
+        58
+      ],
+      [
+        "Self-service onboarding",
+        48
+      ],
+      [
+        "Verification sync",
+        55
+      ]
+    ],
+    "projected_fit": 92
+  },
+  "opt_phases": [
+    {
+      "pid": "1",
+      "name": "Appointment & monitoring",
+      "subtitle": "Verify, screen, train, monitor",
+      "circle": "blue",
+      "roles": "Sales · Licensing · Compliance · DMS",
+      "step_range": "Steps 1–8",
+      "summary": "8 steps + 1 decision"
+    },
+    {
+      "pid": "2",
+      "name": "Renewal & readiness",
+      "subtitle": "Alerts, CE sync, ready-to-sell",
+      "circle": "green",
+      "roles": "Licensing System · Specialist · PAS",
+      "step_range": "Steps 9–12",
+      "summary": "4 steps"
+    },
+    {
+      "pid": "3",
+      "name": "Termination",
+      "subtitle": "Terminate, file, deactivate",
+      "circle": "amber",
+      "roles": "Sales · Document Mgr · Licensing",
+      "step_range": "Steps 13–16",
+      "summary": "4 steps"
+    }
+  ],
+  "opt_steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Onboarding request submitted by Regional Sales Manager",
+      "responsible": "Regional Sales Manager",
+      "output": "Candidate details, product lines, territory",
+      "timeline": "Day 0",
+      "controls": "Standard",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Continuous licence verification (regulator sync)",
+      "responsible": "Licensing Specialist / System",
+      "output": "Real-time licence/appointment sync with regulator (PDB/NIPR) data",
+      "timeline": "Day 1",
+      "controls": "ENHANCED (v2.0) — continuous",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Background check initiated",
+      "responsible": "Licensing Specialist / Compliance",
+      "output": "Criminal, credit and conduct check; Compliance review within 3 days",
+      "timeline": "Day 1–4",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Enrol in continuous compliance monitoring",
+      "responsible": "Compliance Officer / System",
+      "output": "Adverse-action and watchlist feeds enabled for ongoing monitoring",
+      "timeline": "Day 1",
+      "controls": "NEW (v2.0) — between-renewal monitoring",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "5",
+      "phase": "1",
+      "activity": "Pre-appointment compliance training",
+      "responsible": "Licensing Specialist",
+      "output": "AML, conduct and product modules via LMS before filing",
+      "timeline": "Day 2–6",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "1",
+      "activity": "Distribution agreement executed",
+      "responsible": "Document Manager / Representative",
+      "output": "DocuSign execution; filed in DMS",
+      "timeline": "Day 6",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "1",
+      "activity": "Automated appointment filing (NIPR/PDB)",
+      "responsible": "Licensing Specialist / System",
+      "output": "Appointment filed via direct regulator integration; confirmation auto-recorded",
+      "timeline": "Day 6",
+      "controls": "ENHANCED (v2.0) — automated filing",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "1",
+      "activity": "Appointment confirmed; agent activated",
+      "responsible": "Licensing Specialist",
+      "output": "Agent record, authorities, territory, commission tier set",
+      "timeline": "Day 8",
+      "controls": "Standard",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "1",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Compliance disposition",
+      "kind": "decision",
+      "decision": "Adverse findings?",
+      "branches": [
+        "None / minor (justified) → proceed",
+        "Material → rejection (Sec 6.1)"
+      ]
+    },
+    {
+      "num": "9",
+      "phase": "2",
+      "activity": "Renewal alert triggered 90 days before expiry",
+      "responsible": "Licensing System",
+      "output": "Agent and Specialist notified",
+      "timeline": "Expiry −90",
+      "controls": "Standard",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "2",
+      "activity": "Automated CE synchronisation",
+      "responsible": "Licensing System",
+      "output": "CE completions auto-synced from providers; shortfalls flagged automatically",
+      "timeline": "Expiry −60",
+      "controls": "NEW (v2.0) — automated CE",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "2",
+      "activity": "Automated renewal filing",
+      "responsible": "Licensing Specialist / System",
+      "output": "Renewal filed ≥30 days before expiry via regulator integration; fee paid",
+      "timeline": "Expiry −30",
+      "controls": "ENHANCED (v2.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "2",
+      "activity": "Ready-to-sell status published to PAS",
+      "responsible": "Licensing System / PAS",
+      "output": "Real-time ready-to-sell flag enforced at point of sale; expired producers blocked",
+      "timeline": "Continuous",
+      "controls": "NEW (v2.0) — point-of-sale gate",
+      "kind": "control",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "13",
+      "phase": "3",
+      "activity": "Termination request initiated",
+      "responsible": "Sales Manager / Compliance",
+      "output": "Reason code; final commission run; open cases reviewed",
+      "timeline": "Day 0",
+      "controls": "Standard",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "14",
+      "phase": "3",
+      "activity": "Distribution agreement terminated",
+      "responsible": "Document Manager",
+      "output": "Termination notice executed; filed in DMS",
+      "timeline": "Day 1–3",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "15",
+      "phase": "3",
+      "activity": "Automated termination filing",
+      "responsible": "Licensing Specialist / System",
+      "output": "Appointment withdrawal filed via regulator integration within 30 days",
+      "timeline": "≤30 days",
+      "controls": "ENHANCED (v2.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "16",
+      "phase": "3",
+      "activity": "Agent record deactivated; book transferred",
+      "responsible": "Licensing Specialist",
+      "output": "Access revoked; book transferred to replacement agent",
+      "timeline": "Day 3–5",
+      "controls": "Standard",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "opt_swim_phases": [
+    {
+      "pid": "1",
+      "name": "Appointment & monitoring",
+      "subtitle": "Steps 1–8 · v2.0 adds continuous monitoring",
+      "lanes": [
+        "Sales / Rep",
+        "Licensing Specialist",
+        "Compliance",
+        "DMS"
+      ],
+      "nodes": [
+        {
+          "nid": "o1",
+          "lane": "Sales / Rep",
+          "col": 0,
+          "title": "Onboarding request",
+          "sub": "Regional Sales Mgr",
+          "kind": "standard"
+        },
+        {
+          "nid": "o2",
+          "lane": "Licensing Specialist",
+          "col": 1,
+          "title": "Continuous licence sync",
+          "sub": "regulator (PDB/NIPR)",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "o3",
+          "lane": "Compliance",
+          "col": 1,
+          "title": "Background check",
+          "sub": "criminal · credit · conduct",
+          "kind": "standard"
+        },
+        {
+          "nid": "o4",
+          "lane": "Compliance",
+          "col": 2,
+          "title": "Enrol continuous monitoring",
+          "sub": "adverse-action feeds",
+          "kind": "new"
+        },
+        {
+          "nid": "o5",
+          "lane": "Licensing Specialist",
+          "col": 2,
+          "title": "Pre-appointment training",
+          "sub": "AML · conduct",
+          "kind": "standard"
+        },
+        {
+          "nid": "o6",
+          "lane": "DMS",
+          "col": 3,
+          "title": "Execute agreement",
+          "sub": "DocuSign",
+          "kind": "standard"
+        },
+        {
+          "nid": "o7",
+          "lane": "Licensing Specialist",
+          "col": 4,
+          "title": "Automated appointment filing",
+          "sub": "NIPR/PDB",
+          "kind": "enhanced"
+        }
+      ],
+      "edges": [
+        {
+          "src": "o1",
+          "dst": "o2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "o2",
+          "dst": "o3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o3",
+          "dst": "o4",
+          "label": "monitor",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "o3",
+          "dst": "o5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o5",
+          "dst": "o6",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o6",
+          "dst": "o7",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "v2.0 adds continuous licence sync and ongoing compliance monitoring, and automates appointment filing via regulator integration."
+    },
+    {
+      "pid": "2",
+      "name": "Renewal & readiness",
+      "subtitle": "Steps 9–12 · v2.0 adds CE sync & ready-to-sell",
+      "lanes": [
+        "Licensing System",
+        "Licensing Specialist",
+        "PAS / Point of sale"
+      ],
+      "nodes": [
+        {
+          "nid": "p1",
+          "lane": "Licensing System",
+          "col": 0,
+          "title": "Renewal alert (90 days)",
+          "sub": "auto email",
+          "kind": "standard"
+        },
+        {
+          "nid": "p2",
+          "lane": "Licensing System",
+          "col": 1,
+          "title": "Automated CE sync",
+          "sub": "providers",
+          "kind": "new"
+        },
+        {
+          "nid": "p3",
+          "lane": "Licensing Specialist",
+          "col": 2,
+          "title": "Automated renewal filing",
+          "sub": "≥30 days",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "p4",
+          "lane": "PAS / Point of sale",
+          "col": 3,
+          "title": "Ready-to-sell gate",
+          "sub": "block expired",
+          "kind": "new"
+        }
+      ],
+      "edges": [
+        {
+          "src": "p1",
+          "dst": "p2",
+          "label": "",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "p2",
+          "dst": "p3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p3",
+          "dst": "p4",
+          "label": "RTS",
+          "dashed": true,
+          "kind": "new"
+        }
+      ],
+      "note": "v2.0 auto-syncs CE, files renewals via regulator integration, and publishes a ready-to-sell flag enforced at point of sale."
+    },
+    {
+      "pid": "3",
+      "name": "Termination",
+      "subtitle": "Steps 13–16 · automated withdrawal filing",
+      "lanes": [
+        "Sales / Compliance",
+        "Document Manager",
+        "Licensing Specialist"
+      ],
+      "nodes": [
+        {
+          "nid": "q1",
+          "lane": "Sales / Compliance",
+          "col": 0,
+          "title": "Termination request",
+          "sub": "voluntary / for cause",
+          "kind": "standard"
+        },
+        {
+          "nid": "q2",
+          "lane": "Document Manager",
+          "col": 1,
+          "title": "Terminate agreement",
+          "sub": "DMS filed",
+          "kind": "standard"
+        },
+        {
+          "nid": "q3",
+          "lane": "Licensing Specialist",
+          "col": 2,
+          "title": "Automated termination filing",
+          "sub": "NIPR/PDB",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "q4",
+          "lane": "Licensing Specialist",
+          "col": 3,
+          "title": "Deactivate agent",
+          "sub": "book transfer",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "q1",
+          "dst": "q2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q2",
+          "dst": "q3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q3",
+          "dst": "q4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Termination withdrawal filings are now automated via regulator integration within the 30-day window."
+    }
+  ],
+  "opt_n_phases": 3,
+  "opt_n_steps": 16,
+  "opt_n_gateways": 2,
+  "opt_fit": 92,
+  "optimised_doc": {
+    "subtitle": "Optimised per Fit-Gap Analysis against the Sircon Producer Lifecycle Management Catalog",
+    "sections": [
+      {
+        "title": "",
+        "blocks": [
+          [
+            "meta",
+            [
+              [
+                "Document Reference",
+                "SOP-INS-005"
+              ],
+              [
+                "Version",
+                "2.0 (Optimised)"
+              ],
+              [
+                "Effective Date",
+                "01 October 2026"
+              ],
+              [
+                "Supersedes",
+                "v1.4 dated 01 February 2025"
+              ],
+              [
+                "Owner",
+                "Distribution & Licensing"
+              ],
+              [
+                "Approved By",
+                "Chief Distribution Officer"
+              ],
+              [
+                "Optimisation Reference",
+                "Fit-Gap Report FG-INS-005 dated 18 June 2026"
+              ],
+              [
+                "Catalog Alignment Score",
+                "92% (up from 72% in v1.4)"
+              ],
+              [
+                "Classification",
+                "Internal Use Only"
+              ]
+            ]
+          ],
+          [
+            "summary",
+            "OPTIMISATION SUMMARY — What changed in v2.0",
+            [
+              "This version incorporates 5 remediation actions from Fit-Gap Report FG-INS-005. Alignment to the Sircon producer lifecycle catalog increased from 72% to 92%. Critical additions: continuous compliance monitoring, a real-time ready-to-sell gate at point of sale, automated regulator filing (NIPR/PDB), automated CE synchronisation, and continuous licence verification."
+            ],
+            [
+              "NEW STEP (green) — step added to close a gap vs the Sircon catalog",
+              "ENHANCED (amber) — existing step updated with additional automation or controls"
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "1. Purpose",
+        "blocks": [
+          [
+            "para",
+            "This Standard Operating Procedure defines the process for licensing, renewing, amending and terminating insurance distribution agreements with agents and brokers. Version 2.0 incorporates optimisations from fit-gap analysis against the Sircon Producer Lifecycle Management Best-Practice Catalog, achieving 92% alignment (up from 72% in v1.4)."
+          ]
+        ]
+      },
+      {
+        "title": "2. Scope",
+        "blocks": [
+          [
+            "para",
+            "This procedure applies to new agent/broker appointment and licensing, annual renewals and CE compliance, licence amendments, and voluntary or for-cause terminations."
+          ],
+          [
+            "banner",
+            "new",
+            "Scope extended: continuous compliance monitoring and a real-time ready-to-sell gate now apply to every active producer at all times."
+          ],
+          [
+            "para",
+            "This procedure does NOT cover in-house staff licensing (HR onboarding SOP) or MGA entity licensing above the defined book threshold (SOP-INS-015)."
+          ]
+        ]
+      },
+      {
+        "title": "3. Authority Matrix",
+        "blocks": [
+          [
+            "table",
+            [
+              "Decision",
+              "First Authority",
+              "Second Authority"
+            ],
+            [
+              [
+                "Standard appointment",
+                "Licensing Specialist",
+                "—"
+              ],
+              [
+                "Minor adverse history",
+                "Compliance Officer",
+                "Licensing Specialist"
+              ],
+              [
+                "Material adverse / rejection",
+                "Compliance Officer",
+                "Chief Distribution Officer"
+              ],
+              [
+                "For-cause termination",
+                "Compliance Officer",
+                "Regional Sales Manager"
+              ],
+              [
+                "Reinstatement after lapse",
+                "Compliance Officer",
+                "Licensing Specialist"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "4. Roles and Responsibilities",
+        "blocks": [
+          [
+            "table",
+            [
+              "Role",
+              "Responsibilities"
+            ],
+            [
+              [
+                "Insurance Representative",
+                "Completes application and training; maintains active licence and CE; notifies of status changes."
+              ],
+              [
+                "Licensing Specialist",
+                "Verifies and syncs licences; files appointments/renewals/terminations; manages records."
+              ],
+              [
+                "Document Manager",
+                "Maintains contracting files; executes agreements; manages contract version control."
+              ],
+              [
+                "Compliance Officer",
+                "Reviews screening; owns continuous monitoring dispositions and ongoing standing."
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "5. Continuous Compliance (New Section — v2.0)",
+        "blocks": [
+          [
+            "banner",
+            "crit",
+            "New section. Required by the Sircon catalog. Continuous monitoring and a ready-to-sell gate now operate for every active producer, not only at appointment and renewal."
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Control",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "M1",
+                "Continuous licence/appointment sync",
+                "Licensing Specialist",
+                "Real-time PDB/NIPR data sync",
+                "Continuous"
+              ],
+              [
+                "M2",
+                "Adverse-action & watchlist monitoring",
+                "Compliance",
+                "Disqualifying events flagged between renewals",
+                "Continuous"
+              ],
+              [
+                "M3",
+                "Ready-to-sell gate at point of sale",
+                "PAS",
+                "Quote/bind blocked for unlicensed/unappointed producers",
+                "Continuous"
+              ]
+            ],
+            {
+              "0": "new",
+              "1": "new",
+              "2": "new"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "6. Process Steps",
+        "blocks": [
+          [
+            "h3",
+            "6.1 Appointment & Monitoring"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "1",
+                "Onboarding request submitted",
+                "Regional Sales Manager",
+                "Candidate, products, territory",
+                "Day 0"
+              ],
+              [
+                "2",
+                "Continuous licence verification (sync)",
+                "Licensing Specialist",
+                "Real-time regulator sync",
+                "Day 1"
+              ],
+              [
+                "3",
+                "Background check initiated",
+                "Licensing / Compliance",
+                "Criminal/credit/conduct",
+                "Day 1–4"
+              ],
+              [
+                "4",
+                "Enrol in continuous monitoring",
+                "Compliance",
+                "Adverse-action/watchlist feeds",
+                "Day 1"
+              ],
+              [
+                "5",
+                "Pre-appointment compliance training",
+                "Licensing Specialist",
+                "AML/conduct/product via LMS",
+                "Day 2–6"
+              ],
+              [
+                "6",
+                "Distribution agreement executed",
+                "Document Manager",
+                "DocuSign; filed in DMS",
+                "Day 6"
+              ],
+              [
+                "7",
+                "Automated appointment filing (NIPR/PDB)",
+                "Licensing Specialist",
+                "Filed via integration",
+                "Day 6"
+              ],
+              [
+                "8",
+                "Appointment confirmed; agent activated",
+                "Licensing Specialist",
+                "Authorities/territory/tier",
+                "Day 8"
+              ]
+            ],
+            {
+              "1": "enh",
+              "3": "new",
+              "6": "enh"
+            }
+          ],
+          [
+            "h3",
+            "6.2 Renewal & Readiness"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "9",
+                "Renewal alert (90 days before expiry)",
+                "Licensing System",
+                "Agent and Specialist notified",
+                "Expiry −90"
+              ],
+              [
+                "10",
+                "Automated CE synchronisation",
+                "Licensing System",
+                "CE auto-synced; shortfalls flagged",
+                "Expiry −60"
+              ],
+              [
+                "11",
+                "Automated renewal filing",
+                "Licensing Specialist",
+                "Filed ≥30 days pre-expiry via integration",
+                "Expiry −30"
+              ],
+              [
+                "12",
+                "Ready-to-sell status published to PAS",
+                "Licensing System",
+                "Point-of-sale gate enforced",
+                "Continuous"
+              ]
+            ],
+            {
+              "1": "new",
+              "2": "enh",
+              "3": "new"
+            }
+          ],
+          [
+            "h3",
+            "6.3 Termination"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "13",
+                "Termination request initiated",
+                "Sales Manager / Compliance",
+                "Reason code; final commission",
+                "Day 0"
+              ],
+              [
+                "14",
+                "Distribution agreement terminated",
+                "Document Manager",
+                "Notice executed; DMS filed",
+                "Day 1–3"
+              ],
+              [
+                "15",
+                "Automated termination filing",
+                "Licensing Specialist",
+                "Withdrawal filed via integration",
+                "≤30 days"
+              ],
+              [
+                "16",
+                "Agent record deactivated; book transferred",
+                "Licensing Specialist",
+                "Access revoked; book transfer",
+                "Day 3–5"
+              ]
+            ],
+            {
+              "2": "enh"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "7. Exception Handling",
+        "blocks": [
+          [
+            "h3",
+            "7.1 Adverse Background Check"
+          ],
+          [
+            "numbered",
+            [
+              "Compliance reviews specific findings; minor adverse history may be approved with documented justification.",
+              "Material adverse findings (e.g. fraud conviction, prior licence revocation) result in automatic rejection.",
+              "All adverse findings and decisions are logged in the Compliance tracking register."
+            ]
+          ],
+          [
+            "h3",
+            "7.2 Licence Expiry Without Renewal (Enhanced — v2.0)"
+          ],
+          [
+            "banner",
+            "enh",
+            "The ready-to-sell gate now blocks sales the moment a licence lapses, rather than detecting lapse sales after the fact."
+          ],
+          [
+            "numbered_from",
+            4,
+            [
+              "On expiry, the producer's ready-to-sell flag is revoked and quote/bind is blocked in PAS immediately.",
+              "Reinstatement is initiated; outstanding CE must be completed within 30 days.",
+              "Any sales attempted during the lapse are blocked at point of sale; historical lapse exposure is eliminated."
+            ]
+          ],
+          [
+            "h3",
+            "7.3 Continuous-Monitoring Alert (New — v2.0)"
+          ],
+          [
+            "banner",
+            "new",
+            "New exception. A mid-term adverse-action or watchlist hit triggers immediate Compliance review."
+          ],
+          [
+            "numbered_from",
+            7,
+            [
+              "Monitoring alert routes to Compliance for disposition within 1 business day.",
+              "Disqualifying events trigger immediate ready-to-sell suspension pending review."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "8. Systems and Tools",
+        "blocks": [
+          [
+            "table",
+            [
+              "System",
+              "Purpose",
+              "Primary Users"
+            ],
+            [
+              [
+                "Licensing System (AgentOS)",
+                "Licence tracking, continuous sync, filing status",
+                "Licensing Specialist"
+              ],
+              [
+                "Regulator Integration (NIPR/PDB)",
+                "Automated appointment/renewal/termination filing and sync",
+                "Licensing Specialist"
+              ],
+              [
+                "Compliance Monitoring Feed",
+                "Adverse-action and watchlist monitoring",
+                "Compliance"
+              ],
+              [
+                "LMS (Cornerstone)",
+                "Pre-appointment and CE training and sync",
+                "Licensing Specialist, Representatives"
+              ],
+              [
+                "DocuSign",
+                "Digital execution of distribution agreements",
+                "Document Manager, Representatives"
+              ],
+              [
+                "DMS (SharePoint)",
+                "Signed agreements, certificates, compliance records",
+                "Document Manager, Compliance"
+              ],
+              [
+                "PAS / CRM",
+                "Agent record, authorities, ready-to-sell gate",
+                "Licensing Specialist"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "9. Key Controls and Audit Points",
+        "blocks": [
+          [
+            "banner",
+            "enh",
+            "Controls expanded in v2.0: continuous monitoring, ready-to-sell enforcement, automated regulator filing and CE synchronisation."
+          ],
+          [
+            "bullets",
+            [
+              "Continuous monitoring: adverse-action and watchlist events flagged between renewals.",
+              "Ready-to-sell gate: no quote/bind for unlicensed or unappointed producers.",
+              "Automated filing: appointment/renewal/termination filed via regulator integration with audit trail.",
+              "CE synchronisation: completions auto-synced; shortfalls flagged before renewal.",
+              "Training gate: mandatory AML/conduct/product training before any appointment filing.",
+              "Segregation of duties: appointment filing ≠ compliance disposition.",
+              "Immutable audit trail: verification, screening, filing and monitoring events logged."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "10. Key Performance Indicators",
+        "blocks": [
+          [
+            "table",
+            [
+              "KPI",
+              "v1.4 Target",
+              "v2.0 Target",
+              "Measurement"
+            ],
+            [
+              [
+                "Appointment processing time",
+                "~10 business days",
+                "≤6 business days",
+                "Application to confirmed appointment"
+              ],
+              [
+                "Licence renewal on-time",
+                "100%",
+                "100%",
+                "Renewed before expiry"
+              ],
+              [
+                "Lapsed-licence sales",
+                "Zero (post-review)",
+                "Zero (blocked)",
+                "Ready-to-sell gate enforcement"
+              ],
+              [
+                "Continuous-monitoring coverage",
+                "N/A (new)",
+                "100% of active producers",
+                "Monitoring enrolment"
+              ],
+              [
+                "Filing automation",
+                "N/A (new)",
+                "≥95% via integration",
+                "Automated vs manual filings"
+              ],
+              [
+                "CE shortfall detection",
+                "Manual",
+                "Auto before −60 days",
+                "CE sync flags"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "11. Document Control",
+        "blocks": [
+          [
+            "table",
+            [
+              "Version",
+              "Date",
+              "Author",
+              "Summary of Changes"
+            ],
+            [
+              [
+                "1.4",
+                "01 Feb 2025",
+                "C. Wong, Compliance",
+                "Aligned to revised DOA; updated DocuSign execution steps"
+              ],
+              [
+                "2.0",
+                "01 Oct 2026",
+                "C. Wong, Compliance",
+                "OPTIMISED: continuous compliance monitoring; ready-to-sell gate; automated NIPR/PDB filing; CE synchronisation; continuous licence verification; catalog alignment 72% → 92%"
+              ]
+            ],
+            {}
+          ]
+        ]
+      }
+    ]
+  },
+  "swim_cover_tags": "Appointment · Screening · Renewal · Termination · Exception handling",
+  "hierarchy_cover_sub": "Phase breakdown with producer lifecycle tracks, compliance authority, and exception paths"
+}

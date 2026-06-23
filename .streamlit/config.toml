@@ -1,0 +1,10 @@
+# Navy/gold theme to match the FlowAgent deck styling.
+[theme]
+base = "dark"
+primaryColor = "#FFD700"
+backgroundColor = "#0A1628"
+secondaryBackgroundColor = "#0F2044"
+textColor = "#FFFFFF"
+
+[server]
+maxUploadSize = 25

@@ -1,0 +1,1890 @@
+{
+  "meta": {
+    "sop_id": "SOP-INS-007",
+    "slug": "Group_Quote_Marketing",
+    "title": "Group Quote Marketing",
+    "short_title": "Group quote marketing",
+    "version": "1.1",
+    "owner": "Group Marketing & Distribution",
+    "org": "Meridian Insurance Group",
+    "catalog": "Majesco Distribution & Group Quoting Best-Practice Catalog",
+    "catalog_short": "Majesco DM",
+    "new_version": "2.0",
+    "effective_date": "01 October 2026",
+    "supersedes": "v1.1 dated 15 March 2025",
+    "approved_by": "Chief Marketing Officer",
+    "classification": "Internal Use Only"
+  },
+  "phases": [
+    {
+      "pid": "1",
+      "name": "Prospect identification & qualification",
+      "subtitle": "Source, discover, census",
+      "circle": "blue",
+      "roles": "Field Agent · Marketing · New Business",
+      "step_range": "Steps 1–4",
+      "summary": "4 steps"
+    },
+    {
+      "pid": "2",
+      "name": "Quote preparation",
+      "subtitle": "Pricing, proposal, approval",
+      "circle": "green",
+      "roles": "New Business · Underwriting · Actuarial",
+      "step_range": "Steps 5–8",
+      "summary": "4 steps + 1 decision"
+    },
+    {
+      "pid": "3",
+      "name": "Presentation & conversion",
+      "subtitle": "Present, negotiate, accept, handover",
+      "circle": "amber",
+      "roles": "Field Agent · Prospect · New Business",
+      "step_range": "Steps 9–12",
+      "summary": "4 steps + 1 decision"
+    }
+  ],
+  "steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Group prospect identified (campaign, referral, sourcing)",
+      "responsible": "Field Agent / Marketing Manager",
+      "output": "Prospect logged in CRM; preliminary group size and benefit type recorded",
+      "timeline": "Day 0",
+      "controls": "Pipeline entry",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Initial meeting / needs discovery",
+      "responsible": "Field Agent",
+      "output": "Needs, current insurer, renewal date and decision timeline established",
+      "timeline": "Day 1–5",
+      "controls": "Needs discovery",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Census data request sent to prospect",
+      "responsible": "Field Agent",
+      "output": "Meridian Group Census Data Form provided; completion deadline set",
+      "timeline": "Day 5",
+      "controls": "Census request",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Completed census data received",
+      "responsible": "Field Agent / New Business Specialist",
+      "output": "Data validated for completeness; missing data followed up within 2 days",
+      "timeline": "Day 5–10",
+      "controls": "Census validation",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "5",
+      "phase": "2",
+      "activity": "Census data submitted to Underwriting and Actuarial",
+      "responsible": "New Business Specialist",
+      "output": "Quote request logged with target presentation date; urgency assigned",
+      "timeline": "Day 10",
+      "controls": "Quote request",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "2",
+      "activity": "Risk assessment and pricing",
+      "responsible": "Underwriting / Actuarial",
+      "output": "Experience or community rating by group size; pricing within 5 days for standard groups",
+      "timeline": "≤5 days",
+      "controls": "Pricing SLA",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Formal quote document prepared",
+      "responsible": "New Business Specialist",
+      "output": "Proposal: benefits schedule, rates by tier, 30-day validity, key terms",
+      "timeline": "Day +1",
+      "controls": "Proposal generation",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Quote reviewed and approved",
+      "responsible": "Marketing Manager / Underwriting",
+      "output": "Final accuracy and marketing-compliance review; approved quote released to agent",
+      "timeline": "Day +1",
+      "controls": "Compliance review",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "2",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Quote governance",
+      "kind": "decision",
+      "decision": "Standard or non-standard group?",
+      "branches": [
+        "Standard → approve & release",
+        "Non-standard (>80% loss ratio) → Head of Group (Sec 6.3)"
+      ]
+    },
+    {
+      "num": "9",
+      "phase": "3",
+      "activity": "Proposal presented to prospect",
+      "responsible": "Field Agent",
+      "output": "Presentation held; proposal submitted; competitor comparison if requested",
+      "timeline": "Day +2",
+      "controls": "Presentation",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "3",
+      "activity": "Prospect negotiation (if applicable)",
+      "responsible": "Field Agent / New Business Specialist",
+      "output": "Revised terms to Underwriting; max 2 revisions without escalation",
+      "timeline": "Day +2–10",
+      "controls": "Revision control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "3",
+      "activity": "Prospect accepts proposal",
+      "responsible": "Field Agent",
+      "output": "Signed acceptance or heads of agreement received; accepted in CRM",
+      "timeline": "Day +10",
+      "controls": "Acceptance",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Handover to Group Benefits Administration",
+      "responsible": "New Business Specialist",
+      "output": "Case file transferred to SOP-INS-006 for master policy setup",
+      "timeline": "Day +10",
+      "controls": "Handover",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "authority": [
+    {
+      "band": "Standard group quote",
+      "first": "Underwriting / Actuarial",
+      "second": "Marketing review"
+    },
+    {
+      "band": "Up to 2 quote revisions",
+      "first": "New Business Specialist",
+      "second": "Underwriting"
+    },
+    {
+      "band": "Non-standard group",
+      "first": "Head of Group Insurance",
+      "second": "Compliance"
+    },
+    {
+      "band": "Loss ratio >80% (prior 3y)",
+      "first": "Head of Group Insurance",
+      "second": "Underwriting"
+    },
+    {
+      "band": "Marketing collateral approval",
+      "first": "Marketing Manager",
+      "second": "Compliance"
+    }
+  ],
+  "swim_phases": [
+    {
+      "pid": "1",
+      "name": "Prospect identification & qualification",
+      "subtitle": "Steps 1–4 · source to census",
+      "lanes": [
+        "Prospect",
+        "Field Agent",
+        "New Business"
+      ],
+      "nodes": [
+        {
+          "nid": "s1",
+          "lane": "Field Agent",
+          "col": 0,
+          "title": "Prospect identified",
+          "sub": "logged in CRM",
+          "kind": "standard"
+        },
+        {
+          "nid": "s2",
+          "lane": "Field Agent",
+          "col": 1,
+          "title": "Needs discovery",
+          "sub": "current insurer · renewal",
+          "kind": "standard"
+        },
+        {
+          "nid": "s3",
+          "lane": "Field Agent",
+          "col": 2,
+          "title": "Census data request",
+          "sub": "Census Data Form",
+          "kind": "standard"
+        },
+        {
+          "nid": "s4",
+          "lane": "New Business",
+          "col": 3,
+          "title": "Census validated",
+          "sub": "completeness check",
+          "kind": "standard"
+        }
+      ],
+      "edges": [
+        {
+          "src": "s1",
+          "dst": "s2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s2",
+          "dst": "s3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s3",
+          "dst": "s4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Prospects with 10+ lives are qualified and a census data form is collected before quoting can begin."
+    },
+    {
+      "pid": "2",
+      "name": "Quote preparation",
+      "subtitle": "Steps 5–8 · pricing to approval",
+      "lanes": [
+        "New Business",
+        "Underwriting / Actuarial",
+        "Marketing"
+      ],
+      "nodes": [
+        {
+          "nid": "a1",
+          "lane": "New Business",
+          "col": 0,
+          "title": "Submit census to UW",
+          "sub": "urgency assigned",
+          "kind": "standard"
+        },
+        {
+          "nid": "a2",
+          "lane": "Underwriting / Actuarial",
+          "col": 1,
+          "title": "Risk assessment & pricing",
+          "sub": "experience / community",
+          "kind": "standard"
+        },
+        {
+          "nid": "a3",
+          "lane": "New Business",
+          "col": 2,
+          "title": "Prepare formal quote",
+          "sub": "30-day validity",
+          "kind": "standard"
+        },
+        {
+          "nid": "a4",
+          "lane": "Marketing",
+          "col": 3,
+          "title": "Review & approve",
+          "sub": "compliance check",
+          "kind": "decision"
+        },
+        {
+          "nid": "a5",
+          "lane": "Underwriting / Actuarial",
+          "col": 2,
+          "title": "Non-standard → Head of Group",
+          "sub": "Sec 6.3",
+          "kind": "exception"
+        }
+      ],
+      "edges": [
+        {
+          "src": "a1",
+          "dst": "a2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a3",
+          "dst": "a4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a5",
+          "label": "n-std",
+          "dashed": true,
+          "kind": "exception"
+        }
+      ],
+      "note": "Census data is priced by Underwriting/Actuarial and the proposal is compliance-reviewed before release; non-standard groups escalate."
+    },
+    {
+      "pid": "3",
+      "name": "Presentation & conversion",
+      "subtitle": "Steps 9–12 · present to handover",
+      "lanes": [
+        "Field Agent",
+        "Prospect",
+        "New Business"
+      ],
+      "nodes": [
+        {
+          "nid": "d1",
+          "lane": "Field Agent",
+          "col": 0,
+          "title": "Present proposal",
+          "sub": "competitor comparison",
+          "kind": "standard"
+        },
+        {
+          "nid": "d2",
+          "lane": "Field Agent",
+          "col": 1,
+          "title": "Negotiate (≤2 revisions)",
+          "sub": "revised terms",
+          "kind": "standard"
+        },
+        {
+          "nid": "d3",
+          "lane": "Prospect",
+          "col": 2,
+          "title": "Accept proposal",
+          "sub": "signed acceptance",
+          "kind": "standard"
+        },
+        {
+          "nid": "d4",
+          "lane": "New Business",
+          "col": 3,
+          "title": "Handover to GBA",
+          "sub": "SOP-INS-006",
+          "kind": "terminal"
+        },
+        {
+          "nid": "d5",
+          "lane": "Field Agent",
+          "col": 2,
+          "title": "Not proceed → lost",
+          "sub": "reason code",
+          "kind": "exception"
+        }
+      ],
+      "edges": [
+        {
+          "src": "d1",
+          "dst": "d2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d2",
+          "dst": "d3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d3",
+          "dst": "d4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d2",
+          "dst": "d5",
+          "label": "lost",
+          "dashed": true,
+          "kind": "exception"
+        }
+      ],
+      "note": "Proposals are presented and negotiated within revision limits; acceptance hands the case to Group Benefits Administration."
+    }
+  ],
+  "n_phases": 3,
+  "n_steps": 12,
+  "n_roles": 4,
+  "n_gateways": 2,
+  "fitgap": {
+    "overall_fit": 66,
+    "partial_pct": 20,
+    "fits": 6,
+    "gaps": 3,
+    "partials": 4,
+    "steps_analysed": 13,
+    "phases_count": 3,
+    "summary_line": "Overall alignment of SOP-INS-007 against the Majesco distribution & group quoting catalog",
+    "metrics": [
+      [
+        "Steps analysed",
+        "13 steps across 3 phases"
+      ],
+      [
+        "Fits confirmed",
+        "6 steps aligned to catalog"
+      ],
+      [
+        "Gaps identified",
+        "3 steps — remediation required"
+      ],
+      [
+        "Partial fits",
+        "4 steps — enhancement recommended"
+      ],
+      [
+        "Highest risk area",
+        "Manual census & quoting"
+      ],
+      [
+        "Conduct gap",
+        "No digital e-proposal / e-signature"
+      ],
+      [
+        "Ref standard",
+        "Majesco Distribution & Quoting Catalog"
+      ]
+    ],
+    "phase_bars": [
+      {
+        "line1": "Phase 1",
+        "line2": "Qualify",
+        "value": 66,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 2",
+        "line2": "Quote",
+        "value": 62,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 3",
+        "line2": "Convert",
+        "value": 70,
+        "colour": ""
+      },
+      {
+        "line1": "Digital /",
+        "line2": "analytics",
+        "value": 48,
+        "colour": ""
+      }
+    ],
+    "phase_cards": [
+      {
+        "label": "Phase 1",
+        "value": 66,
+        "sub": "Qualification"
+      },
+      {
+        "label": "Phase 2",
+        "value": 62,
+        "sub": "Quote preparation"
+      },
+      {
+        "label": "Phase 3",
+        "value": 70,
+        "sub": "Conversion"
+      },
+      {
+        "label": "Digital",
+        "value": 48,
+        "sub": "Proposal & analytics"
+      }
+    ],
+    "detail_slides": [
+      [
+        "Phase 1 — Prospect identification & qualification",
+        "Steps 1–4 vs Majesco distribution catalog",
+        [
+          "p1"
+        ]
+      ],
+      [
+        "Phase 2 — Quote preparation",
+        "Steps 5–9 vs Majesco distribution catalog",
+        [
+          "p2"
+        ]
+      ],
+      [
+        "Phase 3 — Presentation & conversion",
+        "Steps 10–13 vs Majesco distribution catalog",
+        [
+          "p3"
+        ]
+      ]
+    ],
+    "items": [
+      {
+        "num": "1",
+        "name": "Pipeline & prospect capture",
+        "status": "FIT",
+        "detail": "CRM prospect logging with size and benefit type aligns with Majesco distribution pipeline management.",
+        "owner": "Field Agent / Marketing",
+        "ref": "MJ-DM-PIP-01",
+        "group": "p1"
+      },
+      {
+        "num": "2",
+        "name": "Needs discovery",
+        "status": "FIT",
+        "detail": "Structured needs discovery capturing incumbent and renewal date aligns with Majesco opportunity qualification.",
+        "owner": "Field Agent",
+        "ref": "MJ-DM-PIP-03",
+        "group": "p1"
+      },
+      {
+        "num": "3",
+        "name": "Digital census intake",
+        "status": "GAP",
+        "detail": "Census is collected via a manual form. Majesco supports digital census intake and API import from broker benefits-admin systems, cutting turnaround and transcription error.",
+        "owner": "Field Agent / New Business",
+        "ref": "MJ-DM-CEN-01",
+        "group": "p1"
+      },
+      {
+        "num": "4",
+        "name": "Census validation",
+        "status": "PARTIAL",
+        "detail": "Completeness is checked manually with 2-day follow-up. Majesco auto-validates census structure and data quality on import.",
+        "owner": "New Business Specialist",
+        "ref": "MJ-DM-CEN-02",
+        "group": "p1"
+      },
+      {
+        "num": "5",
+        "name": "Quote request orchestration",
+        "status": "FIT",
+        "detail": "Quote request logging with urgency and target date aligns with Majesco quote workflow.",
+        "owner": "New Business Specialist",
+        "ref": "MJ-DM-QTE-01",
+        "group": "p2"
+      },
+      {
+        "num": "6",
+        "name": "Automated group quoting",
+        "status": "GAP",
+        "detail": "Even standard groups are manually underwritten. Majesco auto-quotes standard groups via a rating engine with what-if modelling, reserving underwriter time for complex risks.",
+        "owner": "Underwriting / Actuarial",
+        "ref": "MJ-DM-QTE-03",
+        "group": "p2"
+      },
+      {
+        "num": "7",
+        "name": "Risk-data enrichment",
+        "status": "PARTIAL",
+        "detail": "Pricing uses census only. Majesco enriches with industry-risk and group claims-history data to refine rating and control anti-selection.",
+        "owner": "Underwriting / Actuarial",
+        "ref": "MJ-DM-QTE-05",
+        "group": "p2"
+      },
+      {
+        "num": "8",
+        "name": "Proposal generation & validity",
+        "status": "FIT",
+        "detail": "Formal proposal with tiered rates and 30-day validity aligns with Majesco proposal generation.",
+        "owner": "New Business Specialist",
+        "ref": "MJ-DM-PRO-01",
+        "group": "p2"
+      },
+      {
+        "num": "9",
+        "name": "Compliance review of proposal",
+        "status": "PARTIAL",
+        "detail": "Marketing-compliance review is manual. Majesco applies automated disclosure/compliance checks to proposals before release.",
+        "owner": "Marketing / Underwriting",
+        "ref": "MJ-DM-PRO-03",
+        "group": "p2"
+      },
+      {
+        "num": "10",
+        "name": "Digital proposal & e-signature",
+        "status": "GAP",
+        "detail": "Proposals are presented and accepted via signed letters. Majesco delivers a digital e-proposal with e-signature acceptance and full audit — a conduct and cycle-time gap.",
+        "owner": "Field Agent",
+        "ref": "MJ-DM-PRO-05",
+        "group": "p3"
+      },
+      {
+        "num": "11",
+        "name": "Negotiation & revision control",
+        "status": "FIT",
+        "detail": "Revision limits with underwriter re-approval align with Majesco quote-revision governance.",
+        "owner": "Field Agent / New Business",
+        "ref": "MJ-DM-NEG-01",
+        "group": "p3"
+      },
+      {
+        "num": "12",
+        "name": "Win/loss & pipeline analytics",
+        "status": "PARTIAL",
+        "detail": "Lost business is reviewed monthly by hand. Majesco provides win/loss and conversion analytics with competitor benchmarking for pricing feedback.",
+        "owner": "Marketing Manager",
+        "ref": "MJ-DM-ANL-01",
+        "group": "p3"
+      },
+      {
+        "num": "13",
+        "name": "Handover to administration",
+        "status": "FIT",
+        "detail": "Structured case-file handover to group administration aligns with Majesco sale-to-service transition.",
+        "owner": "New Business Specialist",
+        "ref": "MJ-DM-HND-01",
+        "group": "p3"
+      }
+    ],
+    "groups": [
+      [
+        "p1",
+        "PHASE 1 — PROSPECT IDENTIFICATION & QUALIFICATION"
+      ],
+      [
+        "p2",
+        "PHASE 2 — QUOTE PREPARATION"
+      ],
+      [
+        "p3",
+        "PHASE 3 — PRESENTATION & CONVERSION"
+      ]
+    ],
+    "critical_missing": [
+      {
+        "title": "Digital census intake & validation",
+        "detail": "Census is collected on a manual form and checked by hand. The catalog imports digital census via API/upload with automated validation, cutting turnaround and error."
+      },
+      {
+        "title": "Automated group quoting",
+        "detail": "Standard groups are manually underwritten. The catalog auto-quotes standard groups with what-if modelling, freeing underwriters for complex risks and speeding response."
+      },
+      {
+        "title": "Digital e-proposal & e-signature",
+        "detail": "Proposals are presented and accepted on paper. The catalog delivers a digital e-proposal with e-signature acceptance and audit — a conduct and cycle-time gap."
+      },
+      {
+        "title": "Win/loss & competitor analytics",
+        "detail": "Lost business is reviewed manually; the catalog provides win/loss and competitor benchmarking analytics that feed pricing and product competitiveness."
+      }
+    ],
+    "radar": [
+      [
+        "Pipeline",
+        72
+      ],
+      [
+        "Census intake",
+        45
+      ],
+      [
+        "Quoting",
+        55
+      ],
+      [
+        "Risk data",
+        50
+      ],
+      [
+        "Proposal",
+        70
+      ],
+      [
+        "E-signature",
+        38
+      ],
+      [
+        "Analytics",
+        52
+      ]
+    ],
+    "control_bars": [
+      {
+        "name": "Pipeline & qualification",
+        "value": 72,
+        "note": "CRM pipeline and needs discovery solid"
+      },
+      {
+        "name": "Census intake",
+        "value": 45,
+        "note": "Manual form; no digital/API import"
+      },
+      {
+        "name": "Group quoting",
+        "value": 55,
+        "note": "Manual UW even for standard groups"
+      },
+      {
+        "name": "Risk-data enrichment",
+        "value": 50,
+        "note": "Census-only; no industry/claims data"
+      },
+      {
+        "name": "Proposal generation",
+        "value": 70,
+        "note": "Tiered proposal with validity"
+      },
+      {
+        "name": "E-proposal / e-signature",
+        "value": 38,
+        "note": "Paper acceptance; no digital signature"
+      },
+      {
+        "name": "Win/loss analytics",
+        "value": 52,
+        "note": "Manual monthly lost-business review"
+      }
+    ],
+    "remediations": [
+      {
+        "rank": 1,
+        "title": "Implement digital census intake & validation",
+        "detail": "Accept census via secure upload/API with automated structure and data-quality validation. Effort: 4 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 2,
+        "title": "Automate quoting for standard groups",
+        "detail": "Auto-quote standard groups via the rating engine with what-if modelling; route only complex risks to underwriters. Effort: 6 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 3,
+        "title": "Deliver digital e-proposal & e-signature",
+        "detail": "Generate a digital e-proposal with e-signature acceptance and full audit trail. Effort: 4 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 4,
+        "title": "Add win/loss & competitor analytics",
+        "detail": "Provide conversion, win/loss and competitor-benchmarking dashboards to feed pricing and product. Effort: 3 weeks.",
+        "priority": "Medium"
+      },
+      {
+        "rank": 5,
+        "title": "Enrich pricing with risk data & auto compliance checks",
+        "detail": "Append industry-risk and group claims-history data and apply automated disclosure/compliance checks to proposals. Effort: 4 weeks.",
+        "priority": "Medium"
+      }
+    ],
+    "risk_impact": [
+      [
+        "Manual census",
+        80
+      ],
+      [
+        "Manual quoting",
+        78
+      ],
+      [
+        "E-proposal / e-sign",
+        72
+      ],
+      [
+        "Win/loss analytics",
+        58
+      ],
+      [
+        "Risk-data enrichment",
+        55
+      ],
+      [
+        "Compliance checks",
+        50
+      ]
+    ],
+    "projected_fit": 90
+  },
+  "opt_phases": [
+    {
+      "pid": "1",
+      "name": "Qualification & digital census",
+      "subtitle": "Source, discover, digital census",
+      "circle": "blue",
+      "roles": "Field Agent · Marketing · New Business",
+      "step_range": "Steps 1–4",
+      "summary": "4 steps"
+    },
+    {
+      "pid": "2",
+      "name": "Automated quote preparation",
+      "subtitle": "Auto-quote, enrich, e-proposal",
+      "circle": "green",
+      "roles": "New Business · Underwriting · Actuarial",
+      "step_range": "Steps 5–9",
+      "summary": "5 steps + 1 decision"
+    },
+    {
+      "pid": "3",
+      "name": "Presentation & conversion",
+      "subtitle": "E-proposal, negotiate, accept, analytics",
+      "circle": "amber",
+      "roles": "Field Agent · Prospect · New Business",
+      "step_range": "Steps 10–14",
+      "summary": "5 steps + 1 decision"
+    }
+  ],
+  "opt_steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Group prospect identified",
+      "responsible": "Field Agent / Marketing Manager",
+      "output": "Logged in CRM; size and benefit type recorded",
+      "timeline": "Day 0",
+      "controls": "Standard",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Initial meeting / needs discovery",
+      "responsible": "Field Agent",
+      "output": "Needs, incumbent and renewal date established",
+      "timeline": "Day 1–5",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Digital census intake & validation",
+      "responsible": "Field Agent / System",
+      "output": "Census imported via secure upload/API; structure and data quality auto-validated",
+      "timeline": "Day 5",
+      "controls": "NEW (v2.0) — faster, cleaner",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Census enriched with risk data",
+      "responsible": "New Business / System",
+      "output": "Industry-risk and group claims-history data appended",
+      "timeline": "Day 5–7",
+      "controls": "NEW (v2.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "5",
+      "phase": "2",
+      "activity": "Automated quote for standard groups",
+      "responsible": "Rating Engine",
+      "output": "Standard groups auto-quoted with what-if modelling; complex routed to UW",
+      "timeline": "Same day",
+      "controls": "ENHANCED (v2.0) — STP quoting",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "2",
+      "activity": "Risk assessment and pricing (complex)",
+      "responsible": "Underwriting / Actuarial",
+      "output": "Experience/community rating for non-standard groups within 5 days",
+      "timeline": "≤5 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Formal e-proposal prepared",
+      "responsible": "New Business Specialist",
+      "output": "Digital proposal: benefits schedule, tiered rates, 30-day validity",
+      "timeline": "Day +1",
+      "controls": "ENHANCED (v2.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Automated compliance / disclosure check",
+      "responsible": "System / Marketing",
+      "output": "Disclosure and marketing-compliance checks applied before release",
+      "timeline": "Day +1",
+      "controls": "NEW (v2.0) — conduct control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "2",
+      "activity": "Quote approved and released",
+      "responsible": "Marketing Manager / Underwriting",
+      "output": "Approved e-proposal released to agent",
+      "timeline": "Day +1",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "2",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Quote governance",
+      "kind": "decision",
+      "decision": "Standard or non-standard?",
+      "branches": [
+        "Standard → auto-quote & release",
+        "Non-standard → Head of Group (Sec 6.3)"
+      ]
+    },
+    {
+      "num": "10",
+      "phase": "3",
+      "activity": "E-proposal presented to prospect",
+      "responsible": "Field Agent",
+      "output": "Digital proposal presented; competitor comparison if requested",
+      "timeline": "Day +2",
+      "controls": "ENHANCED (v2.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "3",
+      "activity": "Prospect negotiation (if applicable)",
+      "responsible": "Field Agent / New Business",
+      "output": "Revised terms via what-if modelling; max 2 revisions without escalation",
+      "timeline": "Day +2–10",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Prospect accepts via e-signature",
+      "responsible": "Field Agent / Prospect",
+      "output": "E-signature acceptance captured with audit; accepted in CRM",
+      "timeline": "Day +10",
+      "controls": "NEW (v2.0) — digital acceptance",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "13",
+      "phase": "3",
+      "activity": "Handover to Group Benefits Administration",
+      "responsible": "New Business Specialist",
+      "output": "Case file transferred to SOP-INS-006",
+      "timeline": "Day +10",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "14",
+      "phase": "3",
+      "activity": "Win/loss analytics updated",
+      "responsible": "Marketing Manager / System",
+      "output": "Conversion, win/loss and competitor benchmarking dashboards updated",
+      "timeline": "Ongoing",
+      "controls": "NEW (v2.0) — pricing feedback",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "opt_swim_phases": [
+    {
+      "pid": "1",
+      "name": "Qualification & digital census",
+      "subtitle": "Steps 1–4 · v2.0 adds digital census & enrichment",
+      "lanes": [
+        "Prospect",
+        "Field Agent",
+        "New Business / System"
+      ],
+      "nodes": [
+        {
+          "nid": "o1",
+          "lane": "Field Agent",
+          "col": 0,
+          "title": "Prospect identified",
+          "sub": "logged in CRM",
+          "kind": "standard"
+        },
+        {
+          "nid": "o2",
+          "lane": "Field Agent",
+          "col": 1,
+          "title": "Needs discovery",
+          "sub": "incumbent · renewal",
+          "kind": "standard"
+        },
+        {
+          "nid": "o3",
+          "lane": "New Business / System",
+          "col": 2,
+          "title": "Digital census intake",
+          "sub": "auto-validate",
+          "kind": "new"
+        },
+        {
+          "nid": "o4",
+          "lane": "New Business / System",
+          "col": 3,
+          "title": "Enrich with risk data",
+          "sub": "industry · claims",
+          "kind": "new"
+        }
+      ],
+      "edges": [
+        {
+          "src": "o1",
+          "dst": "o2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o2",
+          "dst": "o3",
+          "label": "census",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "o3",
+          "dst": "o4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "v2.0 imports and validates census digitally and enriches it with industry-risk and claims data before pricing."
+    },
+    {
+      "pid": "2",
+      "name": "Automated quote preparation",
+      "subtitle": "Steps 5–9 · auto-quote & e-proposal",
+      "lanes": [
+        "New Business",
+        "Rating / Underwriting",
+        "Marketing / System"
+      ],
+      "nodes": [
+        {
+          "nid": "p1",
+          "lane": "Rating / Underwriting",
+          "col": 0,
+          "title": "Auto-quote standard groups",
+          "sub": "what-if modelling",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "p2",
+          "lane": "Rating / Underwriting",
+          "col": 1,
+          "title": "Price complex groups",
+          "sub": "experience / community",
+          "kind": "standard"
+        },
+        {
+          "nid": "p3",
+          "lane": "New Business",
+          "col": 2,
+          "title": "Prepare e-proposal",
+          "sub": "digital · 30-day",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "p4",
+          "lane": "Marketing / System",
+          "col": 2,
+          "title": "Compliance / disclosure check",
+          "sub": "automated",
+          "kind": "new"
+        },
+        {
+          "nid": "p5",
+          "lane": "Marketing / System",
+          "col": 3,
+          "title": "Approve & release",
+          "sub": "to agent",
+          "kind": "decision"
+        }
+      ],
+      "edges": [
+        {
+          "src": "p1",
+          "dst": "p3",
+          "label": "std",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p2",
+          "dst": "p3",
+          "label": "cx",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p3",
+          "dst": "p4",
+          "label": "",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "p4",
+          "dst": "p5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "v2.0 auto-quotes standard groups, generates a digital e-proposal, and applies automated compliance checks before release."
+    },
+    {
+      "pid": "3",
+      "name": "Presentation & conversion",
+      "subtitle": "Steps 10–14 · v2.0 adds e-signature & analytics",
+      "lanes": [
+        "Field Agent",
+        "Prospect",
+        "New Business / Marketing"
+      ],
+      "nodes": [
+        {
+          "nid": "q1",
+          "lane": "Field Agent",
+          "col": 0,
+          "title": "Present e-proposal",
+          "sub": "competitor comparison",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "q2",
+          "lane": "Field Agent",
+          "col": 1,
+          "title": "Negotiate (≤2 revisions)",
+          "sub": "what-if terms",
+          "kind": "standard"
+        },
+        {
+          "nid": "q3",
+          "lane": "Prospect",
+          "col": 2,
+          "title": "Accept via e-signature",
+          "sub": "audited",
+          "kind": "new"
+        },
+        {
+          "nid": "q4",
+          "lane": "New Business / Marketing",
+          "col": 3,
+          "title": "Handover to GBA",
+          "sub": "SOP-INS-006",
+          "kind": "terminal"
+        },
+        {
+          "nid": "q5",
+          "lane": "New Business / Marketing",
+          "col": 2,
+          "title": "Win/loss analytics",
+          "sub": "benchmarking",
+          "kind": "new"
+        }
+      ],
+      "edges": [
+        {
+          "src": "q1",
+          "dst": "q2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q2",
+          "dst": "q3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q3",
+          "dst": "q4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q2",
+          "dst": "q5",
+          "label": "w/l",
+          "dashed": true,
+          "kind": "new"
+        }
+      ],
+      "note": "v2.0 captures e-signature acceptance and feeds win/loss analytics with competitor benchmarking into pricing."
+    }
+  ],
+  "opt_n_phases": 3,
+  "opt_n_steps": 14,
+  "opt_n_gateways": 2,
+  "opt_fit": 90,
+  "optimised_doc": {
+    "subtitle": "Optimised per Fit-Gap Analysis against the Majesco Distribution & Group Quoting Catalog",
+    "sections": [
+      {
+        "title": "",
+        "blocks": [
+          [
+            "meta",
+            [
+              [
+                "Document Reference",
+                "SOP-INS-007"
+              ],
+              [
+                "Version",
+                "2.0 (Optimised)"
+              ],
+              [
+                "Effective Date",
+                "01 October 2026"
+              ],
+              [
+                "Supersedes",
+                "v1.1 dated 15 March 2025"
+              ],
+              [
+                "Owner",
+                "Group Marketing & Distribution"
+              ],
+              [
+                "Approved By",
+                "Chief Marketing Officer"
+              ],
+              [
+                "Optimisation Reference",
+                "Fit-Gap Report FG-INS-007 dated 18 June 2026"
+              ],
+              [
+                "Catalog Alignment Score",
+                "90% (up from 66% in v1.1)"
+              ],
+              [
+                "Classification",
+                "Internal Use Only"
+              ]
+            ]
+          ],
+          [
+            "summary",
+            "OPTIMISATION SUMMARY — What changed in v2.0",
+            [
+              "This version incorporates 5 remediation actions from Fit-Gap Report FG-INS-007. Alignment to the Majesco distribution & group quoting catalog increased from 66% to 90%. Critical additions: digital census intake with validation, automated quoting for standard groups, a digital e-proposal with e-signature, win/loss analytics, and risk-data enrichment with automated compliance checks."
+            ],
+            [
+              "NEW STEP (green) — step added to close a gap vs the Majesco catalog",
+              "ENHANCED (amber) — existing step updated with additional automation or controls"
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "1. Purpose",
+        "blocks": [
+          [
+            "para",
+            "This Standard Operating Procedure defines how group insurance is marketed, quoted and sold to prospective group clients. Version 2.0 incorporates optimisations from fit-gap analysis against the Majesco Distribution & Group Quoting Best-Practice Catalog, achieving 90% alignment (up from 66% in v1.1)."
+          ]
+        ]
+      },
+      {
+        "title": "2. Scope",
+        "blocks": [
+          [
+            "para",
+            "This procedure applies to group opportunities with 10 or more covered lives across employer-sponsored life, health, disability and accident programmes, and affinity/association groups."
+          ],
+          [
+            "banner",
+            "new",
+            "Scope extended: digital census intake and automated quoting now apply to all standard group opportunities."
+          ],
+          [
+            "para",
+            "This procedure does NOT cover individual product campaigns (SOP-INS-001/008), wholesale distribution marketing, or reinsurance treaty placements."
+          ]
+        ]
+      },
+      {
+        "title": "3. Authority Matrix",
+        "blocks": [
+          [
+            "table",
+            [
+              "Item",
+              "First Authority",
+              "Second Authority"
+            ],
+            [
+              [
+                "Standard group quote",
+                "Underwriting / Actuarial",
+                "Marketing review"
+              ],
+              [
+                "Up to 2 quote revisions",
+                "New Business Specialist",
+                "Underwriting"
+              ],
+              [
+                "Non-standard group",
+                "Head of Group Insurance",
+                "Compliance"
+              ],
+              [
+                "Loss ratio >80% (prior 3y)",
+                "Head of Group Insurance",
+                "Underwriting"
+              ],
+              [
+                "Marketing collateral approval",
+                "Marketing Manager",
+                "Compliance"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "4. Roles and Responsibilities",
+        "blocks": [
+          [
+            "table",
+            [
+              "Role",
+              "Responsibilities"
+            ],
+            [
+              [
+                "Field Agent",
+                "Identifies and qualifies prospects; collects census; presents proposals; manages the relationship."
+              ],
+              [
+                "Marketing Manager",
+                "Runs campaigns and collateral; owns win/loss analytics and competitor benchmarking."
+              ],
+              [
+                "New Business Specialist",
+                "Coordinates quoting; prepares e-proposals; manages validity and handover."
+              ],
+              [
+                "Underwriting / Actuarial",
+                "Reviews census; sets pricing and conditions; approves quotes for release."
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "5. Digital Quoting Controls (New Section — v2.0)",
+        "blocks": [
+          [
+            "banner",
+            "crit",
+            "New section. Required by the Majesco catalog. Digital census, automated quoting and e-signature acceptance now govern the group quote lifecycle."
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Control",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "Q1",
+                "Digital census intake & validation",
+                "New Business",
+                "Auto-validated census via upload/API",
+                "At census"
+              ],
+              [
+                "Q2",
+                "Automated quoting for standard groups",
+                "Rating Engine",
+                "Standard groups auto-quoted with what-if",
+                "Same day"
+              ],
+              [
+                "Q3",
+                "E-proposal with e-signature acceptance",
+                "Field Agent",
+                "Digital proposal and audited acceptance",
+                "At present/accept"
+              ]
+            ],
+            {
+              "0": "new",
+              "1": "new",
+              "2": "new"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "6. Process Steps",
+        "blocks": [
+          [
+            "h3",
+            "6.1 Qualification & Digital Census"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "1",
+                "Group prospect identified",
+                "Field Agent / Marketing",
+                "Logged in CRM",
+                "Day 0"
+              ],
+              [
+                "2",
+                "Initial meeting / needs discovery",
+                "Field Agent",
+                "Needs, incumbent, renewal",
+                "Day 1–5"
+              ],
+              [
+                "3",
+                "Digital census intake & validation",
+                "Field Agent / System",
+                "Auto-validated census",
+                "Day 5"
+              ],
+              [
+                "4",
+                "Census enriched with risk data",
+                "New Business / System",
+                "Industry/claims data appended",
+                "Day 5–7"
+              ]
+            ],
+            {
+              "2": "new",
+              "3": "new"
+            }
+          ],
+          [
+            "h3",
+            "6.2 Automated Quote Preparation"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "5",
+                "Automated quote for standard groups",
+                "Rating Engine",
+                "Auto-quote with what-if",
+                "Same day"
+              ],
+              [
+                "6",
+                "Risk assessment and pricing (complex)",
+                "Underwriting / Actuarial",
+                "Experience/community rating",
+                "≤5 days"
+              ],
+              [
+                "7",
+                "Formal e-proposal prepared",
+                "New Business Specialist",
+                "Digital proposal; 30-day validity",
+                "Day +1"
+              ],
+              [
+                "8",
+                "Automated compliance / disclosure check",
+                "System / Marketing",
+                "Checks applied before release",
+                "Day +1"
+              ],
+              [
+                "9",
+                "Quote approved and released",
+                "Marketing / Underwriting",
+                "E-proposal released to agent",
+                "Day +1"
+              ]
+            ],
+            {
+              "0": "enh",
+              "2": "enh",
+              "3": "new"
+            }
+          ],
+          [
+            "h3",
+            "6.3 Presentation & Conversion"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "10",
+                "E-proposal presented to prospect",
+                "Field Agent",
+                "Digital proposal; competitor comparison",
+                "Day +2"
+              ],
+              [
+                "11",
+                "Prospect negotiation (if applicable)",
+                "Field Agent / New Business",
+                "What-if revisions; ≤2",
+                "Day +2–10"
+              ],
+              [
+                "12",
+                "Prospect accepts via e-signature",
+                "Field Agent / Prospect",
+                "Audited e-signature; CRM",
+                "Day +10"
+              ],
+              [
+                "13",
+                "Handover to Group Benefits Administration",
+                "New Business Specialist",
+                "Case file to SOP-INS-006",
+                "Day +10"
+              ],
+              [
+                "14",
+                "Win/loss analytics updated",
+                "Marketing Manager",
+                "Benchmarking dashboards",
+                "Ongoing"
+              ]
+            ],
+            {
+              "0": "enh",
+              "2": "new",
+              "4": "new"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "7. Exception Handling",
+        "blocks": [
+          [
+            "h3",
+            "7.1 Prospect Does Not Proceed"
+          ],
+          [
+            "numbered",
+            [
+              "Reason for loss recorded in CRM with standard 'Lost Business' reason codes.",
+              "Win/loss analytics surface pricing or product competitiveness issues automatically.",
+              "Agent may request a post-decision debrief to capture prospect feedback."
+            ]
+          ],
+          [
+            "h3",
+            "7.2 Quote Exceeds Validity Period"
+          ],
+          [
+            "numbered_from",
+            4,
+            [
+              "New Business Specialist notifies the field agent 7 days before expiry.",
+              "If an extension is needed, Underwriting re-confirms pricing and reissues with a revised validity date."
+            ]
+          ],
+          [
+            "h3",
+            "7.3 Non-Standard Group (High-Risk or Adverse Experience)"
+          ],
+          [
+            "numbered_from",
+            6,
+            [
+              "Underwriting flags non-standard groups to Compliance and Head of Group Insurance before quoting.",
+              "Pricing is loaded with risk margin and exclusions as required.",
+              "Head of Group Insurance must approve quotes for groups with loss ratios above 80% over the prior 3 years."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "8. Systems and Tools",
+        "blocks": [
+          [
+            "table",
+            [
+              "System",
+              "Purpose",
+              "Primary Users"
+            ],
+            [
+              [
+                "CRM (Salesforce)",
+                "Prospect tracking, pipeline, proposal history",
+                "Field Agent, Marketing, New Business"
+              ],
+              [
+                "Group Quotation Tool (Actuarial)",
+                "Census input, automated pricing, proposal generation",
+                "New Business, Actuarial"
+              ],
+              [
+                "Census Intake / API",
+                "Digital census import and validation",
+                "New Business"
+              ],
+              [
+                "E-Proposal / E-Signature",
+                "Digital proposal delivery and audited acceptance",
+                "Field Agent, Prospect"
+              ],
+              [
+                "Marketing Automation (HubSpot)",
+                "Campaigns, leads, win/loss analytics",
+                "Marketing Manager"
+              ],
+              [
+                "Document Management System",
+                "Proposal storage and collateral library",
+                "All roles"
+              ],
+              [
+                "PAS",
+                "Handover to policy setup on acceptance",
+                "New Business Specialist"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "9. Key Controls and Audit Points",
+        "blocks": [
+          [
+            "banner",
+            "enh",
+            "Controls expanded in v2.0: digital census validation, automated quoting, e-signature acceptance, and automated compliance checks."
+          ],
+          [
+            "bullets",
+            [
+              "Digital census: imported and validated automatically before pricing.",
+              "Automated quoting: standard groups auto-quoted; underwriters focus on complex risks.",
+              "Compliance check: disclosure and marketing-compliance applied to every proposal.",
+              "E-signature: audited digital acceptance replaces paper sign-off.",
+              "Risk-data enrichment: industry and claims data improve pricing accuracy.",
+              "Revision control: maximum two revisions without escalation, underwriter re-approved.",
+              "Immutable audit trail: census, quote, proposal and acceptance events logged."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "10. Key Performance Indicators",
+        "blocks": [
+          [
+            "table",
+            [
+              "KPI",
+              "v1.1 Target",
+              "v2.0 Target",
+              "Measurement"
+            ],
+            [
+              [
+                "Group pipeline conversion",
+                "≥25%",
+                "≥30%",
+                "Quotes converting to bound policies"
+              ],
+              [
+                "Quote preparation cycle time",
+                "≤5 business days",
+                "Same day (standard)",
+                "Census to quote"
+              ],
+              [
+                "Quote validity compliance",
+                "100%",
+                "100%",
+                "Presented within validity"
+              ],
+              [
+                "Digital census adoption",
+                "N/A (new)",
+                "≥80%",
+                "Digital vs manual census"
+              ],
+              [
+                "E-signature acceptance",
+                "N/A (new)",
+                "≥75%",
+                "E-sign vs paper acceptance"
+              ],
+              [
+                "Lost-business documentation",
+                "100%",
+                "100%",
+                "Lost opportunities with reason code"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "11. Document Control",
+        "blocks": [
+          [
+            "table",
+            [
+              "Version",
+              "Date",
+              "Author",
+              "Summary of Changes"
+            ],
+            [
+              [
+                "1.1",
+                "15 Mar 2025",
+                "F. Okonkwo, Group Marketing",
+                "Added non-standard group exception; updated CRM steps; revised conversion KPI targets"
+              ],
+              [
+                "2.0",
+                "01 Oct 2026",
+                "F. Okonkwo, Group Marketing",
+                "OPTIMISED: digital census intake; automated quoting; e-proposal & e-signature; win/loss analytics; risk-data enrichment & compliance checks; catalog alignment 66% → 90%"
+              ]
+            ],
+            {}
+          ]
+        ]
+      }
+    ]
+  },
+  "swim_cover_tags": "Qualify · Quote · Present · Convert · Exception handling",
+  "hierarchy_cover_sub": "Phase breakdown with group sales tracks, quoting authority, and exception paths"
+}

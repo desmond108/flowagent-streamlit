@@ -1,0 +1,1898 @@
+{
+  "meta": {
+    "sop_id": "SOP-INS-002",
+    "slug": "Premium_Accounting",
+    "title": "Premium Accounting",
+    "short_title": "Premium accounting",
+    "version": "2.0",
+    "owner": "Finance — Premium Accounting",
+    "org": "Meridian Insurance Group",
+    "catalog": "Guidewire BillingCenter — Premium Billing Best-Practice Catalog",
+    "catalog_short": "Guidewire BillingCenter",
+    "new_version": "3.0",
+    "effective_date": "01 October 2026",
+    "supersedes": "v2.0 dated 15 February 2025",
+    "approved_by": "Chief Financial Officer",
+    "classification": "Internal Use Only"
+  },
+  "phases": [
+    {
+      "pid": "1",
+      "name": "Review & premium validation",
+      "subtitle": "Policy intake and premium check",
+      "circle": "blue",
+      "roles": "PAS · Premium Accounting",
+      "step_range": "Steps 1–4",
+      "summary": "4 steps + 1 decision"
+    },
+    {
+      "pid": "2",
+      "name": "Payment method setup",
+      "subtitle": "Mandate, schedule, confirmation",
+      "circle": "green",
+      "roles": "Premium Accounting · CRM · Agent",
+      "step_range": "Steps 5–8",
+      "summary": "4 steps"
+    },
+    {
+      "pid": "3",
+      "name": "First payment processing",
+      "subtitle": "Collection, reconciliation, activation",
+      "circle": "amber",
+      "roles": "Billing System · Premium Accounting",
+      "step_range": "Steps 9–11",
+      "summary": "3 steps + 1 decision"
+    }
+  ],
+  "steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Home Office receives new policy notification from PAS",
+      "responsible": "PAS (automated)",
+      "output": "Email alert to Premium Accounting queue; policy accessible in billing system",
+      "timeline": "T+0",
+      "controls": "Automated trigger",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Validate premium calculation against rating output",
+      "responsible": "Premium Accounting",
+      "output": "Billed premium matched to quote/schedule; variance above SGD 10 flagged",
+      "timeline": "T+1 day",
+      "controls": "Variance threshold control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Confirm coverage period and instalment schedule",
+      "responsible": "Premium Accounting",
+      "output": "Annual/semi-annual/quarterly/monthly recorded in billing module",
+      "timeline": "T+1 day",
+      "controls": "Schedule confirmed",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Verify policyholder banking or card details",
+      "responsible": "Premium Accounting",
+      "output": "Bank/card validated via micro-deposit or card check",
+      "timeline": "T+1 day",
+      "controls": "Account verification",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "1",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Variance investigation",
+      "kind": "decision",
+      "decision": "Premium variance?",
+      "branches": [
+        "Within SGD 10 → proceed to setup",
+        "Above SGD 10 → hold + investigate (Sec 6.1)"
+      ]
+    },
+    {
+      "num": "5",
+      "phase": "2",
+      "activity": "Configure direct debit mandate in billing system",
+      "responsible": "Premium Accounting",
+      "output": "GIRO/direct debit mandate activated; reference recorded in PAS",
+      "timeline": "T+2 days",
+      "controls": "Mandate control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "2",
+      "activity": "Set up payment schedule in billing module",
+      "responsible": "Premium Accounting",
+      "output": "Due dates, amounts and instalment plan loaded; first due date confirmed",
+      "timeline": "T+2 days",
+      "controls": "Schedule loaded",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Send first-payment confirmation to policyholder",
+      "responsible": "Premium Accounting / CRM",
+      "output": "Written confirmation by email/post; amount, due date and payment reference",
+      "timeline": "T+2 days",
+      "controls": "Confirmation SLA: 1 day",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Notify agent or branch of billing setup completion",
+      "responsible": "Premium Accounting",
+      "output": "Agent notified; confirmation logged in CRM",
+      "timeline": "T+2 days",
+      "controls": "Agent notification",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "3",
+      "activity": "First premium collected on due date",
+      "responsible": "Billing System (automated)",
+      "output": "Payment deducted; receipt generated and emailed",
+      "timeline": "Due date",
+      "controls": "Automated collection",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "3",
+      "activity": "Payment reconciled against policy record",
+      "responsible": "Premium Accounting",
+      "output": "Receipt matched to policy; GL entry posted in SAP",
+      "timeline": "Due date +1",
+      "controls": "Reconciliation to GL",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "3",
+      "activity": "Update billing status in PAS to 'Active – Current'",
+      "responsible": "Premium Accounting",
+      "output": "Policy confirmed fully in-force; agent notified",
+      "timeline": "Due date +1",
+      "controls": "Status activation",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "authority": [
+    {
+      "band": "Variance ≤ SGD 10",
+      "first": "Premium Accounting",
+      "second": "—"
+    },
+    {
+      "band": "Variance SGD 11–500",
+      "first": "Premium Accounting",
+      "second": "Underwriting sign-off"
+    },
+    {
+      "band": "Variance above SGD 500",
+      "first": "Finance Manager",
+      "second": "Underwriting Manager"
+    },
+    {
+      "band": "Write-off / small balance",
+      "first": "Finance Manager",
+      "second": "—"
+    },
+    {
+      "band": "Refund authorisation",
+      "first": "Finance Manager",
+      "second": "CFO above SGD 25,000"
+    }
+  ],
+  "swim_phases": [
+    {
+      "pid": "1",
+      "name": "Review & premium validation",
+      "subtitle": "Steps 1–4 · intake and premium check",
+      "lanes": [
+        "PAS / System",
+        "Premium Accounting",
+        "Underwriting"
+      ],
+      "nodes": [
+        {
+          "nid": "s1",
+          "lane": "PAS / System",
+          "col": 0,
+          "title": "New policy notification",
+          "sub": "auto alert",
+          "kind": "standard"
+        },
+        {
+          "nid": "s2",
+          "lane": "Premium Accounting",
+          "col": 1,
+          "title": "Validate premium vs rating",
+          "sub": "variance > SGD 10 flagged",
+          "kind": "standard"
+        },
+        {
+          "nid": "s3",
+          "lane": "Premium Accounting",
+          "col": 2,
+          "title": "Confirm instalment schedule",
+          "sub": "billing module",
+          "kind": "standard"
+        },
+        {
+          "nid": "s4",
+          "lane": "Premium Accounting",
+          "col": 3,
+          "title": "Verify bank / card details",
+          "sub": "micro-deposit",
+          "kind": "standard"
+        },
+        {
+          "nid": "s5",
+          "lane": "Underwriting",
+          "col": 2,
+          "title": "Variance hold & sign-off",
+          "sub": "Sec 6.1",
+          "kind": "exception"
+        }
+      ],
+      "edges": [
+        {
+          "src": "s1",
+          "dst": "s2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "s2",
+          "dst": "s3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s3",
+          "dst": "s4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s2",
+          "dst": "s5",
+          "label": "var",
+          "dashed": true,
+          "kind": "exception"
+        }
+      ],
+      "note": "Policy issuance triggers premium validation; variances above SGD 10 are held for underwriting sign-off."
+    },
+    {
+      "pid": "2",
+      "name": "Payment method setup",
+      "subtitle": "Steps 5–8 · mandate, schedule, confirmation",
+      "lanes": [
+        "Premium Accounting",
+        "Billing System",
+        "CRM / Agent"
+      ],
+      "nodes": [
+        {
+          "nid": "a1",
+          "lane": "Premium Accounting",
+          "col": 0,
+          "title": "Configure DD mandate",
+          "sub": "GIRO",
+          "kind": "standard"
+        },
+        {
+          "nid": "a2",
+          "lane": "Billing System",
+          "col": 1,
+          "title": "Load payment schedule",
+          "sub": "due dates",
+          "kind": "standard"
+        },
+        {
+          "nid": "a3",
+          "lane": "Premium Accounting",
+          "col": 2,
+          "title": "Send first-payment confirmation",
+          "sub": "email / post",
+          "kind": "standard"
+        },
+        {
+          "nid": "a4",
+          "lane": "CRM / Agent",
+          "col": 3,
+          "title": "Notify agent / branch",
+          "sub": "logged in CRM",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "a1",
+          "dst": "a2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a3",
+          "dst": "a4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "The mandate and payment schedule are configured in Sapiens; the policyholder and agent receive written confirmation."
+    },
+    {
+      "pid": "3",
+      "name": "First payment processing",
+      "subtitle": "Steps 9–11 · collection, reconciliation, activation",
+      "lanes": [
+        "Billing System",
+        "Premium Accounting",
+        "Finance / SAP"
+      ],
+      "nodes": [
+        {
+          "nid": "d1",
+          "lane": "Billing System",
+          "col": 0,
+          "title": "Collect first premium",
+          "sub": "auto deduct",
+          "kind": "standard"
+        },
+        {
+          "nid": "d2",
+          "lane": "Premium Accounting",
+          "col": 1,
+          "title": "Reconcile to policy",
+          "sub": "match receipt",
+          "kind": "standard"
+        },
+        {
+          "nid": "d3",
+          "lane": "Finance / SAP",
+          "col": 2,
+          "title": "Post GL entry",
+          "sub": "SAP S/4HANA",
+          "kind": "standard"
+        },
+        {
+          "nid": "d4",
+          "lane": "Premium Accounting",
+          "col": 3,
+          "title": "Activate billing status",
+          "sub": "Active – Current",
+          "kind": "terminal"
+        },
+        {
+          "nid": "d5",
+          "lane": "Premium Accounting",
+          "col": 0,
+          "title": "Failed payment → Collections",
+          "sub": "Sec 6.2",
+          "kind": "exception"
+        }
+      ],
+      "edges": [
+        {
+          "src": "d1",
+          "dst": "d2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d2",
+          "dst": "d3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d3",
+          "dst": "d4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d1",
+          "dst": "d5",
+          "label": "fail",
+          "dashed": true,
+          "kind": "exception"
+        }
+      ],
+      "note": "On the due date the first premium is collected, reconciled and posted to the GL; failed payments route to Collections."
+    }
+  ],
+  "n_phases": 3,
+  "n_steps": 11,
+  "n_roles": 4,
+  "n_gateways": 2,
+  "fitgap": {
+    "overall_fit": 66,
+    "partial_pct": 16,
+    "fits": 7,
+    "gaps": 4,
+    "partials": 3,
+    "steps_analysed": 14,
+    "phases_count": 3,
+    "summary_line": "Overall alignment of SOP-INS-002 against the Guidewire BillingCenter billing catalog",
+    "metrics": [
+      [
+        "Steps analysed",
+        "14 steps across 3 phases"
+      ],
+      [
+        "Fits confirmed",
+        "7 steps aligned to catalog"
+      ],
+      [
+        "Gaps identified",
+        "4 steps — remediation required"
+      ],
+      [
+        "Partial fits",
+        "3 steps — enhancement recommended"
+      ],
+      [
+        "Highest risk area",
+        "Unapplied/suspense cash (missing)"
+      ],
+      [
+        "Compliance gap",
+        "No GST / premium-tax handling"
+      ],
+      [
+        "Ref standard",
+        "Guidewire BillingCenter Billing Catalog"
+      ]
+    ],
+    "phase_bars": [
+      {
+        "line1": "Phase 1",
+        "line2": "Validation",
+        "value": 74,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 2",
+        "line2": "Setup",
+        "value": 62,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 3",
+        "line2": "Collection",
+        "value": 60,
+        "colour": ""
+      },
+      {
+        "line1": "Cash /",
+        "line2": "GL",
+        "value": 52,
+        "colour": ""
+      }
+    ],
+    "phase_cards": [
+      {
+        "label": "Phase 1",
+        "value": 74,
+        "sub": "Review & validation"
+      },
+      {
+        "label": "Phase 2",
+        "value": 62,
+        "sub": "Payment setup"
+      },
+      {
+        "label": "Phase 3",
+        "value": 60,
+        "sub": "First payment"
+      },
+      {
+        "label": "Cash/GL",
+        "value": 52,
+        "sub": "Reconciliation"
+      }
+    ],
+    "detail_slides": [
+      [
+        "Phase 1 — Review & premium validation",
+        "Steps 1–4 vs Guidewire BillingCenter catalog",
+        [
+          "p1"
+        ]
+      ],
+      [
+        "Phase 2 — Payment method setup",
+        "Steps 5–8 vs Guidewire BillingCenter catalog",
+        [
+          "p2"
+        ]
+      ],
+      [
+        "Phase 3 — First payment & reconciliation",
+        "Steps 9–14 vs Guidewire BillingCenter catalog",
+        [
+          "p3"
+        ]
+      ]
+    ],
+    "items": [
+      {
+        "num": "1",
+        "name": "Automated policy intake",
+        "status": "FIT",
+        "detail": "PAS-triggered notification into the billing queue aligns with BillingCenter policy-to-billing integration.",
+        "owner": "PAS / Premium Accounting",
+        "ref": "GW-BC-INT-01",
+        "group": "p1"
+      },
+      {
+        "num": "2",
+        "name": "Premium validation vs rating",
+        "status": "PARTIAL",
+        "detail": "Premium is validated manually against the schedule with a fixed SGD 10 flag. BillingCenter auto-reconciles billed-to-rated premium and raises variance exceptions systematically.",
+        "owner": "Premium Accounting",
+        "ref": "GW-BC-INV-02",
+        "group": "p1"
+      },
+      {
+        "num": "3",
+        "name": "Instalment schedule configuration",
+        "status": "FIT",
+        "detail": "Annual to monthly instalment options recorded in the billing module align with BillingCenter payment plans.",
+        "owner": "Premium Accounting",
+        "ref": "GW-BC-PLN-01",
+        "group": "p1"
+      },
+      {
+        "num": "4",
+        "name": "Bank / card verification",
+        "status": "FIT",
+        "detail": "Micro-deposit / card verification before mandate setup aligns with BillingCenter payment-instrument validation.",
+        "owner": "Premium Accounting",
+        "ref": "GW-BC-PAY-03",
+        "group": "p1"
+      },
+      {
+        "num": "5",
+        "name": "Direct debit mandate setup",
+        "status": "FIT",
+        "detail": "GIRO/direct-debit mandate activation with reference recorded in PAS aligns with BillingCenter mandate management.",
+        "owner": "Premium Accounting",
+        "ref": "GW-BC-PAY-01",
+        "group": "p2"
+      },
+      {
+        "num": "6",
+        "name": "Instalment fees & partial payments",
+        "status": "GAP",
+        "detail": "No instalment-fee logic or handling of partial/short payments. BillingCenter applies plan fees and an allocation hierarchy for partial receipts.",
+        "owner": "Premium Accounting",
+        "ref": "GW-BC-PLN-04",
+        "group": "p2"
+      },
+      {
+        "num": "7",
+        "name": "First-payment confirmation",
+        "status": "FIT",
+        "detail": "Written confirmation with amount, due date and reference aligns with BillingCenter billing communications.",
+        "owner": "Premium Accounting / CRM",
+        "ref": "GW-BC-COM-01",
+        "group": "p2"
+      },
+      {
+        "num": "8",
+        "name": "GST / premium tax handling",
+        "status": "GAP",
+        "detail": "No explicit GST/premium-tax computation, posting or reporting step. BillingCenter itemises and posts premium tax separately for regulatory reporting.",
+        "owner": "Premium Accounting / Finance",
+        "ref": "GW-BC-TAX-01",
+        "group": "p2"
+      },
+      {
+        "num": "9",
+        "name": "Automated collection",
+        "status": "FIT",
+        "detail": "Scheduled auto-collection with receipt issuance aligns with BillingCenter direct-debit processing.",
+        "owner": "Billing System",
+        "ref": "GW-BC-COL-01",
+        "group": "p3"
+      },
+      {
+        "num": "10",
+        "name": "Unapplied / suspense cash",
+        "status": "GAP",
+        "detail": "Receipts are matched manually; there is no suspense/unapplied-cash account for unmatched payments. BillingCenter posts unmatched cash to suspense and works it off systematically.",
+        "owner": "Premium Accounting",
+        "ref": "GW-BC-CSH-02",
+        "group": "p3"
+      },
+      {
+        "num": "11",
+        "name": "Reconciliation to GL",
+        "status": "PARTIAL",
+        "detail": "GL posting to SAP is performed per policy. BillingCenter posts an automated subledger with daily reconciliation and an exceptions dashboard rather than manual matching.",
+        "owner": "Premium Accounting / Finance",
+        "ref": "GW-BC-GL-01",
+        "group": "p3"
+      },
+      {
+        "num": "12",
+        "name": "Delinquency / dunning",
+        "status": "GAP",
+        "detail": "Failed first payment is handled manually by Collections. BillingCenter runs an automated delinquency/dunning workflow with staged notices and lapse triggers.",
+        "owner": "Collections",
+        "ref": "GW-BC-DLQ-01",
+        "group": "p3"
+      },
+      {
+        "num": "13",
+        "name": "Write-off / small-balance tolerance",
+        "status": "PARTIAL",
+        "detail": "No documented small-balance write-off tolerance. BillingCenter auto-writes-off balances below a threshold to avoid uneconomic collection.",
+        "owner": "Finance",
+        "ref": "GW-BC-WO-01",
+        "group": "p3"
+      },
+      {
+        "num": "14",
+        "name": "Billing status activation",
+        "status": "FIT",
+        "detail": "Status set to 'Active – Current' with agent notification aligns with BillingCenter account status management.",
+        "owner": "Premium Accounting",
+        "ref": "GW-BC-ACC-01",
+        "group": "p3"
+      }
+    ],
+    "groups": [
+      [
+        "p1",
+        "PHASE 1 — REVIEW & PREMIUM VALIDATION"
+      ],
+      [
+        "p2",
+        "PHASE 2 — PAYMENT METHOD SETUP"
+      ],
+      [
+        "p3",
+        "PHASE 3 — FIRST PAYMENT & RECONCILIATION"
+      ]
+    ],
+    "critical_missing": [
+      {
+        "title": "Unapplied / suspense cash management",
+        "detail": "Unmatched receipts have no suspense account; manual matching risks misallocation and reconciliation breaks. BillingCenter posts unmatched cash to suspense and works it off with an ageing report."
+      },
+      {
+        "title": "Automated delinquency / dunning",
+        "detail": "Failed payments are worked manually by Collections with no staged dunning. BillingCenter automates delinquency notices, grace periods and lapse triggers."
+      },
+      {
+        "title": "GST / premium-tax handling",
+        "detail": "No explicit premium-tax computation, posting or reporting, a regulatory gap versus the catalog's tax itemisation."
+      },
+      {
+        "title": "Write-off & small-balance tolerance",
+        "detail": "No documented tolerance for uneconomic small balances, leading to manual effort and stale receivables."
+      }
+    ],
+    "radar": [
+      [
+        "Policy intake",
+        82
+      ],
+      [
+        "Premium validation",
+        70
+      ],
+      [
+        "Mandate setup",
+        80
+      ],
+      [
+        "Cash application",
+        45
+      ],
+      [
+        "Delinquency",
+        40
+      ],
+      [
+        "Tax handling",
+        35
+      ],
+      [
+        "GL reconciliation",
+        60
+      ]
+    ],
+    "control_bars": [
+      {
+        "name": "Policy intake",
+        "value": 82,
+        "note": "Automated PAS-to-billing trigger"
+      },
+      {
+        "name": "Premium validation",
+        "value": 70,
+        "note": "Manual check; fixed variance threshold"
+      },
+      {
+        "name": "Mandate & schedule",
+        "value": 80,
+        "note": "GIRO mandate and plan setup solid"
+      },
+      {
+        "name": "Cash application",
+        "value": 45,
+        "note": "Manual matching; no suspense account"
+      },
+      {
+        "name": "Delinquency / dunning",
+        "value": 40,
+        "note": "Manual collections; no staged dunning"
+      },
+      {
+        "name": "Tax handling",
+        "value": 35,
+        "note": "No GST/premium-tax itemisation"
+      },
+      {
+        "name": "GL reconciliation",
+        "value": 60,
+        "note": "Per-policy posting; no daily auto-recon"
+      }
+    ],
+    "remediations": [
+      {
+        "rank": 1,
+        "title": "Introduce suspense / unapplied-cash management",
+        "detail": "Post unmatched receipts to a suspense account with an ageing report; auto-match on payment reference and work off exceptions daily. Effort: 4 weeks (Sapiens + SAP).",
+        "priority": "High"
+      },
+      {
+        "rank": 2,
+        "title": "Automate delinquency / dunning workflow",
+        "detail": "Configure staged dunning notices, grace periods and lapse triggers for failed and overdue payments, replacing manual collections handling. Effort: 5 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 3,
+        "title": "Add GST / premium-tax handling",
+        "detail": "Compute, itemise and post premium tax separately for regulatory reporting at billing setup. Effort: 3 weeks (Finance + Sapiens).",
+        "priority": "High"
+      },
+      {
+        "rank": 4,
+        "title": "Automate billed-to-rated reconciliation",
+        "detail": "Replace manual premium validation with an automated billed-vs-rated reconciliation that raises only variance exceptions. Effort: 3 weeks.",
+        "priority": "Medium"
+      },
+      {
+        "rank": 5,
+        "title": "Define instalment fees & small-balance write-off",
+        "detail": "Add instalment-fee logic, a partial-payment allocation hierarchy, and an auto-write-off tolerance for uneconomic balances. Effort: 3 weeks.",
+        "priority": "Medium"
+      }
+    ],
+    "risk_impact": [
+      [
+        "Unapplied cash",
+        88
+      ],
+      [
+        "Delinquency automation",
+        80
+      ],
+      [
+        "Tax handling",
+        72
+      ],
+      [
+        "Auto reconciliation",
+        60
+      ],
+      [
+        "Instalment fees",
+        50
+      ],
+      [
+        "Write-off tolerance",
+        45
+      ]
+    ],
+    "projected_fit": 90
+  },
+  "opt_phases": [
+    {
+      "pid": "1",
+      "name": "Review & premium validation",
+      "subtitle": "Auto-reconciliation; tax setup",
+      "circle": "blue",
+      "roles": "PAS · Premium Accounting",
+      "step_range": "Steps 1–5",
+      "summary": "5 steps + 1 decision"
+    },
+    {
+      "pid": "2",
+      "name": "Payment method setup",
+      "subtitle": "Mandate, plan, fees, confirmation",
+      "circle": "green",
+      "roles": "Premium Accounting · Billing · CRM",
+      "step_range": "Steps 6–9",
+      "summary": "4 steps"
+    },
+    {
+      "pid": "3",
+      "name": "Collection, cash & reconciliation",
+      "subtitle": "Collection, suspense, dunning, GL",
+      "circle": "amber",
+      "roles": "Billing System · Premium Accounting · Finance",
+      "step_range": "Steps 10–14",
+      "summary": "5 steps + 1 decision"
+    }
+  ],
+  "opt_steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "New policy notification from PAS",
+      "responsible": "PAS (automated)",
+      "output": "Alert to billing queue",
+      "timeline": "T+0",
+      "controls": "Standard",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Automated billed-to-rated reconciliation",
+      "responsible": "Premium Accounting / System",
+      "output": "Billed premium auto-reconciled to rating; only variances raised as exceptions",
+      "timeline": "T+0",
+      "controls": "ENHANCED (v3.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Confirm coverage period and instalment schedule",
+      "responsible": "Premium Accounting",
+      "output": "Schedule recorded in billing module",
+      "timeline": "T+1 day",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Compute GST / premium tax",
+      "responsible": "Premium Accounting / Finance",
+      "output": "Premium tax itemised and posted separately for reporting",
+      "timeline": "T+1 day",
+      "controls": "NEW (v3.0) — regulatory",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "5",
+      "phase": "1",
+      "activity": "Verify policyholder banking or card details",
+      "responsible": "Premium Accounting",
+      "output": "Bank/card validated via micro-deposit or card check",
+      "timeline": "T+1 day",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "1",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Variance exception",
+      "kind": "decision",
+      "decision": "Premium variance?",
+      "branches": [
+        "Within tolerance → setup",
+        "Exception → underwriting sign-off (Sec 6.1)"
+      ]
+    },
+    {
+      "num": "6",
+      "phase": "2",
+      "activity": "Configure direct debit mandate",
+      "responsible": "Premium Accounting",
+      "output": "GIRO/direct-debit mandate activated",
+      "timeline": "T+2 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Set up payment schedule with instalment fees",
+      "responsible": "Premium Accounting",
+      "output": "Plan loaded with instalment-fee logic and partial-payment allocation",
+      "timeline": "T+2 days",
+      "controls": "ENHANCED (v3.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Send first-payment confirmation",
+      "responsible": "Premium Accounting / CRM",
+      "output": "Written confirmation; amount, due date, reference",
+      "timeline": "T+2 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "2",
+      "activity": "Notify agent or branch",
+      "responsible": "Premium Accounting",
+      "output": "Agent notified; logged in CRM",
+      "timeline": "T+2 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "3",
+      "activity": "First premium collected on due date",
+      "responsible": "Billing System (automated)",
+      "output": "Payment deducted; receipt issued",
+      "timeline": "Due date",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "3",
+      "activity": "Cash application with suspense handling",
+      "responsible": "Premium Accounting / System",
+      "output": "Receipts auto-matched; unmatched cash posted to suspense and aged",
+      "timeline": "Due date",
+      "controls": "NEW (v3.0) — cash control",
+      "kind": "control",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Automated subledger reconciliation to GL",
+      "responsible": "Premium Accounting / Finance",
+      "output": "Daily subledger posted to SAP; exceptions dashboard worked",
+      "timeline": "Due date +1",
+      "controls": "ENHANCED (v3.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "13",
+      "phase": "3",
+      "activity": "Delinquency / dunning on failed or overdue",
+      "responsible": "Collections / System",
+      "output": "Staged dunning notices, grace periods and lapse triggers",
+      "timeline": "On failure",
+      "controls": "NEW (v3.0) — automated collections",
+      "kind": "control",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "14",
+      "phase": "3",
+      "activity": "Activate billing status / small-balance write-off",
+      "responsible": "Premium Accounting",
+      "output": "Status set Active – Current; uneconomic balances auto-written-off within tolerance",
+      "timeline": "Due date +1",
+      "controls": "ENHANCED (v3.0)",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "opt_swim_phases": [
+    {
+      "pid": "1",
+      "name": "Review & premium validation",
+      "subtitle": "Steps 1–5 · v3.0 adds auto-recon & tax",
+      "lanes": [
+        "PAS / System",
+        "Premium Accounting",
+        "Finance"
+      ],
+      "nodes": [
+        {
+          "nid": "o1",
+          "lane": "PAS / System",
+          "col": 0,
+          "title": "New policy notification",
+          "sub": "auto alert",
+          "kind": "standard"
+        },
+        {
+          "nid": "o2",
+          "lane": "Premium Accounting",
+          "col": 1,
+          "title": "Auto billed-vs-rated recon",
+          "sub": "exceptions only",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "o3",
+          "lane": "Premium Accounting",
+          "col": 2,
+          "title": "Confirm instalment schedule",
+          "sub": "billing module",
+          "kind": "standard"
+        },
+        {
+          "nid": "o4",
+          "lane": "Finance",
+          "col": 2,
+          "title": "Compute GST / premium tax",
+          "sub": "itemised",
+          "kind": "new"
+        },
+        {
+          "nid": "o5",
+          "lane": "Premium Accounting",
+          "col": 3,
+          "title": "Verify bank / card details",
+          "sub": "micro-deposit",
+          "kind": "standard"
+        }
+      ],
+      "edges": [
+        {
+          "src": "o1",
+          "dst": "o2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "o2",
+          "dst": "o3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o3",
+          "dst": "o5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o3",
+          "dst": "o4",
+          "label": "tax",
+          "dashed": true,
+          "kind": "new"
+        }
+      ],
+      "note": "v3.0 automates billed-to-rated reconciliation and adds a GST/premium-tax computation and posting step."
+    },
+    {
+      "pid": "2",
+      "name": "Payment method setup",
+      "subtitle": "Steps 6–9 · mandate, plan & fees",
+      "lanes": [
+        "Premium Accounting",
+        "Billing System",
+        "CRM / Agent"
+      ],
+      "nodes": [
+        {
+          "nid": "p1",
+          "lane": "Premium Accounting",
+          "col": 0,
+          "title": "Configure DD mandate",
+          "sub": "GIRO",
+          "kind": "standard"
+        },
+        {
+          "nid": "p2",
+          "lane": "Billing System",
+          "col": 1,
+          "title": "Load plan with fees",
+          "sub": "instalment fees",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "p3",
+          "lane": "Premium Accounting",
+          "col": 2,
+          "title": "First-payment confirmation",
+          "sub": "email / post",
+          "kind": "standard"
+        },
+        {
+          "nid": "p4",
+          "lane": "CRM / Agent",
+          "col": 3,
+          "title": "Notify agent / branch",
+          "sub": "logged",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "p1",
+          "dst": "p2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p2",
+          "dst": "p3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p3",
+          "dst": "p4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Plans now carry instalment-fee logic and a partial-payment allocation hierarchy."
+    },
+    {
+      "pid": "3",
+      "name": "Collection, cash & reconciliation",
+      "subtitle": "Steps 10–14 · v3.0 adds suspense & dunning",
+      "lanes": [
+        "Billing System",
+        "Premium Accounting",
+        "Finance / Collections"
+      ],
+      "nodes": [
+        {
+          "nid": "q1",
+          "lane": "Billing System",
+          "col": 0,
+          "title": "Collect first premium",
+          "sub": "auto deduct",
+          "kind": "standard"
+        },
+        {
+          "nid": "q2",
+          "lane": "Premium Accounting",
+          "col": 1,
+          "title": "Cash application + suspense",
+          "sub": "auto-match / age",
+          "kind": "new"
+        },
+        {
+          "nid": "q3",
+          "lane": "Finance / Collections",
+          "col": 1,
+          "title": "Subledger recon to GL",
+          "sub": "daily",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "q4",
+          "lane": "Premium Accounting",
+          "col": 2,
+          "title": "Activate / write-off",
+          "sub": "tolerance",
+          "kind": "terminal"
+        },
+        {
+          "nid": "q5",
+          "lane": "Finance / Collections",
+          "col": 2,
+          "title": "Delinquency / dunning",
+          "sub": "staged notices",
+          "kind": "new"
+        }
+      ],
+      "edges": [
+        {
+          "src": "q1",
+          "dst": "q2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q2",
+          "dst": "q3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q3",
+          "dst": "q4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q1",
+          "dst": "q5",
+          "label": "fail",
+          "dashed": true,
+          "kind": "new"
+        }
+      ],
+      "note": "v3.0 introduces suspense/unapplied-cash handling, daily subledger reconciliation, and an automated delinquency/dunning workflow."
+    }
+  ],
+  "opt_n_phases": 3,
+  "opt_n_steps": 14,
+  "opt_n_gateways": 2,
+  "opt_fit": 90,
+  "optimised_doc": {
+    "subtitle": "Optimised per Fit-Gap Analysis against the Guidewire BillingCenter Premium Billing Catalog",
+    "sections": [
+      {
+        "title": "",
+        "blocks": [
+          [
+            "meta",
+            [
+              [
+                "Document Reference",
+                "SOP-INS-002"
+              ],
+              [
+                "Version",
+                "3.0 (Optimised)"
+              ],
+              [
+                "Effective Date",
+                "01 October 2026"
+              ],
+              [
+                "Supersedes",
+                "v2.0 dated 15 February 2025"
+              ],
+              [
+                "Owner",
+                "Finance — Premium Accounting"
+              ],
+              [
+                "Approved By",
+                "Chief Financial Officer"
+              ],
+              [
+                "Optimisation Reference",
+                "Fit-Gap Report FG-INS-002 dated 18 June 2026"
+              ],
+              [
+                "Catalog Alignment Score",
+                "90% (up from 66% in v2.0)"
+              ],
+              [
+                "Classification",
+                "Internal Use Only"
+              ]
+            ]
+          ],
+          [
+            "summary",
+            "OPTIMISATION SUMMARY — What changed in v3.0",
+            [
+              "This version incorporates 5 remediation actions from Fit-Gap Report FG-INS-002. Alignment to the Guidewire BillingCenter billing catalog increased from 66% to 90%. Critical additions: suspense / unapplied-cash management, an automated delinquency/dunning workflow, GST/premium-tax handling, automated billed-to-rated reconciliation, and a small-balance write-off tolerance."
+            ],
+            [
+              "NEW STEP (green) — step added to close a gap vs the BillingCenter catalog",
+              "ENHANCED (amber) — existing step updated with additional controls or automation"
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "1. Purpose",
+        "blocks": [
+          [
+            "para",
+            "This Standard Operating Procedure defines the process for reviewing newly onboarded policies and establishing premium payment arrangements. Version 3.0 incorporates optimisations from fit-gap analysis against the Guidewire BillingCenter Premium Billing Best-Practice Catalog, achieving 90% alignment (up from 66% in v2.0)."
+          ]
+        ]
+      },
+      {
+        "title": "2. Scope",
+        "blocks": [
+          [
+            "para",
+            "This procedure applies to all personal and commercial lines policies newly issued by Meridian, across online, agent, broker and bancassurance channels, and to mid-term changes that alter billing."
+          ],
+          [
+            "banner",
+            "new",
+            "Scope extended: GST/premium-tax computation and suspense-cash handling now apply to every billing setup and receipt."
+          ],
+          [
+            "para",
+            "This procedure does NOT cover claims payment (SOP-INS-007), refund handling (SOP-FIN-012), or reinsurance premium settlements."
+          ]
+        ]
+      },
+      {
+        "title": "3. Authority Matrix",
+        "blocks": [
+          [
+            "table",
+            [
+              "Item",
+              "First Authority",
+              "Second Authority"
+            ],
+            [
+              [
+                "Variance ≤ SGD 10",
+                "Premium Accounting",
+                "—"
+              ],
+              [
+                "Variance SGD 11–500",
+                "Premium Accounting",
+                "Underwriting sign-off"
+              ],
+              [
+                "Variance above SGD 500",
+                "Finance Manager",
+                "Underwriting Manager"
+              ],
+              [
+                "Write-off / small balance",
+                "Finance Manager",
+                "—"
+              ],
+              [
+                "Refund authorisation",
+                "Finance Manager",
+                "CFO above SGD 25,000"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "4. Roles and Responsibilities",
+        "blocks": [
+          [
+            "table",
+            [
+              "Role",
+              "Responsibilities"
+            ],
+            [
+              [
+                "Branch / Agent",
+                "Confirms payment preference at point of sale; submits setup request; addresses billing queries."
+              ],
+              [
+                "Premium Accounting",
+                "Validates premium; configures mandates and plans; applies cash; reconciles to GL; manages suspense."
+              ],
+              [
+                "Collections Specialist",
+                "Runs delinquency/dunning; manages failed payments and reinstatement."
+              ],
+              [
+                "Finance",
+                "Owns GST posting, GL reconciliation, write-off tolerance and refunds."
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "5. Cash & Tax Controls (New Section — v3.0)",
+        "blocks": [
+          [
+            "banner",
+            "crit",
+            "New section. Required by the BillingCenter catalog. Suspense-cash handling and premium-tax posting are now mandatory controls on every receipt and billing setup."
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Control",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "X1",
+                "GST / premium-tax computation",
+                "Finance",
+                "Premium tax itemised and posted separately",
+                "At setup"
+              ],
+              [
+                "X2",
+                "Suspense / unapplied-cash account",
+                "Premium Accounting",
+                "Unmatched receipts posted to suspense and aged",
+                "Daily"
+              ],
+              [
+                "X3",
+                "Small-balance write-off tolerance",
+                "Finance",
+                "Uneconomic balances auto-written-off within tolerance",
+                "Monthly"
+              ]
+            ],
+            {
+              "0": "new",
+              "1": "new",
+              "2": "new"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "6. Process Steps",
+        "blocks": [
+          [
+            "h3",
+            "6.1 Review & Premium Validation"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "1",
+                "New policy notification from PAS",
+                "PAS",
+                "Alert to billing queue",
+                "T+0"
+              ],
+              [
+                "2",
+                "Automated billed-to-rated reconciliation",
+                "Premium Accounting",
+                "Variances raised as exceptions only",
+                "T+0"
+              ],
+              [
+                "3",
+                "Confirm coverage period and instalment schedule",
+                "Premium Accounting",
+                "Schedule recorded",
+                "T+1 day"
+              ],
+              [
+                "4",
+                "Compute GST / premium tax",
+                "Finance",
+                "Premium tax itemised and posted",
+                "T+1 day"
+              ],
+              [
+                "5",
+                "Verify banking or card details",
+                "Premium Accounting",
+                "Micro-deposit / card check",
+                "T+1 day"
+              ]
+            ],
+            {
+              "1": "enh",
+              "3": "new"
+            }
+          ],
+          [
+            "h3",
+            "6.2 Payment Method Setup"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "6",
+                "Configure direct debit mandate",
+                "Premium Accounting",
+                "GIRO mandate activated",
+                "T+2 days"
+              ],
+              [
+                "7",
+                "Set up payment schedule with instalment fees",
+                "Premium Accounting",
+                "Plan + fee logic + allocation",
+                "T+2 days"
+              ],
+              [
+                "8",
+                "Send first-payment confirmation",
+                "Premium Accounting / CRM",
+                "Amount, due date, reference",
+                "T+2 days"
+              ],
+              [
+                "9",
+                "Notify agent or branch",
+                "Premium Accounting",
+                "Logged in CRM",
+                "T+2 days"
+              ]
+            ],
+            {
+              "1": "enh"
+            }
+          ],
+          [
+            "h3",
+            "6.3 Collection, Cash & Reconciliation"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "10",
+                "First premium collected on due date",
+                "Billing System",
+                "Payment deducted; receipt issued",
+                "Due date"
+              ],
+              [
+                "11",
+                "Cash application with suspense handling",
+                "Premium Accounting",
+                "Auto-match; unmatched to suspense",
+                "Due date"
+              ],
+              [
+                "12",
+                "Automated subledger reconciliation to GL",
+                "Finance",
+                "Daily subledger to SAP; exceptions worked",
+                "Due date +1"
+              ],
+              [
+                "13",
+                "Delinquency / dunning on failure",
+                "Collections",
+                "Staged notices; lapse triggers",
+                "On failure"
+              ],
+              [
+                "14",
+                "Activate status / small-balance write-off",
+                "Premium Accounting",
+                "Active – Current; write-off within tolerance",
+                "Due date +1"
+              ]
+            ],
+            {
+              "1": "new",
+              "2": "enh",
+              "3": "new",
+              "4": "enh"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "7. Exception Handling",
+        "blocks": [
+          [
+            "h3",
+            "7.1 Premium Variance"
+          ],
+          [
+            "numbered",
+            [
+              "Billing is placed on hold and the issuing agent notified within 1 business day.",
+              "Agent or Underwriting confirms the correct premium within 3 business days; endorsement issued if required.",
+              "Billing setup resumes only after written Underwriting sign-off on the correct amount."
+            ]
+          ],
+          [
+            "h3",
+            "7.2 Failed Payment & Dunning (Enhanced — v3.0)"
+          ],
+          [
+            "banner",
+            "enh",
+            "Failed payments now enter an automated dunning workflow rather than ad-hoc manual follow-up."
+          ],
+          [
+            "numbered_from",
+            4,
+            [
+              "Automated dunning notice issued on payment failure; policyholder given a grace period.",
+              "Collections contacts the policyholder within 2 business days; 5 business days to provide an alternate method.",
+              "If unresolved, a lapse trigger issues a cancellation notice per SOP-INS-011."
+            ]
+          ],
+          [
+            "h3",
+            "7.3 Invalid Banking Details"
+          ],
+          [
+            "numbered_from",
+            7,
+            [
+              "Agent notified immediately; policyholder contacted for correction within 1 business day.",
+              "Corrected details submitted via secure channel; Premium Accounting re-validates and reactivates billing within 24 hours."
+            ]
+          ],
+          [
+            "h3",
+            "7.4 Unapplied Cash (New — v3.0)"
+          ],
+          [
+            "banner",
+            "new",
+            "New exception. Unmatched receipts are held in suspense and worked off via an ageing report."
+          ],
+          [
+            "numbered_from",
+            9,
+            [
+              "Unmatched receipts posted to the suspense account and aged daily.",
+              "Items unresolved after 30 days escalated to Finance for investigation or refund."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "8. Systems and Tools",
+        "blocks": [
+          [
+            "table",
+            [
+              "System",
+              "Purpose",
+              "Primary Users"
+            ],
+            [
+              [
+                "Policy Administration System (PAS)",
+                "Policy issuance data; payment-setup trigger",
+                "Premium Accounting, Agent"
+              ],
+              [
+                "Billing System (Sapiens)",
+                "Schedules, mandates, instalments, suspense, dunning",
+                "Premium Accounting, Collections"
+              ],
+              [
+                "SAP S/4HANA",
+                "GL subledger, premium-tax and receipt posting",
+                "Finance"
+              ],
+              [
+                "CRM (Salesforce)",
+                "Agent and policyholder communications",
+                "Premium Accounting, Agent"
+              ],
+              [
+                "Banking Portal (GIRO / Direct Debit)",
+                "Mandate registration and payment execution",
+                "Premium Accounting"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "9. Key Controls and Audit Points",
+        "blocks": [
+          [
+            "banner",
+            "enh",
+            "Controls expanded in v3.0: suspense-cash, automated dunning, premium-tax posting, automated reconciliation and write-off tolerance."
+          ],
+          [
+            "bullets",
+            [
+              "Suspense control: unmatched receipts never posted directly to policy; held and aged in suspense.",
+              "Automated reconciliation: billed-vs-rated and subledger-to-GL reconciled daily with exceptions worked.",
+              "Premium tax: GST itemised and posted separately for regulatory reporting.",
+              "Delinquency: staged dunning with documented grace periods and lapse triggers.",
+              "Write-off tolerance: uneconomic balances auto-written-off within an approved threshold.",
+              "Segregation of duties: setup ≠ cash application ≠ write-off approval.",
+              "Immutable audit trail: validation, setup, collection and reconciliation events logged."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "10. Key Performance Indicators",
+        "blocks": [
+          [
+            "table",
+            [
+              "KPI",
+              "v2.0 Target",
+              "v3.0 Target",
+              "Measurement"
+            ],
+            [
+              [
+                "Billing setup SLA",
+                "≤2 business days",
+                "≤2 business days",
+                "Issuance to setup"
+              ],
+              [
+                "Premium variance rate",
+                "<0.5%",
+                "<0.3%",
+                "Corrections post-issuance"
+              ],
+              [
+                "Cash applied same day",
+                "N/A (new)",
+                "≥98%",
+                "Receipts matched / received"
+              ],
+              [
+                "Suspense ageing >30 days",
+                "N/A (new)",
+                "<1%",
+                "Suspense ageing report"
+              ],
+              [
+                "First-payment failure rate",
+                "<3%",
+                "<2.5%",
+                "Failed / monthly new business"
+              ],
+              [
+                "GL reconciliation breaks",
+                "N/A (new)",
+                "Zero unexplained",
+                "Daily subledger recon"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "11. Document Control",
+        "blocks": [
+          [
+            "table",
+            [
+              "Version",
+              "Date",
+              "Author",
+              "Summary of Changes"
+            ],
+            [
+              [
+                "2.0",
+                "15 Feb 2025",
+                "M. Patel, Finance",
+                "Added premium variance exception handling; aligned to SAP S/4HANA migration"
+              ],
+              [
+                "3.0",
+                "01 Oct 2026",
+                "M. Patel, Finance",
+                "OPTIMISED: suspense/unapplied cash; automated dunning; GST handling; automated reconciliation; small-balance write-off; catalog alignment 66% → 90%"
+              ]
+            ],
+            {}
+          ]
+        ]
+      }
+    ]
+  },
+  "swim_cover_tags": "Validation · Mandate setup · Collection · Reconciliation · Exception handling",
+  "hierarchy_cover_sub": "Phase breakdown with billing tracks, variance authority, and exception paths"
+}

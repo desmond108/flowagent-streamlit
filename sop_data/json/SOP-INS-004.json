@@ -1,0 +1,1974 @@
+{
+  "meta": {
+    "sop_id": "SOP-INS-004",
+    "slug": "Prospect_to_Issue",
+    "title": "Prospect-to-Issue",
+    "short_title": "Prospect-to-issue",
+    "version": "2.1",
+    "owner": "Member Services — Policy Operations",
+    "org": "Meridian Insurance Group",
+    "catalog": "Guidewire PolicyCenter — New Business & Renewal Underwriting Catalog",
+    "catalog_short": "Guidewire PolicyCenter",
+    "new_version": "3.0",
+    "effective_date": "01 October 2026",
+    "supersedes": "v2.1 dated 01 January 2025",
+    "approved_by": "Chief Underwriting Officer",
+    "classification": "Internal Use Only"
+  },
+  "phases": [
+    {
+      "pid": "1",
+      "name": "Prospect qualification & quote",
+      "subtitle": "Enquiry, needs, quote",
+      "circle": "blue",
+      "roles": "Prospect · Member Services · Rating",
+      "step_range": "Steps 1–4",
+      "summary": "4 steps"
+    },
+    {
+      "pid": "2",
+      "name": "Underwriting assessment",
+      "subtitle": "Rules engine, referral, decision",
+      "circle": "green",
+      "roles": "PAS · Underwriter · Actuarial",
+      "step_range": "Steps 5–7",
+      "summary": "3 steps + 1 decision"
+    },
+    {
+      "pid": "3",
+      "name": "Acceptance & issuance",
+      "subtitle": "Terms, payment, issuance, fulfilment",
+      "circle": "amber",
+      "roles": "Applicant · Member Services · PAS · Broker",
+      "step_range": "Steps 8–12",
+      "summary": "5 steps + 1 decision"
+    }
+  ],
+  "steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Prospect enquiry received via channel",
+      "responsible": "Member Services Rep",
+      "output": "Enquiry logged in CRM; prospect record created if new",
+      "timeline": "Day 0",
+      "controls": "Multi-channel intake",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Needs assessment conducted",
+      "responsible": "Member Services Rep",
+      "output": "Product suitability confirmed; information gathered per product checklist",
+      "timeline": "Day 0",
+      "controls": "Suitability checklist",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Application data entered into PAS",
+      "responsible": "Member Services Rep",
+      "output": "Application ID generated; data validated for completeness",
+      "timeline": "Day 0–1",
+      "controls": "Application capture",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Premium quoted to prospect",
+      "responsible": "PAS / Rating Engine",
+      "output": "Quote valid 30 days; reference logged in CRM",
+      "timeline": "Day 1",
+      "controls": "Real-time rating",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "5",
+      "phase": "2",
+      "activity": "Application submitted to underwriting rules engine",
+      "responsible": "PAS (auto)",
+      "output": "Auto-accept → issuance; refer → underwriter queue",
+      "timeline": "Instant",
+      "controls": "Auto-accept rules",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "2",
+      "activity": "Underwriter reviews referred application",
+      "responsible": "Underwriter",
+      "output": "Risk assessed within 2 days (personal) / 5 days (commercial); info requested if needed",
+      "timeline": "≤2–5 days",
+      "controls": "Referral SLA",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Underwriting decision made",
+      "responsible": "Underwriter",
+      "output": "Accept standard / accept substandard / decline; recorded in PAS",
+      "timeline": "≤5 days",
+      "controls": "Decision recorded",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "2",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Rules + underwriter outcome",
+      "kind": "decision",
+      "decision": "Underwriting outcome?",
+      "branches": [
+        "Accept (standard/substandard) → issuance",
+        "Decline → written notice (Sec 6.3)"
+      ]
+    },
+    {
+      "num": "8",
+      "phase": "3",
+      "activity": "Terms communicated to prospect / policyholder",
+      "responsible": "Member Services Rep",
+      "output": "Acceptance letter or renewal notice; payment instructions included",
+      "timeline": "Day +1",
+      "controls": "Terms communication",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "3",
+      "activity": "Prospect accepts terms and pays premium",
+      "responsible": "Applicant / Policyholder",
+      "output": "Payment received; acceptance confirmed in CRM",
+      "timeline": "Day +1–3",
+      "controls": "Acceptance & payment",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "3",
+      "activity": "Policy issued in PAS",
+      "responsible": "Member Services Rep",
+      "output": "Policy number assigned; coverage start date confirmed",
+      "timeline": "Day +1",
+      "controls": "Issuance",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "3",
+      "activity": "Policy documents dispatched",
+      "responsible": "PAS / Document Engine",
+      "output": "Schedule, certificate and PDS sent within 2 business days",
+      "timeline": "≤2 days",
+      "controls": "Document SLA",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Broker / agent notification (if applicable)",
+      "responsible": "PAS (auto)",
+      "output": "Commission statement generated; confirmation sent to producing broker",
+      "timeline": "Day +1",
+      "controls": "Producer notification",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "authority": [
+    {
+      "band": "Auto-accept (rules-clear)",
+      "first": "Rules Engine",
+      "second": "—"
+    },
+    {
+      "band": "Personal lines referral",
+      "first": "Underwriter",
+      "second": "—"
+    },
+    {
+      "band": "Commercial SME referral",
+      "first": "Senior Underwriter",
+      "second": "Underwriter"
+    },
+    {
+      "band": "Substandard / non-standard terms",
+      "first": "Senior Underwriter",
+      "second": "Actuarial pricing"
+    },
+    {
+      "band": "Large risk (above treaty limit)",
+      "first": "Chief Underwriting Officer",
+      "second": "Reinsurance referral"
+    }
+  ],
+  "swim_phases": [
+    {
+      "pid": "1",
+      "name": "Prospect qualification & quote",
+      "subtitle": "Steps 1–4 · enquiry to quote",
+      "lanes": [
+        "Prospect",
+        "Member Services",
+        "PAS / Rating"
+      ],
+      "nodes": [
+        {
+          "nid": "s1",
+          "lane": "Prospect",
+          "col": 0,
+          "title": "Enquiry received",
+          "sub": "any channel",
+          "kind": "standard"
+        },
+        {
+          "nid": "s2",
+          "lane": "Member Services",
+          "col": 1,
+          "title": "Needs assessment",
+          "sub": "suitability checklist",
+          "kind": "standard"
+        },
+        {
+          "nid": "s3",
+          "lane": "Member Services",
+          "col": 2,
+          "title": "Enter application in PAS",
+          "sub": "Application ID",
+          "kind": "standard"
+        },
+        {
+          "nid": "s4",
+          "lane": "PAS / Rating",
+          "col": 3,
+          "title": "Premium quoted",
+          "sub": "30-day quote",
+          "kind": "standard"
+        }
+      ],
+      "edges": [
+        {
+          "src": "s1",
+          "dst": "s2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "s2",
+          "dst": "s3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s3",
+          "dst": "s4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Prospects are qualified against a product suitability checklist before a 30-day quote is issued."
+    },
+    {
+      "pid": "2",
+      "name": "Underwriting assessment",
+      "subtitle": "Steps 5–7 · rules, referral, decision",
+      "lanes": [
+        "PAS / Rules",
+        "Underwriter",
+        "Actuarial"
+      ],
+      "nodes": [
+        {
+          "nid": "a1",
+          "lane": "PAS / Rules",
+          "col": 0,
+          "title": "Rules engine",
+          "sub": "auto-accept / refer",
+          "kind": "decision"
+        },
+        {
+          "nid": "a2",
+          "lane": "Underwriter",
+          "col": 1,
+          "title": "Review referred application",
+          "sub": "≤2–5 days",
+          "kind": "standard"
+        },
+        {
+          "nid": "a3",
+          "lane": "Actuarial",
+          "col": 1,
+          "title": "Price non-standard risk",
+          "sub": "if substandard",
+          "kind": "standard"
+        },
+        {
+          "nid": "a4",
+          "lane": "Underwriter",
+          "col": 2,
+          "title": "Underwriting decision",
+          "sub": "std / substd / decline",
+          "kind": "decision"
+        },
+        {
+          "nid": "a5",
+          "lane": "Underwriter",
+          "col": 3,
+          "title": "Decline notice",
+          "sub": "Sec 6.3",
+          "kind": "exception"
+        }
+      ],
+      "edges": [
+        {
+          "src": "a1",
+          "dst": "a2",
+          "label": "ref",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a3",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "a3",
+          "dst": "a4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a4",
+          "dst": "a5",
+          "label": "dec",
+          "dashed": true,
+          "kind": "exception"
+        }
+      ],
+      "note": "Only referred applications reach an underwriter; non-standard risks are priced with Actuarial before a decision."
+    },
+    {
+      "pid": "3",
+      "name": "Acceptance & issuance",
+      "subtitle": "Steps 8–12 · terms to fulfilment",
+      "lanes": [
+        "Applicant",
+        "Member Services",
+        "PAS / Broker"
+      ],
+      "nodes": [
+        {
+          "nid": "d1",
+          "lane": "Member Services",
+          "col": 0,
+          "title": "Communicate terms",
+          "sub": "letter / renewal",
+          "kind": "standard"
+        },
+        {
+          "nid": "d2",
+          "lane": "Applicant",
+          "col": 1,
+          "title": "Accept & pay premium",
+          "sub": "confirmed in CRM",
+          "kind": "standard"
+        },
+        {
+          "nid": "d3",
+          "lane": "Member Services",
+          "col": 2,
+          "title": "Issue policy in PAS",
+          "sub": "policy number",
+          "kind": "standard"
+        },
+        {
+          "nid": "d4",
+          "lane": "PAS / Broker",
+          "col": 3,
+          "title": "Dispatch documents",
+          "sub": "schedule · cert · PDS",
+          "kind": "standard"
+        },
+        {
+          "nid": "d5",
+          "lane": "PAS / Broker",
+          "col": 4,
+          "title": "Broker / agent notification",
+          "sub": "commission",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "d1",
+          "dst": "d2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "d2",
+          "dst": "d3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d3",
+          "dst": "d4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d4",
+          "dst": "d5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "On acceptance and payment the policy issues, documents dispatch within two days, and producers are notified."
+    }
+  ],
+  "n_phases": 3,
+  "n_steps": 12,
+  "n_roles": 4,
+  "n_gateways": 2,
+  "fitgap": {
+    "overall_fit": 69,
+    "partial_pct": 15,
+    "fits": 8,
+    "gaps": 3,
+    "partials": 3,
+    "steps_analysed": 14,
+    "phases_count": 3,
+    "summary_line": "Overall alignment of SOP-INS-004 against the Guidewire PolicyCenter underwriting catalog",
+    "metrics": [
+      [
+        "Steps analysed",
+        "14 steps across 3 phases"
+      ],
+      [
+        "Fits confirmed",
+        "8 steps aligned to catalog"
+      ],
+      [
+        "Gaps identified",
+        "3 steps — remediation required"
+      ],
+      [
+        "Partial fits",
+        "3 steps — enhancement recommended"
+      ],
+      [
+        "Highest risk area",
+        "KYC / sanctions screening (missing)"
+      ],
+      [
+        "Capacity gap",
+        "No reinsurance facultative referral"
+      ],
+      [
+        "Ref standard",
+        "Guidewire PolicyCenter UW Catalog"
+      ]
+    ],
+    "phase_bars": [
+      {
+        "line1": "Phase 1",
+        "line2": "Quote",
+        "value": 70,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 2",
+        "line2": "Underwriting",
+        "value": 64,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 3",
+        "line2": "Issuance",
+        "value": 78,
+        "colour": ""
+      },
+      {
+        "line1": "Screening /",
+        "line2": "data",
+        "value": 46,
+        "colour": ""
+      }
+    ],
+    "phase_cards": [
+      {
+        "label": "Phase 1",
+        "value": 70,
+        "sub": "Prospect & quote"
+      },
+      {
+        "label": "Phase 2",
+        "value": 64,
+        "sub": "Underwriting"
+      },
+      {
+        "label": "Phase 3",
+        "value": 78,
+        "sub": "Acceptance & issue"
+      },
+      {
+        "label": "Screening",
+        "value": 46,
+        "sub": "KYC & risk data"
+      }
+    ],
+    "detail_slides": [
+      [
+        "Phase 1 — Prospect qualification & quote",
+        "Steps 1–4 vs Guidewire PolicyCenter catalog",
+        [
+          "p1"
+        ]
+      ],
+      [
+        "Phase 2 — Underwriting assessment",
+        "Steps 5–9 vs Guidewire PolicyCenter catalog",
+        [
+          "p2"
+        ]
+      ],
+      [
+        "Phase 3 — Acceptance & issuance",
+        "Steps 10–14 vs Guidewire PolicyCenter catalog",
+        [
+          "p3"
+        ]
+      ]
+    ],
+    "items": [
+      {
+        "num": "1",
+        "name": "Multi-channel prospect intake",
+        "status": "FIT",
+        "detail": "Enquiry capture and CRM prospect creation across channels align with PolicyCenter submission intake.",
+        "owner": "Member Services",
+        "ref": "GW-PC-SUB-01",
+        "group": "p1"
+      },
+      {
+        "num": "2",
+        "name": "Needs assessment & suitability",
+        "status": "PARTIAL",
+        "detail": "A product checklist is used, but suitability is not captured as a structured, auditable needs analysis as the catalog recommends for conduct compliance.",
+        "owner": "Member Services",
+        "ref": "GW-PC-SUB-02",
+        "group": "p1"
+      },
+      {
+        "num": "3",
+        "name": "Real-time rating & quote",
+        "status": "FIT",
+        "detail": "Rating-engine quote with 30-day validity aligns with PolicyCenter quoting.",
+        "owner": "Rating Engine",
+        "ref": "GW-PC-QTE-01",
+        "group": "p1"
+      },
+      {
+        "num": "4",
+        "name": "Third-party risk-data enrichment",
+        "status": "GAP",
+        "detail": "Quotes use applicant-supplied data only. PolicyCenter enriches submissions with third-party risk data (property, flood, credit, prior-claims) for pricing accuracy and anti-selection control.",
+        "owner": "Rating Engine",
+        "ref": "GW-PC-QTE-08",
+        "group": "p1"
+      },
+      {
+        "num": "5",
+        "name": "Auto-accept rules engine",
+        "status": "PARTIAL",
+        "detail": "Rules-based auto-accept present, but no predictive risk-model score to widen straight-through processing.",
+        "owner": "Rules Engine",
+        "ref": "GW-PC-UW-02",
+        "group": "p2"
+      },
+      {
+        "num": "6",
+        "name": "KYC / sanctions screening",
+        "status": "GAP",
+        "detail": "No KYC or sanctions/PEP screening at new business. PolicyCenter screens applicants before binding.",
+        "owner": "Underwriter / Compliance",
+        "ref": "GW-PC-UW-05",
+        "group": "p2"
+      },
+      {
+        "num": "7",
+        "name": "Underwriter referral & SLAs",
+        "status": "FIT",
+        "detail": "Referral with 2-day/5-day SLAs and additional-info handling aligns with PolicyCenter referral workflow.",
+        "owner": "Underwriter",
+        "ref": "GW-PC-UW-03",
+        "group": "p2"
+      },
+      {
+        "num": "8",
+        "name": "Substandard terms & actuarial pricing",
+        "status": "FIT",
+        "detail": "Accept/substandard/decline with actuarial pricing for non-standard risk aligns with PolicyCenter decisioning.",
+        "owner": "Underwriter / Actuarial",
+        "ref": "GW-PC-UW-04",
+        "group": "p2"
+      },
+      {
+        "num": "9",
+        "name": "Reinsurance / facultative referral",
+        "status": "GAP",
+        "detail": "No facultative reinsurance referral or treaty-capacity check for large commercial risks above retention — a capacity and accumulation-control gap vs the catalog.",
+        "owner": "Underwriter / Reinsurance",
+        "ref": "GW-PC-RI-01",
+        "group": "p2"
+      },
+      {
+        "num": "10",
+        "name": "Terms communication & acceptance",
+        "status": "FIT",
+        "detail": "Acceptance letter / renewal notice with payment instructions aligns with PolicyCenter offer handling.",
+        "owner": "Member Services",
+        "ref": "GW-PC-ISS-02",
+        "group": "p3"
+      },
+      {
+        "num": "11",
+        "name": "Disclosure & e-signature",
+        "status": "GAP",
+        "detail": "Acceptance is confirmed in CRM with no auditable e-signature on terms/PDS. PolicyCenter captures a signed acceptance before issuance — conduct and dispute exposure.",
+        "owner": "Member Services",
+        "ref": "GW-PC-ISS-04",
+        "group": "p3"
+      },
+      {
+        "num": "12",
+        "name": "Instant issuance & document dispatch",
+        "status": "FIT",
+        "detail": "Policy issuance with 2-day document dispatch aligns with PolicyCenter issuance and fulfilment.",
+        "owner": "Member Services / PAS",
+        "ref": "GW-PC-ISS-01",
+        "group": "p3"
+      },
+      {
+        "num": "13",
+        "name": "Renewal re-rating & retention",
+        "status": "PARTIAL",
+        "detail": "Renewals trigger at 60 days but without retention/price-optimisation modelling or proactive win-back for non-take-up recommended by the catalog.",
+        "owner": "Actuarial / Member Services",
+        "ref": "GW-PC-REN-02",
+        "group": "p3"
+      },
+      {
+        "num": "14",
+        "name": "Producer / commission notification",
+        "status": "FIT",
+        "detail": "Automated commission statement and broker confirmation align with PolicyCenter producer management.",
+        "owner": "PAS",
+        "ref": "GW-PC-PRD-01",
+        "group": "p3"
+      }
+    ],
+    "groups": [
+      [
+        "p1",
+        "PHASE 1 — PROSPECT QUALIFICATION & QUOTE"
+      ],
+      [
+        "p2",
+        "PHASE 2 — UNDERWRITING ASSESSMENT"
+      ],
+      [
+        "p3",
+        "PHASE 3 — ACCEPTANCE & ISSUANCE"
+      ]
+    ],
+    "critical_missing": [
+      {
+        "title": "KYC / sanctions screening",
+        "detail": "Applicants are not KYC-verified or screened against sanctions/PEP lists before binding, a regulatory control required by the catalog at new business."
+      },
+      {
+        "title": "Third-party risk-data enrichment",
+        "detail": "Quotes rely on applicant-supplied data only, with no property/flood/credit/prior-claims enrichment — an anti-selection and pricing-accuracy gap."
+      },
+      {
+        "title": "Reinsurance / facultative referral",
+        "detail": "No facultative reinsurance referral or treaty-capacity check for large commercial risks above retention, a capacity and accumulation-control gap."
+      },
+      {
+        "title": "Disclosure & e-signature acceptance",
+        "detail": "Acceptance is confirmed only in CRM with no auditable signed acceptance of terms/PDS before issuance."
+      }
+    ],
+    "radar": [
+      [
+        "Intake / quote",
+        76
+      ],
+      [
+        "Risk data",
+        45
+      ],
+      [
+        "Auto-accept",
+        64
+      ],
+      [
+        "KYC / sanctions",
+        38
+      ],
+      [
+        "Decisioning",
+        78
+      ],
+      [
+        "Reinsurance",
+        40
+      ],
+      [
+        "Issuance",
+        82
+      ]
+    ],
+    "control_bars": [
+      {
+        "name": "Intake & quote",
+        "value": 76,
+        "note": "Multi-channel capture with real-time rating"
+      },
+      {
+        "name": "Risk-data enrichment",
+        "value": 45,
+        "note": "Applicant data only; no third-party enrichment"
+      },
+      {
+        "name": "Auto-accept rules",
+        "value": 64,
+        "note": "Rules-based; no predictive model"
+      },
+      {
+        "name": "KYC / sanctions",
+        "value": 38,
+        "note": "No screening at new business"
+      },
+      {
+        "name": "Underwriting decisioning",
+        "value": 78,
+        "note": "Referral, substandard terms and pricing solid"
+      },
+      {
+        "name": "Reinsurance referral",
+        "value": 40,
+        "note": "No facultative/treaty-capacity check"
+      },
+      {
+        "name": "Issuance & fulfilment",
+        "value": 82,
+        "note": "Instant issuance with 2-day document SLA"
+      }
+    ],
+    "remediations": [
+      {
+        "rank": 1,
+        "title": "Add KYC / sanctions screening at new business",
+        "detail": "Verify identity and screen applicants against sanctions/PEP lists before any bind; route hits to Compliance. Effort: 4 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 2,
+        "title": "Enrich submissions with third-party risk data",
+        "detail": "Call property, flood, credit and prior-claims data at quote to improve pricing accuracy and control anti-selection. Effort: 5 weeks (data partners).",
+        "priority": "High"
+      },
+      {
+        "rank": 3,
+        "title": "Introduce reinsurance facultative referral",
+        "detail": "Add a treaty-capacity check and automatic facultative referral for risks above retention before binding large commercial business. Effort: 4 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 4,
+        "title": "Capture disclosure acknowledgement & e-signature",
+        "detail": "Require an auditable signed acceptance of terms/PDS before issuance, stored against the policy. Effort: 3 weeks.",
+        "priority": "Medium"
+      },
+      {
+        "rank": 5,
+        "title": "Add predictive scoring & renewal retention modelling",
+        "detail": "Layer a predictive risk score over the rules engine and a retention/price-optimisation model on renewals with automated NTU win-back. Effort: 7 weeks.",
+        "priority": "Medium"
+      }
+    ],
+    "risk_impact": [
+      [
+        "KYC / sanctions",
+        88
+      ],
+      [
+        "Risk-data enrichment",
+        80
+      ],
+      [
+        "Reinsurance referral",
+        75
+      ],
+      [
+        "E-signature",
+        62
+      ],
+      [
+        "Predictive scoring",
+        55
+      ],
+      [
+        "Retention modelling",
+        50
+      ]
+    ],
+    "projected_fit": 91
+  },
+  "opt_phases": [
+    {
+      "pid": "1",
+      "name": "Prospect, quote & enrichment",
+      "subtitle": "Needs, risk data, quote",
+      "circle": "blue",
+      "roles": "Prospect · Member Services · Rating",
+      "step_range": "Steps 1–5",
+      "summary": "5 steps"
+    },
+    {
+      "pid": "2",
+      "name": "Underwriting & screening",
+      "subtitle": "Screening, rules+model, referral",
+      "circle": "green",
+      "roles": "PAS · Underwriter · Actuarial · Reinsurance",
+      "step_range": "Steps 6–10",
+      "summary": "5 steps + 1 decision"
+    },
+    {
+      "pid": "3",
+      "name": "Acceptance & issuance",
+      "subtitle": "Terms, e-sign, issuance, fulfilment",
+      "circle": "amber",
+      "roles": "Applicant · Member Services · PAS · Broker",
+      "step_range": "Steps 11–15",
+      "summary": "5 steps + 1 decision"
+    }
+  ],
+  "opt_steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Prospect enquiry received via channel",
+      "responsible": "Member Services Rep",
+      "output": "Logged in CRM; prospect record created",
+      "timeline": "Day 0",
+      "controls": "Standard",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Structured needs analysis & suitability",
+      "responsible": "Member Services Rep",
+      "output": "Auditable needs analysis captured for conduct compliance",
+      "timeline": "Day 0",
+      "controls": "ENHANCED (v3.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Application entered into PAS",
+      "responsible": "Member Services Rep",
+      "output": "Application ID; completeness validated",
+      "timeline": "Day 0–1",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Third-party risk-data enrichment",
+      "responsible": "Rating Engine / Data Service",
+      "output": "Property, flood, credit and prior-claims data appended before rating",
+      "timeline": "Day 1",
+      "controls": "NEW (v3.0) — anti-selection control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "5",
+      "phase": "1",
+      "activity": "Premium quoted to prospect",
+      "responsible": "PAS / Rating Engine",
+      "output": "Quote valid 30 days; reference logged",
+      "timeline": "Day 1",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "2",
+      "activity": "KYC / sanctions screening",
+      "responsible": "Underwriter / Compliance",
+      "output": "Identity verified; applicant screened against sanctions/PEP lists",
+      "timeline": "Instant",
+      "controls": "NEW (v3.0) — regulatory control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Auto-accept with predictive risk score",
+      "responsible": "Rules + Model Engine",
+      "output": "Rules plus predictive score widen straight-through acceptance",
+      "timeline": "Instant",
+      "controls": "ENHANCED (v3.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Underwriter reviews referred application",
+      "responsible": "Underwriter",
+      "output": "Risk assessed within 2–5 days; info requested if needed",
+      "timeline": "≤2–5 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "2",
+      "activity": "Reinsurance facultative referral (large risk)",
+      "responsible": "Underwriter / Reinsurance",
+      "output": "Treaty-capacity check; facultative placement for risks above retention",
+      "timeline": "≤3 days",
+      "controls": "NEW (v3.0) — capacity control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "2",
+      "activity": "Underwriting decision made",
+      "responsible": "Underwriter",
+      "output": "Accept standard/substandard or decline; recorded in PAS",
+      "timeline": "≤5 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "2",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Decision",
+      "kind": "decision",
+      "decision": "Underwriting outcome?",
+      "branches": [
+        "Accept → issuance",
+        "Decline → written notice (Sec 6.3)"
+      ]
+    },
+    {
+      "num": "11",
+      "phase": "3",
+      "activity": "Terms communicated to prospect",
+      "responsible": "Member Services Rep",
+      "output": "Acceptance letter or renewal notice; payment instructions",
+      "timeline": "Day +1",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Disclosure acknowledgement & e-signature",
+      "responsible": "Applicant / PAS",
+      "output": "Auditable signed acceptance of terms/PDS captured before issuance",
+      "timeline": "Day +1–3",
+      "controls": "NEW (v3.0) — conduct control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "13",
+      "phase": "3",
+      "activity": "Policy issued in PAS",
+      "responsible": "Member Services Rep",
+      "output": "Policy number; coverage start date confirmed",
+      "timeline": "Day +1",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "14",
+      "phase": "3",
+      "activity": "Policy documents dispatched",
+      "responsible": "PAS / Document Engine",
+      "output": "Schedule, certificate and PDS within 2 business days",
+      "timeline": "≤2 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "15",
+      "phase": "3",
+      "activity": "Producer notification & renewal retention tag",
+      "responsible": "PAS / Actuarial",
+      "output": "Commission statement issued; retention/price-optimisation flag set for renewal",
+      "timeline": "Day +1",
+      "controls": "ENHANCED (v3.0)",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "opt_swim_phases": [
+    {
+      "pid": "1",
+      "name": "Prospect, quote & enrichment",
+      "subtitle": "Steps 1–5 · v3.0 adds risk-data enrichment",
+      "lanes": [
+        "Prospect",
+        "Member Services",
+        "Rating / Data"
+      ],
+      "nodes": [
+        {
+          "nid": "o1",
+          "lane": "Prospect",
+          "col": 0,
+          "title": "Enquiry received",
+          "sub": "any channel",
+          "kind": "standard"
+        },
+        {
+          "nid": "o2",
+          "lane": "Member Services",
+          "col": 1,
+          "title": "Structured needs analysis",
+          "sub": "auditable suitability",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "o3",
+          "lane": "Member Services",
+          "col": 2,
+          "title": "Enter application in PAS",
+          "sub": "Application ID",
+          "kind": "standard"
+        },
+        {
+          "nid": "o4",
+          "lane": "Rating / Data",
+          "col": 3,
+          "title": "Risk-data enrichment",
+          "sub": "property · flood · credit",
+          "kind": "new"
+        },
+        {
+          "nid": "o5",
+          "lane": "Rating / Data",
+          "col": 4,
+          "title": "Premium quoted",
+          "sub": "30-day quote",
+          "kind": "standard"
+        }
+      ],
+      "edges": [
+        {
+          "src": "o1",
+          "dst": "o2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "o2",
+          "dst": "o3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o3",
+          "dst": "o4",
+          "label": "enrich",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "o4",
+          "dst": "o5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "v3.0 enriches every submission with third-party risk data before rating, improving pricing accuracy."
+    },
+    {
+      "pid": "2",
+      "name": "Underwriting & screening",
+      "subtitle": "Steps 6–10 · screening, model, reinsurance",
+      "lanes": [
+        "PAS / Rules",
+        "Underwriter",
+        "Compliance / Reinsurance"
+      ],
+      "nodes": [
+        {
+          "nid": "p1",
+          "lane": "Compliance / Reinsurance",
+          "col": 0,
+          "title": "KYC / sanctions screening",
+          "sub": "before bind",
+          "kind": "new"
+        },
+        {
+          "nid": "p2",
+          "lane": "PAS / Rules",
+          "col": 1,
+          "title": "Auto-accept + risk model",
+          "sub": "predictive score",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "p3",
+          "lane": "Underwriter",
+          "col": 1,
+          "title": "Review referred application",
+          "sub": "≤2–5 days",
+          "kind": "standard"
+        },
+        {
+          "nid": "p4",
+          "lane": "Compliance / Reinsurance",
+          "col": 2,
+          "title": "Reinsurance facultative referral",
+          "sub": "treaty capacity",
+          "kind": "new"
+        },
+        {
+          "nid": "p5",
+          "lane": "Underwriter",
+          "col": 2,
+          "title": "Underwriting decision",
+          "sub": "std / substd / decline",
+          "kind": "decision"
+        }
+      ],
+      "edges": [
+        {
+          "src": "p1",
+          "dst": "p2",
+          "label": "",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "p2",
+          "dst": "p3",
+          "label": "ref",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p3",
+          "dst": "p4",
+          "label": "large",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "p4",
+          "dst": "p5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p3",
+          "dst": "p5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "v3.0 screens applicants before binding, scores them with a predictive model, and refers large risks to reinsurance."
+    },
+    {
+      "pid": "3",
+      "name": "Acceptance & issuance",
+      "subtitle": "Steps 11–15 · v3.0 adds e-signature",
+      "lanes": [
+        "Applicant",
+        "Member Services",
+        "PAS / Broker"
+      ],
+      "nodes": [
+        {
+          "nid": "q1",
+          "lane": "Member Services",
+          "col": 0,
+          "title": "Communicate terms",
+          "sub": "letter / renewal",
+          "kind": "standard"
+        },
+        {
+          "nid": "q2",
+          "lane": "Applicant",
+          "col": 1,
+          "title": "Disclosure & e-signature",
+          "sub": "signed acceptance",
+          "kind": "new"
+        },
+        {
+          "nid": "q3",
+          "lane": "Member Services",
+          "col": 2,
+          "title": "Issue policy in PAS",
+          "sub": "policy number",
+          "kind": "standard"
+        },
+        {
+          "nid": "q4",
+          "lane": "PAS / Broker",
+          "col": 3,
+          "title": "Dispatch documents",
+          "sub": "schedule · cert · PDS",
+          "kind": "standard"
+        },
+        {
+          "nid": "q5",
+          "lane": "PAS / Broker",
+          "col": 4,
+          "title": "Producer & retention tag",
+          "sub": "commission · retention",
+          "kind": "enhanced"
+        }
+      ],
+      "edges": [
+        {
+          "src": "q1",
+          "dst": "q2",
+          "label": "",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "q2",
+          "dst": "q3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q3",
+          "dst": "q4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q4",
+          "dst": "q5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "v3.0 captures an auditable e-signature acceptance before issuance and tags renewals for retention modelling."
+    }
+  ],
+  "opt_n_phases": 3,
+  "opt_n_steps": 15,
+  "opt_n_gateways": 2,
+  "opt_fit": 91,
+  "optimised_doc": {
+    "subtitle": "Optimised per Fit-Gap Analysis against the Guidewire PolicyCenter Underwriting Catalog",
+    "sections": [
+      {
+        "title": "",
+        "blocks": [
+          [
+            "meta",
+            [
+              [
+                "Document Reference",
+                "SOP-INS-004"
+              ],
+              [
+                "Version",
+                "3.0 (Optimised)"
+              ],
+              [
+                "Effective Date",
+                "01 October 2026"
+              ],
+              [
+                "Supersedes",
+                "v2.1 dated 01 January 2025"
+              ],
+              [
+                "Owner",
+                "Member Services — Policy Operations"
+              ],
+              [
+                "Approved By",
+                "Chief Underwriting Officer"
+              ],
+              [
+                "Optimisation Reference",
+                "Fit-Gap Report FG-INS-004 dated 18 June 2026"
+              ],
+              [
+                "Catalog Alignment Score",
+                "91% (up from 69% in v2.1)"
+              ],
+              [
+                "Classification",
+                "Internal Use Only"
+              ]
+            ]
+          ],
+          [
+            "summary",
+            "OPTIMISATION SUMMARY — What changed in v3.0",
+            [
+              "This version incorporates 5 remediation actions from Fit-Gap Report FG-INS-004. Alignment to the Guidewire PolicyCenter underwriting catalog increased from 69% to 91%. Critical additions: KYC/sanctions screening, third-party risk-data enrichment, reinsurance facultative referral, disclosure e-signature, predictive risk scoring, and renewal retention modelling."
+            ],
+            [
+              "NEW STEP (green) — step added to close a gap vs the PolicyCenter catalog",
+              "ENHANCED (amber) — existing step updated with additional controls or automation"
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "1. Purpose",
+        "blocks": [
+          [
+            "para",
+            "This Standard Operating Procedure defines the end-to-end process from prospect enquiry to policy issuance for new business and renewals. Version 3.0 incorporates optimisations from fit-gap analysis against the Guidewire PolicyCenter New Business & Renewal Underwriting Catalog, achieving 91% alignment (up from 69% in v2.1)."
+          ]
+        ]
+      },
+      {
+        "title": "2. Scope",
+        "blocks": [
+          [
+            "para",
+            "This procedure applies to new business across personal lines and commercial SME products and to renewals, received via online, agent, broker and bancassurance channels."
+          ],
+          [
+            "banner",
+            "new",
+            "Scope extended: KYC/sanctions screening and risk-data enrichment now apply to every application before binding."
+          ],
+          [
+            "para",
+            "This procedure does NOT cover claims-triggered reinstatements, group enrolments (SOP-INS-006), or life and health products."
+          ]
+        ]
+      },
+      {
+        "title": "3. Underwriting Authority Matrix",
+        "blocks": [
+          [
+            "table",
+            [
+              "Decision",
+              "First Authority",
+              "Second Authority"
+            ],
+            [
+              [
+                "Auto-accept (rules + model clear)",
+                "Rules + Model Engine",
+                "—"
+              ],
+              [
+                "Personal lines referral",
+                "Underwriter",
+                "—"
+              ],
+              [
+                "Commercial SME referral",
+                "Senior Underwriter",
+                "Underwriter"
+              ],
+              [
+                "Substandard / non-standard terms",
+                "Senior Underwriter",
+                "Actuarial pricing"
+              ],
+              [
+                "Large risk (above treaty limit)",
+                "Chief Underwriting Officer",
+                "Reinsurance referral"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "4. Roles and Responsibilities",
+        "blocks": [
+          [
+            "table",
+            [
+              "Role",
+              "Responsibilities"
+            ],
+            [
+              [
+                "Member Services Representative",
+                "Captures enquiries and needs analysis; initiates applications; communicates terms; coordinates to issuance."
+              ],
+              [
+                "Underwriter",
+                "Reviews referred applications; sets terms and pricing; approves/declines; manages reinsurance referral."
+              ],
+              [
+                "Actuarial",
+                "Maintains rating and models; prices non-standard risk; owns renewal retention modelling."
+              ],
+              [
+                "Compliance",
+                "Owns KYC/sanctions dispositions and conduct/suitability governance."
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "5. Screening & Risk Data (New Section — v3.0)",
+        "blocks": [
+          [
+            "banner",
+            "crit",
+            "New section. Required by the PolicyCenter catalog. KYC/sanctions screening and risk-data enrichment must complete before any policy is bound."
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Control",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "S1",
+                "Third-party risk-data enrichment",
+                "Rating / Data Service",
+                "Property, flood, credit, prior-claims appended",
+                "At quote"
+              ],
+              [
+                "S2",
+                "KYC / sanctions screening",
+                "Compliance",
+                "Identity verified; sanctions/PEP screened",
+                "Pre-bind"
+              ],
+              [
+                "S3",
+                "Reinsurance facultative referral",
+                "Underwriter / Reinsurance",
+                "Treaty capacity checked; facultative placement",
+                "Pre-bind"
+              ],
+              [
+                "S4",
+                "Disclosure acknowledgement & e-signature",
+                "Applicant / PAS",
+                "Signed acceptance of terms/PDS",
+                "Pre-issue"
+              ]
+            ],
+            {
+              "0": "new",
+              "1": "new",
+              "2": "new",
+              "3": "new"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "6. Process Steps",
+        "blocks": [
+          [
+            "h3",
+            "6.1 Prospect, Quote & Enrichment"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "1",
+                "Prospect enquiry received",
+                "Member Services",
+                "Logged in CRM",
+                "Day 0"
+              ],
+              [
+                "2",
+                "Structured needs analysis & suitability",
+                "Member Services",
+                "Auditable needs analysis",
+                "Day 0"
+              ],
+              [
+                "3",
+                "Application entered into PAS",
+                "Member Services",
+                "Application ID; validated",
+                "Day 0–1"
+              ],
+              [
+                "4",
+                "Third-party risk-data enrichment",
+                "Rating / Data Service",
+                "Risk data appended",
+                "Day 1"
+              ],
+              [
+                "5",
+                "Premium quoted to prospect",
+                "PAS / Rating Engine",
+                "30-day quote",
+                "Day 1"
+              ]
+            ],
+            {
+              "1": "enh",
+              "3": "new"
+            }
+          ],
+          [
+            "h3",
+            "6.2 Underwriting & Screening"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "6",
+                "KYC / sanctions screening",
+                "Compliance",
+                "Identity + watchlist before bind",
+                "Instant"
+              ],
+              [
+                "7",
+                "Auto-accept with predictive risk score",
+                "Rules + Model Engine",
+                "STP acceptance widened",
+                "Instant"
+              ],
+              [
+                "8",
+                "Underwriter reviews referred application",
+                "Underwriter",
+                "Risk assessed 2–5 days",
+                "≤2–5 days"
+              ],
+              [
+                "9",
+                "Reinsurance facultative referral (large risk)",
+                "Underwriter / Reinsurance",
+                "Treaty capacity; facultative",
+                "≤3 days"
+              ],
+              [
+                "10",
+                "Underwriting decision made",
+                "Underwriter",
+                "Accept/substandard/decline",
+                "≤5 days"
+              ]
+            ],
+            {
+              "0": "new",
+              "1": "enh",
+              "3": "new"
+            }
+          ],
+          [
+            "h3",
+            "6.3 Acceptance & Issuance"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "11",
+                "Terms communicated to prospect",
+                "Member Services",
+                "Acceptance/renewal notice",
+                "Day +1"
+              ],
+              [
+                "12",
+                "Disclosure acknowledgement & e-signature",
+                "Applicant / PAS",
+                "Signed acceptance captured",
+                "Day +1–3"
+              ],
+              [
+                "13",
+                "Policy issued in PAS",
+                "Member Services",
+                "Policy number; start date",
+                "Day +1"
+              ],
+              [
+                "14",
+                "Policy documents dispatched",
+                "PAS / Document Engine",
+                "Schedule, cert, PDS within 2 days",
+                "≤2 days"
+              ],
+              [
+                "15",
+                "Producer notification & retention tag",
+                "PAS / Actuarial",
+                "Commission; retention flag",
+                "Day +1"
+              ]
+            ],
+            {
+              "1": "new",
+              "4": "enh"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "7. Exception Handling",
+        "blocks": [
+          [
+            "h3",
+            "7.1 Prospect Does Not Accept Terms"
+          ],
+          [
+            "numbered",
+            [
+              "Application status set to 'Not Taken Up' in PAS with a reason code.",
+              "CRM follow-up task set for 14 days; an automated win-back offer is sent where pricing flexibility exists."
+            ]
+          ],
+          [
+            "h3",
+            "7.2 Renewal — Policyholder Non-Response"
+          ],
+          [
+            "numbered_from",
+            3,
+            [
+              "If no response within 21 days of expiry, a final reminder is sent.",
+              "Policy lapses on expiry if no renewal payment received; reinstatement per SOP-INS-011."
+            ]
+          ],
+          [
+            "h3",
+            "7.3 Decline"
+          ],
+          [
+            "numbered_from",
+            5,
+            [
+              "Applicant notified in writing within 1 business day with reasons permitted by guidelines and regulation.",
+              "Applicant referred to an alternative market where a known placement pathway exists."
+            ]
+          ],
+          [
+            "h3",
+            "7.4 Screening Hold (New — v3.0)"
+          ],
+          [
+            "banner",
+            "new",
+            "New exception. Applications failing KYC or hitting a sanctions match are held pending Compliance review."
+          ],
+          [
+            "numbered_from",
+            7,
+            [
+              "KYC failure: document-upload fallback offered; unresolved cases referred to Underwriting.",
+              "Sanctions/PEP hit: application held; Compliance dispositions within 1 business day before any bind."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "8. Systems and Tools",
+        "blocks": [
+          [
+            "table",
+            [
+              "System",
+              "Purpose",
+              "Primary Users"
+            ],
+            [
+              [
+                "Policy Administration System (PAS)",
+                "Application capture, underwriting workflow, issuance",
+                "All roles"
+              ],
+              [
+                "CRM (Salesforce)",
+                "Prospect/customer records, renewal tracking, win-back",
+                "Member Services, Underwriting"
+              ],
+              [
+                "Rating + Model Engine",
+                "Premium calculation, auto-accept rules and predictive scoring",
+                "Automated"
+              ],
+              [
+                "Risk-Data Service",
+                "Property, flood, credit and prior-claims enrichment",
+                "Rating, Underwriting"
+              ],
+              [
+                "KYC / Sanctions Tool",
+                "Identity verification and watchlist screening",
+                "Compliance"
+              ],
+              [
+                "Reinsurance System",
+                "Treaty-capacity checks and facultative placement",
+                "Underwriting, Reinsurance"
+              ],
+              [
+                "Document Management System",
+                "Policy document generation and dispatch",
+                "PAS integration"
+              ],
+              [
+                "Broker Portal",
+                "Broker submission, quotes, commission statements",
+                "Broker, Member Services"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "9. Key Controls and Audit Points",
+        "blocks": [
+          [
+            "banner",
+            "enh",
+            "Controls expanded in v3.0: KYC/sanctions screening, risk-data enrichment, reinsurance referral, e-signature acceptance and predictive scoring."
+          ],
+          [
+            "bullets",
+            [
+              "Screening gate: no bind without KYC and sanctions clearance.",
+              "Risk-data enrichment: third-party data appended to every submission before rating.",
+              "Capacity control: large risks referred to reinsurance with a treaty-capacity check.",
+              "Disclosure capture: auditable e-signature on terms/PDS before issuance.",
+              "Predictive scoring: rules-engine acceptance refined by a governed risk model.",
+              "Suitability: structured needs analysis recorded for conduct compliance.",
+              "Immutable audit trail: enquiry, screening, decision, acceptance and issuance events logged."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "10. Key Performance Indicators",
+        "blocks": [
+          [
+            "table",
+            [
+              "KPI",
+              "v2.1 Target",
+              "v3.0 Target",
+              "Measurement"
+            ],
+            [
+              [
+                "Quote-to-bind (new business)",
+                "≥22%",
+                "≥26%",
+                "Bound / quoted"
+              ],
+              [
+                "Straight-through acceptance",
+                "Rules only",
+                "≥70% with model",
+                "Auto-accept rate"
+              ],
+              [
+                "Sanctions screening",
+                "N/A (new)",
+                "100% pre-bind",
+                "Screening log"
+              ],
+              [
+                "Application-to-issue (auto)",
+                "≤1 day",
+                "≤1 day",
+                "Submission to issuance"
+              ],
+              [
+                "Renewal retention",
+                "≥82%",
+                "≥86%",
+                "Retained / eligible renewals"
+              ],
+              [
+                "Large-risk reinsurance referral",
+                "N/A (new)",
+                "100% above retention",
+                "Facultative referral log"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "11. Document Control",
+        "blocks": [
+          [
+            "table",
+            [
+              "Version",
+              "Date",
+              "Author",
+              "Summary of Changes"
+            ],
+            [
+              [
+                "2.1",
+                "01 Jan 2025",
+                "A. Ibrahim, Underwriting",
+                "Updated underwriting SLAs; added broker portal steps; revised retention KPIs"
+              ],
+              [
+                "3.0",
+                "01 Oct 2026",
+                "A. Ibrahim, Underwriting",
+                "OPTIMISED: KYC/sanctions screening; risk-data enrichment; reinsurance facultative referral; e-signature acceptance; predictive scoring; renewal retention modelling; catalog alignment 69% → 91%"
+              ]
+            ],
+            {}
+          ]
+        ]
+      }
+    ]
+  },
+  "swim_cover_tags": "Prospect · Underwriting · Acceptance · Issuance · Exception handling",
+  "hierarchy_cover_sub": "Phase breakdown with new-business tracks, underwriting authority, and exception paths"
+}

@@ -1,0 +1,1880 @@
+{
+  "meta": {
+    "sop_id": "SOP-INS-009",
+    "slug": "In_Force_Customer_Service",
+    "title": "In-Force Customer Service",
+    "short_title": "In-force customer service",
+    "version": "3.0",
+    "owner": "Customer Service — Policy Servicing",
+    "org": "Meridian Insurance Group",
+    "catalog": "Salesforce Service Cloud — Insurance Servicing Best-Practice Catalog",
+    "catalog_short": "Service Cloud",
+    "new_version": "3.1",
+    "effective_date": "01 October 2026",
+    "supersedes": "v3.0 dated 01 January 2025",
+    "approved_by": "Chief Customer Officer",
+    "classification": "Internal Use Only"
+  },
+  "phases": [
+    {
+      "pid": "1",
+      "name": "Contact receipt & verification",
+      "subtitle": "Intake, identity, context",
+      "circle": "blue",
+      "roles": "Policyholder · CSR · PAS",
+      "step_range": "Steps 1–4",
+      "summary": "4 steps + 1 decision"
+    },
+    {
+      "pid": "2",
+      "name": "Request handling",
+      "subtitle": "Resolve, update, escalate",
+      "circle": "green",
+      "roles": "CSR · Policy Service · Member Care",
+      "step_range": "Steps 5–9",
+      "summary": "5 steps + 1 decision"
+    },
+    {
+      "pid": "3",
+      "name": "Closure & quality",
+      "subtitle": "Confirm, close, survey",
+      "circle": "amber",
+      "roles": "CSR · CRM",
+      "step_range": "Steps 10–12",
+      "summary": "3 steps"
+    }
+  ],
+  "steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Inbound contact received (phone, email, chat, portal)",
+      "responsible": "CSR / ACD System",
+      "output": "Contact logged in CRM; channel and timestamp recorded",
+      "timeline": "Real time",
+      "controls": "Omni-channel intake",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Identity verification",
+      "responsible": "CSR",
+      "output": "3-point verification: policy number, DOB and postcode/email; on hold until passed",
+      "timeline": "Real time",
+      "controls": "Key control: 3-point ID",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Contact purpose identified and categorised",
+      "responsible": "CSR",
+      "output": "Contact type coded in CRM (enquiry, update, payment, document, complaint)",
+      "timeline": "Real time",
+      "controls": "Categorisation",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Policy record retrieved and reviewed",
+      "responsible": "CSR / PAS",
+      "output": "Policy status, payment standing and interaction history reviewed before engaging",
+      "timeline": "Real time",
+      "controls": "Context review",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "1",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Identity gate",
+      "kind": "decision",
+      "decision": "Identity verified?",
+      "branches": [
+        "Pass → handle request",
+        "Fail (2 attempts) → terminate + security flag (Sec 6.1)"
+      ]
+    },
+    {
+      "num": "5",
+      "phase": "2",
+      "activity": "Standard enquiry resolved at first contact",
+      "responsible": "CSR",
+      "output": "Policy info, billing, payment dates and coverage summaries within CSR authority",
+      "timeline": "Real time",
+      "controls": "First-contact resolution",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "2",
+      "activity": "Account update processed (address, payment, contacts)",
+      "responsible": "CSR / Policy Service Rep",
+      "output": "Update processed in PAS; confirmation emailed; change noted in CRM",
+      "timeline": "Real time",
+      "controls": "Account update",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Document request fulfilled",
+      "responsible": "CSR / PAS (auto)",
+      "output": "Certificate, schedule or receipt regenerated and emailed within 24 hours",
+      "timeline": "≤24 hours",
+      "controls": "Document fulfilment",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Payment received or arrangement set up",
+      "responsible": "CSR",
+      "output": "Payment via IVR or agent-assisted; arrangement per SOP-INS-003 authority",
+      "timeline": "Real time",
+      "controls": "Payment handling",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "2",
+      "activity": "Complex or sensitive contact escalated to Member Care",
+      "responsible": "CSR / Member Care Rep",
+      "output": "Escalation logged; Member Care contacts policyholder within 2 hours",
+      "timeline": "≤2 hours",
+      "controls": "Escalation control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "3",
+      "activity": "Resolution confirmed with policyholder",
+      "responsible": "CSR",
+      "output": "Summary of actions communicated verbally or in writing",
+      "timeline": "Real time",
+      "controls": "Resolution confirmation",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "3",
+      "activity": "Contact record closed and coded in CRM",
+      "responsible": "CSR",
+      "output": "Resolution code, handle time and CSAT prompt recorded; follow-up task if pending",
+      "timeline": "Real time",
+      "controls": "Closure coding",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Post-interaction survey sent",
+      "responsible": "CRM (auto)",
+      "output": "CSAT survey dispatched; responses captured for quality reporting",
+      "timeline": "Post-contact",
+      "controls": "CSAT capture",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "authority": [
+    {
+      "band": "Standard enquiry / document",
+      "first": "CSR",
+      "second": "—"
+    },
+    {
+      "band": "Account update (non-financial)",
+      "first": "CSR",
+      "second": "Policy Service Rep"
+    },
+    {
+      "band": "Payment arrangement",
+      "first": "CSR",
+      "second": "per SOP-INS-003 matrix"
+    },
+    {
+      "band": "Complex / VIP / sensitive",
+      "first": "Member Care Rep",
+      "second": "Team Leader"
+    },
+    {
+      "band": "Exception outside CSR authority",
+      "first": "Team Leader",
+      "second": "—"
+    }
+  ],
+  "swim_phases": [
+    {
+      "pid": "1",
+      "name": "Contact receipt & verification",
+      "subtitle": "Steps 1–4 · intake to context",
+      "lanes": [
+        "Policyholder",
+        "CSR",
+        "PAS / Security"
+      ],
+      "nodes": [
+        {
+          "nid": "s1",
+          "lane": "Policyholder",
+          "col": 0,
+          "title": "Inbound contact",
+          "sub": "phone · email · chat · portal",
+          "kind": "standard"
+        },
+        {
+          "nid": "s2",
+          "lane": "CSR",
+          "col": 1,
+          "title": "Identity verification",
+          "sub": "3-point",
+          "kind": "decision"
+        },
+        {
+          "nid": "s3",
+          "lane": "CSR",
+          "col": 2,
+          "title": "Categorise contact",
+          "sub": "CRM coded",
+          "kind": "standard"
+        },
+        {
+          "nid": "s4",
+          "lane": "PAS / Security",
+          "col": 3,
+          "title": "Retrieve policy record",
+          "sub": "status · standing",
+          "kind": "standard"
+        },
+        {
+          "nid": "s5",
+          "lane": "PAS / Security",
+          "col": 2,
+          "title": "Failed ID → terminate",
+          "sub": "security flag",
+          "kind": "exception"
+        }
+      ],
+      "edges": [
+        {
+          "src": "s1",
+          "dst": "s2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "s2",
+          "dst": "s3",
+          "label": "pass",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s2",
+          "dst": "s5",
+          "label": "fail",
+          "dashed": true,
+          "kind": "exception"
+        },
+        {
+          "src": "s3",
+          "dst": "s4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Every contact passes 3-point identity verification before any account information is provided; failures trigger a security flag."
+    },
+    {
+      "pid": "2",
+      "name": "Request handling",
+      "subtitle": "Steps 5–9 · resolve, update, escalate",
+      "lanes": [
+        "CSR",
+        "Policy Service / PAS",
+        "Member Care"
+      ],
+      "nodes": [
+        {
+          "nid": "a1",
+          "lane": "CSR",
+          "col": 0,
+          "title": "Resolve standard enquiry",
+          "sub": "first contact",
+          "kind": "standard"
+        },
+        {
+          "nid": "a2",
+          "lane": "Policy Service / PAS",
+          "col": 1,
+          "title": "Process account update",
+          "sub": "PAS + confirmation",
+          "kind": "standard"
+        },
+        {
+          "nid": "a3",
+          "lane": "Policy Service / PAS",
+          "col": 2,
+          "title": "Fulfil document request",
+          "sub": "≤24h",
+          "kind": "standard"
+        },
+        {
+          "nid": "a4",
+          "lane": "CSR",
+          "col": 1,
+          "title": "Payment / arrangement",
+          "sub": "IVR / assisted",
+          "kind": "standard"
+        },
+        {
+          "nid": "a5",
+          "lane": "Member Care",
+          "col": 2,
+          "title": "Escalate complex / sensitive",
+          "sub": "≤2h",
+          "kind": "exception"
+        }
+      ],
+      "edges": [
+        {
+          "src": "a1",
+          "dst": "a2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a1",
+          "dst": "a4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a1",
+          "dst": "a5",
+          "label": "esc",
+          "dashed": true,
+          "kind": "exception"
+        }
+      ],
+      "note": "Standard enquiries, updates, documents and payments are handled at first contact; complex or sensitive cases escalate to Member Care."
+    },
+    {
+      "pid": "3",
+      "name": "Closure & quality",
+      "subtitle": "Steps 10–12 · confirm to survey",
+      "lanes": [
+        "CSR",
+        "Policyholder",
+        "CRM"
+      ],
+      "nodes": [
+        {
+          "nid": "d1",
+          "lane": "CSR",
+          "col": 0,
+          "title": "Confirm resolution",
+          "sub": "summary of actions",
+          "kind": "standard"
+        },
+        {
+          "nid": "d2",
+          "lane": "CSR",
+          "col": 1,
+          "title": "Close & code contact",
+          "sub": "resolution code · AHT",
+          "kind": "standard"
+        },
+        {
+          "nid": "d3",
+          "lane": "CRM",
+          "col": 2,
+          "title": "Send CSAT survey",
+          "sub": "quality reporting",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "d1",
+          "dst": "d2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d2",
+          "dst": "d3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Contacts are confirmed, coded and closed, and a CSAT survey is dispatched for quality reporting."
+    }
+  ],
+  "n_phases": 3,
+  "n_steps": 12,
+  "n_roles": 4,
+  "n_gateways": 2,
+  "fitgap": {
+    "overall_fit": 69,
+    "partial_pct": 22,
+    "fits": 6,
+    "gaps": 3,
+    "partials": 4,
+    "steps_analysed": 13,
+    "phases_count": 3,
+    "summary_line": "Overall alignment of SOP-INS-009 against the Salesforce Service Cloud servicing catalog",
+    "metrics": [
+      [
+        "Steps analysed",
+        "13 steps across 3 phases"
+      ],
+      [
+        "Fits confirmed",
+        "6 steps aligned to catalog"
+      ],
+      [
+        "Gaps identified",
+        "3 steps — remediation required"
+      ],
+      [
+        "Partial fits",
+        "4 steps — enhancement recommended"
+      ],
+      [
+        "Highest risk area",
+        "Knowledge-based ID only"
+      ],
+      [
+        "Experience gap",
+        "No AI assist / self-service deflection"
+      ],
+      [
+        "Ref standard",
+        "Salesforce Service Cloud Catalog"
+      ]
+    ],
+    "phase_bars": [
+      {
+        "line1": "Phase 1",
+        "line2": "Receipt",
+        "value": 72,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 2",
+        "line2": "Handling",
+        "value": 60,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 3",
+        "line2": "Closure",
+        "value": 80,
+        "colour": ""
+      },
+      {
+        "line1": "Digital /",
+        "line2": "AI",
+        "value": 46,
+        "colour": ""
+      }
+    ],
+    "phase_cards": [
+      {
+        "label": "Phase 1",
+        "value": 72,
+        "sub": "Receipt & verification"
+      },
+      {
+        "label": "Phase 2",
+        "value": 60,
+        "sub": "Request handling"
+      },
+      {
+        "label": "Phase 3",
+        "value": 80,
+        "sub": "Closure & quality"
+      },
+      {
+        "label": "Digital",
+        "value": 46,
+        "sub": "AI & self-service"
+      }
+    ],
+    "detail_slides": [
+      [
+        "Phase 1 — Contact receipt & verification",
+        "Steps 1–4 vs Salesforce Service Cloud catalog",
+        [
+          "p1"
+        ]
+      ],
+      [
+        "Phase 2 — Request handling",
+        "Steps 5–11 vs Salesforce Service Cloud catalog",
+        [
+          "p2"
+        ]
+      ],
+      [
+        "Phase 3 — Closure & quality",
+        "Steps 12–13 vs Salesforce Service Cloud catalog",
+        [
+          "p3"
+        ]
+      ]
+    ],
+    "items": [
+      {
+        "num": "1",
+        "name": "Omni-channel intake",
+        "status": "FIT",
+        "detail": "Phone, email, chat and portal logged in CRM with channel/timestamp align with Service Cloud omni-channel.",
+        "owner": "CSR / ACD",
+        "ref": "SF-SC-OMN-01",
+        "group": "p1"
+      },
+      {
+        "num": "2",
+        "name": "Identity verification",
+        "status": "PARTIAL",
+        "detail": "3-point knowledge-based verification is enforced, but the catalog recommends step-up authentication (OTP/biometric) for sensitive changes — KBA alone is increasingly bypassable.",
+        "owner": "CSR",
+        "ref": "SF-SC-IDV-01",
+        "group": "p1"
+      },
+      {
+        "num": "3",
+        "name": "Contact categorisation",
+        "status": "FIT",
+        "detail": "Coded contact types in CRM align with Service Cloud case classification.",
+        "owner": "CSR",
+        "ref": "SF-SC-CAS-01",
+        "group": "p1"
+      },
+      {
+        "num": "4",
+        "name": "Unified policy context",
+        "status": "PARTIAL",
+        "detail": "Policy context is reviewed from PAS, but the agent works across PAS and CRM without a single 360° customer view/agent desktop as the catalog recommends.",
+        "owner": "CSR / PAS",
+        "ref": "SF-SC-360-01",
+        "group": "p1"
+      },
+      {
+        "num": "5",
+        "name": "First-contact resolution",
+        "status": "FIT",
+        "detail": "Standard enquiries resolved within authority at first contact align with Service Cloud FCR practice.",
+        "owner": "CSR",
+        "ref": "SF-SC-FCR-01",
+        "group": "p2"
+      },
+      {
+        "num": "6",
+        "name": "Self-service deflection",
+        "status": "GAP",
+        "detail": "A self-service portal exists but is limited; the catalog deflects routine contacts via an AI assistant/chatbot and expanded self-service, reducing volume and AHT.",
+        "owner": "Policyholder / Portal",
+        "ref": "SF-SC-SS-01",
+        "group": "p2"
+      },
+      {
+        "num": "7",
+        "name": "AI agent-assist & knowledge",
+        "status": "GAP",
+        "detail": "No agent-assist, knowledge suggestions or next-best-action. The catalog surfaces knowledge and recommended actions in-flow to improve consistency and FCR.",
+        "owner": "CSR",
+        "ref": "SF-SC-AI-01",
+        "group": "p2"
+      },
+      {
+        "num": "8",
+        "name": "Account update processing",
+        "status": "FIT",
+        "detail": "PAS account updates with emailed confirmation align with Service Cloud service requests.",
+        "owner": "CSR / Policy Service Rep",
+        "ref": "SF-SC-REQ-01",
+        "group": "p2"
+      },
+      {
+        "num": "9",
+        "name": "Escalation to Member Care",
+        "status": "FIT",
+        "detail": "Logged escalation with a 2-hour callback aligns with Service Cloud escalation/queue management.",
+        "owner": "Member Care Rep",
+        "ref": "SF-SC-ESC-01",
+        "group": "p2"
+      },
+      {
+        "num": "10",
+        "name": "Complaint & sentiment detection",
+        "status": "PARTIAL",
+        "detail": "Complaints are spotted by manual keyword recognition. The catalog applies automated sentiment/complaint detection to flag at-risk interactions in real time.",
+        "owner": "CSR",
+        "ref": "SF-SC-SEN-01",
+        "group": "p2"
+      },
+      {
+        "num": "11",
+        "name": "Vulnerable-customer & consent handling",
+        "status": "GAP",
+        "detail": "No structured vulnerable-customer identification or consent capture for changes. The catalog supports vulnerability flags and consent logging — a conduct and privacy gap.",
+        "owner": "Member Care / CSR",
+        "ref": "SF-SC-VUL-01",
+        "group": "p2"
+      },
+      {
+        "num": "12",
+        "name": "Closure coding & CSAT",
+        "status": "FIT",
+        "detail": "Resolution coding, handle-time capture and CSAT survey align with Service Cloud closure and feedback.",
+        "owner": "CSR / CRM",
+        "ref": "SF-SC-CSAT-01",
+        "group": "p3"
+      },
+      {
+        "num": "13",
+        "name": "Quality / interaction analytics",
+        "status": "PARTIAL",
+        "detail": "Quality is scored manually on samples. The catalog uses interaction/speech analytics to QA at scale and coach automatically.",
+        "owner": "Team Leader",
+        "ref": "SF-SC-QA-01",
+        "group": "p3"
+      }
+    ],
+    "groups": [
+      [
+        "p1",
+        "PHASE 1 — CONTACT RECEIPT & VERIFICATION"
+      ],
+      [
+        "p2",
+        "PHASE 2 — REQUEST HANDLING"
+      ],
+      [
+        "p3",
+        "PHASE 3 — CLOSURE & QUALITY"
+      ]
+    ],
+    "critical_missing": [
+      {
+        "title": "Step-up authentication",
+        "detail": "Identity relies on 3-point knowledge-based verification, increasingly bypassable. The catalog adds step-up authentication (OTP/biometric) for sensitive changes to control account-takeover fraud."
+      },
+      {
+        "title": "AI agent-assist & self-service deflection",
+        "detail": "No agent-assist, knowledge or next-best-action, and limited self-service. The catalog deflects routine contacts via an AI assistant and surfaces knowledge in-flow, improving FCR and lowering AHT."
+      },
+      {
+        "title": "Vulnerable-customer & consent handling",
+        "detail": "No structured vulnerable-customer identification or consent capture for changes, a conduct and privacy gap."
+      },
+      {
+        "title": "Interaction / speech analytics for QA",
+        "detail": "Quality is scored on manual samples; the catalog QA's interactions at scale with speech/interaction analytics and automated coaching."
+      }
+    ],
+    "radar": [
+      [
+        "Omni-channel",
+        80
+      ],
+      [
+        "Identity",
+        55
+      ],
+      [
+        "360 view",
+        52
+      ],
+      [
+        "Self-service / AI",
+        40
+      ],
+      [
+        "Escalation",
+        78
+      ],
+      [
+        "Vulnerability",
+        38
+      ],
+      [
+        "Quality / CSAT",
+        70
+      ]
+    ],
+    "control_bars": [
+      {
+        "name": "Omni-channel intake",
+        "value": 80,
+        "note": "Phone, email, chat, portal logged in CRM"
+      },
+      {
+        "name": "Identity verification",
+        "value": 55,
+        "note": "3-point KBA; no step-up auth"
+      },
+      {
+        "name": "Unified 360 view",
+        "value": 52,
+        "note": "PAS + CRM not unified into one desktop"
+      },
+      {
+        "name": "Self-service / AI assist",
+        "value": 40,
+        "note": "Limited portal; no AI assist or chatbot"
+      },
+      {
+        "name": "Escalation",
+        "value": 78,
+        "note": "Logged escalation with 2-hour callback"
+      },
+      {
+        "name": "Vulnerable-customer handling",
+        "value": 38,
+        "note": "No vulnerability flags or consent logging"
+      },
+      {
+        "name": "Quality & CSAT",
+        "value": 70,
+        "note": "CSAT captured; manual QA sampling"
+      }
+    ],
+    "remediations": [
+      {
+        "rank": 1,
+        "title": "Add step-up authentication for sensitive changes",
+        "detail": "Require OTP or biometric step-up beyond 3-point KBA for payment, bank and contact changes to control account takeover. Effort: 4 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 2,
+        "title": "Deploy AI agent-assist & self-service deflection",
+        "detail": "Add an AI assistant/chatbot for routine contacts and surface knowledge and next-best-action in the agent desktop to improve FCR and AHT. Effort: 7 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 3,
+        "title": "Add vulnerable-customer & consent handling",
+        "detail": "Introduce vulnerability identification flags and consent capture/logging for account changes. Effort: 3 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 4,
+        "title": "Unify the agent desktop (360 view)",
+        "detail": "Surface a single 360° customer view across PAS and CRM to cut context switching. Effort: 5 weeks.",
+        "priority": "Medium"
+      },
+      {
+        "rank": 5,
+        "title": "Add interaction/speech analytics for QA",
+        "detail": "QA interactions at scale with speech/interaction analytics and automated complaint/sentiment detection and coaching. Effort: 5 weeks.",
+        "priority": "Medium"
+      }
+    ],
+    "risk_impact": [
+      [
+        "Step-up authentication",
+        85
+      ],
+      [
+        "AI assist / deflection",
+        75
+      ],
+      [
+        "Vulnerable-customer",
+        72
+      ],
+      [
+        "360 view",
+        58
+      ],
+      [
+        "Speech analytics",
+        55
+      ],
+      [
+        "Sentiment detection",
+        52
+      ]
+    ],
+    "projected_fit": 91
+  },
+  "opt_phases": [
+    {
+      "pid": "1",
+      "name": "Receipt, verification & 360 view",
+      "subtitle": "Intake, step-up ID, unified view",
+      "circle": "blue",
+      "roles": "Policyholder · CSR · PAS",
+      "step_range": "Steps 1–5",
+      "summary": "5 steps + 1 decision"
+    },
+    {
+      "pid": "2",
+      "name": "Request handling & assist",
+      "subtitle": "Deflect, assist, resolve, escalate",
+      "circle": "green",
+      "roles": "CSR · Policy Service · Member Care · AI",
+      "step_range": "Steps 6–11",
+      "summary": "6 steps + 1 decision"
+    },
+    {
+      "pid": "3",
+      "name": "Closure & quality analytics",
+      "subtitle": "Confirm, close, analytics",
+      "circle": "amber",
+      "roles": "CSR · CRM · Quality",
+      "step_range": "Steps 12–14",
+      "summary": "3 steps"
+    }
+  ],
+  "opt_steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Inbound contact received (omni-channel)",
+      "responsible": "CSR / ACD System",
+      "output": "Logged in CRM with channel and timestamp",
+      "timeline": "Real time",
+      "controls": "Standard",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Identity verification with step-up",
+      "responsible": "CSR / Auth Service",
+      "output": "3-point KBA plus OTP/biometric step-up for sensitive changes",
+      "timeline": "Real time",
+      "controls": "ENHANCED (v3.1) — account-takeover control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Contact categorised with AI intent",
+      "responsible": "CSR / AI",
+      "output": "Intent classified automatically; type coded in CRM",
+      "timeline": "Real time",
+      "controls": "ENHANCED (v3.1)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Unified 360 customer view retrieved",
+      "responsible": "CSR / PAS / CRM",
+      "output": "Single 360° view across PAS and CRM presented to the agent",
+      "timeline": "Real time",
+      "controls": "NEW (v3.1) — agent desktop",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "5",
+      "phase": "1",
+      "activity": "Vulnerability check & consent capture",
+      "responsible": "CSR / Member Care",
+      "output": "Vulnerability flags applied; consent captured for any change",
+      "timeline": "Real time",
+      "controls": "NEW (v3.1) — conduct & privacy",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "1",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Identity gate",
+      "kind": "decision",
+      "decision": "Identity verified?",
+      "branches": [
+        "Pass → handle request",
+        "Fail → terminate + security flag (Sec 6.1)"
+      ]
+    },
+    {
+      "num": "6",
+      "phase": "2",
+      "activity": "Self-service deflection (AI assistant)",
+      "responsible": "Policyholder / AI Assistant",
+      "output": "Routine requests deflected to chatbot/self-service before agent handling",
+      "timeline": "Real time",
+      "controls": "NEW (v3.1) — volume reduction",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Standard enquiry resolved with agent-assist",
+      "responsible": "CSR / AI",
+      "output": "Knowledge and next-best-action surfaced in-flow; resolved at first contact",
+      "timeline": "Real time",
+      "controls": "ENHANCED (v3.1)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Account update processed",
+      "responsible": "CSR / Policy Service Rep",
+      "output": "Update in PAS with consent; confirmation emailed",
+      "timeline": "Real time",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "2",
+      "activity": "Document request fulfilled",
+      "responsible": "CSR / PAS",
+      "output": "Certificate, schedule or receipt regenerated within 24 hours",
+      "timeline": "≤24 hours",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "2",
+      "activity": "Payment received or arrangement set up",
+      "responsible": "CSR",
+      "output": "Payment via IVR/assisted; arrangement per SOP-INS-003",
+      "timeline": "Real time",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "2",
+      "activity": "Complex / sensitive escalated to Member Care",
+      "responsible": "CSR / Member Care Rep",
+      "output": "Sentiment-flagged contacts escalated; 2-hour callback",
+      "timeline": "≤2 hours",
+      "controls": "ENHANCED (v3.1)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Resolution confirmed with policyholder",
+      "responsible": "CSR",
+      "output": "Summary of actions communicated",
+      "timeline": "Real time",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "13",
+      "phase": "3",
+      "activity": "Contact closed and coded in CRM",
+      "responsible": "CSR",
+      "output": "Resolution code, handle time and CSAT prompt",
+      "timeline": "Real time",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "14",
+      "phase": "3",
+      "activity": "Quality via interaction analytics & CSAT",
+      "responsible": "CRM / Quality",
+      "output": "Interaction/speech analytics QA every contact; CSAT captured; coaching automated",
+      "timeline": "Post-contact",
+      "controls": "NEW (v3.1) — QA at scale",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "opt_swim_phases": [
+    {
+      "pid": "1",
+      "name": "Receipt, verification & 360 view",
+      "subtitle": "Steps 1–5 · v3.1 adds step-up & 360 view",
+      "lanes": [
+        "Policyholder",
+        "CSR",
+        "PAS / CRM"
+      ],
+      "nodes": [
+        {
+          "nid": "o1",
+          "lane": "Policyholder",
+          "col": 0,
+          "title": "Inbound contact",
+          "sub": "omni-channel",
+          "kind": "standard"
+        },
+        {
+          "nid": "o2",
+          "lane": "CSR",
+          "col": 1,
+          "title": "Identity + step-up auth",
+          "sub": "OTP / biometric",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "o3",
+          "lane": "CSR",
+          "col": 2,
+          "title": "AI intent categorisation",
+          "sub": "auto-coded",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "o4",
+          "lane": "PAS / CRM",
+          "col": 3,
+          "title": "Unified 360 view",
+          "sub": "single desktop",
+          "kind": "new"
+        },
+        {
+          "nid": "o5",
+          "lane": "CSR",
+          "col": 3,
+          "title": "Vulnerability & consent",
+          "sub": "flags + consent",
+          "kind": "new"
+        }
+      ],
+      "edges": [
+        {
+          "src": "o1",
+          "dst": "o2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "o2",
+          "dst": "o3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o3",
+          "dst": "o4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o4",
+          "dst": "o5",
+          "label": "",
+          "dashed": true,
+          "kind": "new"
+        }
+      ],
+      "note": "v3.1 adds step-up authentication, an AI-classified intent, a unified 360 view, and vulnerability/consent capture."
+    },
+    {
+      "pid": "2",
+      "name": "Request handling & assist",
+      "subtitle": "Steps 6–11 · deflection and agent-assist",
+      "lanes": [
+        "Policyholder / AI",
+        "CSR",
+        "Policy Service / Member Care"
+      ],
+      "nodes": [
+        {
+          "nid": "p1",
+          "lane": "Policyholder / AI",
+          "col": 0,
+          "title": "Self-service deflection",
+          "sub": "chatbot",
+          "kind": "new"
+        },
+        {
+          "nid": "p2",
+          "lane": "CSR",
+          "col": 1,
+          "title": "Resolve with agent-assist",
+          "sub": "knowledge · NBA",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "p3",
+          "lane": "Policy Service / Member Care",
+          "col": 1,
+          "title": "Process account update",
+          "sub": "PAS + consent",
+          "kind": "standard"
+        },
+        {
+          "nid": "p4",
+          "lane": "Policy Service / Member Care",
+          "col": 2,
+          "title": "Fulfil document request",
+          "sub": "≤24h",
+          "kind": "standard"
+        },
+        {
+          "nid": "p5",
+          "lane": "CSR",
+          "col": 2,
+          "title": "Payment / arrangement",
+          "sub": "IVR / assisted",
+          "kind": "standard"
+        },
+        {
+          "nid": "p6",
+          "lane": "Policy Service / Member Care",
+          "col": 3,
+          "title": "Escalate (sentiment-flagged)",
+          "sub": "≤2h",
+          "kind": "exception"
+        }
+      ],
+      "edges": [
+        {
+          "src": "p1",
+          "dst": "p2",
+          "label": "deflect",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "p2",
+          "dst": "p3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p3",
+          "dst": "p4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p2",
+          "dst": "p5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p2",
+          "dst": "p6",
+          "label": "esc",
+          "dashed": true,
+          "kind": "exception"
+        }
+      ],
+      "note": "v3.1 deflects routine contacts to self-service and gives agents knowledge and next-best-action; sentiment flags drive escalation."
+    },
+    {
+      "pid": "3",
+      "name": "Closure & quality analytics",
+      "subtitle": "Steps 12–14 · v3.1 adds interaction analytics",
+      "lanes": [
+        "CSR",
+        "Policyholder",
+        "CRM / Quality"
+      ],
+      "nodes": [
+        {
+          "nid": "q1",
+          "lane": "CSR",
+          "col": 0,
+          "title": "Confirm resolution",
+          "sub": "summary",
+          "kind": "standard"
+        },
+        {
+          "nid": "q2",
+          "lane": "CSR",
+          "col": 1,
+          "title": "Close & code contact",
+          "sub": "resolution code",
+          "kind": "standard"
+        },
+        {
+          "nid": "q3",
+          "lane": "CRM / Quality",
+          "col": 2,
+          "title": "Interaction analytics & CSAT",
+          "sub": "QA every contact",
+          "kind": "new"
+        }
+      ],
+      "edges": [
+        {
+          "src": "q1",
+          "dst": "q2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q2",
+          "dst": "q3",
+          "label": "",
+          "dashed": true,
+          "kind": "new"
+        }
+      ],
+      "note": "v3.1 QA's every interaction with speech/interaction analytics and captures CSAT for automated coaching."
+    }
+  ],
+  "opt_n_phases": 3,
+  "opt_n_steps": 14,
+  "opt_n_gateways": 2,
+  "opt_fit": 91,
+  "optimised_doc": {
+    "subtitle": "Optimised per Fit-Gap Analysis against the Salesforce Service Cloud Insurance Servicing Catalog",
+    "sections": [
+      {
+        "title": "",
+        "blocks": [
+          [
+            "meta",
+            [
+              [
+                "Document Reference",
+                "SOP-INS-009"
+              ],
+              [
+                "Version",
+                "3.1 (Optimised)"
+              ],
+              [
+                "Effective Date",
+                "01 October 2026"
+              ],
+              [
+                "Supersedes",
+                "v3.0 dated 01 January 2025"
+              ],
+              [
+                "Owner",
+                "Customer Service — Policy Servicing"
+              ],
+              [
+                "Approved By",
+                "Chief Customer Officer"
+              ],
+              [
+                "Optimisation Reference",
+                "Fit-Gap Report FG-INS-009 dated 18 June 2026"
+              ],
+              [
+                "Catalog Alignment Score",
+                "91% (up from 69% in v3.0)"
+              ],
+              [
+                "Classification",
+                "Internal Use Only"
+              ]
+            ]
+          ],
+          [
+            "summary",
+            "OPTIMISATION SUMMARY — What changed in v3.1",
+            [
+              "This version incorporates 5 remediation actions from Fit-Gap Report FG-INS-009. Alignment to the Salesforce Service Cloud servicing catalog increased from 69% to 91%. Critical additions: step-up authentication, AI agent-assist with self-service deflection, vulnerable-customer and consent handling, a unified 360 view, and interaction/speech analytics for quality."
+            ],
+            [
+              "NEW STEP (green) — step added to close a gap vs the Service Cloud catalog",
+              "ENHANCED (amber) — existing step updated with additional automation or controls"
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "1. Purpose",
+        "blocks": [
+          [
+            "para",
+            "This Standard Operating Procedure defines how inbound requests from current policyholders are received and resolved across all channels. Version 3.1 incorporates optimisations from fit-gap analysis against the Salesforce Service Cloud Insurance Servicing Best-Practice Catalog, achieving 91% alignment (up from 69% in v3.0)."
+          ]
+        ]
+      },
+      {
+        "title": "2. Scope",
+        "blocks": [
+          [
+            "para",
+            "This procedure applies to inbound policyholder contacts for general enquiries, policy information, billing queries, payment processing, account updates and document requests."
+          ],
+          [
+            "banner",
+            "new",
+            "Scope extended: step-up authentication and vulnerable-customer/consent handling now apply to every sensitive request."
+          ],
+          [
+            "para",
+            "This procedure does NOT cover claims notifications (SOP-INS-007/011/012), formal complaints (SOP-COMP-001), or policy cancellation (SOP-INS-011)."
+          ]
+        ]
+      },
+      {
+        "title": "3. Authority Matrix",
+        "blocks": [
+          [
+            "table",
+            [
+              "Item",
+              "First Authority",
+              "Second Authority"
+            ],
+            [
+              [
+                "Standard enquiry / document",
+                "CSR",
+                "—"
+              ],
+              [
+                "Account update (non-financial)",
+                "CSR",
+                "Policy Service Rep"
+              ],
+              [
+                "Payment arrangement",
+                "CSR",
+                "per SOP-INS-003 matrix"
+              ],
+              [
+                "Complex / VIP / sensitive",
+                "Member Care Rep",
+                "Team Leader"
+              ],
+              [
+                "Exception outside CSR authority",
+                "Team Leader",
+                "—"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "4. Roles and Responsibilities",
+        "blocks": [
+          [
+            "table",
+            [
+              "Role",
+              "Responsibilities"
+            ],
+            [
+              [
+                "Customer Service Representative",
+                "Logs contacts; verifies identity; resolves standard requests with agent-assist; escalates."
+              ],
+              [
+                "Member Care Representative",
+                "Handles complex/sensitive and VIP cases; owns vulnerable-customer handling."
+              ],
+              [
+                "Policy Service Representative",
+                "Processes formal account changes in PAS; back-office support."
+              ],
+              [
+                "Team Leader / Supervisor",
+                "Monitors queues; handles escalations; reviews analytics-driven quality."
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "5. Identity & Conduct Controls (New Section — v3.1)",
+        "blocks": [
+          [
+            "banner",
+            "crit",
+            "New section. Required by the Service Cloud catalog. Step-up authentication and vulnerable-customer/consent handling now gate sensitive requests."
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Control",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "C1",
+                "Step-up authentication",
+                "CSR / Auth Service",
+                "OTP/biometric for sensitive changes",
+                "Real time"
+              ],
+              [
+                "C2",
+                "Vulnerability identification",
+                "Member Care / CSR",
+                "Vulnerability flags applied",
+                "Real time"
+              ],
+              [
+                "C3",
+                "Consent capture & logging",
+                "CSR",
+                "Consent recorded for account changes",
+                "Real time"
+              ]
+            ],
+            {
+              "0": "new",
+              "1": "new",
+              "2": "new"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "6. Process Steps",
+        "blocks": [
+          [
+            "h3",
+            "6.1 Receipt, Verification & 360 View"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "1",
+                "Inbound contact received (omni-channel)",
+                "CSR / ACD",
+                "Logged in CRM",
+                "Real time"
+              ],
+              [
+                "2",
+                "Identity verification with step-up",
+                "CSR / Auth Service",
+                "3-point + OTP/biometric",
+                "Real time"
+              ],
+              [
+                "3",
+                "Contact categorised with AI intent",
+                "CSR / AI",
+                "Intent classified; coded",
+                "Real time"
+              ],
+              [
+                "4",
+                "Unified 360 customer view retrieved",
+                "CSR / PAS / CRM",
+                "Single agent desktop",
+                "Real time"
+              ],
+              [
+                "5",
+                "Vulnerability check & consent capture",
+                "CSR / Member Care",
+                "Flags + consent",
+                "Real time"
+              ]
+            ],
+            {
+              "1": "enh",
+              "2": "enh",
+              "3": "new",
+              "4": "new"
+            }
+          ],
+          [
+            "h3",
+            "6.2 Request Handling & Assist"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "6",
+                "Self-service deflection (AI assistant)",
+                "Policyholder / AI",
+                "Routine requests deflected",
+                "Real time"
+              ],
+              [
+                "7",
+                "Standard enquiry resolved with agent-assist",
+                "CSR / AI",
+                "Knowledge + next-best-action",
+                "Real time"
+              ],
+              [
+                "8",
+                "Account update processed",
+                "CSR / Policy Service Rep",
+                "PAS update with consent",
+                "Real time"
+              ],
+              [
+                "9",
+                "Document request fulfilled",
+                "CSR / PAS",
+                "Regenerated within 24 hours",
+                "≤24 hours"
+              ],
+              [
+                "10",
+                "Payment received or arrangement set up",
+                "CSR",
+                "IVR/assisted; per SOP-INS-003",
+                "Real time"
+              ],
+              [
+                "11",
+                "Complex / sensitive escalated",
+                "CSR / Member Care",
+                "Sentiment-flagged; 2-hour callback",
+                "≤2 hours"
+              ]
+            ],
+            {
+              "0": "new",
+              "1": "enh",
+              "5": "enh"
+            }
+          ],
+          [
+            "h3",
+            "6.3 Closure & Quality Analytics"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "12",
+                "Resolution confirmed with policyholder",
+                "CSR",
+                "Summary of actions",
+                "Real time"
+              ],
+              [
+                "13",
+                "Contact closed and coded in CRM",
+                "CSR",
+                "Resolution code; AHT; CSAT prompt",
+                "Real time"
+              ],
+              [
+                "14",
+                "Quality via interaction analytics & CSAT",
+                "CRM / Quality",
+                "QA every contact; coaching",
+                "Post-contact"
+              ]
+            ],
+            {
+              "2": "new"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "7. Exception Handling",
+        "blocks": [
+          [
+            "h3",
+            "7.1 Failed Identity Verification (Enhanced — v3.1)"
+          ],
+          [
+            "banner",
+            "enh",
+            "Step-up authentication strengthens identity assurance; repeated failures still trigger a security flag."
+          ],
+          [
+            "numbered",
+            [
+              "After 2 failed attempts, the CSR terminates the contact and advises a call-back with correct information.",
+              "A third failure within 24 hours triggers a security flag and Team Leader notification.",
+              "No account information is provided to an unverified caller under any circumstances."
+            ]
+          ],
+          [
+            "h3",
+            "7.2 Formal Complaint Identified"
+          ],
+          [
+            "numbered_from",
+            4,
+            [
+              "Automated sentiment/complaint detection or agent recognition routes the contact to Member Care immediately.",
+              "Formal complaint logged in the Complaints Register within 30 minutes per SOP-COMP-001.",
+              "CSR must not attempt to resolve a formal complaint without Member Care or Supervisor involvement."
+            ]
+          ],
+          [
+            "h3",
+            "7.3 Suspected Fraud or Identity Theft"
+          ],
+          [
+            "numbered_from",
+            7,
+            [
+              "CSR transfers to Member Care and flags the policy as 'Security Hold' in PAS.",
+              "Fraud team notified within 1 hour; no account changes processed until fraud review is complete."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "8. Systems and Tools",
+        "blocks": [
+          [
+            "table",
+            [
+              "System",
+              "Purpose",
+              "Primary Users"
+            ],
+            [
+              [
+                "CRM (Salesforce Service Cloud)",
+                "Contact logging, case management, 360 view, analytics",
+                "All CSR roles"
+              ],
+              [
+                "Policy Administration System (PAS)",
+                "Policy record, account updates, documents",
+                "CSR, Policy Service Rep"
+              ],
+              [
+                "ACD / IVR (NICE CXone)",
+                "Routing, IVR payment, recording",
+                "CSR, Team Leader"
+              ],
+              [
+                "Authentication Service",
+                "OTP/biometric step-up authentication",
+                "CSR"
+              ],
+              [
+                "AI Assistant / Knowledge",
+                "Self-service deflection, agent-assist, next-best-action",
+                "Policyholders, CSR"
+              ],
+              [
+                "Interaction Analytics",
+                "Speech/interaction QA, sentiment detection",
+                "Team Leader, Quality"
+              ],
+              [
+                "Self-Service Portal",
+                "Policyholder self-service and document downloads",
+                "Policyholders"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "9. Key Controls and Audit Points",
+        "blocks": [
+          [
+            "banner",
+            "enh",
+            "Controls expanded in v3.1: step-up authentication, consent logging, AI assist, and interaction analytics."
+          ],
+          [
+            "bullets",
+            [
+              "Identity assurance: 3-point verification plus step-up for sensitive changes; no service without verification.",
+              "Consent: account changes captured against logged policyholder consent.",
+              "Vulnerability: vulnerable customers identified and handled with appropriate care.",
+              "AI assist: knowledge and next-best-action surfaced in-flow for consistency.",
+              "Deflection: routine contacts handled via self-service to reduce volume.",
+              "Quality: every interaction QA'd via analytics with automated coaching.",
+              "Immutable audit trail: identity, consent, change and escalation events logged."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "10. Key Performance Indicators",
+        "blocks": [
+          [
+            "table",
+            [
+              "KPI",
+              "v3.0 Target",
+              "v3.1 Target",
+              "Measurement"
+            ],
+            [
+              [
+                "First Contact Resolution",
+                "≥78%",
+                "≥84%",
+                "Resolved on first interaction"
+              ],
+              [
+                "Average Handle Time",
+                "<5 min",
+                "<4 min",
+                "Standard enquiries"
+              ],
+              [
+                "Self-service deflection",
+                "N/A (new)",
+                "≥25% of routine",
+                "Deflected vs total"
+              ],
+              [
+                "Step-up auth on sensitive changes",
+                "N/A (new)",
+                "100%",
+                "Step-up enforcement"
+              ],
+              [
+                "CSAT",
+                "≥4.2/5.0",
+                "≥4.4/5.0",
+                "Post-contact survey"
+              ],
+              [
+                "Quality coverage",
+                "Sample-based",
+                "100% via analytics",
+                "Interaction analytics QA"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "11. Document Control",
+        "blocks": [
+          [
+            "table",
+            [
+              "Version",
+              "Date",
+              "Author",
+              "Summary of Changes"
+            ],
+            [
+              [
+                "3.0",
+                "01 Jan 2025",
+                "L. Adebayo, CS Ops",
+                "Full rewrite aligned to Salesforce CRM migration; new FCR and AHT KPI baselines"
+              ],
+              [
+                "3.1",
+                "01 Oct 2026",
+                "L. Adebayo, CS Ops",
+                "OPTIMISED: step-up authentication; AI agent-assist & self-service deflection; vulnerable-customer & consent handling; unified 360 view; interaction analytics; catalog alignment 69% → 91%"
+              ]
+            ],
+            {}
+          ]
+        ]
+      }
+    ]
+  },
+  "swim_cover_tags": "Receipt · Verification · Handling · Closure · Exception handling",
+  "hierarchy_cover_sub": "Phase breakdown with service tracks, identity controls, and exception paths"
+}

@@ -1,0 +1,1907 @@
+{
+  "meta": {
+    "sop_id": "SOP-INS-010",
+    "slug": "Insurance_Sales_General",
+    "title": "Insurance Sales (General)",
+    "short_title": "General insurance sales",
+    "version": "1.3",
+    "owner": "Sales Operations",
+    "org": "Meridian Insurance Group",
+    "catalog": "Guidewire PolicyCenter — Conduct-Aligned Sales Best-Practice Catalog",
+    "catalog_short": "Guidewire PolicyCenter",
+    "new_version": "2.0",
+    "effective_date": "01 October 2026",
+    "supersedes": "v1.3 dated 01 February 2025",
+    "approved_by": "Chief Sales Officer",
+    "classification": "Internal Use Only"
+  },
+  "phases": [
+    {
+      "pid": "1",
+      "name": "Needs analysis & suitability",
+      "subtitle": "Contact, needs, suitability, PDS",
+      "circle": "blue",
+      "roles": "Agent / CSR · Member Care",
+      "step_range": "Steps 1–4",
+      "summary": "4 steps + 1 decision"
+    },
+    {
+      "pid": "2",
+      "name": "Application completion",
+      "subtitle": "Collect, submit, refer, confirm",
+      "circle": "green",
+      "roles": "Agent / CSR · PAS · Underwriting",
+      "step_range": "Steps 5–8",
+      "summary": "4 steps + 1 decision"
+    },
+    {
+      "pid": "3",
+      "name": "Issuance & post-sale",
+      "subtitle": "Pay, issue, QA, record",
+      "circle": "amber",
+      "roles": "Agent / CSR · Policy Service · Team Leader",
+      "step_range": "Steps 9–12",
+      "summary": "4 steps"
+    }
+  ],
+  "steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Client contact initiated (inbound or outbound)",
+      "responsible": "Agent / CSR",
+      "output": "Contact logged in CRM; prospect record created; channel and source code recorded",
+      "timeline": "Day 0",
+      "controls": "Pipeline entry",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Needs analysis conducted",
+      "responsible": "Agent / CSR",
+      "output": "Needs, financial situation, existing coverage and risk profile assessed via Needs Analysis Framework",
+      "timeline": "Day 0",
+      "controls": "Needs Analysis Framework",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Product suitability confirmed",
+      "responsible": "Agent / CSR",
+      "output": "Suitable product identified or client referred; suitability decision documented in CRM",
+      "timeline": "Day 0",
+      "controls": "Suitability decision",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Product Disclosure Statement (PDS) provided",
+      "responsible": "Agent / CSR",
+      "output": "PDS provided; receipt confirmed (verbal on call or digital acknowledgement)",
+      "timeline": "Day 0",
+      "controls": "PDS delivery control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "1",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Suitability gate",
+      "kind": "decision",
+      "decision": "Suitability clear?",
+      "branches": [
+        "Clear → proceed",
+        "Concern → escalate to Member Care (Sec 6.2)"
+      ]
+    },
+    {
+      "num": "5",
+      "phase": "2",
+      "activity": "Application details collected",
+      "responsible": "Agent / CSR",
+      "output": "All fields completed; material information confirmed and recorded verbatim in CRM",
+      "timeline": "Day 0–1",
+      "controls": "Material info capture",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "2",
+      "activity": "Application submitted in PAS / agent portal",
+      "responsible": "Agent / CSR",
+      "output": "Application ID generated; auto-accept or referral decision triggered",
+      "timeline": "Day 1",
+      "controls": "Auto-accept rules",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Underwriting referral handled (if applicable)",
+      "responsible": "Agent / Underwriting",
+      "output": "Client advised of referral; SLA communicated; agent follows up within timeframe",
+      "timeline": "≤2 days",
+      "controls": "Referral handling",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Terms and premium confirmed with client",
+      "responsible": "Agent / CSR",
+      "output": "Final premium, options, start date and coverage repeated back; confirmation obtained",
+      "timeline": "Day 1–2",
+      "controls": "Read-back confirmation",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "3",
+      "activity": "First premium payment collected",
+      "responsible": "Agent / CSR / Payment Gateway",
+      "output": "Payment processed; receipt provided; GIRO/direct debit set up if instalment",
+      "timeline": "Day 2",
+      "controls": "Payment & mandate",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "3",
+      "activity": "Policy issued and documents dispatched",
+      "responsible": "Policy Service Rep / PAS",
+      "output": "Policy number confirmed; documents dispatched per SOP-INS-004 timelines",
+      "timeline": "≤2 days",
+      "controls": "Issuance",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "3",
+      "activity": "Post-sale quality check",
+      "responsible": "Team Leader",
+      "output": "10% of interactions reviewed for conduct and suitability; coaching provided",
+      "timeline": "Post-sale",
+      "controls": "Quality assurance",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "CRM updated with policy outcome",
+      "responsible": "Agent / CSR",
+      "output": "Policy number, product, premium and payment recorded; annual review date set",
+      "timeline": "Day 2",
+      "controls": "Record & review date",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "authority": [
+    {
+      "band": "Standard sale (suitable)",
+      "first": "Agent / CSR",
+      "second": "—"
+    },
+    {
+      "band": "Suitability override",
+      "first": "Team Leader",
+      "second": "Client signed override"
+    },
+    {
+      "band": "Suitability doubt",
+      "first": "Member Care Rep",
+      "second": "Team Leader"
+    },
+    {
+      "band": "Backdated cover / substandard",
+      "first": "Team Leader",
+      "second": "Underwriting"
+    },
+    {
+      "band": "Vulnerable client",
+      "first": "Member Care Rep",
+      "second": "Compliance"
+    }
+  ],
+  "swim_phases": [
+    {
+      "pid": "1",
+      "name": "Needs analysis & suitability",
+      "subtitle": "Steps 1–4 · contact to PDS",
+      "lanes": [
+        "Client",
+        "Agent / CSR",
+        "Member Care"
+      ],
+      "nodes": [
+        {
+          "nid": "s1",
+          "lane": "Agent / CSR",
+          "col": 0,
+          "title": "Client contact initiated",
+          "sub": "logged in CRM",
+          "kind": "standard"
+        },
+        {
+          "nid": "s2",
+          "lane": "Agent / CSR",
+          "col": 1,
+          "title": "Needs analysis",
+          "sub": "Needs Analysis Framework",
+          "kind": "standard"
+        },
+        {
+          "nid": "s3",
+          "lane": "Agent / CSR",
+          "col": 2,
+          "title": "Confirm suitability",
+          "sub": "documented in CRM",
+          "kind": "standard"
+        },
+        {
+          "nid": "s4",
+          "lane": "Agent / CSR",
+          "col": 3,
+          "title": "Provide PDS",
+          "sub": "receipt confirmed",
+          "kind": "standard"
+        },
+        {
+          "nid": "s5",
+          "lane": "Member Care",
+          "col": 2,
+          "title": "Suitability concern → escalate",
+          "sub": "Sec 6.2",
+          "kind": "exception"
+        }
+      ],
+      "edges": [
+        {
+          "src": "s1",
+          "dst": "s2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s2",
+          "dst": "s3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s3",
+          "dst": "s4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s3",
+          "dst": "s5",
+          "label": "doubt",
+          "dashed": true,
+          "kind": "exception"
+        }
+      ],
+      "note": "Needs analysis and a documented suitability decision precede PDS delivery; suitability doubts escalate to Member Care."
+    },
+    {
+      "pid": "2",
+      "name": "Application completion",
+      "subtitle": "Steps 5–8 · collect to confirm",
+      "lanes": [
+        "Agent / CSR",
+        "PAS / Rules",
+        "Underwriting"
+      ],
+      "nodes": [
+        {
+          "nid": "a1",
+          "lane": "Agent / CSR",
+          "col": 0,
+          "title": "Collect application",
+          "sub": "material info verbatim",
+          "kind": "standard"
+        },
+        {
+          "nid": "a2",
+          "lane": "PAS / Rules",
+          "col": 1,
+          "title": "Submit in PAS",
+          "sub": "auto-accept / refer",
+          "kind": "decision"
+        },
+        {
+          "nid": "a3",
+          "lane": "Underwriting",
+          "col": 2,
+          "title": "Handle referral",
+          "sub": "SLA communicated",
+          "kind": "standard"
+        },
+        {
+          "nid": "a4",
+          "lane": "Agent / CSR",
+          "col": 3,
+          "title": "Confirm terms & premium",
+          "sub": "read-back",
+          "kind": "standard"
+        }
+      ],
+      "edges": [
+        {
+          "src": "a1",
+          "dst": "a2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a4",
+          "label": "auto",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a3",
+          "label": "ref",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a3",
+          "dst": "a4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Applications are captured with material information verbatim and either auto-accepted or referred before terms are confirmed by read-back."
+    },
+    {
+      "pid": "3",
+      "name": "Issuance & post-sale",
+      "subtitle": "Steps 9–12 · pay to record",
+      "lanes": [
+        "Agent / CSR",
+        "Policy Service / PAS",
+        "Team Leader"
+      ],
+      "nodes": [
+        {
+          "nid": "d1",
+          "lane": "Agent / CSR",
+          "col": 0,
+          "title": "Collect first payment",
+          "sub": "receipt / mandate",
+          "kind": "standard"
+        },
+        {
+          "nid": "d2",
+          "lane": "Policy Service / PAS",
+          "col": 1,
+          "title": "Issue & dispatch documents",
+          "sub": "policy number",
+          "kind": "standard"
+        },
+        {
+          "nid": "d3",
+          "lane": "Team Leader",
+          "col": 2,
+          "title": "Post-sale QA (10%)",
+          "sub": "conduct review",
+          "kind": "exception"
+        },
+        {
+          "nid": "d4",
+          "lane": "Agent / CSR",
+          "col": 3,
+          "title": "Update CRM",
+          "sub": "annual review date",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "d1",
+          "dst": "d2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d2",
+          "dst": "d4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d2",
+          "dst": "d3",
+          "label": "QA",
+          "dashed": true,
+          "kind": "exception"
+        }
+      ],
+      "note": "On payment the policy issues; a sample of interactions is quality-reviewed and the sale is recorded with a review date."
+    }
+  ],
+  "n_phases": 3,
+  "n_steps": 12,
+  "n_roles": 4,
+  "n_gateways": 2,
+  "fitgap": {
+    "overall_fit": 70,
+    "partial_pct": 20,
+    "fits": 7,
+    "gaps": 2,
+    "partials": 4,
+    "steps_analysed": 13,
+    "phases_count": 3,
+    "summary_line": "Overall alignment of SOP-INS-010 against the Guidewire PolicyCenter conduct-aligned sales catalog",
+    "metrics": [
+      [
+        "Steps analysed",
+        "13 steps across 3 phases"
+      ],
+      [
+        "Fits confirmed",
+        "7 steps aligned to catalog"
+      ],
+      [
+        "Gaps identified",
+        "2 steps — remediation required"
+      ],
+      [
+        "Partial fits",
+        "4 steps — enhancement recommended"
+      ],
+      [
+        "Highest risk area",
+        "No ready-to-sell enforcement"
+      ],
+      [
+        "Conduct gap",
+        "10% manual QA; no e-consent"
+      ],
+      [
+        "Ref standard",
+        "Guidewire PolicyCenter Conduct Catalog"
+      ]
+    ],
+    "phase_bars": [
+      {
+        "line1": "Phase 1",
+        "line2": "Suitability",
+        "value": 68,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 2",
+        "line2": "Application",
+        "value": 66,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 3",
+        "line2": "Post-sale",
+        "value": 74,
+        "colour": ""
+      },
+      {
+        "line1": "Conduct /",
+        "line2": "QA",
+        "value": 50,
+        "colour": ""
+      }
+    ],
+    "phase_cards": [
+      {
+        "label": "Phase 1",
+        "value": 68,
+        "sub": "Needs & suitability"
+      },
+      {
+        "label": "Phase 2",
+        "value": 66,
+        "sub": "Application"
+      },
+      {
+        "label": "Phase 3",
+        "value": 74,
+        "sub": "Issuance & post-sale"
+      },
+      {
+        "label": "Conduct",
+        "value": 50,
+        "sub": "QA & e-consent"
+      }
+    ],
+    "detail_slides": [
+      [
+        "Phase 1 — Needs analysis & suitability",
+        "Steps 1–5 vs Guidewire PolicyCenter conduct catalog",
+        [
+          "p1"
+        ]
+      ],
+      [
+        "Phase 2 — Application completion",
+        "Steps 6–10 vs Guidewire PolicyCenter conduct catalog",
+        [
+          "p2"
+        ]
+      ],
+      [
+        "Phase 3 — Issuance & post-sale",
+        "Steps 11–13 vs Guidewire PolicyCenter conduct catalog",
+        [
+          "p3"
+        ]
+      ]
+    ],
+    "items": [
+      {
+        "num": "1",
+        "name": "Needs analysis framework",
+        "status": "FIT",
+        "detail": "A structured Needs Analysis Framework with documented assessment aligns with PolicyCenter suitability intake.",
+        "owner": "Agent / CSR",
+        "ref": "GW-PC-SUI-01",
+        "group": "p1"
+      },
+      {
+        "num": "2",
+        "name": "Documented suitability decision",
+        "status": "FIT",
+        "detail": "Suitability decisions documented in CRM with referral where unsuitable align with conduct controls.",
+        "owner": "Agent / CSR",
+        "ref": "GW-PC-SUI-02",
+        "group": "p1"
+      },
+      {
+        "num": "3",
+        "name": "Agent ready-to-sell enforcement",
+        "status": "GAP",
+        "detail": "Licensing is a stated prerequisite but not enforced. The catalog blocks selling by representatives not currently licensed and appointed for the product (links to SOP-INS-005).",
+        "owner": "Agent / PAS",
+        "ref": "GW-PC-RTS-01",
+        "group": "p1"
+      },
+      {
+        "num": "4",
+        "name": "PDS delivery & e-consent",
+        "status": "PARTIAL",
+        "detail": "PDS is provided with verbal/portal acknowledgement, but the catalog mandates an auditable digital consent with a captured timestamp — verbal receipt is hard to evidence.",
+        "owner": "Agent / CSR",
+        "ref": "GW-PC-DIS-02",
+        "group": "p1"
+      },
+      {
+        "num": "5",
+        "name": "Vulnerable-customer detection",
+        "status": "PARTIAL",
+        "detail": "A vulnerable-customer protocol exists but relies on representative judgement; the catalog adds systematic vulnerability indicators and handling.",
+        "owner": "Member Care / Agent",
+        "ref": "GW-PC-VUL-01",
+        "group": "p1"
+      },
+      {
+        "num": "6",
+        "name": "Material information capture",
+        "status": "FIT",
+        "detail": "Verbatim capture of material information in CRM aligns with PolicyCenter disclosure-of-material-facts control.",
+        "owner": "Agent / CSR",
+        "ref": "GW-PC-SUB-02",
+        "group": "p2"
+      },
+      {
+        "num": "7",
+        "name": "Application submission & auto-accept",
+        "status": "PARTIAL",
+        "detail": "Rules-based auto-accept/referral present, but no predictive scoring to widen straight-through binding.",
+        "owner": "PAS / Rules",
+        "ref": "GW-PC-UW-02",
+        "group": "p2"
+      },
+      {
+        "num": "8",
+        "name": "KYC / sanctions screening",
+        "status": "GAP",
+        "detail": "No identity/sanctions screening before binding. PolicyCenter screens applicants as a regulatory control.",
+        "owner": "Underwriting / Compliance",
+        "ref": "GW-PC-UW-05",
+        "group": "p2"
+      },
+      {
+        "num": "9",
+        "name": "Referral handling & SLA",
+        "status": "FIT",
+        "detail": "Referral with client advisory and SLA communication aligns with PolicyCenter referral workflow.",
+        "owner": "Agent / Underwriting",
+        "ref": "GW-PC-UW-03",
+        "group": "p2"
+      },
+      {
+        "num": "10",
+        "name": "Read-back confirmation",
+        "status": "FIT",
+        "detail": "Repeating terms, premium and start date back to the client aligns with PolicyCenter conduct confirmation.",
+        "owner": "Agent / CSR",
+        "ref": "GW-PC-DIS-03",
+        "group": "p2"
+      },
+      {
+        "num": "11",
+        "name": "Payment, issuance & dispatch",
+        "status": "FIT",
+        "detail": "Payment with mandate setup and issuance per dispatch timelines align with PolicyCenter billing/issuance.",
+        "owner": "Agent / Policy Service",
+        "ref": "GW-PC-ISS-01",
+        "group": "p3"
+      },
+      {
+        "num": "12",
+        "name": "Post-sale conduct QA",
+        "status": "PARTIAL",
+        "detail": "Only 10% of interactions are manually reviewed. The catalog QA's conduct at scale with call/interaction analytics, not a small manual sample.",
+        "owner": "Team Leader",
+        "ref": "GW-PC-QA-01",
+        "group": "p3"
+      },
+      {
+        "num": "13",
+        "name": "Sale record & review date",
+        "status": "FIT",
+        "detail": "CRM sale record with an annual review date aligns with PolicyCenter post-sale management.",
+        "owner": "Agent / CSR",
+        "ref": "GW-PC-ISS-06",
+        "group": "p3"
+      }
+    ],
+    "groups": [
+      [
+        "p1",
+        "PHASE 1 — NEEDS ANALYSIS & SUITABILITY"
+      ],
+      [
+        "p2",
+        "PHASE 2 — APPLICATION COMPLETION"
+      ],
+      [
+        "p3",
+        "PHASE 3 — ISSUANCE & POST-SALE"
+      ]
+    ],
+    "critical_missing": [
+      {
+        "title": "Agent ready-to-sell enforcement",
+        "detail": "Licensing is a stated prerequisite but not enforced at point of sale. The catalog blocks selling by representatives not currently licensed and appointed (links to SOP-INS-005)."
+      },
+      {
+        "title": "KYC / sanctions screening",
+        "detail": "No identity/sanctions screening before binding, a regulatory control required by the catalog."
+      },
+      {
+        "title": "Auditable PDS e-consent & suitability e-signature",
+        "detail": "PDS receipt is verbal/portal and suitability is documented free-text; the catalog mandates an auditable digital consent and signed suitability record — a conduct and evidencing gap."
+      },
+      {
+        "title": "Conduct QA at scale & vulnerability detection",
+        "detail": "Only 10% of interactions are manually reviewed and vulnerability relies on judgement; the catalog QA's conduct at scale with analytics and systematic vulnerability indicators."
+      }
+    ],
+    "radar": [
+      [
+        "Suitability",
+        75
+      ],
+      [
+        "Ready-to-sell",
+        40
+      ],
+      [
+        "PDS / consent",
+        55
+      ],
+      [
+        "KYC / sanctions",
+        38
+      ],
+      [
+        "Application",
+        66
+      ],
+      [
+        "Conduct QA",
+        50
+      ],
+      [
+        "Post-sale",
+        76
+      ]
+    ],
+    "control_bars": [
+      {
+        "name": "Suitability assessment",
+        "value": 75,
+        "note": "Structured needs analysis and decision"
+      },
+      {
+        "name": "Ready-to-sell",
+        "value": 40,
+        "note": "Licensing not enforced at point of sale"
+      },
+      {
+        "name": "PDS / e-consent",
+        "value": 55,
+        "note": "Verbal/portal receipt; no auditable e-consent"
+      },
+      {
+        "name": "KYC / sanctions",
+        "value": 38,
+        "note": "No screening before binding"
+      },
+      {
+        "name": "Application & rules",
+        "value": 66,
+        "note": "Rules-based auto-accept; no model"
+      },
+      {
+        "name": "Conduct QA",
+        "value": 50,
+        "note": "10% manual sampling; no analytics QA"
+      },
+      {
+        "name": "Post-sale management",
+        "value": 76,
+        "note": "Sale record with annual review date"
+      }
+    ],
+    "remediations": [
+      {
+        "rank": 1,
+        "title": "Enforce agent ready-to-sell at point of sale",
+        "detail": "Block selling by representatives not currently licensed/appointed for the product, integrated with the licensing system (SOP-INS-005). Effort: 3 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 2,
+        "title": "Add KYC / sanctions screening",
+        "detail": "Screen identity and sanctions before binding; route hits to Compliance. Effort: 4 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 3,
+        "title": "Capture auditable PDS e-consent & suitability e-signature",
+        "detail": "Replace verbal PDS receipt with auditable digital consent and a signed suitability record. Effort: 3 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 4,
+        "title": "Move conduct QA to analytics at scale",
+        "detail": "QA conduct across all interactions with call/interaction analytics, replacing 10% sampling, and add systematic vulnerability indicators. Effort: 5 weeks.",
+        "priority": "Medium"
+      },
+      {
+        "rank": 5,
+        "title": "Add suitability decision support & predictive scoring",
+        "detail": "Provide next-best-product decision support and a predictive risk score to widen straight-through binding. Effort: 5 weeks.",
+        "priority": "Medium"
+      }
+    ],
+    "risk_impact": [
+      [
+        "Ready-to-sell",
+        85
+      ],
+      [
+        "KYC / sanctions",
+        78
+      ],
+      [
+        "PDS e-consent",
+        72
+      ],
+      [
+        "Conduct QA at scale",
+        65
+      ],
+      [
+        "Vulnerability detection",
+        58
+      ],
+      [
+        "Predictive scoring",
+        50
+      ]
+    ],
+    "projected_fit": 91
+  },
+  "opt_phases": [
+    {
+      "pid": "1",
+      "name": "Suitability, readiness & consent",
+      "subtitle": "Ready-to-sell, needs, e-consent",
+      "circle": "blue",
+      "roles": "Agent / CSR · Member Care · Licensing",
+      "step_range": "Steps 1–6",
+      "summary": "6 steps + 1 decision"
+    },
+    {
+      "pid": "2",
+      "name": "Application & screening",
+      "subtitle": "Capture, KYC, submit, confirm",
+      "circle": "green",
+      "roles": "Agent / CSR · PAS · Underwriting · Compliance",
+      "step_range": "Steps 7–10",
+      "summary": "4 steps + 1 decision"
+    },
+    {
+      "pid": "3",
+      "name": "Issuance & post-sale analytics",
+      "subtitle": "Pay, issue, QA analytics, record",
+      "circle": "amber",
+      "roles": "Agent / CSR · Policy Service · Quality",
+      "step_range": "Steps 11–14",
+      "summary": "4 steps"
+    }
+  ],
+  "opt_steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Client contact initiated",
+      "responsible": "Agent / CSR",
+      "output": "Logged in CRM; prospect record; source code",
+      "timeline": "Day 0",
+      "controls": "Standard",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Agent ready-to-sell check",
+      "responsible": "Licensing System / PAS",
+      "output": "Selling enabled only if licensed and appointed for the product",
+      "timeline": "Day 0",
+      "controls": "NEW (v2.0) — point-of-sale gate",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Needs analysis conducted",
+      "responsible": "Agent / CSR",
+      "output": "Needs, finances, coverage and risk via Needs Analysis Framework",
+      "timeline": "Day 0",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Suitability confirmed with decision support",
+      "responsible": "Agent / CSR",
+      "output": "Next-best-product decision support; suitability decision documented",
+      "timeline": "Day 0",
+      "controls": "ENHANCED (v2.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "5",
+      "phase": "1",
+      "activity": "Systematic vulnerability check",
+      "responsible": "Agent / Member Care",
+      "output": "Vulnerability indicators applied; handling per protocol",
+      "timeline": "Day 0",
+      "controls": "NEW (v2.0) — conduct control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "1",
+      "activity": "PDS provided with auditable e-consent",
+      "responsible": "Agent / CSR",
+      "output": "Digital consent captured with timestamp before application",
+      "timeline": "Day 0",
+      "controls": "ENHANCED (v2.0) — evidencing",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "1",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Suitability gate",
+      "kind": "decision",
+      "decision": "Suitability clear?",
+      "branches": [
+        "Clear → proceed",
+        "Concern → Member Care (Sec 6.2)"
+      ]
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Application details collected",
+      "responsible": "Agent / CSR",
+      "output": "Material information confirmed and recorded verbatim",
+      "timeline": "Day 0–1",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "KYC / sanctions screening",
+      "responsible": "Underwriting / Compliance",
+      "output": "Identity and sanctions screened before binding",
+      "timeline": "Instant",
+      "controls": "NEW (v2.0) — regulatory",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "2",
+      "activity": "Submit with predictive scoring; refer if needed",
+      "responsible": "PAS / Model Engine",
+      "output": "Rules plus predictive score widen straight-through binding; refer otherwise",
+      "timeline": "Instant",
+      "controls": "ENHANCED (v2.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "2",
+      "activity": "Terms and premium confirmed (read-back)",
+      "responsible": "Agent / CSR",
+      "output": "Final premium, options, start date repeated back; confirmation obtained",
+      "timeline": "Day 1–2",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "3",
+      "activity": "First premium payment collected",
+      "responsible": "Agent / CSR / Payment Gateway",
+      "output": "Payment processed; mandate set up if instalment",
+      "timeline": "Day 2",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Policy issued and documents dispatched",
+      "responsible": "Policy Service Rep / PAS",
+      "output": "Policy number; documents per SOP-INS-004 timelines",
+      "timeline": "≤2 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "13",
+      "phase": "3",
+      "activity": "Post-sale conduct QA via analytics",
+      "responsible": "Quality / Team Leader",
+      "output": "All interactions QA'd with call/interaction analytics; coaching automated",
+      "timeline": "Post-sale",
+      "controls": "ENHANCED (v2.0) — QA at scale",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "14",
+      "phase": "3",
+      "activity": "CRM updated with policy outcome",
+      "responsible": "Agent / CSR",
+      "output": "Policy, product, premium and payment recorded; annual review date set",
+      "timeline": "Day 2",
+      "controls": "Standard",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "opt_swim_phases": [
+    {
+      "pid": "1",
+      "name": "Suitability, readiness & consent",
+      "subtitle": "Steps 1–6 · v2.0 adds RTS & e-consent",
+      "lanes": [
+        "Client",
+        "Agent / CSR",
+        "Licensing / Member Care"
+      ],
+      "nodes": [
+        {
+          "nid": "o1",
+          "lane": "Agent / CSR",
+          "col": 0,
+          "title": "Client contact initiated",
+          "sub": "logged in CRM",
+          "kind": "standard"
+        },
+        {
+          "nid": "o2",
+          "lane": "Licensing / Member Care",
+          "col": 1,
+          "title": "Ready-to-sell check",
+          "sub": "licensed & appointed",
+          "kind": "new"
+        },
+        {
+          "nid": "o3",
+          "lane": "Agent / CSR",
+          "col": 2,
+          "title": "Needs analysis",
+          "sub": "framework",
+          "kind": "standard"
+        },
+        {
+          "nid": "o4",
+          "lane": "Agent / CSR",
+          "col": 3,
+          "title": "Suitability + decision support",
+          "sub": "next-best-product",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "o5",
+          "lane": "Licensing / Member Care",
+          "col": 3,
+          "title": "Vulnerability check",
+          "sub": "indicators",
+          "kind": "new"
+        },
+        {
+          "nid": "o6",
+          "lane": "Agent / CSR",
+          "col": 4,
+          "title": "PDS with e-consent",
+          "sub": "timestamped",
+          "kind": "enhanced"
+        }
+      ],
+      "edges": [
+        {
+          "src": "o1",
+          "dst": "o2",
+          "label": "RTS",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "o2",
+          "dst": "o3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o3",
+          "dst": "o4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o4",
+          "dst": "o5",
+          "label": "",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "o5",
+          "dst": "o6",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "v2.0 enforces a ready-to-sell gate, adds suitability decision support and systematic vulnerability checks, and captures auditable PDS e-consent."
+    },
+    {
+      "pid": "2",
+      "name": "Application & screening",
+      "subtitle": "Steps 7–10 · KYC and predictive scoring",
+      "lanes": [
+        "Agent / CSR",
+        "PAS / Model",
+        "Underwriting / Compliance"
+      ],
+      "nodes": [
+        {
+          "nid": "p1",
+          "lane": "Agent / CSR",
+          "col": 0,
+          "title": "Collect application",
+          "sub": "material info verbatim",
+          "kind": "standard"
+        },
+        {
+          "nid": "p2",
+          "lane": "Underwriting / Compliance",
+          "col": 1,
+          "title": "KYC / sanctions screening",
+          "sub": "before bind",
+          "kind": "new"
+        },
+        {
+          "nid": "p3",
+          "lane": "PAS / Model",
+          "col": 1,
+          "title": "Submit + predictive score",
+          "sub": "auto-accept / refer",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "p4",
+          "lane": "Underwriting / Compliance",
+          "col": 2,
+          "title": "Handle referral",
+          "sub": "SLA",
+          "kind": "standard"
+        },
+        {
+          "nid": "p5",
+          "lane": "Agent / CSR",
+          "col": 2,
+          "title": "Confirm terms & premium",
+          "sub": "read-back",
+          "kind": "standard"
+        }
+      ],
+      "edges": [
+        {
+          "src": "p1",
+          "dst": "p2",
+          "label": "",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "p2",
+          "dst": "p3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p3",
+          "dst": "p5",
+          "label": "auto",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p3",
+          "dst": "p4",
+          "label": "ref",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p4",
+          "dst": "p5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "v2.0 screens applications for KYC/sanctions and scores risk predictively before terms are confirmed by read-back."
+    },
+    {
+      "pid": "3",
+      "name": "Issuance & post-sale analytics",
+      "subtitle": "Steps 11–14 · v2.0 QA at scale",
+      "lanes": [
+        "Agent / CSR",
+        "Policy Service / PAS",
+        "Quality"
+      ],
+      "nodes": [
+        {
+          "nid": "q1",
+          "lane": "Agent / CSR",
+          "col": 0,
+          "title": "Collect first payment",
+          "sub": "receipt / mandate",
+          "kind": "standard"
+        },
+        {
+          "nid": "q2",
+          "lane": "Policy Service / PAS",
+          "col": 1,
+          "title": "Issue & dispatch documents",
+          "sub": "policy number",
+          "kind": "standard"
+        },
+        {
+          "nid": "q3",
+          "lane": "Quality",
+          "col": 2,
+          "title": "Conduct QA via analytics",
+          "sub": "all interactions",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "q4",
+          "lane": "Agent / CSR",
+          "col": 3,
+          "title": "Update CRM",
+          "sub": "annual review date",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "q1",
+          "dst": "q2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q2",
+          "dst": "q4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q2",
+          "dst": "q3",
+          "label": "QA",
+          "dashed": true,
+          "kind": "standard"
+        }
+      ],
+      "note": "v2.0 QA's conduct across all interactions with analytics rather than a 10% manual sample."
+    }
+  ],
+  "opt_n_phases": 3,
+  "opt_n_steps": 14,
+  "opt_n_gateways": 2,
+  "opt_fit": 91,
+  "optimised_doc": {
+    "subtitle": "Optimised per Fit-Gap Analysis against the Guidewire PolicyCenter Conduct-Aligned Sales Catalog",
+    "sections": [
+      {
+        "title": "",
+        "blocks": [
+          [
+            "meta",
+            [
+              [
+                "Document Reference",
+                "SOP-INS-010"
+              ],
+              [
+                "Version",
+                "2.0 (Optimised)"
+              ],
+              [
+                "Effective Date",
+                "01 October 2026"
+              ],
+              [
+                "Supersedes",
+                "v1.3 dated 01 February 2025"
+              ],
+              [
+                "Owner",
+                "Sales Operations"
+              ],
+              [
+                "Approved By",
+                "Chief Sales Officer"
+              ],
+              [
+                "Optimisation Reference",
+                "Fit-Gap Report FG-INS-010 dated 18 June 2026"
+              ],
+              [
+                "Catalog Alignment Score",
+                "91% (up from 70% in v1.3)"
+              ],
+              [
+                "Classification",
+                "Internal Use Only"
+              ]
+            ]
+          ],
+          [
+            "summary",
+            "OPTIMISATION SUMMARY — What changed in v2.0",
+            [
+              "This version incorporates 5 remediation actions from Fit-Gap Report FG-INS-010. Alignment to the Guidewire PolicyCenter conduct-aligned sales catalog increased from 70% to 91%. Critical additions: agent ready-to-sell enforcement, KYC/sanctions screening, auditable PDS e-consent with a signed suitability record, conduct QA at scale via analytics, and systematic vulnerability detection."
+            ],
+            [
+              "NEW STEP (green) — step added to close a gap vs the PolicyCenter catalog",
+              "ENHANCED (amber) — existing step updated with additional controls or automation"
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "1. Purpose",
+        "blocks": [
+          [
+            "para",
+            "This Standard Operating Procedure defines the channel-agnostic process for signing up a new client across all product lines through the agent or call centre channel. Version 2.0 incorporates optimisations from fit-gap analysis against the Guidewire PolicyCenter Conduct-Aligned Sales Best-Practice Catalog, achieving 91% alignment (up from 70% in v1.3)."
+          ]
+        ]
+      },
+      {
+        "title": "2. Scope",
+        "blocks": [
+          [
+            "para",
+            "This procedure applies to all new policy sales by a licensed agent or call centre representative across personal and commercial product lines where a product-specific SOP does not supersede it, for telephone and face-to-face interactions."
+          ],
+          [
+            "banner",
+            "new",
+            "Scope extended: ready-to-sell enforcement, KYC/sanctions screening and PDS e-consent now apply to every sale before binding."
+          ],
+          [
+            "para",
+            "This procedure does NOT cover digital direct sales (SOP-INS-001), group enrolments (SOP-INS-006), or renewals (SOP-INS-004)."
+          ]
+        ]
+      },
+      {
+        "title": "3. Authority Matrix",
+        "blocks": [
+          [
+            "table",
+            [
+              "Item",
+              "First Authority",
+              "Second Authority"
+            ],
+            [
+              [
+                "Standard sale (suitable)",
+                "Agent / CSR",
+                "—"
+              ],
+              [
+                "Suitability override",
+                "Team Leader",
+                "Client signed override"
+              ],
+              [
+                "Suitability doubt",
+                "Member Care Rep",
+                "Team Leader"
+              ],
+              [
+                "Backdated cover / substandard",
+                "Team Leader",
+                "Underwriting"
+              ],
+              [
+                "Vulnerable client",
+                "Member Care Rep",
+                "Compliance"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "4. Roles and Responsibilities",
+        "blocks": [
+          [
+            "table",
+            [
+              "Role",
+              "Responsibilities"
+            ],
+            [
+              [
+                "Customer Service Representative / Agent",
+                "Runs needs/suitability; discloses terms with e-consent; completes application; confirms understanding."
+              ],
+              [
+                "Member Care Representative",
+                "Second-level support; reviews suitability concerns; owns vulnerable-customer handling."
+              ],
+              [
+                "Policy Service Representative",
+                "Processes applications in PAS; issues documents; sets up premium with Finance."
+              ],
+              [
+                "Team Leader / Sales Supervisor",
+                "Approves exceptions; owns analytics-driven post-sale quality."
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "5. Conduct & Screening Controls (New Section — v2.0)",
+        "blocks": [
+          [
+            "banner",
+            "crit",
+            "New section. Required by the PolicyCenter catalog. Ready-to-sell, KYC/sanctions and PDS e-consent now gate every sale."
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Control",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "C1",
+                "Agent ready-to-sell check",
+                "Licensing / PAS",
+                "Selling blocked if not licensed/appointed",
+                "At sale start"
+              ],
+              [
+                "C2",
+                "KYC / sanctions screening",
+                "Compliance",
+                "Identity and watchlist screened before bind",
+                "Pre-bind"
+              ],
+              [
+                "C3",
+                "PDS e-consent & suitability e-signature",
+                "Agent / Client",
+                "Auditable consent and signed suitability",
+                "Pre-application"
+              ]
+            ],
+            {
+              "0": "new",
+              "1": "new",
+              "2": "new"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "6. Process Steps",
+        "blocks": [
+          [
+            "h3",
+            "6.1 Suitability, Readiness & Consent"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "1",
+                "Client contact initiated",
+                "Agent / CSR",
+                "Logged in CRM; source code",
+                "Day 0"
+              ],
+              [
+                "2",
+                "Agent ready-to-sell check",
+                "Licensing / PAS",
+                "Selling enabled if eligible",
+                "Day 0"
+              ],
+              [
+                "3",
+                "Needs analysis conducted",
+                "Agent / CSR",
+                "Needs Analysis Framework",
+                "Day 0"
+              ],
+              [
+                "4",
+                "Suitability confirmed with decision support",
+                "Agent / CSR",
+                "Next-best-product; documented",
+                "Day 0"
+              ],
+              [
+                "5",
+                "Systematic vulnerability check",
+                "Agent / Member Care",
+                "Indicators applied; protocol",
+                "Day 0"
+              ],
+              [
+                "6",
+                "PDS provided with auditable e-consent",
+                "Agent / CSR",
+                "Timestamped digital consent",
+                "Day 0"
+              ]
+            ],
+            {
+              "1": "new",
+              "3": "enh",
+              "4": "new",
+              "5": "enh"
+            }
+          ],
+          [
+            "h3",
+            "6.2 Application & Screening"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "7",
+                "Application details collected",
+                "Agent / CSR",
+                "Material info verbatim",
+                "Day 0–1"
+              ],
+              [
+                "8",
+                "KYC / sanctions screening",
+                "Compliance",
+                "Screened before bind",
+                "Instant"
+              ],
+              [
+                "9",
+                "Submit with predictive scoring",
+                "PAS / Model Engine",
+                "STP binding widened; refer otherwise",
+                "Instant"
+              ],
+              [
+                "10",
+                "Terms and premium confirmed (read-back)",
+                "Agent / CSR",
+                "Confirmation obtained",
+                "Day 1–2"
+              ]
+            ],
+            {
+              "1": "new",
+              "2": "enh"
+            }
+          ],
+          [
+            "h3",
+            "6.3 Issuance & Post-Sale Analytics"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "11",
+                "First premium payment collected",
+                "Agent / CSR / Gateway",
+                "Receipt; mandate if instalment",
+                "Day 2"
+              ],
+              [
+                "12",
+                "Policy issued and documents dispatched",
+                "Policy Service / PAS",
+                "Per SOP-INS-004 timelines",
+                "≤2 days"
+              ],
+              [
+                "13",
+                "Post-sale conduct QA via analytics",
+                "Quality / Team Leader",
+                "All interactions QA'd; coaching",
+                "Post-sale"
+              ],
+              [
+                "14",
+                "CRM updated with policy outcome",
+                "Agent / CSR",
+                "Annual review date set",
+                "Day 2"
+              ]
+            ],
+            {
+              "2": "enh"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "7. Exception Handling",
+        "blocks": [
+          [
+            "h3",
+            "7.1 Client Declines Recommended Product"
+          ],
+          [
+            "numbered",
+            [
+              "Agent records the declination and stated reason in CRM.",
+              "If the client proceeds against recommendation, a suitability override form is completed and e-signed by the client.",
+              "All overrides are reviewed by a Team Leader within 24 hours."
+            ]
+          ],
+          [
+            "h3",
+            "7.2 Suitability Concern Identified"
+          ],
+          [
+            "numbered_from",
+            4,
+            [
+              "If suitability is uncertain, the interaction is paused and escalated to Member Care or a Team Leader.",
+              "No product is sold where a material suitability doubt exists without second-level approval."
+            ]
+          ],
+          [
+            "h3",
+            "7.3 Vulnerable or Financially Distressed Client (Enhanced — v2.0)"
+          ],
+          [
+            "banner",
+            "enh",
+            "Systematic vulnerability indicators now support representative judgement in identifying at-risk clients."
+          ],
+          [
+            "numbered_from",
+            6,
+            [
+              "Vulnerable-customer protocols apply; the representative does not proceed if the product may not be in the client's best interest.",
+              "The client is referred to financial counselling or government assistance where appropriate."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "8. Systems and Tools",
+        "blocks": [
+          [
+            "table",
+            [
+              "System",
+              "Purpose",
+              "Primary Users"
+            ],
+            [
+              [
+                "CRM (Salesforce)",
+                "Contact, needs analysis, suitability and post-sale records",
+                "All roles"
+              ],
+              [
+                "Policy Administration System (PAS)",
+                "Application processing, issuance, ready-to-sell gate",
+                "CSR, Policy Service Rep"
+              ],
+              [
+                "Agent Portal (Meridian Connect)",
+                "Quotation, application and payment for the agent channel",
+                "Agent"
+              ],
+              [
+                "KYC / Sanctions Tool",
+                "Identity and sanctions screening",
+                "Compliance"
+              ],
+              [
+                "E-Consent / E-Signature",
+                "PDS consent and suitability sign-off",
+                "Agent, Client"
+              ],
+              [
+                "Call Recording & Interaction Analytics (NICE)",
+                "Conduct QA at scale and coaching",
+                "Quality, Team Leader"
+              ],
+              [
+                "Payment Gateway",
+                "Premium collection at point of sale",
+                "Agent, CSR"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "9. Key Controls and Audit Points",
+        "blocks": [
+          [
+            "banner",
+            "enh",
+            "Controls expanded in v2.0: ready-to-sell enforcement, KYC/sanctions, PDS e-consent, analytics-based conduct QA and vulnerability detection."
+          ],
+          [
+            "bullets",
+            [
+              "Ready-to-sell gate: no selling by an unlicensed or unappointed representative.",
+              "KYC/sanctions: identity and watchlists screened before binding.",
+              "Evidenced consent: PDS e-consent and signed suitability record captured before application.",
+              "Vulnerability: systematic indicators support fair treatment of at-risk clients.",
+              "Conduct QA: all interactions reviewed via analytics, replacing 10% sampling.",
+              "Suitability: documented decision with override governance.",
+              "Immutable audit trail: needs, consent, screening, sale and QA events logged."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "10. Key Performance Indicators",
+        "blocks": [
+          [
+            "table",
+            [
+              "KPI",
+              "v1.3 Target",
+              "v2.0 Target",
+              "Measurement"
+            ],
+            [
+              [
+                "Suitability compliance",
+                "100%",
+                "100%",
+                "Needs analysis + suitability on record"
+              ],
+              [
+                "Ready-to-sell breaches",
+                "N/A (new)",
+                "Zero (blocked)",
+                "Gate enforcement"
+              ],
+              [
+                "PDS e-consent capture",
+                "Verbal/portal",
+                "100% auditable",
+                "E-consent records"
+              ],
+              [
+                "Conduct QA coverage",
+                "10% sample",
+                "100% via analytics",
+                "Interactions QA'd"
+              ],
+              [
+                "Post-sale quality score",
+                "≥85%",
+                "≥90%",
+                "Conduct standards met"
+              ],
+              [
+                "Vulnerable-customer complaints",
+                "Zero upheld",
+                "Zero upheld",
+                "Complaints register"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "11. Document Control",
+        "blocks": [
+          [
+            "table",
+            [
+              "Version",
+              "Date",
+              "Author",
+              "Summary of Changes"
+            ],
+            [
+              [
+                "1.3",
+                "01 Feb 2025",
+                "M. Reyes, Compliance",
+                "Updated PDS delivery requirements; aligned KPIs to Salesforce reporting"
+              ],
+              [
+                "2.0",
+                "01 Oct 2026",
+                "M. Reyes, Compliance",
+                "OPTIMISED: ready-to-sell enforcement; KYC/sanctions screening; PDS e-consent & suitability e-signature; analytics-based conduct QA; vulnerability detection; catalog alignment 70% → 91%"
+              ]
+            ],
+            {}
+          ]
+        ]
+      }
+    ]
+  },
+  "swim_cover_tags": "Suitability · Application · Issuance · Post-sale · Exception handling",
+  "hierarchy_cover_sub": "Phase breakdown with sales-conduct tracks, suitability authority, and exception paths"
+}

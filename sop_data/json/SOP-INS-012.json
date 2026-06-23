@@ -1,0 +1,2333 @@
+{
+  "meta": {
+    "sop_id": "SOP-INS-012",
+    "slug": "Property_Casualty_Claims",
+    "title": "Property and Casualty Claims",
+    "short_title": "P&C claims",
+    "version": "3.1",
+    "owner": "P&C Claims — Claims Operations",
+    "org": "Meridian Insurance Group",
+    "catalog": "Guidewire ClaimCenter — Property & Casualty Best-Practice Catalog",
+    "catalog_short": "Guidewire ClaimCenter",
+    "new_version": "4.0",
+    "effective_date": "01 October 2026",
+    "supersedes": "v3.1 dated 15 January 2025",
+    "approved_by": "Chief Claims Officer",
+    "classification": "Internal Use Only — Claims Restricted"
+  },
+  "phases": [
+    {
+      "pid": "1",
+      "name": "FNOL & registration",
+      "subtitle": "Notice, coverage, triage, reserve",
+      "circle": "blue",
+      "roles": "Claimant · Processor · PAS",
+      "step_range": "Steps 1–4",
+      "summary": "4 steps + 1 decision"
+    },
+    {
+      "pid": "2",
+      "name": "Appraisal",
+      "subtitle": "Assign, inspect, report, screen",
+      "circle": "green",
+      "roles": "Processor · Adjuster · Assessor · SIU",
+      "step_range": "Steps 5–8",
+      "summary": "4 steps"
+    },
+    {
+      "pid": "3",
+      "name": "Adjustment & settlement",
+      "subtitle": "Calculate, approve, pay, close",
+      "circle": "amber",
+      "roles": "Adjuster · Claims Manager · Finance",
+      "step_range": "Steps 9–13",
+      "summary": "5 steps + 1 decision"
+    },
+    {
+      "pid": "4",
+      "name": "Subrogation & salvage",
+      "subtitle": "Identify, recover, salvage",
+      "circle": "gold",
+      "roles": "Adjuster · Recovery Analyst · Legal",
+      "step_range": "Steps 14–16",
+      "summary": "3 steps"
+    }
+  ],
+  "steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "FNOL received via phone, portal, app, or mail",
+      "responsible": "Claims Processor / System",
+      "output": "Claim ID assigned; loss date/time, circumstances and contact details recorded",
+      "timeline": "T+0",
+      "controls": "Multi-channel FNOL",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Policy coverage verification",
+      "responsible": "Claims Processor / PAS",
+      "output": "Policy active at loss date; peril covered; deductible and sum insured confirmed; prior claims noted",
+      "timeline": "T+0",
+      "controls": "Coverage check",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Initial loss triage and priority assignment",
+      "responsible": "Claims Processor",
+      "output": "Standard / Urgent (fast-track) / Major (Manager) / Fraud Flag (SIU)",
+      "timeline": "T+0",
+      "controls": "Triage routing",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Claim registered with reserve and acknowledgement",
+      "responsible": "Claims Processor",
+      "output": "Full record created; reserve estimate set; acknowledgement within 1 business day",
+      "timeline": "T+1 day",
+      "controls": "Reserve at registration",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "1",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Triage routing",
+      "kind": "decision",
+      "decision": "Loss category?",
+      "branches": [
+        "Standard / Urgent → adjuster queue",
+        "Major → Claims Manager",
+        "Fraud flag → SIU (Sec 6.2)"
+      ]
+    },
+    {
+      "num": "5",
+      "phase": "2",
+      "activity": "Claim assigned to adjuster",
+      "responsible": "Claims Processor / System",
+      "output": "Assignment by type, complexity and workload; adjuster contacts claimant within 2 days",
+      "timeline": "T+1–2 days",
+      "controls": "Assignment SLA",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "2",
+      "activity": "On-site inspection or desktop assessment",
+      "responsible": "Adjuster / External Assessor",
+      "output": "Inspection within 5 days (standard) / 48h (urgent); digital photos for minor losses",
+      "timeline": "≤5 days",
+      "controls": "Inspection SLA",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Damage or liability report prepared",
+      "responsible": "Adjuster / Assessor",
+      "output": "Scope of damage; repair estimate or liability assessment; photos attached",
+      "timeline": "T+3–7 days",
+      "controls": "Loss documentation",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Fraud screening completed",
+      "responsible": "Claims System / SIU",
+      "output": "Automated fraud score; flagged claims suspended and transferred to SIU within 1 day",
+      "timeline": "Parallel",
+      "controls": "Fraud control",
+      "kind": "control",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "3",
+      "activity": "Settlement amount calculated",
+      "responsible": "Adjuster",
+      "output": "Loss less deductible; ACV/RCV per policy basis; co-insurance check for property",
+      "timeline": "T+7–10 days",
+      "controls": "Loss settlement basis",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "3",
+      "activity": "Settlement approved within authority",
+      "responsible": "Adjuster / Claims Manager",
+      "output": "Adjuster ≤SGD 50k; Manager 50–250k; CCO >250k",
+      "timeline": "T+8–10 days",
+      "controls": "Authority matrix",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "3",
+      "activity": "Settlement offer communicated to claimant",
+      "responsible": "Adjuster",
+      "output": "Written itemised offer; claimant given 10 business days to accept or dispute",
+      "timeline": "T+10 days",
+      "controls": "Offer & dispute window",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Claimant accepts; payment processed",
+      "responsible": "Adjuster / Finance",
+      "output": "Bank transfer or cheque within 5 business days; remittance advice issued",
+      "timeline": "T+15 days",
+      "controls": "Payment SLA",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "13",
+      "phase": "3",
+      "activity": "Claim closed and reserves released",
+      "responsible": "Claims Processor / Finance",
+      "output": "Status 'Settled'; reserve adjusted to final paid amount; GL updated in SAP",
+      "timeline": "T+15 days",
+      "controls": "Reserve true-up",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "14",
+      "phase": "4",
+      "activity": "Subrogation opportunity identified",
+      "responsible": "Adjuster / Recovery Analyst",
+      "output": "Third-party liability established; recovery potential assessed; assignment of rights obtained",
+      "timeline": "Post-settlement",
+      "controls": "Recovery identification",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "15",
+      "phase": "4",
+      "activity": "Subrogation recovery pursued",
+      "responsible": "Recovery Analyst / Legal",
+      "output": "Demand letter to at-fault party/insurer; timeline tracked; Legal for contested recoveries",
+      "timeline": "Ongoing",
+      "controls": "Recovery pursuit",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "16",
+      "phase": "4",
+      "activity": "Salvage sold",
+      "responsible": "Recovery Analyst",
+      "output": "Total-loss vehicles and salvageable property sold via approved agent; proceeds reduce loss cost",
+      "timeline": "Ongoing",
+      "controls": "Salvage recovery",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "authority": [
+    {
+      "band": "Settlement up to SGD 50,000",
+      "first": "Claims Adjuster",
+      "second": "—"
+    },
+    {
+      "band": "SGD 50,001–250,000",
+      "first": "Claims Manager",
+      "second": "Adjuster recommendation"
+    },
+    {
+      "band": "Above SGD 250,000",
+      "first": "Chief Claims Officer",
+      "second": "Claims Manager"
+    },
+    {
+      "band": "Reserve > SGD 100,000",
+      "first": "Claims Manager",
+      "second": "Adjuster"
+    },
+    {
+      "band": "Litigation referral",
+      "first": "Claims Manager",
+      "second": "Legal"
+    },
+    {
+      "band": "Catastrophe / reinsurance loss",
+      "first": "Chief Claims Officer",
+      "second": "Reinsurance (SOP-RE-001)"
+    }
+  ],
+  "swim_phases": [
+    {
+      "pid": "1",
+      "name": "FNOL & registration",
+      "subtitle": "Steps 1–4 · notice to reserve",
+      "lanes": [
+        "Claimant",
+        "Claims Processor",
+        "PAS / System"
+      ],
+      "nodes": [
+        {
+          "nid": "s1",
+          "lane": "Claimant",
+          "col": 0,
+          "title": "Submit FNOL",
+          "sub": "phone · portal · app",
+          "kind": "standard"
+        },
+        {
+          "nid": "s2",
+          "lane": "Claims Processor",
+          "col": 1,
+          "title": "Register & assign Claim ID",
+          "sub": "loss details",
+          "kind": "standard"
+        },
+        {
+          "nid": "s3",
+          "lane": "Claims Processor",
+          "col": 2,
+          "title": "Coverage verification",
+          "sub": "via PAS",
+          "kind": "standard"
+        },
+        {
+          "nid": "s4",
+          "lane": "Claims Processor",
+          "col": 3,
+          "title": "Loss triage & priority",
+          "sub": "standard / major / fraud",
+          "kind": "decision"
+        },
+        {
+          "nid": "s5",
+          "lane": "PAS / System",
+          "col": 4,
+          "title": "Register + reserve + ack",
+          "sub": "≤1 day",
+          "kind": "standard"
+        },
+        {
+          "nid": "s6",
+          "lane": "PAS / System",
+          "col": 3,
+          "title": "Fraud flag → SIU",
+          "sub": "Sec 6.2",
+          "kind": "exception"
+        }
+      ],
+      "edges": [
+        {
+          "src": "s1",
+          "dst": "s2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "s2",
+          "dst": "s3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s3",
+          "dst": "s4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s4",
+          "dst": "s5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s4",
+          "dst": "s6",
+          "label": "fraud",
+          "dashed": true,
+          "kind": "exception"
+        }
+      ],
+      "note": "Multi-channel FNOL is registered with coverage verified and a reserve set at registration; fraud-flagged claims route to SIU."
+    },
+    {
+      "pid": "2",
+      "name": "Appraisal",
+      "subtitle": "Steps 5–8 · assign, inspect, report",
+      "lanes": [
+        "Claims Processor",
+        "Adjuster",
+        "Assessor / SIU"
+      ],
+      "nodes": [
+        {
+          "nid": "a1",
+          "lane": "Claims Processor",
+          "col": 0,
+          "title": "Assign to adjuster",
+          "sub": "by type & workload",
+          "kind": "standard"
+        },
+        {
+          "nid": "a2",
+          "lane": "Adjuster",
+          "col": 1,
+          "title": "Inspection / assessment",
+          "sub": "≤5 days / 48h urgent",
+          "kind": "standard"
+        },
+        {
+          "nid": "a3",
+          "lane": "Assessor / SIU",
+          "col": 2,
+          "title": "External on-site assessment",
+          "sub": "major losses",
+          "kind": "standard"
+        },
+        {
+          "nid": "a4",
+          "lane": "Adjuster",
+          "col": 3,
+          "title": "Damage / liability report",
+          "sub": "scope + estimate",
+          "kind": "standard"
+        },
+        {
+          "nid": "a5",
+          "lane": "Assessor / SIU",
+          "col": 1,
+          "title": "Fraud screening",
+          "sub": "auto-score · SIU",
+          "kind": "standard"
+        }
+      ],
+      "edges": [
+        {
+          "src": "a1",
+          "dst": "a2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a3",
+          "label": "major",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a3",
+          "dst": "a4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a1",
+          "dst": "a5",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "a5",
+          "dst": "a4",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        }
+      ],
+      "note": "Claims are assigned and inspected (on-site or desktop) with external assessors for major losses; all claims are fraud-screened in parallel."
+    },
+    {
+      "pid": "3",
+      "name": "Adjustment & settlement",
+      "subtitle": "Steps 9–13 · calculate to close",
+      "lanes": [
+        "Adjuster",
+        "Claims Manager",
+        "Finance"
+      ],
+      "nodes": [
+        {
+          "nid": "d1",
+          "lane": "Adjuster",
+          "col": 0,
+          "title": "Calculate settlement",
+          "sub": "ACV / RCV · deductible",
+          "kind": "standard"
+        },
+        {
+          "nid": "d2",
+          "lane": "Claims Manager",
+          "col": 1,
+          "title": "Approve within authority",
+          "sub": "matrix",
+          "kind": "decision"
+        },
+        {
+          "nid": "d3",
+          "lane": "Adjuster",
+          "col": 2,
+          "title": "Communicate offer",
+          "sub": "10-day window",
+          "kind": "standard"
+        },
+        {
+          "nid": "d4",
+          "lane": "Finance",
+          "col": 3,
+          "title": "Process payment",
+          "sub": "≤5 days",
+          "kind": "standard"
+        },
+        {
+          "nid": "d5",
+          "lane": "Finance",
+          "col": 4,
+          "title": "Close & release reserves",
+          "sub": "GL updated",
+          "kind": "terminal"
+        },
+        {
+          "nid": "d6",
+          "lane": "Claims Manager",
+          "col": 2,
+          "title": "Dispute → review",
+          "sub": "Sec 6.1",
+          "kind": "exception"
+        }
+      ],
+      "edges": [
+        {
+          "src": "d1",
+          "dst": "d2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d2",
+          "dst": "d3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d3",
+          "dst": "d4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d4",
+          "dst": "d5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d3",
+          "dst": "d6",
+          "label": "dispute",
+          "dashed": true,
+          "kind": "exception"
+        }
+      ],
+      "note": "Settlements are calculated, approved per authority and paid within five days of acceptance; disputes route to the Claims Manager."
+    },
+    {
+      "pid": "4",
+      "name": "Subrogation & salvage",
+      "subtitle": "Steps 14–16 · recover loss cost",
+      "lanes": [
+        "Adjuster",
+        "Recovery Analyst",
+        "Legal"
+      ],
+      "nodes": [
+        {
+          "nid": "e1",
+          "lane": "Adjuster",
+          "col": 0,
+          "title": "Identify subrogation",
+          "sub": "assignment of rights",
+          "kind": "standard"
+        },
+        {
+          "nid": "e2",
+          "lane": "Recovery Analyst",
+          "col": 1,
+          "title": "Pursue recovery",
+          "sub": "demand letter",
+          "kind": "standard"
+        },
+        {
+          "nid": "e3",
+          "lane": "Legal",
+          "col": 2,
+          "title": "Contested recovery",
+          "sub": "litigation",
+          "kind": "standard"
+        },
+        {
+          "nid": "e4",
+          "lane": "Recovery Analyst",
+          "col": 3,
+          "title": "Sell salvage",
+          "sub": "reduces loss cost",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "e1",
+          "dst": "e2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "e2",
+          "dst": "e3",
+          "label": "contested",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "e2",
+          "dst": "e4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Third-party recoveries and salvage sales reduce ultimate loss cost; contested recoveries are escalated to Legal."
+    }
+  ],
+  "n_phases": 4,
+  "n_steps": 16,
+  "n_roles": 6,
+  "n_gateways": 3,
+  "fitgap": {
+    "overall_fit": 74,
+    "partial_pct": 14,
+    "fits": 12,
+    "gaps": 2,
+    "partials": 2,
+    "steps_analysed": 16,
+    "phases_count": 4,
+    "summary_line": "Overall alignment of SOP-INS-012 against the Guidewire ClaimCenter P&C catalog",
+    "metrics": [
+      [
+        "Steps analysed",
+        "16 steps across 4 phases"
+      ],
+      [
+        "Fits confirmed",
+        "12 steps aligned to catalog"
+      ],
+      [
+        "Gaps identified",
+        "2 steps — remediation required"
+      ],
+      [
+        "Partial fits",
+        "2 steps — enhancement recommended"
+      ],
+      [
+        "Highest risk area",
+        "No AI estimation / touchless STP"
+      ],
+      [
+        "Indemnity gap",
+        "No managed-repair network"
+      ],
+      [
+        "Ref standard",
+        "Guidewire ClaimCenter P&C Catalog"
+      ]
+    ],
+    "phase_bars": [
+      {
+        "line1": "Phase 1",
+        "line2": "FNOL",
+        "value": 88,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 2",
+        "line2": "Appraisal",
+        "value": 68,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 3",
+        "line2": "Settlement",
+        "value": 70,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 4",
+        "line2": "Recovery",
+        "value": 82,
+        "colour": ""
+      }
+    ],
+    "phase_cards": [
+      {
+        "label": "Phase 1",
+        "value": 88,
+        "sub": "FNOL & registration"
+      },
+      {
+        "label": "Phase 2",
+        "value": 68,
+        "sub": "Appraisal"
+      },
+      {
+        "label": "Phase 3",
+        "value": 70,
+        "sub": "Adjustment & settlement"
+      },
+      {
+        "label": "Phase 4",
+        "value": 82,
+        "sub": "Subrogation & salvage"
+      }
+    ],
+    "detail_slides": [
+      [
+        "Phase 1 — FNOL & registration",
+        "Steps 1–4 vs Guidewire ClaimCenter P&C catalog",
+        [
+          "p1"
+        ]
+      ],
+      [
+        "Phase 2 — Appraisal",
+        "Steps 5–8 vs Guidewire ClaimCenter P&C catalog",
+        [
+          "p2"
+        ]
+      ],
+      [
+        "Phase 3 — Adjustment & settlement",
+        "Steps 9–14 vs Guidewire ClaimCenter P&C catalog",
+        [
+          "p3"
+        ]
+      ],
+      [
+        "Phase 4 — Subrogation & salvage",
+        "Steps 15–16 vs Guidewire ClaimCenter P&C catalog",
+        [
+          "p4"
+        ]
+      ]
+    ],
+    "items": [
+      {
+        "num": "1",
+        "name": "Multi-channel FNOL",
+        "status": "FIT",
+        "detail": "Phone, portal, app and mail FNOL with Claim ID aligns with ClaimCenter FNOL intake.",
+        "owner": "Claims Processor",
+        "ref": "GW-CC-FNOL-01",
+        "group": "p1"
+      },
+      {
+        "num": "2",
+        "name": "Coverage verification",
+        "status": "FIT",
+        "detail": "Policy-active, peril, deductible and sum-insured verification via PAS aligns with ClaimCenter coverage check.",
+        "owner": "Claims Processor / PAS",
+        "ref": "GW-CC-FNOL-03",
+        "group": "p1"
+      },
+      {
+        "num": "3",
+        "name": "Loss triage & priority",
+        "status": "FIT",
+        "detail": "Standard/urgent/major/fraud triage aligns with ClaimCenter segmentation and routing.",
+        "owner": "Claims Processor",
+        "ref": "GW-CC-SEG-01",
+        "group": "p1"
+      },
+      {
+        "num": "4",
+        "name": "Reserve at registration",
+        "status": "FIT",
+        "detail": "Initial reserve set when the claim is registered aligns with ClaimCenter reserving discipline.",
+        "owner": "Claims Processor",
+        "ref": "GW-CC-FIN-01",
+        "group": "p1"
+      },
+      {
+        "num": "5",
+        "name": "Adjuster assignment",
+        "status": "FIT",
+        "detail": "Assignment by type, complexity and workload with a 2-day contact SLA aligns with ClaimCenter assignment.",
+        "owner": "Claims Processor",
+        "ref": "GW-CC-ASG-01",
+        "group": "p2"
+      },
+      {
+        "num": "6",
+        "name": "AI photo-based damage estimation",
+        "status": "GAP",
+        "detail": "Digital photos are accepted but estimates are manual. ClaimCenter integrates AI photo-based estimation for fast, consistent repair costing on motor and property.",
+        "owner": "Adjuster / System",
+        "ref": "GW-CC-EST-02",
+        "group": "p2"
+      },
+      {
+        "num": "7",
+        "name": "Inspection & loss documentation",
+        "status": "FIT",
+        "detail": "Inspection SLAs with scoped damage reports and attached evidence align with ClaimCenter assessment.",
+        "owner": "Adjuster / Assessor",
+        "ref": "GW-CC-ASS-01",
+        "group": "p2"
+      },
+      {
+        "num": "8",
+        "name": "Fraud screening & analytics",
+        "status": "PARTIAL",
+        "detail": "Automated fraud scoring and SIU referral are present, but without network/link analytics across claims and parties recommended by the catalog.",
+        "owner": "Claims System / SIU",
+        "ref": "GW-CC-SIU-01",
+        "group": "p2"
+      },
+      {
+        "num": "9",
+        "name": "Settlement calculation",
+        "status": "FIT",
+        "detail": "ACV/RCV with deductible and co-insurance checks aligns with ClaimCenter settlement evaluation.",
+        "owner": "Adjuster",
+        "ref": "GW-CC-STL-01",
+        "group": "p3"
+      },
+      {
+        "num": "10",
+        "name": "Authority & approval",
+        "status": "FIT",
+        "detail": "Tiered settlement authority (adjuster/manager/CCO) aligns with ClaimCenter authority management.",
+        "owner": "Adjuster / Claims Manager",
+        "ref": "GW-CC-AUT-01",
+        "group": "p3"
+      },
+      {
+        "num": "11",
+        "name": "Touchless / STP settlement",
+        "status": "GAP",
+        "detail": "Even simple, low-value claims follow the full adjuster path. ClaimCenter offers straight-through, self-service settlement for clear minor claims, cutting cycle time and cost.",
+        "owner": "Claims System",
+        "ref": "GW-CC-STP-01",
+        "group": "p3"
+      },
+      {
+        "num": "12",
+        "name": "Managed-repair vendor network",
+        "status": "PARTIAL",
+        "detail": "Repairs are authorised ad hoc; there is no preferred/managed-repair network with direct-repair and guarantees as the catalog recommends, raising indemnity cost.",
+        "owner": "Adjuster",
+        "ref": "GW-CC-VEN-01",
+        "group": "p3"
+      },
+      {
+        "num": "13",
+        "name": "Predictive reserving & analytics",
+        "status": "PARTIAL",
+        "detail": "Reserves are set on adjuster judgement with a variance KPI. ClaimCenter uses predictive reserving and large-loss/litigation propensity analytics for accuracy and early escalation.",
+        "owner": "Adjuster / Claims Manager",
+        "ref": "GW-CC-ANL-01",
+        "group": "p3"
+      },
+      {
+        "num": "14",
+        "name": "Payment & closure",
+        "status": "FIT",
+        "detail": "Payment within 5 days, closure and reserve release with GL update align with ClaimCenter financials.",
+        "owner": "Adjuster / Finance",
+        "ref": "GW-CC-FIN-03",
+        "group": "p3"
+      },
+      {
+        "num": "15",
+        "name": "Subrogation & recovery",
+        "status": "FIT",
+        "detail": "Subrogation identification, demand and Legal handling align with ClaimCenter recovery management.",
+        "owner": "Recovery Analyst / Legal",
+        "ref": "GW-CC-REC-01",
+        "group": "p4"
+      },
+      {
+        "num": "16",
+        "name": "Salvage management",
+        "status": "FIT",
+        "detail": "Salvage sale via approved agents with proceeds reducing loss cost aligns with ClaimCenter salvage.",
+        "owner": "Recovery Analyst",
+        "ref": "GW-CC-SAL-01",
+        "group": "p4"
+      }
+    ],
+    "groups": [
+      [
+        "p1",
+        "PHASE 1 — FNOL & REGISTRATION"
+      ],
+      [
+        "p2",
+        "PHASE 2 — APPRAISAL"
+      ],
+      [
+        "p3",
+        "PHASE 3 — ADJUSTMENT & SETTLEMENT"
+      ],
+      [
+        "p4",
+        "PHASE 4 — SUBROGATION & SALVAGE"
+      ]
+    ],
+    "critical_missing": [
+      {
+        "title": "AI photo-based damage estimation",
+        "detail": "Digital photos are accepted but estimates are manual. The catalog integrates AI photo-based estimating for fast, consistent repair costing and lower leakage on motor and property."
+      },
+      {
+        "title": "Touchless / straight-through settlement",
+        "detail": "Simple, low-value claims still follow the full adjuster path. The catalog provides straight-through, self-service settlement for clear minor claims, cutting cycle time and cost."
+      },
+      {
+        "title": "Managed-repair vendor network",
+        "detail": "Repairs are authorised ad hoc with no preferred/managed-repair network, direct-repair or guarantees, raising indemnity cost and lengthening cycle time."
+      },
+      {
+        "title": "Predictive reserving & loss analytics",
+        "detail": "Reserves rely on adjuster judgement; the catalog uses predictive reserving and large-loss/litigation propensity analytics for accuracy and early escalation."
+      }
+    ],
+    "radar": [
+      [
+        "FNOL",
+        90
+      ],
+      [
+        "Coverage",
+        85
+      ],
+      [
+        "Estimation",
+        50
+      ],
+      [
+        "Fraud / SIU",
+        68
+      ],
+      [
+        "Settlement",
+        72
+      ],
+      [
+        "Managed repair",
+        45
+      ],
+      [
+        "Recovery",
+        84
+      ]
+    ],
+    "control_bars": [
+      {
+        "name": "FNOL & registration",
+        "value": 88,
+        "note": "Multi-channel FNOL with reserve at registration"
+      },
+      {
+        "name": "Coverage verification",
+        "value": 85,
+        "note": "Active-policy, peril and deductible checks"
+      },
+      {
+        "name": "Damage estimation",
+        "value": 50,
+        "note": "Manual estimating; no AI photo estimation"
+      },
+      {
+        "name": "Fraud & SIU",
+        "value": 68,
+        "note": "Scoring and SIU; no network/link analytics"
+      },
+      {
+        "name": "Touchless settlement",
+        "value": 45,
+        "note": "Full adjuster path even for minor claims"
+      },
+      {
+        "name": "Managed repair",
+        "value": 45,
+        "note": "Ad-hoc repair authorisation; no network"
+      },
+      {
+        "name": "Recovery & salvage",
+        "value": 84,
+        "note": "Subrogation and salvage well established"
+      }
+    ],
+    "remediations": [
+      {
+        "rank": 1,
+        "title": "Integrate AI photo-based damage estimation",
+        "detail": "Add AI estimating on motor and property photos for fast, consistent repair costing and reduced leakage. Effort: 6 weeks (vendor integration).",
+        "priority": "High"
+      },
+      {
+        "rank": 2,
+        "title": "Enable touchless / STP settlement for minor claims",
+        "detail": "Auto-adjudicate clear, low-value claims with self-service settlement, routing only exceptions to adjusters. Effort: 6 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 3,
+        "title": "Stand up a managed-repair vendor network",
+        "detail": "Establish a preferred/managed-repair network with direct-repair, agreed rates and guarantees to control indemnity and cycle time. Effort: 8 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 4,
+        "title": "Add predictive reserving & loss analytics",
+        "detail": "Introduce predictive reserving and large-loss/litigation propensity analytics for accurate reserves and early escalation. Effort: 5 weeks.",
+        "priority": "Medium"
+      },
+      {
+        "rank": 5,
+        "title": "Add claimant self-service tracking & SIU analytics",
+        "detail": "Provide a claimant status-tracking portal and extend fraud screening with network/link analytics. Effort: 5 weeks.",
+        "priority": "Medium"
+      }
+    ],
+    "risk_impact": [
+      [
+        "AI estimation",
+        80
+      ],
+      [
+        "Touchless settlement",
+        78
+      ],
+      [
+        "Managed repair",
+        75
+      ],
+      [
+        "Predictive reserving",
+        65
+      ],
+      [
+        "SIU analytics",
+        55
+      ],
+      [
+        "Self-service tracking",
+        50
+      ]
+    ],
+    "projected_fit": 93
+  },
+  "opt_phases": [
+    {
+      "pid": "1",
+      "name": "FNOL, triage & reserving",
+      "subtitle": "Notice, coverage, triage, reserve",
+      "circle": "blue",
+      "roles": "Claimant · Processor · PAS",
+      "step_range": "Steps 1–4",
+      "summary": "4 steps + 1 decision"
+    },
+    {
+      "pid": "2",
+      "name": "Appraisal & estimation",
+      "subtitle": "Assign, AI estimate, inspect, screen",
+      "circle": "green",
+      "roles": "Processor · Adjuster · Assessor · SIU",
+      "step_range": "Steps 5–9",
+      "summary": "5 steps"
+    },
+    {
+      "pid": "3",
+      "name": "Settlement & repair",
+      "subtitle": "STP, managed repair, approve, pay",
+      "circle": "amber",
+      "roles": "Adjuster · Claims Manager · Finance",
+      "step_range": "Steps 10–14",
+      "summary": "5 steps + 1 decision"
+    },
+    {
+      "pid": "4",
+      "name": "Subrogation & salvage",
+      "subtitle": "Identify, recover, salvage",
+      "circle": "gold",
+      "roles": "Adjuster · Recovery Analyst · Legal",
+      "step_range": "Steps 15–17",
+      "summary": "3 steps"
+    }
+  ],
+  "opt_steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "FNOL received (multi-channel)",
+      "responsible": "Claims Processor / System",
+      "output": "Claim ID; loss details and contact captured",
+      "timeline": "T+0",
+      "controls": "Standard",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Policy coverage verification",
+      "responsible": "Claims Processor / PAS",
+      "output": "Active policy, peril, deductible and sum insured confirmed",
+      "timeline": "T+0",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Loss triage with predictive segmentation",
+      "responsible": "Claims Processor / Model",
+      "output": "Triage augmented by large-loss/litigation propensity scoring",
+      "timeline": "T+0",
+      "controls": "ENHANCED (v4.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Register with predictive reserve & acknowledgement",
+      "responsible": "Claims Processor / Model",
+      "output": "Predictive reserve set; acknowledgement within 1 business day",
+      "timeline": "T+1 day",
+      "controls": "ENHANCED (v4.0) — reserve accuracy",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "1",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Triage routing",
+      "kind": "decision",
+      "decision": "Loss category?",
+      "branches": [
+        "Minor & clear → touchless settlement",
+        "Standard/major → adjuster",
+        "Fraud → SIU"
+      ]
+    },
+    {
+      "num": "5",
+      "phase": "2",
+      "activity": "Claim assigned (or routed to STP)",
+      "responsible": "Claims Processor / System",
+      "output": "Clear minor claims routed to straight-through settlement; others assigned to adjuster",
+      "timeline": "T+1–2 days",
+      "controls": "ENHANCED (v4.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "2",
+      "activity": "AI photo-based damage estimation",
+      "responsible": "Adjuster / AI Estimator",
+      "output": "AI estimate from claimant/assessor photos for motor and property",
+      "timeline": "T+1–3 days",
+      "controls": "NEW (v4.0) — fast, consistent costing",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Inspection or desktop assessment",
+      "responsible": "Adjuster / External Assessor",
+      "output": "On-site for major losses; AI/desktop for minor; SLAs unchanged",
+      "timeline": "≤5 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Damage / liability report prepared",
+      "responsible": "Adjuster / Assessor",
+      "output": "Scope, estimate and evidence attached to the claim file",
+      "timeline": "T+3–7 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "2",
+      "activity": "Fraud screening with network analytics",
+      "responsible": "Claims System / SIU",
+      "output": "Fraud scoring plus network/link analytics across claims and parties",
+      "timeline": "Parallel",
+      "controls": "ENHANCED (v4.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "3",
+      "activity": "Touchless settlement for clear minor claims",
+      "responsible": "Claims System",
+      "output": "Straight-through self-service settlement for clear, low-value claims",
+      "timeline": "Same day",
+      "controls": "NEW (v4.0) — cycle-time reduction",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "3",
+      "activity": "Managed-repair authorisation (network)",
+      "responsible": "Adjuster / Repair Network",
+      "output": "Repairs directed to a managed network at agreed rates with guarantees",
+      "timeline": "T+5–8 days",
+      "controls": "NEW (v4.0) — indemnity control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Settlement approved within authority",
+      "responsible": "Adjuster / Claims Manager",
+      "output": "Adjuster ≤SGD 50k; Manager 50–250k; CCO >250k",
+      "timeline": "T+8–10 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "13",
+      "phase": "3",
+      "activity": "Offer communicated and accepted; payment",
+      "responsible": "Adjuster / Finance",
+      "output": "Itemised offer; payment within 5 business days of acceptance",
+      "timeline": "T+15 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "14",
+      "phase": "3",
+      "activity": "Claim closed and reserves released",
+      "responsible": "Claims Processor / Finance",
+      "output": "Status 'Settled'; reserve trued-up; GL updated",
+      "timeline": "T+15 days",
+      "controls": "Standard",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "15",
+      "phase": "4",
+      "activity": "Subrogation identified (analytics-assisted)",
+      "responsible": "Adjuster / Recovery Analyst",
+      "output": "Recovery opportunities surfaced by analytics; assignment of rights obtained",
+      "timeline": "Post-settlement",
+      "controls": "ENHANCED (v4.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "16",
+      "phase": "4",
+      "activity": "Subrogation recovery pursued",
+      "responsible": "Recovery Analyst / Legal",
+      "output": "Demand to at-fault party/insurer; Legal for contested recoveries",
+      "timeline": "Ongoing",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "17",
+      "phase": "4",
+      "activity": "Salvage sold",
+      "responsible": "Recovery Analyst",
+      "output": "Salvage sold via approved agents; proceeds reduce loss cost",
+      "timeline": "Ongoing",
+      "controls": "Standard",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "opt_swim_phases": [
+    {
+      "pid": "1",
+      "name": "FNOL, triage & reserving",
+      "subtitle": "Steps 1–4 · v4.0 adds predictive reserving",
+      "lanes": [
+        "Claimant",
+        "Claims Processor",
+        "PAS / Model"
+      ],
+      "nodes": [
+        {
+          "nid": "o1",
+          "lane": "Claimant",
+          "col": 0,
+          "title": "Submit FNOL",
+          "sub": "phone · portal · app",
+          "kind": "standard"
+        },
+        {
+          "nid": "o2",
+          "lane": "Claims Processor",
+          "col": 1,
+          "title": "Register & assign Claim ID",
+          "sub": "loss details",
+          "kind": "standard"
+        },
+        {
+          "nid": "o3",
+          "lane": "Claims Processor",
+          "col": 2,
+          "title": "Coverage verification",
+          "sub": "via PAS",
+          "kind": "standard"
+        },
+        {
+          "nid": "o4",
+          "lane": "PAS / Model",
+          "col": 3,
+          "title": "Predictive triage",
+          "sub": "propensity score",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "o5",
+          "lane": "PAS / Model",
+          "col": 4,
+          "title": "Predictive reserve + ack",
+          "sub": "≤1 day",
+          "kind": "enhanced"
+        }
+      ],
+      "edges": [
+        {
+          "src": "o1",
+          "dst": "o2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "o2",
+          "dst": "o3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o3",
+          "dst": "o4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o4",
+          "dst": "o5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "v4.0 augments triage and reserving with predictive analytics for accuracy and early escalation."
+    },
+    {
+      "pid": "2",
+      "name": "Appraisal & estimation",
+      "subtitle": "Steps 5–9 · v4.0 adds AI estimation",
+      "lanes": [
+        "Claims Processor",
+        "Adjuster / AI",
+        "Assessor / SIU"
+      ],
+      "nodes": [
+        {
+          "nid": "p1",
+          "lane": "Claims Processor",
+          "col": 0,
+          "title": "Assign or route to STP",
+          "sub": "minor → STP",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "p2",
+          "lane": "Adjuster / AI",
+          "col": 1,
+          "title": "AI photo-based estimation",
+          "sub": "motor · property",
+          "kind": "new"
+        },
+        {
+          "nid": "p3",
+          "lane": "Assessor / SIU",
+          "col": 2,
+          "title": "Inspection (major losses)",
+          "sub": "on-site",
+          "kind": "standard"
+        },
+        {
+          "nid": "p4",
+          "lane": "Adjuster / AI",
+          "col": 3,
+          "title": "Damage / liability report",
+          "sub": "scope + estimate",
+          "kind": "standard"
+        },
+        {
+          "nid": "p5",
+          "lane": "Assessor / SIU",
+          "col": 1,
+          "title": "Fraud + network analytics",
+          "sub": "link analysis",
+          "kind": "enhanced"
+        }
+      ],
+      "edges": [
+        {
+          "src": "p1",
+          "dst": "p2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p2",
+          "dst": "p3",
+          "label": "major",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p3",
+          "dst": "p4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p2",
+          "dst": "p4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p1",
+          "dst": "p5",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        }
+      ],
+      "note": "v4.0 adds AI photo-based estimation for fast costing and extends fraud screening with network/link analytics."
+    },
+    {
+      "pid": "3",
+      "name": "Settlement & repair",
+      "subtitle": "Steps 10–14 · v4.0 adds STP & managed repair",
+      "lanes": [
+        "Adjuster",
+        "Claims Manager / Network",
+        "Finance"
+      ],
+      "nodes": [
+        {
+          "nid": "q1",
+          "lane": "Claims Manager / Network",
+          "col": 0,
+          "title": "Touchless settlement (minor)",
+          "sub": "self-service",
+          "kind": "new"
+        },
+        {
+          "nid": "q2",
+          "lane": "Adjuster",
+          "col": 0,
+          "title": "Calculate settlement",
+          "sub": "ACV / RCV",
+          "kind": "standard"
+        },
+        {
+          "nid": "q3",
+          "lane": "Claims Manager / Network",
+          "col": 1,
+          "title": "Managed-repair authorisation",
+          "sub": "agreed rates",
+          "kind": "new"
+        },
+        {
+          "nid": "q4",
+          "lane": "Claims Manager / Network",
+          "col": 2,
+          "title": "Approve within authority",
+          "sub": "matrix",
+          "kind": "decision"
+        },
+        {
+          "nid": "q5",
+          "lane": "Finance",
+          "col": 3,
+          "title": "Pay & close; release reserves",
+          "sub": "≤5 days",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "q2",
+          "dst": "q3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q3",
+          "dst": "q4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q4",
+          "dst": "q5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q1",
+          "dst": "q5",
+          "label": "STP",
+          "dashed": true,
+          "kind": "new"
+        }
+      ],
+      "note": "v4.0 settles clear minor claims straight-through and directs repairs to a managed network at agreed rates."
+    },
+    {
+      "pid": "4",
+      "name": "Subrogation & salvage",
+      "subtitle": "Steps 15–17 · analytics-assisted recovery",
+      "lanes": [
+        "Adjuster",
+        "Recovery Analyst",
+        "Legal"
+      ],
+      "nodes": [
+        {
+          "nid": "r1",
+          "lane": "Adjuster",
+          "col": 0,
+          "title": "Identify subrogation (analytics)",
+          "sub": "opportunities surfaced",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "r2",
+          "lane": "Recovery Analyst",
+          "col": 1,
+          "title": "Pursue recovery",
+          "sub": "demand letter",
+          "kind": "standard"
+        },
+        {
+          "nid": "r3",
+          "lane": "Legal",
+          "col": 2,
+          "title": "Contested recovery",
+          "sub": "litigation",
+          "kind": "standard"
+        },
+        {
+          "nid": "r4",
+          "lane": "Recovery Analyst",
+          "col": 3,
+          "title": "Sell salvage",
+          "sub": "reduces loss cost",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "r1",
+          "dst": "r2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "r2",
+          "dst": "r3",
+          "label": "contested",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "r2",
+          "dst": "r4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "v4.0 surfaces subrogation opportunities through analytics; recovery and salvage continue to reduce loss cost."
+    }
+  ],
+  "opt_n_phases": 4,
+  "opt_n_steps": 17,
+  "opt_n_gateways": 3,
+  "opt_fit": 93,
+  "optimised_doc": {
+    "subtitle": "Optimised per Fit-Gap Analysis against the Guidewire ClaimCenter P&C Catalog",
+    "sections": [
+      {
+        "title": "",
+        "blocks": [
+          [
+            "meta",
+            [
+              [
+                "Document Reference",
+                "SOP-INS-012"
+              ],
+              [
+                "Version",
+                "4.0 (Optimised)"
+              ],
+              [
+                "Effective Date",
+                "01 October 2026"
+              ],
+              [
+                "Supersedes",
+                "v3.1 dated 15 January 2025"
+              ],
+              [
+                "Owner",
+                "P&C Claims — Claims Operations"
+              ],
+              [
+                "Approved By",
+                "Chief Claims Officer"
+              ],
+              [
+                "Optimisation Reference",
+                "Fit-Gap Report FG-INS-012 dated 18 June 2026"
+              ],
+              [
+                "Catalog Alignment Score",
+                "93% (up from 74% in v3.1)"
+              ],
+              [
+                "Classification",
+                "Internal Use Only — Claims Restricted"
+              ]
+            ]
+          ],
+          [
+            "summary",
+            "OPTIMISATION SUMMARY — What changed in v4.0",
+            [
+              "This version incorporates 5 remediation actions from Fit-Gap Report FG-INS-012. Alignment to the Guidewire ClaimCenter P&C catalog increased from 74% to 93%. Critical additions: AI photo-based damage estimation, touchless/straight-through settlement for minor claims, a managed-repair vendor network, predictive reserving and loss analytics, and SIU network analytics."
+            ],
+            [
+              "NEW STEP (green) — step added to close a gap vs the ClaimCenter catalog",
+              "ENHANCED (amber) — existing step updated with additional automation or controls"
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "1. Purpose",
+        "blocks": [
+          [
+            "para",
+            "This Standard Operating Procedure defines the end-to-end process for receiving, triaging, appraising, adjusting and settling property and casualty claims, including subrogation and salvage. Version 4.0 incorporates optimisations from fit-gap analysis against the Guidewire ClaimCenter P&C Best-Practice Catalog, achieving 93% alignment (up from 74% in v3.1)."
+          ]
+        ]
+      },
+      {
+        "title": "2. Scope",
+        "blocks": [
+          [
+            "para",
+            "This procedure applies to all personal and commercial property damage claims, casualty and third-party liability claims, FNOL across channels, and subrogation and salvage recovery."
+          ],
+          [
+            "banner",
+            "new",
+            "Scope extended: AI estimation, touchless settlement and managed-repair now apply to eligible motor and property claims."
+          ],
+          [
+            "para",
+            "This procedure does NOT cover medical claims (SOP-INS-011), life claims (SOP-INS-013), or reinsurance claim notifications (SOP-RE-001)."
+          ]
+        ]
+      },
+      {
+        "title": "3. Settlement Authority Matrix",
+        "blocks": [
+          [
+            "table",
+            [
+              "Settlement / Action",
+              "First Authority",
+              "Second Authority"
+            ],
+            [
+              [
+                "Settlement up to SGD 50,000",
+                "Claims Adjuster",
+                "—"
+              ],
+              [
+                "SGD 50,001–250,000",
+                "Claims Manager",
+                "Adjuster recommendation"
+              ],
+              [
+                "Above SGD 250,000",
+                "Chief Claims Officer",
+                "Claims Manager"
+              ],
+              [
+                "Reserve > SGD 100,000",
+                "Claims Manager",
+                "Adjuster"
+              ],
+              [
+                "Litigation referral",
+                "Claims Manager",
+                "Legal"
+              ],
+              [
+                "Catastrophe / reinsurance loss",
+                "Chief Claims Officer",
+                "Reinsurance (SOP-RE-001)"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "4. Roles and Responsibilities",
+        "blocks": [
+          [
+            "table",
+            [
+              "Role",
+              "Responsibilities"
+            ],
+            [
+              [
+                "Claims Processor",
+                "Registers FNOL; verifies coverage; triages; assigns; closes the file."
+              ],
+              [
+                "Claims Adjuster",
+                "Assesses damage/liability; uses AI estimation; directs managed repair; settles within authority; identifies subrogation."
+              ],
+              [
+                "Claims Manager",
+                "Approves above adjuster authority; oversees predictive reserving; manages litigation referrals."
+              ],
+              [
+                "External Assessor",
+                "On-site assessment for major losses; independent estimates."
+              ],
+              [
+                "Fraud & SIU",
+                "Investigates flagged claims; runs network/link analytics; recommends action."
+              ],
+              [
+                "Recovery Analyst",
+                "Pursues subrogation (analytics-assisted) and salvage recovery."
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "5. Estimation, Settlement & Repair Controls (New Section — v4.0)",
+        "blocks": [
+          [
+            "banner",
+            "crit",
+            "New section. Required by the ClaimCenter catalog. AI estimation, touchless settlement and managed-repair now govern eligible motor and property claims."
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Control",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "A1",
+                "AI photo-based damage estimation",
+                "Adjuster / AI",
+                "Consistent estimate from photos",
+                "T+1–3 days"
+              ],
+              [
+                "A2",
+                "Touchless / STP settlement",
+                "Claims System",
+                "Self-service settlement for clear minor claims",
+                "Same day"
+              ],
+              [
+                "A3",
+                "Managed-repair network authorisation",
+                "Adjuster / Network",
+                "Direct-repair at agreed rates with guarantee",
+                "T+5–8 days"
+              ],
+              [
+                "A4",
+                "Predictive reserving & analytics",
+                "Claims Manager",
+                "Reserve and large-loss propensity from models",
+                "At registration"
+              ]
+            ],
+            {
+              "0": "new",
+              "1": "new",
+              "2": "new",
+              "3": "enh"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "6. Process Steps",
+        "blocks": [
+          [
+            "h3",
+            "6.1 FNOL, Triage & Reserving"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "1",
+                "FNOL received (multi-channel)",
+                "Claims Processor",
+                "Claim ID; loss details",
+                "T+0"
+              ],
+              [
+                "2",
+                "Policy coverage verification",
+                "Claims Processor / PAS",
+                "Peril, deductible, sum insured",
+                "T+0"
+              ],
+              [
+                "3",
+                "Loss triage with predictive segmentation",
+                "Claims Processor / Model",
+                "Propensity-scored triage",
+                "T+0"
+              ],
+              [
+                "4",
+                "Register with predictive reserve & acknowledgement",
+                "Claims Processor / Model",
+                "Reserve; ack ≤1 day",
+                "T+1 day"
+              ]
+            ],
+            {
+              "2": "enh",
+              "3": "enh"
+            }
+          ],
+          [
+            "h3",
+            "6.2 Appraisal & Estimation"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "5",
+                "Claim assigned (or routed to STP)",
+                "Claims Processor",
+                "Minor clear → STP; others assigned",
+                "T+1–2 days"
+              ],
+              [
+                "6",
+                "AI photo-based damage estimation",
+                "Adjuster / AI",
+                "Estimate from photos",
+                "T+1–3 days"
+              ],
+              [
+                "7",
+                "Inspection or desktop assessment",
+                "Adjuster / Assessor",
+                "On-site for major; AI/desktop for minor",
+                "≤5 days"
+              ],
+              [
+                "8",
+                "Damage / liability report prepared",
+                "Adjuster / Assessor",
+                "Scope, estimate, evidence",
+                "T+3–7 days"
+              ],
+              [
+                "9",
+                "Fraud screening with network analytics",
+                "Claims System / SIU",
+                "Scoring + link analytics",
+                "Parallel"
+              ]
+            ],
+            {
+              "0": "enh",
+              "1": "new",
+              "4": "enh"
+            }
+          ],
+          [
+            "h3",
+            "6.3 Settlement & Repair"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "10",
+                "Touchless settlement for clear minor claims",
+                "Claims System",
+                "Self-service settlement",
+                "Same day"
+              ],
+              [
+                "11",
+                "Managed-repair authorisation (network)",
+                "Adjuster / Network",
+                "Direct-repair at agreed rates",
+                "T+5–8 days"
+              ],
+              [
+                "12",
+                "Settlement approved within authority",
+                "Adjuster / Claims Manager",
+                "Per authority matrix",
+                "T+8–10 days"
+              ],
+              [
+                "13",
+                "Offer communicated and accepted; payment",
+                "Adjuster / Finance",
+                "Payment within 5 days",
+                "T+15 days"
+              ],
+              [
+                "14",
+                "Claim closed and reserves released",
+                "Claims Processor / Finance",
+                "Reserve trued-up; GL",
+                "T+15 days"
+              ]
+            ],
+            {
+              "0": "new",
+              "1": "new"
+            }
+          ],
+          [
+            "h3",
+            "6.4 Subrogation & Salvage"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "15",
+                "Subrogation identified (analytics-assisted)",
+                "Adjuster / Recovery Analyst",
+                "Opportunities surfaced",
+                "Post-settlement"
+              ],
+              [
+                "16",
+                "Subrogation recovery pursued",
+                "Recovery Analyst / Legal",
+                "Demand; litigation if contested",
+                "Ongoing"
+              ],
+              [
+                "17",
+                "Salvage sold",
+                "Recovery Analyst",
+                "Proceeds reduce loss cost",
+                "Ongoing"
+              ]
+            ],
+            {
+              "0": "enh"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "7. Exception Handling",
+        "blocks": [
+          [
+            "h3",
+            "7.1 Disputed Settlement"
+          ],
+          [
+            "numbered",
+            [
+              "Claimant disputes in writing within 10 business days; dispute logged in the Claims System.",
+              "Claims Manager reviews within 5 business days; revised offer or maintained position communicated in writing.",
+              "Unresolved after 30 days: claimant advised of external dispute resolution (FIDREC / MAS scheme)."
+            ]
+          ],
+          [
+            "h3",
+            "7.2 Suspected Fraud (Enhanced — v4.0)"
+          ],
+          [
+            "banner",
+            "enh",
+            "Network/link analytics now strengthen fraud detection across related claims and parties."
+          ],
+          [
+            "numbered_from",
+            4,
+            [
+              "SIU takes custody of the claim; settlement is suspended.",
+              "Investigation completed within 20 business days; Claims Manager decides to reject, settle or refer.",
+              "Rejected fraud claims logged and submitted to the industry fraud database."
+            ]
+          ],
+          [
+            "h3",
+            "7.3 Total Loss (Motor)"
+          ],
+          [
+            "numbered_from",
+            7,
+            [
+              "Total loss declared when repair cost exceeds 75% of pre-accident market value.",
+              "Market valuation obtained from an approved independent valuer; settlement on market value less salvage.",
+              "Finance encumbrance checked; payment directed to the financier first where applicable."
+            ]
+          ],
+          [
+            "h3",
+            "7.4 Major or Catastrophe Loss"
+          ],
+          [
+            "numbered_from",
+            10,
+            [
+              "Claims Manager notified immediately; CCO briefed for losses above SGD 250,000.",
+              "External loss adjusters deployed; a dedicated major-loss team assigned.",
+              "Reinsurance notification triggered per SOP-RE-001 above treaty retention."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "8. Systems and Tools",
+        "blocks": [
+          [
+            "table",
+            [
+              "System",
+              "Purpose",
+              "Primary Users"
+            ],
+            [
+              [
+                "Claims Management System (Majesco)",
+                "FNOL, workflow, assessment, settlement, reserves",
+                "All Claims roles"
+              ],
+              [
+                "Policy Administration System (PAS)",
+                "Coverage, terms, prior-claims history",
+                "Claims Processor, Adjuster"
+              ],
+              [
+                "AI Estimation Engine",
+                "Photo-based damage estimation",
+                "Adjuster"
+              ],
+              [
+                "Managed-Repair Network",
+                "Direct-repair authorisation and tracking",
+                "Adjuster, Repairers"
+              ],
+              [
+                "SAP S/4HANA",
+                "Payment, reserve GL, subrogation accounting",
+                "Finance, Claims Manager"
+              ],
+              [
+                "Fraud Detection & Analytics",
+                "Fraud scoring and network/link analytics",
+                "Automated, SIU"
+              ],
+              [
+                "Assessor & Salvage Platforms",
+                "Assessor reports and salvage sale",
+                "External Assessor, Recovery Analyst"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "9. Key Controls and Audit Points",
+        "blocks": [
+          [
+            "banner",
+            "enh",
+            "Controls expanded in v4.0: AI estimation, touchless settlement, managed-repair, predictive reserving and SIU network analytics."
+          ],
+          [
+            "bullets",
+            [
+              "Reserve at registration: predictive reserve set when the claim is created.",
+              "AI estimation: consistent photo-based repair costing reduces leakage.",
+              "Touchless settlement: clear minor claims settled straight-through with self-service.",
+              "Managed repair: indemnity controlled via a network with agreed rates and guarantees.",
+              "Fraud analytics: scoring plus network/link analysis across claims and parties.",
+              "Segregation of duties: assessor ≠ settlement approver ≠ payment.",
+              "Immutable audit trail: FNOL, estimate, settlement, payment and recovery events logged."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "10. Key Performance Indicators",
+        "blocks": [
+          [
+            "table",
+            [
+              "KPI",
+              "v3.1 Target",
+              "v4.0 Target",
+              "Measurement"
+            ],
+            [
+              [
+                "FNOL acknowledgement",
+                "100% ≤1 day",
+                "100% ≤1 day",
+                "Ack within 1 business day"
+              ],
+              [
+                "Straight-through settlement",
+                "N/A (new)",
+                "≥30% of minor claims",
+                "Touchless settlement rate"
+              ],
+              [
+                "Claims cycle time",
+                "80% ≤15 days",
+                "80% ≤10 days",
+                "Receipt to settlement"
+              ],
+              [
+                "Reserve adequacy variance",
+                "<10%",
+                "<6%",
+                "Initial vs final reserve"
+              ],
+              [
+                "Subrogation recovery",
+                "≥65%",
+                "≥72%",
+                "Recovered / identified"
+              ],
+              [
+                "Managed-repair adoption",
+                "N/A (new)",
+                "≥50% of repairs",
+                "Network vs ad-hoc repairs"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "11. Document Control",
+        "blocks": [
+          [
+            "table",
+            [
+              "Version",
+              "Date",
+              "Author",
+              "Summary of Changes"
+            ],
+            [
+              [
+                "3.1",
+                "15 Jan 2025",
+                "E. Okafor, Claims Manager",
+                "Updated SGD authority thresholds; added total loss motor protocol; aligned to reinsurance notification SOP"
+              ],
+              [
+                "4.0",
+                "01 Oct 2026",
+                "E. Okafor, Claims Manager",
+                "OPTIMISED: AI photo-based estimation; touchless/STP settlement; managed-repair network; predictive reserving & analytics; SIU network analytics; catalog alignment 74% → 93%"
+              ]
+            ],
+            {}
+          ]
+        ]
+      }
+    ]
+  },
+  "swim_cover_tags": "FNOL · Appraisal · Settlement · Subrogation · Exception handling",
+  "hierarchy_cover_sub": "Phase breakdown with claims tracks, settlement authority, and exception paths"
+}

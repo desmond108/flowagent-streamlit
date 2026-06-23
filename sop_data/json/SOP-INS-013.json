@@ -1,0 +1,2375 @@
+{
+  "meta": {
+    "sop_id": "SOP-INS-013",
+    "slug": "Policy_Administration",
+    "title": "Insurance Policy Administration",
+    "short_title": "Policy administration",
+    "version": "1.0",
+    "owner": "Policy Administration — Operations",
+    "org": "Meridian Insurance Group",
+    "catalog": "Guidewire PolicyCenter — Policy Lifecycle (System-of-Record) Best-Practice Catalog",
+    "catalog_short": "Guidewire PolicyCenter",
+    "new_version": "2.0",
+    "effective_date": "01 October 2026",
+    "supersedes": "v1.0 dated 01 June 2025",
+    "approved_by": "Chief Operating Officer",
+    "classification": "Internal Use Only"
+  },
+  "phases": [
+    {
+      "pid": "1",
+      "name": "Application & risk assessment",
+      "subtitle": "Receipt, verify, risk, price",
+      "circle": "blue",
+      "roles": "Policyholder · App Processing · Underwriting",
+      "step_range": "Steps 1–5",
+      "summary": "5 steps + 1 gate"
+    },
+    {
+      "pid": "2",
+      "name": "Drafting & acceptance",
+      "subtitle": "Draft, approve terms, accept",
+      "circle": "green",
+      "roles": "Underwriting · Policy Admin · Policyholder",
+      "step_range": "Steps 6–9",
+      "summary": "4 steps + 1 gate"
+    },
+    {
+      "pid": "3",
+      "name": "Payment, issuance & in-force",
+      "subtitle": "Pay, issue, dispatch, manage",
+      "circle": "amber",
+      "roles": "Finance · Policy Admin · PAS",
+      "step_range": "Steps 10–15",
+      "summary": "6 steps"
+    },
+    {
+      "pid": "4",
+      "name": "Claims intake & closure",
+      "subtitle": "Claims intake, closure",
+      "circle": "gold",
+      "roles": "Claims · Policy Admin · Finance",
+      "step_range": "Steps 16–17",
+      "summary": "2 steps + 1 gate"
+    }
+  ],
+  "steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Policyholder submits insurance application",
+      "responsible": "Policyholder / Agent",
+      "output": "Received via portal, agent or paper; application ID assigned; timestamp in PAS",
+      "timeline": "Day 0",
+      "controls": "Multi-channel intake",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Collect and verify policyholder data",
+      "responsible": "Application Processing Staff",
+      "output": "Personal details confirmed; identity documents verified; discrepancies flagged",
+      "timeline": "Day 0–1",
+      "controls": "Identity verification",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Verify coverage details and eligibility",
+      "responsible": "Application Processing Staff",
+      "output": "Coverage type, sum insured and period reviewed against product guidelines",
+      "timeline": "Day 0–1",
+      "controls": "Eligibility check",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "1",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Agent / supervisor approval",
+      "kind": "decision",
+      "decision": "Data & coverage verified?",
+      "branches": [
+        "Approved → risk assessment",
+        "Anomaly → return to applicant (Sec 6.1)"
+      ]
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Conduct risk assessment based on verified data",
+      "responsible": "Underwriting Staff",
+      "output": "Risk checklist (claims history, occupation, health, credit, driving); risk score assigned",
+      "timeline": "Day 1–2",
+      "controls": "Risk evaluation",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "5",
+      "phase": "1",
+      "activity": "Determine the policy price",
+      "responsible": "Underwriting Staff / Rating Engine",
+      "output": "Premium calculated on risk, coverage and rating factors; currency confirmed",
+      "timeline": "Day 2",
+      "controls": "Rating",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "2",
+      "activity": "Draft insurance policy",
+      "responsible": "Underwriting Staff / Policy Admin",
+      "output": "Policy drafted with coverage, risk conditions, premium and terms; Legal input for non-standard clauses",
+      "timeline": "Day 2–3",
+      "controls": "Policy drafting",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Review and update policy terms and conditions",
+      "responsible": "Underwriting Staff",
+      "output": "Wording reviewed for accuracy, completeness and regulatory compliance; final terms confirmed",
+      "timeline": "Day 3",
+      "controls": "Terms review",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "2",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Terms & conditions approval",
+      "kind": "decision",
+      "decision": "Terms approved?",
+      "branches": [
+        "Approved → notify policyholder",
+        "Not approved → revise (Head of UW)"
+      ]
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Notify policyholder of policy terms and price",
+      "responsible": "Policy Administration Staff",
+      "output": "Formal notification (email/post): coverage, premium, schedule, start date, 10-day deadline",
+      "timeline": "Day 3",
+      "controls": "Terms notification",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "2",
+      "activity": "Obtain policyholder consensus on terms and price",
+      "responsible": "Policy Administration Staff / Agent",
+      "output": "Acceptance via portal, signed form or recorded verbal; queries escalated",
+      "timeline": "Day 3–5",
+      "controls": "Acceptance capture",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "3",
+      "activity": "Policyholder makes initial premium payment",
+      "responsible": "Policyholder / Finance",
+      "output": "Payment via card, banking, cheque or transfer; coverage attaches only on confirmed payment",
+      "timeline": "Day 5",
+      "controls": "Coverage-on-payment",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "3",
+      "activity": "Formally issue the insurance policy",
+      "responsible": "Policy Administration Staff",
+      "output": "Final policy generated in PAS; policy number and effective date assigned; document linked",
+      "timeline": "Day 5",
+      "controls": "Issuance",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Dispatch policy document to policyholder",
+      "responsible": "Policy Administration Staff",
+      "output": "Schedule, certificate and PDS by email within 2 days; hard copy if required",
+      "timeline": "≤2 days",
+      "controls": "Document SLA",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "13",
+      "phase": "3",
+      "activity": "Update policy information in database",
+      "responsible": "Policy Administration Staff",
+      "output": "PAS record updated and quality-checked within 1 business day of issuance",
+      "timeline": "Day +1",
+      "controls": "Record QC",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "14",
+      "phase": "3",
+      "activity": "Set up policy renewal reminders",
+      "responsible": "Policy Administration Staff / PAS",
+      "output": "Automated 90/60/30-day pre-expiry alerts to policyholder and agent",
+      "timeline": "Day +1",
+      "controls": "Renewal alerts",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "15",
+      "phase": "3",
+      "activity": "Monitor policyholder payment schedule",
+      "responsible": "Finance / Policy Administration",
+      "output": "Due dates tracked; reminders 7 days before due; missed payments flagged to Collections",
+      "timeline": "Ongoing",
+      "controls": "Payment monitoring",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "16",
+      "phase": "4",
+      "activity": "File and manage policyholder claims",
+      "responsible": "Claims Staff / Policy Administration",
+      "output": "Claim registered in CMS; claim ID issued; routed to SOP-INS-011 or SOP-INS-012",
+      "timeline": "On claim",
+      "controls": "Claims intake & routing",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "4",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Settlement approval (POL-CLAIMS-001)",
+      "kind": "decision",
+      "decision": "Settlement authorised?",
+      "branches": [
+        "Within authority → settle per claims SOP",
+        "Above authority → Claims Manager"
+      ]
+    },
+    {
+      "num": "17",
+      "phase": "4",
+      "activity": "Close policy at end of term or on request",
+      "responsible": "Policy Administration Staff",
+      "output": "Expiry/cancellation/breach/non-payment/ineligibility; status 'Closed'/'Lapsed'; refund per SOP-FIN-012",
+      "timeline": "≤5 days",
+      "controls": "Closure & refund",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "authority": [
+    {
+      "band": "Data & coverage approval",
+      "first": "Application Processing Supervisor",
+      "second": "Agent"
+    },
+    {
+      "band": "Underwriting decision",
+      "first": "Underwriting Staff",
+      "second": "—"
+    },
+    {
+      "band": "Policy terms approval",
+      "first": "Underwriting Supervisor",
+      "second": "Head of Underwriting"
+    },
+    {
+      "band": "Mid-term endorsement",
+      "first": "Policy Administration",
+      "second": "Underwriting"
+    },
+    {
+      "band": "Claim settlement",
+      "first": "Claims Adjuster / Manager",
+      "second": "POL-CLAIMS-001"
+    },
+    {
+      "band": "Disputed cancellation",
+      "first": "Compliance",
+      "second": "Legal"
+    }
+  ],
+  "swim_phases": [
+    {
+      "pid": "1",
+      "name": "Application & risk assessment",
+      "subtitle": "Steps 1–5 · receipt to pricing",
+      "lanes": [
+        "Policyholder / Agent",
+        "Application Processing",
+        "Underwriting"
+      ],
+      "nodes": [
+        {
+          "nid": "s1",
+          "lane": "Policyholder / Agent",
+          "col": 0,
+          "title": "Submit application",
+          "sub": "portal · agent · paper",
+          "kind": "standard"
+        },
+        {
+          "nid": "s2",
+          "lane": "Application Processing",
+          "col": 1,
+          "title": "Verify data & identity",
+          "sub": "documents checked",
+          "kind": "standard"
+        },
+        {
+          "nid": "s3",
+          "lane": "Application Processing",
+          "col": 2,
+          "title": "Verify coverage eligibility",
+          "sub": "product guidelines",
+          "kind": "standard"
+        },
+        {
+          "nid": "s4",
+          "lane": "Application Processing",
+          "col": 3,
+          "title": "Data & coverage gate",
+          "sub": "supervisor approval",
+          "kind": "decision"
+        },
+        {
+          "nid": "s5",
+          "lane": "Underwriting",
+          "col": 4,
+          "title": "Risk assessment & pricing",
+          "sub": "risk score · premium",
+          "kind": "standard"
+        },
+        {
+          "nid": "s6",
+          "lane": "Underwriting",
+          "col": 3,
+          "title": "Discrepancy → return",
+          "sub": "Sec 6.1",
+          "kind": "exception"
+        }
+      ],
+      "edges": [
+        {
+          "src": "s1",
+          "dst": "s2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "s2",
+          "dst": "s3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s3",
+          "dst": "s4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s4",
+          "dst": "s5",
+          "label": "ok",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s4",
+          "dst": "s6",
+          "label": "anom",
+          "dashed": true,
+          "kind": "exception"
+        }
+      ],
+      "note": "Applications are verified for data, identity and coverage eligibility and pass an approval gate before risk assessment and pricing."
+    },
+    {
+      "pid": "2",
+      "name": "Drafting & acceptance",
+      "subtitle": "Steps 6–9 · draft to acceptance",
+      "lanes": [
+        "Underwriting",
+        "Policy Admin",
+        "Policyholder"
+      ],
+      "nodes": [
+        {
+          "nid": "a1",
+          "lane": "Underwriting",
+          "col": 0,
+          "title": "Draft policy",
+          "sub": "Legal for non-standard",
+          "kind": "standard"
+        },
+        {
+          "nid": "a2",
+          "lane": "Underwriting",
+          "col": 1,
+          "title": "Review & terms gate",
+          "sub": "UW supervisor approval",
+          "kind": "decision"
+        },
+        {
+          "nid": "a3",
+          "lane": "Policy Admin",
+          "col": 2,
+          "title": "Notify policyholder",
+          "sub": "terms · price · 10 days",
+          "kind": "standard"
+        },
+        {
+          "nid": "a4",
+          "lane": "Policyholder",
+          "col": 3,
+          "title": "Accept terms",
+          "sub": "portal / signed / verbal",
+          "kind": "standard"
+        },
+        {
+          "nid": "a5",
+          "lane": "Underwriting",
+          "col": 2,
+          "title": "Dispute → revise",
+          "sub": "max 2 offers",
+          "kind": "exception"
+        }
+      ],
+      "edges": [
+        {
+          "src": "a1",
+          "dst": "a2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a3",
+          "dst": "a4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a3",
+          "dst": "a5",
+          "label": "dispute",
+          "dashed": true,
+          "kind": "exception"
+        }
+      ],
+      "note": "Drafted policies pass a terms-approval gate before notification; disputes allow up to two revised offers before closing as not taken up."
+    },
+    {
+      "pid": "3",
+      "name": "Payment, issuance & in-force",
+      "subtitle": "Steps 10–15 · pay to ongoing management",
+      "lanes": [
+        "Policyholder / Finance",
+        "Policy Admin",
+        "PAS / Billing"
+      ],
+      "nodes": [
+        {
+          "nid": "d1",
+          "lane": "Policyholder / Finance",
+          "col": 0,
+          "title": "Initial premium payment",
+          "sub": "coverage on payment",
+          "kind": "standard"
+        },
+        {
+          "nid": "d2",
+          "lane": "Policy Admin",
+          "col": 1,
+          "title": "Issue policy",
+          "sub": "policy number",
+          "kind": "standard"
+        },
+        {
+          "nid": "d3",
+          "lane": "Policy Admin",
+          "col": 2,
+          "title": "Dispatch documents",
+          "sub": "schedule · cert · PDS",
+          "kind": "standard"
+        },
+        {
+          "nid": "d4",
+          "lane": "PAS / Billing",
+          "col": 3,
+          "title": "Update & QC record",
+          "sub": "≤1 day",
+          "kind": "standard"
+        },
+        {
+          "nid": "d5",
+          "lane": "PAS / Billing",
+          "col": 4,
+          "title": "Renewal alerts & payment monitoring",
+          "sub": "90/60/30-day",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "d1",
+          "dst": "d2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d2",
+          "dst": "d3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d3",
+          "dst": "d4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d4",
+          "dst": "d5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Coverage attaches on payment; the policy is issued, dispatched, quality-checked, and set up for renewal alerts and payment monitoring."
+    },
+    {
+      "pid": "4",
+      "name": "Claims intake & closure",
+      "subtitle": "Steps 16–17 · lifecycle endpoints",
+      "lanes": [
+        "Policyholder",
+        "Claims",
+        "Policy Admin / Finance"
+      ],
+      "nodes": [
+        {
+          "nid": "e1",
+          "lane": "Policyholder",
+          "col": 0,
+          "title": "File claim",
+          "sub": "portal · hotline",
+          "kind": "standard"
+        },
+        {
+          "nid": "e2",
+          "lane": "Claims",
+          "col": 1,
+          "title": "Register & route claim",
+          "sub": "SOP-INS-011/012",
+          "kind": "standard"
+        },
+        {
+          "nid": "e3",
+          "lane": "Claims",
+          "col": 2,
+          "title": "Settlement approval gate",
+          "sub": "POL-CLAIMS-001",
+          "kind": "decision"
+        },
+        {
+          "nid": "e4",
+          "lane": "Policy Admin / Finance",
+          "col": 1,
+          "title": "Close policy",
+          "sub": "expiry / request / lapse",
+          "kind": "standard"
+        },
+        {
+          "nid": "e5",
+          "lane": "Policy Admin / Finance",
+          "col": 2,
+          "title": "Calculate refund & confirm",
+          "sub": "SOP-FIN-012",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "e1",
+          "dst": "e2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "e2",
+          "dst": "e3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "e4",
+          "dst": "e5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Claims are registered and routed to the relevant claims SOP under settlement authority; closure handles expiry, cancellation and refund."
+    }
+  ],
+  "n_phases": 4,
+  "n_steps": 17,
+  "n_roles": 7,
+  "n_gateways": 3,
+  "fitgap": {
+    "overall_fit": 67,
+    "partial_pct": 20,
+    "fits": 10,
+    "gaps": 2,
+    "partials": 4,
+    "steps_analysed": 16,
+    "phases_count": 4,
+    "summary_line": "Overall alignment of SOP-INS-013 against the Guidewire PolicyCenter lifecycle catalog",
+    "metrics": [
+      [
+        "Steps analysed",
+        "16 steps across 4 phases"
+      ],
+      [
+        "Fits confirmed",
+        "10 steps aligned to catalog"
+      ],
+      [
+        "Gaps identified",
+        "2 steps — remediation required"
+      ],
+      [
+        "Partial fits",
+        "4 steps — enhancement recommended"
+      ],
+      [
+        "Highest risk area",
+        "No explicit KYC/sanctions step"
+      ],
+      [
+        "Conduct gap",
+        "E-signature not mandated"
+      ],
+      [
+        "Ref standard",
+        "Guidewire PolicyCenter Lifecycle Catalog"
+      ]
+    ],
+    "phase_bars": [
+      {
+        "line1": "Phase 1",
+        "line2": "Application",
+        "value": 68,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 2",
+        "line2": "Drafting",
+        "value": 64,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 3",
+        "line2": "In-force",
+        "value": 72,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 4",
+        "line2": "Claims/close",
+        "value": 80,
+        "colour": ""
+      }
+    ],
+    "phase_cards": [
+      {
+        "label": "Phase 1",
+        "value": 68,
+        "sub": "Application & risk"
+      },
+      {
+        "label": "Phase 2",
+        "value": 64,
+        "sub": "Drafting & acceptance"
+      },
+      {
+        "label": "Phase 3",
+        "value": 72,
+        "sub": "Payment & in-force"
+      },
+      {
+        "label": "Phase 4",
+        "value": 80,
+        "sub": "Claims & closure"
+      }
+    ],
+    "detail_slides": [
+      [
+        "Phase 1 — Application & risk assessment",
+        "Steps 1–5 vs Guidewire PolicyCenter lifecycle catalog",
+        [
+          "p1"
+        ]
+      ],
+      [
+        "Phase 2 — Drafting & acceptance",
+        "Steps 6–9 vs Guidewire PolicyCenter lifecycle catalog",
+        [
+          "p2"
+        ]
+      ],
+      [
+        "Phase 3 — Payment, issuance & in-force",
+        "Steps 10–14 vs Guidewire PolicyCenter lifecycle catalog",
+        [
+          "p3"
+        ]
+      ],
+      [
+        "Phase 4 — Claims intake & closure",
+        "Steps 15–16 vs Guidewire PolicyCenter lifecycle catalog",
+        [
+          "p4"
+        ]
+      ]
+    ],
+    "items": [
+      {
+        "num": "1",
+        "name": "Multi-channel application intake",
+        "status": "FIT",
+        "detail": "Portal, agent and paper intake with application ID and timestamp aligns with PolicyCenter submission intake.",
+        "owner": "Application Processing",
+        "ref": "GW-PC-SUB-01",
+        "group": "p1"
+      },
+      {
+        "num": "2",
+        "name": "Identity & document verification",
+        "status": "PARTIAL",
+        "detail": "Identity documents are verified, but there is no explicit sanctions/PEP screening step or continuous monitoring, only a prerequisite note — a regulatory control gap.",
+        "owner": "Application Processing",
+        "ref": "GW-PC-KYC-01",
+        "group": "p1"
+      },
+      {
+        "num": "3",
+        "name": "Coverage eligibility check",
+        "status": "FIT",
+        "detail": "Coverage type, sum insured and period checked against product guidelines align with PolicyCenter eligibility.",
+        "owner": "Application Processing",
+        "ref": "GW-PC-ELG-01",
+        "group": "p1"
+      },
+      {
+        "num": "4",
+        "name": "Verification approval gate",
+        "status": "FIT",
+        "detail": "A supervisor approval gate before risk assessment aligns with PolicyCenter submission governance.",
+        "owner": "Application Processing Supervisor",
+        "ref": "GW-PC-GAT-01",
+        "group": "p1"
+      },
+      {
+        "num": "5",
+        "name": "Risk assessment & rating",
+        "status": "PARTIAL",
+        "detail": "A manual risk checklist plus rating engine is used; PolicyCenter recommends automated underwriting with a predictive risk model to widen straight-through processing.",
+        "owner": "Underwriting / Rating Engine",
+        "ref": "GW-PC-UW-02",
+        "group": "p1"
+      },
+      {
+        "num": "6",
+        "name": "Policy drafting & clause library",
+        "status": "PARTIAL",
+        "detail": "Policies are drafted with Legal input for non-standard clauses; PolicyCenter generates documents from a configurable product/clause library, reducing manual drafting and error.",
+        "owner": "Underwriting / Policy Admin",
+        "ref": "GW-PC-DOC-02",
+        "group": "p2"
+      },
+      {
+        "num": "7",
+        "name": "Terms review & approval gate",
+        "status": "FIT",
+        "detail": "Regulatory-compliance review with a terms-approval gate aligns with PolicyCenter terms governance.",
+        "owner": "Underwriting Supervisor",
+        "ref": "GW-PC-GAT-02",
+        "group": "p2"
+      },
+      {
+        "num": "8",
+        "name": "Terms notification",
+        "status": "FIT",
+        "detail": "Formal multi-channel notification with a response deadline aligns with PolicyCenter offer communication.",
+        "owner": "Policy Administration",
+        "ref": "GW-PC-OFR-01",
+        "group": "p2"
+      },
+      {
+        "num": "9",
+        "name": "Acceptance & e-signature",
+        "status": "GAP",
+        "detail": "Acceptance may be verbal; DocuSign exists but is not mandated. PolicyCenter requires an auditable e-signature acceptance of terms before issuance — a conduct and evidencing gap.",
+        "owner": "Policy Administration / Agent",
+        "ref": "GW-PC-ISS-04",
+        "group": "p2"
+      },
+      {
+        "num": "10",
+        "name": "Payment & coverage attachment",
+        "status": "FIT",
+        "detail": "Coverage attaching only on confirmed payment aligns with PolicyCenter bind-on-payment control.",
+        "owner": "Finance",
+        "ref": "GW-PC-BIL-02",
+        "group": "p3"
+      },
+      {
+        "num": "11",
+        "name": "Issuance & document dispatch",
+        "status": "FIT",
+        "detail": "Issuance with policy number, effective date and 2-day document dispatch aligns with PolicyCenter issuance.",
+        "owner": "Policy Administration",
+        "ref": "GW-PC-ISS-01",
+        "group": "p3"
+      },
+      {
+        "num": "12",
+        "name": "Record quality & data integrity",
+        "status": "PARTIAL",
+        "detail": "Records are quality-checked manually within a day; PolicyCenter validates data integrity automatically as the system of record, reducing downstream errors.",
+        "owner": "Policy Administration",
+        "ref": "GW-PC-DQ-01",
+        "group": "p3"
+      },
+      {
+        "num": "13",
+        "name": "Renewal & payment monitoring",
+        "status": "FIT",
+        "detail": "Automated renewal alerts and payment-schedule monitoring align with PolicyCenter lifecycle management.",
+        "owner": "Policy Administration / Finance",
+        "ref": "GW-PC-REN-01",
+        "group": "p3"
+      },
+      {
+        "num": "14",
+        "name": "Mid-term endorsements",
+        "status": "GAP",
+        "detail": "Mid-term changes are assessed manually with a 5-day endorsement SLA. PolicyCenter supports self-service and straight-through endorsements for standard changes — a service and efficiency gap.",
+        "owner": "Policy Administration / Underwriting",
+        "ref": "GW-PC-END-01",
+        "group": "p3"
+      },
+      {
+        "num": "15",
+        "name": "Claims intake & routing",
+        "status": "FIT",
+        "detail": "Claim registration, ID issue and routing to the relevant claims SOP align with PolicyCenter-to-claims handoff.",
+        "owner": "Claims Staff",
+        "ref": "GW-PC-CLM-01",
+        "group": "p4"
+      },
+      {
+        "num": "16",
+        "name": "Policy closure & refund",
+        "status": "FIT",
+        "detail": "Closure for expiry/cancellation/lapse with unearned-premium refund aligns with PolicyCenter cancellation.",
+        "owner": "Policy Administration",
+        "ref": "GW-PC-CAN-01",
+        "group": "p4"
+      }
+    ],
+    "groups": [
+      [
+        "p1",
+        "PHASE 1 — APPLICATION & RISK ASSESSMENT"
+      ],
+      [
+        "p2",
+        "PHASE 2 — DRAFTING & ACCEPTANCE"
+      ],
+      [
+        "p3",
+        "PHASE 3 — PAYMENT, ISSUANCE & IN-FORCE"
+      ],
+      [
+        "p4",
+        "PHASE 4 — CLAIMS INTAKE & CLOSURE"
+      ]
+    ],
+    "critical_missing": [
+      {
+        "title": "KYC / sanctions screening & monitoring",
+        "detail": "Identity documents are verified but there is no explicit sanctions/PEP screening step or continuous monitoring across the lifecycle — a regulatory control gap versus the catalog."
+      },
+      {
+        "title": "Mandatory e-signature acceptance",
+        "detail": "Acceptance may be verbal and DocuSign is not mandated; the catalog requires an auditable e-signature acceptance of terms before issuance, a conduct and evidencing gap."
+      },
+      {
+        "title": "Automated underwriting & document generation",
+        "detail": "Risk assessment and policy drafting are largely manual; the catalog uses automated underwriting with a predictive model and a configurable clause library to widen STP and cut error."
+      },
+      {
+        "title": "Self-service & straight-through endorsements",
+        "detail": "Mid-term changes are assessed manually; the catalog supports self-service and straight-through endorsements for standard changes, improving service and efficiency."
+      }
+    ],
+    "radar": [
+      [
+        "Intake",
+        78
+      ],
+      [
+        "KYC / sanctions",
+        42
+      ],
+      [
+        "Underwriting",
+        60
+      ],
+      [
+        "Acceptance",
+        55
+      ],
+      [
+        "Issuance",
+        80
+      ],
+      [
+        "Endorsements",
+        48
+      ],
+      [
+        "Closure",
+        82
+      ]
+    ],
+    "control_bars": [
+      {
+        "name": "Application intake",
+        "value": 78,
+        "note": "Multi-channel with ID verification"
+      },
+      {
+        "name": "KYC / sanctions",
+        "value": 42,
+        "note": "No explicit screening or monitoring step"
+      },
+      {
+        "name": "Automated underwriting",
+        "value": 60,
+        "note": "Manual checklist; rating engine only"
+      },
+      {
+        "name": "Acceptance & e-signature",
+        "value": 55,
+        "note": "Verbal allowed; DocuSign not mandated"
+      },
+      {
+        "name": "Issuance & dispatch",
+        "value": 80,
+        "note": "Bind-on-payment with 2-day documents"
+      },
+      {
+        "name": "Endorsements",
+        "value": 48,
+        "note": "Manual mid-term changes; no self-service"
+      },
+      {
+        "name": "Closure & refund",
+        "value": 82,
+        "note": "Closure with unearned-premium refund"
+      }
+    ],
+    "remediations": [
+      {
+        "rank": 1,
+        "title": "Add KYC / sanctions screening & continuous monitoring",
+        "detail": "Insert an explicit identity/sanctions screening step at application and continuous watchlist monitoring across the lifecycle; route hits to Compliance. Effort: 4 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 2,
+        "title": "Mandate e-signature acceptance",
+        "detail": "Require auditable DocuSign acceptance of terms before issuance, replacing verbal confirmation. Effort: 3 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 3,
+        "title": "Introduce automated underwriting & clause-library generation",
+        "detail": "Add automated underwriting with a predictive risk model and generate policy documents from a configurable product/clause library. Effort: 8 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 4,
+        "title": "Enable self-service & straight-through endorsements",
+        "detail": "Allow standard mid-term changes to be self-served and processed straight-through, routing only complex endorsements to underwriting. Effort: 6 weeks.",
+        "priority": "Medium"
+      },
+      {
+        "rank": 5,
+        "title": "Automate data-quality validation",
+        "detail": "Validate policy data integrity automatically at issuance rather than manual QC, reducing downstream errors. Effort: 3 weeks.",
+        "priority": "Medium"
+      }
+    ],
+    "risk_impact": [
+      [
+        "KYC / sanctions",
+        88
+      ],
+      [
+        "E-signature",
+        75
+      ],
+      [
+        "Automated underwriting",
+        70
+      ],
+      [
+        "Self-service endorsements",
+        60
+      ],
+      [
+        "Data-quality automation",
+        52
+      ],
+      [
+        "Clause library",
+        55
+      ]
+    ],
+    "projected_fit": 90
+  },
+  "opt_phases": [
+    {
+      "pid": "1",
+      "name": "Application, screening & risk",
+      "subtitle": "Verify, KYC, automated UW",
+      "circle": "blue",
+      "roles": "Policyholder · App Processing · Underwriting",
+      "step_range": "Steps 1–6",
+      "summary": "6 steps + 1 gate"
+    },
+    {
+      "pid": "2",
+      "name": "Drafting & e-acceptance",
+      "subtitle": "Generate, approve, e-sign",
+      "circle": "green",
+      "roles": "Underwriting · Policy Admin · Policyholder",
+      "step_range": "Steps 7–10",
+      "summary": "4 steps + 1 gate"
+    },
+    {
+      "pid": "3",
+      "name": "Payment, issuance & in-force",
+      "subtitle": "Pay, issue, validate, self-service",
+      "circle": "amber",
+      "roles": "Finance · Policy Admin · PAS",
+      "step_range": "Steps 11–16",
+      "summary": "6 steps"
+    },
+    {
+      "pid": "4",
+      "name": "Claims intake & closure",
+      "subtitle": "Claims intake, closure",
+      "circle": "gold",
+      "roles": "Claims · Policy Admin · Finance",
+      "step_range": "Steps 17–18",
+      "summary": "2 steps + 1 gate"
+    }
+  ],
+  "opt_steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Policyholder submits insurance application",
+      "responsible": "Policyholder / Agent",
+      "output": "Received via portal, agent or paper; application ID; timestamp",
+      "timeline": "Day 0",
+      "controls": "Standard",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Collect and verify policyholder data",
+      "responsible": "Application Processing Staff",
+      "output": "Personal details confirmed; identity documents verified",
+      "timeline": "Day 0–1",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "KYC / sanctions screening",
+      "responsible": "Application Processing / Compliance",
+      "output": "Identity proofed; sanctions/PEP screened; continuous monitoring enabled",
+      "timeline": "Day 0–1",
+      "controls": "NEW (v2.0) — regulatory control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Verify coverage details and eligibility",
+      "responsible": "Application Processing Staff",
+      "output": "Coverage type, sum insured and period checked against guidelines",
+      "timeline": "Day 0–1",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "1",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Verification gate",
+      "kind": "decision",
+      "decision": "Verified & screened?",
+      "branches": [
+        "Approved → underwriting",
+        "Anomaly/hit → return / Compliance (Sec 6.1)"
+      ]
+    },
+    {
+      "num": "5",
+      "phase": "1",
+      "activity": "Automated underwriting with predictive model",
+      "responsible": "Underwriting / Model Engine",
+      "output": "Risk scored by predictive model; rules-clear cases straight-through; refer otherwise",
+      "timeline": "Day 1",
+      "controls": "ENHANCED (v2.0) — STP underwriting",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "1",
+      "activity": "Determine the policy price",
+      "responsible": "Underwriting / Rating Engine",
+      "output": "Premium calculated on risk, coverage and rating factors; currency confirmed",
+      "timeline": "Day 1–2",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Generate policy from clause library",
+      "responsible": "Underwriting / Policy Admin",
+      "output": "Policy documents generated from a configurable product/clause library; Legal for exceptions",
+      "timeline": "Day 2",
+      "controls": "ENHANCED (v2.0) — document automation",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Review and confirm terms",
+      "responsible": "Underwriting Staff",
+      "output": "Wording reviewed for accuracy and regulatory compliance; final terms confirmed",
+      "timeline": "Day 2",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "2",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Terms approval",
+      "kind": "decision",
+      "decision": "Terms approved?",
+      "branches": [
+        "Approved → notify",
+        "Not approved → revise (Head of UW)"
+      ]
+    },
+    {
+      "num": "9",
+      "phase": "2",
+      "activity": "Notify policyholder of terms and price",
+      "responsible": "Policy Administration Staff",
+      "output": "Coverage, premium, schedule, start date and 10-day deadline notified",
+      "timeline": "Day 2",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "2",
+      "activity": "Obtain acceptance via mandatory e-signature",
+      "responsible": "Policyholder / Policy Admin",
+      "output": "Auditable DocuSign acceptance of terms captured before issuance",
+      "timeline": "Day 2–4",
+      "controls": "NEW (v2.0) — conduct control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "3",
+      "activity": "Initial premium payment",
+      "responsible": "Policyholder / Finance",
+      "output": "Payment via card, banking, cheque or transfer; coverage attaches on confirmed payment",
+      "timeline": "Day 4",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Formally issue the insurance policy",
+      "responsible": "Policy Administration Staff",
+      "output": "Policy generated in PAS; number and effective date assigned; document linked",
+      "timeline": "Day 4",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "13",
+      "phase": "3",
+      "activity": "Dispatch policy document to policyholder",
+      "responsible": "Policy Administration Staff",
+      "output": "Schedule, certificate and PDS by email within 2 days; hard copy if required",
+      "timeline": "≤2 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "14",
+      "phase": "3",
+      "activity": "Automated data-quality validation",
+      "responsible": "PAS / System",
+      "output": "Policy data integrity validated automatically at issuance",
+      "timeline": "Day +0",
+      "controls": "NEW (v2.0) — data integrity",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "15",
+      "phase": "3",
+      "activity": "Renewal reminders & payment monitoring",
+      "responsible": "Policy Administration / PAS",
+      "output": "Automated 90/60/30-day alerts; payment schedule monitored; missed payments flagged",
+      "timeline": "Ongoing",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "16",
+      "phase": "3",
+      "activity": "Self-service & straight-through endorsements",
+      "responsible": "Policyholder / Policy Admin",
+      "output": "Standard mid-term changes self-served and processed straight-through; complex routed to UW",
+      "timeline": "On request",
+      "controls": "NEW (v2.0) — service & efficiency",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "17",
+      "phase": "4",
+      "activity": "File and manage policyholder claims",
+      "responsible": "Claims Staff / Policy Administration",
+      "output": "Claim registered in CMS; routed to SOP-INS-011 or SOP-INS-012",
+      "timeline": "On claim",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "4",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Settlement approval (POL-CLAIMS-001)",
+      "kind": "decision",
+      "decision": "Settlement authorised?",
+      "branches": [
+        "Within authority → settle",
+        "Above authority → Claims Manager"
+      ]
+    },
+    {
+      "num": "18",
+      "phase": "4",
+      "activity": "Close policy at end of term or on request",
+      "responsible": "Policy Administration Staff",
+      "output": "Status 'Closed'/'Lapsed'; unearned-premium refund per SOP-FIN-012",
+      "timeline": "≤5 days",
+      "controls": "Standard",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "opt_swim_phases": [
+    {
+      "pid": "1",
+      "name": "Application, screening & risk",
+      "subtitle": "Steps 1–6 · v2.0 adds KYC & automated UW",
+      "lanes": [
+        "Policyholder / Agent",
+        "App Processing / Compliance",
+        "Underwriting / Model"
+      ],
+      "nodes": [
+        {
+          "nid": "o1",
+          "lane": "Policyholder / Agent",
+          "col": 0,
+          "title": "Submit application",
+          "sub": "portal · agent · paper",
+          "kind": "standard"
+        },
+        {
+          "nid": "o2",
+          "lane": "App Processing / Compliance",
+          "col": 1,
+          "title": "Verify data & identity",
+          "sub": "documents checked",
+          "kind": "standard"
+        },
+        {
+          "nid": "o3",
+          "lane": "App Processing / Compliance",
+          "col": 2,
+          "title": "KYC / sanctions screening",
+          "sub": "watchlists",
+          "kind": "new"
+        },
+        {
+          "nid": "o4",
+          "lane": "App Processing / Compliance",
+          "col": 3,
+          "title": "Verification gate",
+          "sub": "approval",
+          "kind": "decision"
+        },
+        {
+          "nid": "o5",
+          "lane": "Underwriting / Model",
+          "col": 4,
+          "title": "Automated underwriting",
+          "sub": "predictive score",
+          "kind": "enhanced"
+        }
+      ],
+      "edges": [
+        {
+          "src": "o1",
+          "dst": "o2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "o2",
+          "dst": "o3",
+          "label": "KYC",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "o3",
+          "dst": "o4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o4",
+          "dst": "o5",
+          "label": "ok",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "v2.0 adds an explicit KYC/sanctions screening step and automated, model-scored underwriting before pricing."
+    },
+    {
+      "pid": "2",
+      "name": "Drafting & e-acceptance",
+      "subtitle": "Steps 7–10 · clause library & e-signature",
+      "lanes": [
+        "Underwriting",
+        "Policy Admin",
+        "Policyholder"
+      ],
+      "nodes": [
+        {
+          "nid": "p1",
+          "lane": "Underwriting",
+          "col": 0,
+          "title": "Generate from clause library",
+          "sub": "configurable templates",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "p2",
+          "lane": "Underwriting",
+          "col": 1,
+          "title": "Review & terms gate",
+          "sub": "approval",
+          "kind": "decision"
+        },
+        {
+          "nid": "p3",
+          "lane": "Policy Admin",
+          "col": 2,
+          "title": "Notify policyholder",
+          "sub": "terms · price · 10 days",
+          "kind": "standard"
+        },
+        {
+          "nid": "p4",
+          "lane": "Policyholder",
+          "col": 3,
+          "title": "Accept via e-signature",
+          "sub": "DocuSign",
+          "kind": "new"
+        }
+      ],
+      "edges": [
+        {
+          "src": "p1",
+          "dst": "p2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p2",
+          "dst": "p3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p3",
+          "dst": "p4",
+          "label": "e-sign",
+          "dashed": true,
+          "kind": "new"
+        }
+      ],
+      "note": "v2.0 generates policy documents from a clause library and mandates an auditable e-signature acceptance before issuance."
+    },
+    {
+      "pid": "3",
+      "name": "Payment, issuance & in-force",
+      "subtitle": "Steps 11–16 · v2.0 adds data-quality & self-service",
+      "lanes": [
+        "Policyholder / Finance",
+        "Policy Admin",
+        "PAS / Self-service"
+      ],
+      "nodes": [
+        {
+          "nid": "q1",
+          "lane": "Policyholder / Finance",
+          "col": 0,
+          "title": "Initial premium payment",
+          "sub": "coverage on payment",
+          "kind": "standard"
+        },
+        {
+          "nid": "q2",
+          "lane": "Policy Admin",
+          "col": 1,
+          "title": "Issue policy",
+          "sub": "policy number",
+          "kind": "standard"
+        },
+        {
+          "nid": "q3",
+          "lane": "Policy Admin",
+          "col": 2,
+          "title": "Dispatch documents",
+          "sub": "schedule · cert · PDS",
+          "kind": "standard"
+        },
+        {
+          "nid": "q4",
+          "lane": "PAS / Self-service",
+          "col": 3,
+          "title": "Automated data-quality validation",
+          "sub": "integrity check",
+          "kind": "new"
+        },
+        {
+          "nid": "q5",
+          "lane": "PAS / Self-service",
+          "col": 4,
+          "title": "Self-service endorsements",
+          "sub": "STP changes",
+          "kind": "new"
+        }
+      ],
+      "edges": [
+        {
+          "src": "q1",
+          "dst": "q2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q2",
+          "dst": "q3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q3",
+          "dst": "q4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q4",
+          "dst": "q5",
+          "label": "",
+          "dashed": true,
+          "kind": "new"
+        }
+      ],
+      "note": "v2.0 validates policy data automatically at issuance and lets policyholders self-serve standard mid-term endorsements straight-through."
+    },
+    {
+      "pid": "4",
+      "name": "Claims intake & closure",
+      "subtitle": "Steps 17–18 · lifecycle endpoints",
+      "lanes": [
+        "Policyholder",
+        "Claims",
+        "Policy Admin / Finance"
+      ],
+      "nodes": [
+        {
+          "nid": "r1",
+          "lane": "Policyholder",
+          "col": 0,
+          "title": "File claim",
+          "sub": "portal · hotline",
+          "kind": "standard"
+        },
+        {
+          "nid": "r2",
+          "lane": "Claims",
+          "col": 1,
+          "title": "Register & route claim",
+          "sub": "SOP-INS-011/012",
+          "kind": "standard"
+        },
+        {
+          "nid": "r3",
+          "lane": "Claims",
+          "col": 2,
+          "title": "Settlement approval gate",
+          "sub": "POL-CLAIMS-001",
+          "kind": "decision"
+        },
+        {
+          "nid": "r4",
+          "lane": "Policy Admin / Finance",
+          "col": 1,
+          "title": "Close policy",
+          "sub": "expiry / request / lapse",
+          "kind": "standard"
+        },
+        {
+          "nid": "r5",
+          "lane": "Policy Admin / Finance",
+          "col": 2,
+          "title": "Calculate refund & confirm",
+          "sub": "SOP-FIN-012",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "r1",
+          "dst": "r2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "r2",
+          "dst": "r3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "r4",
+          "dst": "r5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Claims intake and policy closure are unchanged in flow but benefit from cleaner, validated lifecycle data."
+    }
+  ],
+  "opt_n_phases": 4,
+  "opt_n_steps": 18,
+  "opt_n_gateways": 3,
+  "opt_fit": 90,
+  "optimised_doc": {
+    "subtitle": "Optimised per Fit-Gap Analysis against the Guidewire PolicyCenter Policy Lifecycle Catalog",
+    "sections": [
+      {
+        "title": "",
+        "blocks": [
+          [
+            "meta",
+            [
+              [
+                "Document Reference",
+                "SOP-INS-013"
+              ],
+              [
+                "Version",
+                "2.0 (Optimised)"
+              ],
+              [
+                "Effective Date",
+                "01 October 2026"
+              ],
+              [
+                "Supersedes",
+                "v1.0 dated 01 June 2025"
+              ],
+              [
+                "Owner",
+                "Policy Administration — Operations"
+              ],
+              [
+                "Approved By",
+                "Chief Operating Officer"
+              ],
+              [
+                "Optimisation Reference",
+                "Fit-Gap Report FG-INS-013 dated 18 June 2026"
+              ],
+              [
+                "Catalog Alignment Score",
+                "90% (up from 67% in v1.0)"
+              ],
+              [
+                "Classification",
+                "Internal Use Only"
+              ]
+            ]
+          ],
+          [
+            "summary",
+            "OPTIMISATION SUMMARY — What changed in v2.0",
+            [
+              "This version incorporates 5 remediation actions from Fit-Gap Report FG-INS-013. Alignment to the Guidewire PolicyCenter lifecycle catalog increased from 67% to 90%. Critical additions: an explicit KYC/sanctions screening step with continuous monitoring, mandatory e-signature acceptance, automated underwriting with clause-library document generation, self-service straight-through endorsements, and automated data-quality validation."
+            ],
+            [
+              "NEW STEP (green) — step added to close a gap vs the PolicyCenter catalog",
+              "ENHANCED (amber) — existing step updated with additional automation or controls"
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "1. Purpose",
+        "blocks": [
+          [
+            "para",
+            "This Standard Operating Procedure defines the end-to-end lifecycle process for administering an insurance policy from application submission to closure. Version 2.0 incorporates optimisations from fit-gap analysis against the Guidewire PolicyCenter Policy Lifecycle Best-Practice Catalog, achieving 90% alignment (up from 67% in v1.0)."
+          ]
+        ]
+      },
+      {
+        "title": "2. Scope",
+        "blocks": [
+          [
+            "para",
+            "This procedure applies to all personal and commercial lines policies across all channels, covering new business, mid-term amendments, renewals and closures."
+          ],
+          [
+            "banner",
+            "new",
+            "Scope extended: KYC/sanctions screening, mandatory e-signature and self-service endorsements now apply across the policy lifecycle."
+          ],
+          [
+            "para",
+            "This procedure does NOT cover reinsurance treaty administration (SOP-RE-001), group member-level enrolment (SOP-INS-006), or claims settlement beyond intake (SOP-INS-011/012)."
+          ]
+        ]
+      },
+      {
+        "title": "3. Authority & Decision Gates",
+        "blocks": [
+          [
+            "table",
+            [
+              "Gate / Decision",
+              "First Authority",
+              "Second Authority"
+            ],
+            [
+              [
+                "Data & coverage approval",
+                "Application Processing Supervisor",
+                "Agent"
+              ],
+              [
+                "Underwriting decision",
+                "Underwriting Staff",
+                "Model engine (STP)"
+              ],
+              [
+                "Policy terms approval",
+                "Underwriting Supervisor",
+                "Head of Underwriting"
+              ],
+              [
+                "Mid-term endorsement",
+                "Policy Administration",
+                "Underwriting (complex)"
+              ],
+              [
+                "Claim settlement",
+                "Claims Adjuster / Manager",
+                "POL-CLAIMS-001"
+              ],
+              [
+                "Disputed cancellation",
+                "Compliance",
+                "Legal"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "4. Roles and Responsibilities",
+        "blocks": [
+          [
+            "table",
+            [
+              "Role",
+              "Responsibilities"
+            ],
+            [
+              [
+                "Policyholder / Applicant",
+                "Submits accurate application and documents; e-signs acceptance; pays premium; requests changes."
+              ],
+              [
+                "Application Processing Staff",
+                "Registers and verifies applications; performs identity and KYC/sanctions screening; routes to underwriting."
+              ],
+              [
+                "Underwriting Staff",
+                "Owns automated and manual underwriting; sets terms and pricing; approves within authority."
+              ],
+              [
+                "Policy Administration Staff",
+                "Generates and issues documents; maintains the system of record; processes endorsements and closure."
+              ],
+              [
+                "Finance",
+                "Processes premium payments; monitors schedules; handles refunds."
+              ],
+              [
+                "Claims Staff",
+                "Registers and routes claims to the relevant claims SOP."
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "5. Screening & Acceptance Controls (New Section — v2.0)",
+        "blocks": [
+          [
+            "banner",
+            "crit",
+            "New section. Required by the PolicyCenter catalog. KYC/sanctions screening and e-signature acceptance now gate the policy lifecycle."
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Control",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "S1",
+                "KYC / sanctions screening",
+                "Application Processing / Compliance",
+                "Identity proofed; watchlists screened",
+                "At application"
+              ],
+              [
+                "S2",
+                "Continuous sanctions monitoring",
+                "Compliance",
+                "Lifecycle watchlist monitoring",
+                "Continuous"
+              ],
+              [
+                "S3",
+                "Mandatory e-signature acceptance",
+                "Policyholder / Policy Admin",
+                "Auditable DocuSign acceptance",
+                "Pre-issue"
+              ]
+            ],
+            {
+              "0": "new",
+              "1": "new",
+              "2": "new"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "6. Process Steps",
+        "blocks": [
+          [
+            "h3",
+            "6.1 Application, Screening & Risk"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "1",
+                "Policyholder submits application",
+                "Policyholder / Agent",
+                "Application ID; timestamp",
+                "Day 0"
+              ],
+              [
+                "2",
+                "Collect and verify policyholder data",
+                "Application Processing",
+                "Identity documents verified",
+                "Day 0–1"
+              ],
+              [
+                "3",
+                "KYC / sanctions screening",
+                "Application Processing / Compliance",
+                "Screened; monitoring enabled",
+                "Day 0–1"
+              ],
+              [
+                "4",
+                "Verify coverage details and eligibility",
+                "Application Processing",
+                "Checked against guidelines",
+                "Day 0–1"
+              ],
+              [
+                "5",
+                "Automated underwriting with predictive model",
+                "Underwriting / Model",
+                "STP for rules-clear; refer otherwise",
+                "Day 1"
+              ],
+              [
+                "6",
+                "Determine the policy price",
+                "Underwriting / Rating Engine",
+                "Premium calculated",
+                "Day 1–2"
+              ]
+            ],
+            {
+              "2": "new",
+              "4": "enh"
+            }
+          ],
+          [
+            "h3",
+            "6.2 Drafting & E-Acceptance"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "7",
+                "Generate policy from clause library",
+                "Underwriting / Policy Admin",
+                "Configurable templates; Legal exceptions",
+                "Day 2"
+              ],
+              [
+                "8",
+                "Review and confirm terms",
+                "Underwriting Staff",
+                "Compliance-reviewed final terms",
+                "Day 2"
+              ],
+              [
+                "9",
+                "Notify policyholder of terms and price",
+                "Policy Administration",
+                "Coverage, premium, deadline",
+                "Day 2"
+              ],
+              [
+                "10",
+                "Obtain acceptance via mandatory e-signature",
+                "Policyholder / Policy Admin",
+                "Auditable DocuSign acceptance",
+                "Day 2–4"
+              ]
+            ],
+            {
+              "0": "enh",
+              "3": "new"
+            }
+          ],
+          [
+            "h3",
+            "6.3 Payment, Issuance & In-Force"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "11",
+                "Initial premium payment",
+                "Policyholder / Finance",
+                "Coverage attaches on payment",
+                "Day 4"
+              ],
+              [
+                "12",
+                "Formally issue the policy",
+                "Policy Administration",
+                "Number and effective date assigned",
+                "Day 4"
+              ],
+              [
+                "13",
+                "Dispatch policy document",
+                "Policy Administration",
+                "Schedule, cert, PDS within 2 days",
+                "≤2 days"
+              ],
+              [
+                "14",
+                "Automated data-quality validation",
+                "PAS / System",
+                "Integrity validated at issuance",
+                "Day +0"
+              ],
+              [
+                "15",
+                "Renewal reminders & payment monitoring",
+                "Policy Administration / PAS",
+                "90/60/30-day alerts; payment tracked",
+                "Ongoing"
+              ],
+              [
+                "16",
+                "Self-service & STP endorsements",
+                "Policyholder / Policy Admin",
+                "Standard changes self-served",
+                "On request"
+              ]
+            ],
+            {
+              "3": "new",
+              "5": "new"
+            }
+          ],
+          [
+            "h3",
+            "6.4 Claims Intake & Closure"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "17",
+                "File and manage policyholder claims",
+                "Claims Staff",
+                "Registered in CMS; routed to claims SOP",
+                "On claim"
+              ],
+              [
+                "18",
+                "Close policy at end of term or on request",
+                "Policy Administration",
+                "Status set; refund per SOP-FIN-012",
+                "≤5 days"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "7. Exception Handling",
+        "blocks": [
+          [
+            "h3",
+            "7.1 Application Data Discrepancy"
+          ],
+          [
+            "numbered",
+            [
+              "Application placed on hold; applicant contacted within 2 business days to clarify or resubmit.",
+              "Material misrepresentation: Underwriting and Compliance notified; application suspended pending review.",
+              "Maximum resolution period: 14 calendar days before withdrawal."
+            ]
+          ],
+          [
+            "h3",
+            "7.2 Applicant Disputes Terms Post-Notification"
+          ],
+          [
+            "numbered_from",
+            4,
+            [
+              "Agent/Policy Admin liaises with Underwriting on whether terms adjustment is possible within authority.",
+              "Maximum two revised offers; further negotiation escalated to Head of Underwriting.",
+              "No agreement within 10 business days: application closed as 'Not Taken Up'."
+            ]
+          ],
+          [
+            "h3",
+            "7.3 Screening Hold (New — v2.0)"
+          ],
+          [
+            "banner",
+            "new",
+            "New exception. A sanctions/PEP match holds the application pending Compliance review before any bind."
+          ],
+          [
+            "numbered_from",
+            7,
+            [
+              "Screening hit: application held; Compliance dispositions within 1 business day.",
+              "Confirmed match: application declined and reported per regulatory obligations."
+            ]
+          ],
+          [
+            "h3",
+            "7.4 Mid-Term Change & Disputed Cancellation"
+          ],
+          [
+            "numbered_from",
+            9,
+            [
+              "Standard mid-term changes are self-served; complex changes assessed by Underwriting with premium adjustment.",
+              "Disputed Meridian-initiated cancellation: closure held 10 business days for internal review.",
+              "Regulatory cases escalated to Compliance and Legal; external dispute resolution advised if unresolved."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "8. Systems and Tools",
+        "blocks": [
+          [
+            "table",
+            [
+              "System",
+              "Purpose",
+              "Primary Users"
+            ],
+            [
+              [
+                "Policy Administration System (PAS)",
+                "System of record for the full policy lifecycle",
+                "All roles"
+              ],
+              [
+                "Rating + Model Engine",
+                "Premium calculation and automated underwriting",
+                "Underwriting, Application Processing"
+              ],
+              [
+                "KYC / Sanctions Tool",
+                "Identity and watchlist screening and monitoring",
+                "Application Processing, Compliance"
+              ],
+              [
+                "Billing System (Sapiens)",
+                "Premium scheduling, collection, reconciliation",
+                "Finance, Policy Administration"
+              ],
+              [
+                "Claims Management System (Majesco)",
+                "Claim registration and routing",
+                "Claims Staff"
+              ],
+              [
+                "DocuSign",
+                "Mandatory e-signature acceptance and amendments",
+                "Policy Administration, Policyholder"
+              ],
+              [
+                "Document & Self-Service Platform",
+                "Clause-library generation and self-service endorsements",
+                "Policy Administration, Policyholders"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "9. Key Controls and Audit Points",
+        "blocks": [
+          [
+            "banner",
+            "enh",
+            "Controls expanded in v2.0: KYC/sanctions, e-signature, automated underwriting, data-quality validation and self-service endorsements."
+          ],
+          [
+            "bullets",
+            [
+              "Screening gate: KYC/sanctions screened at application and monitored across the lifecycle.",
+              "E-signature: auditable acceptance of terms before issuance.",
+              "Automated underwriting: predictive scoring widens straight-through processing with governance.",
+              "Clause library: documents generated from approved, version-controlled templates.",
+              "Data integrity: policy data validated automatically at issuance.",
+              "Self-service endorsements: standard mid-term changes processed straight-through.",
+              "Immutable audit trail: application, screening, acceptance, issuance and change events logged."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "10. Key Performance Indicators",
+        "blocks": [
+          [
+            "table",
+            [
+              "KPI",
+              "v1.0 Target",
+              "v2.0 Target",
+              "Measurement"
+            ],
+            [
+              [
+                "Application-to-issuance",
+                "≤3 business days",
+                "≤2 business days",
+                "Documentation/payment to issuance"
+              ],
+              [
+                "Straight-through underwriting",
+                "N/A (new)",
+                "≥60%",
+                "Auto-underwritten rate"
+              ],
+              [
+                "Sanctions screening",
+                "N/A (new)",
+                "100% at application",
+                "Screening log"
+              ],
+              [
+                "E-signature acceptance",
+                "Verbal allowed",
+                "100% auditable",
+                "E-signature records"
+              ],
+              [
+                "Policy database accuracy",
+                "100% ≤1 day",
+                "100% validated at issuance",
+                "Data-quality checks"
+              ],
+              [
+                "Self-service endorsements",
+                "N/A (new)",
+                "≥40% of standard changes",
+                "Self-service vs manual"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "11. Document Control",
+        "blocks": [
+          [
+            "table",
+            [
+              "Version",
+              "Date",
+              "Author",
+              "Summary of Changes"
+            ],
+            [
+              [
+                "1.0",
+                "01 Jun 2025",
+                "A. Tan, Policy Operations",
+                "Initial release — full policy lifecycle SOP consolidating application, issuance, in-force management, claims intake, and closure"
+              ],
+              [
+                "2.0",
+                "01 Oct 2026",
+                "A. Tan, Policy Operations",
+                "OPTIMISED: KYC/sanctions screening & monitoring; mandatory e-signature; automated underwriting & clause-library generation; self-service straight-through endorsements; automated data-quality validation; catalog alignment 67% → 90%"
+              ]
+            ],
+            {}
+          ]
+        ]
+      }
+    ]
+  },
+  "swim_cover_tags": "Application · Underwriting · Issuance · In-force · Claims · Closure",
+  "hierarchy_cover_sub": "Phase breakdown with lifecycle tracks, decision gates, and exception paths"
+}

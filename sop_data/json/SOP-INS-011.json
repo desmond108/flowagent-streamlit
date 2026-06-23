@@ -1,0 +1,2239 @@
+{
+  "meta": {
+    "sop_id": "SOP-INS-011",
+    "slug": "Medical_Claims",
+    "title": "Medical Claims Processing",
+    "short_title": "Medical claims processing",
+    "version": "2.3",
+    "owner": "Medical Claims — Claims Operations",
+    "org": "Meridian Insurance Group",
+    "catalog": "Guidewire ClaimCenter — Health Claims Best-Practice Catalog",
+    "catalog_short": "Guidewire ClaimCenter",
+    "new_version": "3.0",
+    "effective_date": "01 September 2026",
+    "supersedes": "v2.3 dated 01 March 2025",
+    "approved_by": "Chief Claims Officer",
+    "classification": "Internal Use Only — Claims Restricted"
+  },
+  "phases": [
+    {
+      "pid": "1",
+      "name": "Receipt & registration",
+      "subtitle": "All claims entering Claims Operations",
+      "circle": "blue",
+      "roles": "Claimant · Claims Processor · PAS",
+      "step_range": "Steps 1–4",
+      "summary": "4 steps + 1 decision"
+    },
+    {
+      "pid": "2",
+      "name": "Assessment",
+      "subtitle": "Eligibility, clinical review, fraud screening",
+      "circle": "green",
+      "roles": "Processor · Adjuster · Medical Advisor · SIU",
+      "step_range": "Steps 5–8",
+      "summary": "4 steps"
+    },
+    {
+      "pid": "3",
+      "name": "Decision & settlement",
+      "subtitle": "Decision, payment and closure",
+      "circle": "amber",
+      "roles": "Adjuster · Manager · Finance",
+      "step_range": "Steps 9–12",
+      "summary": "4 steps + 1 decision"
+    }
+  ],
+  "steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Claim received via portal, app, email, or post",
+      "responsible": "Claims Processor / System",
+      "output": "Claim ID assigned; date of receipt recorded; acknowledgement sent to claimant",
+      "timeline": "T+1 day",
+      "controls": "Acknowledgement SLA: 1 business day",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Eligibility verification",
+      "responsible": "Claims Processor / PAS",
+      "output": "Policy active at date of loss/treatment; claimant a covered member; waiting periods checked",
+      "timeline": "T+1 day",
+      "controls": "Coverage confirmed before assessment",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Document completeness check",
+      "responsible": "Claims Processor",
+      "output": "Claim form, medical reports, itemised bills, referral letters and receipts reviewed",
+      "timeline": "T+2 days",
+      "controls": "Missing items: 7-day request deadline",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Claim type determination and routing",
+      "responsible": "Claims Processor",
+      "output": "Categorised: routine (auto-assess), complex (adjuster), high-value (manager), suspicious (SIU)",
+      "timeline": "T+2 days",
+      "controls": "Determines assessment track",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "1",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Routing rules per claim category",
+      "kind": "decision",
+      "decision": "Claim category?",
+      "branches": [
+        "Routine → auto-assessment",
+        "Complex / high-value → adjuster review",
+        "Suspicious → SIU flag (Sec 6.2)"
+      ]
+    },
+    {
+      "num": "5",
+      "phase": "2",
+      "activity": "Policy coverage and benefit limit verification",
+      "responsible": "Claims Processor / Adjuster",
+      "output": "Applicable benefit, sub-limit, excess and co-payment calculated; exclusions checked",
+      "timeline": "T+3 days",
+      "controls": "PAS benefit configuration applied",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "2",
+      "activity": "Clinical review (complex claims)",
+      "responsible": "Adjuster / Medical Advisor",
+      "output": "Medical necessity, standard of care and reasonableness of charges assessed",
+      "timeline": "T+5 days",
+      "controls": "Medical Advisor opinion for high-value/contested",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Fraud screening",
+      "responsible": "Claims System / SIU",
+      "output": "Automated scoring; flagged claims reviewed by SIU within 3 business days",
+      "timeline": "Parallel",
+      "controls": "Key control: SIU review ≥2% of submissions",
+      "kind": "control",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Settlement amount calculated",
+      "responsible": "Claims Adjuster / System",
+      "output": "Approved amount: covered charges less excess and co-payment; itemised breakdown",
+      "timeline": "T+5 days",
+      "controls": "Benefit accumulators updated",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "3",
+      "activity": "Claims decision made and documented",
+      "responsible": "Adjuster / Claims Manager",
+      "output": "Approve, partial approve, or reject; rationale documented in Claims System",
+      "timeline": "T+6 days",
+      "controls": "Manager approval above adjuster authority",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "3",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Per authority matrix",
+      "kind": "decision",
+      "decision": "Decision outcome?",
+      "branches": [
+        "Approve / partial → settlement",
+        "Reject → rejection notice + 30-day appeal (Sec 6.1)"
+      ]
+    },
+    {
+      "num": "10",
+      "phase": "3",
+      "activity": "Claimant notified of decision",
+      "responsible": "Claims Processor",
+      "output": "Settlement letter or rejection notice within 1 business day; amount and timeline stated",
+      "timeline": "T+7 days",
+      "controls": "Notification SLA: 1 business day",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "3",
+      "activity": "Payment processed",
+      "responsible": "Finance / Claims System",
+      "output": "Direct bank transfer or cheque within 5 business days of approval; remittance advice sent",
+      "timeline": "T+10 days",
+      "controls": "SAP payment run",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Claim closed and GL updated",
+      "responsible": "Claims Processor / Finance",
+      "output": "Status set to Settled or Rejected; loss reserve released or adjusted; GL journal posted",
+      "timeline": "T+10 days",
+      "controls": "Reserve adjustment; immutable audit trail",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "authority": [
+    {
+      "band": "Up to SGD 5,000",
+      "first": "Claims Processor",
+      "second": "—"
+    },
+    {
+      "band": "SGD 5,001–25,000",
+      "first": "Claims Adjuster",
+      "second": "—"
+    },
+    {
+      "band": "SGD 25,001–100,000",
+      "first": "Claims Manager",
+      "second": "Adjuster recommendation"
+    },
+    {
+      "band": "SGD 100,001–250,000",
+      "first": "Claims Manager",
+      "second": "Medical Advisor sign-off"
+    },
+    {
+      "band": "Above SGD 250,000",
+      "first": "Chief Claims Officer",
+      "second": "Claims Manager"
+    }
+  ],
+  "swim_phases": [
+    {
+      "pid": "1",
+      "name": "Claim receipt & registration",
+      "subtitle": "Steps 1–4 · all claim types",
+      "lanes": [
+        "Claimant",
+        "Claims Processor",
+        "Claims System / PAS"
+      ],
+      "nodes": [
+        {
+          "nid": "s1",
+          "lane": "Claimant",
+          "col": 0,
+          "title": "Submit claim",
+          "sub": "Portal · app · hotline",
+          "kind": "standard"
+        },
+        {
+          "nid": "s2",
+          "lane": "Claims Processor",
+          "col": 1,
+          "title": "Register & assign Claim ID",
+          "sub": "Claims Processor",
+          "kind": "standard"
+        },
+        {
+          "nid": "s3",
+          "lane": "Claims Processor",
+          "col": 2,
+          "title": "Eligibility verification",
+          "sub": "via PAS",
+          "kind": "standard"
+        },
+        {
+          "nid": "s4",
+          "lane": "Claims Processor",
+          "col": 3,
+          "title": "Document completeness",
+          "sub": "Claims Processor",
+          "kind": "standard"
+        },
+        {
+          "nid": "s5",
+          "lane": "Claims Processor",
+          "col": 4,
+          "title": "Determine type & route",
+          "sub": "routine / complex / SIU",
+          "kind": "decision"
+        },
+        {
+          "nid": "s6",
+          "lane": "Claims System / PAS",
+          "col": 1,
+          "title": "Auto-acknowledge claimant",
+          "sub": "Majesco",
+          "kind": "standard"
+        },
+        {
+          "nid": "s7",
+          "lane": "Claims System / PAS",
+          "col": 3,
+          "title": "Request missing docs",
+          "sub": "7-day deadline",
+          "kind": "exception"
+        }
+      ],
+      "edges": [
+        {
+          "src": "s1",
+          "dst": "s2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "s2",
+          "dst": "s6",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "s2",
+          "dst": "s3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s3",
+          "dst": "s4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s4",
+          "dst": "s5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s4",
+          "dst": "s7",
+          "label": "gap",
+          "dashed": true,
+          "kind": "exception"
+        }
+      ],
+      "note": "Claims arrive via portal, app, hotline or post. Incomplete claims trigger a 7-day document request."
+    },
+    {
+      "pid": "2",
+      "name": "Assessment",
+      "subtitle": "Steps 5–8 · eligibility, clinical, fraud",
+      "lanes": [
+        "Claims Processor",
+        "Claims Adjuster",
+        "Medical Advisor / SIU"
+      ],
+      "nodes": [
+        {
+          "nid": "a1",
+          "lane": "Claims Processor",
+          "col": 0,
+          "title": "Coverage & benefit check",
+          "sub": "via PAS",
+          "kind": "standard"
+        },
+        {
+          "nid": "a2",
+          "lane": "Claims Adjuster",
+          "col": 1,
+          "title": "Clinical review",
+          "sub": "complex claims",
+          "kind": "standard"
+        },
+        {
+          "nid": "a3",
+          "lane": "Medical Advisor / SIU",
+          "col": 2,
+          "title": "Medical Advisor opinion",
+          "sub": "high-value / contested",
+          "kind": "standard"
+        },
+        {
+          "nid": "a4",
+          "lane": "Medical Advisor / SIU",
+          "col": 1,
+          "title": "Fraud screening",
+          "sub": "auto-score · SIU",
+          "kind": "standard"
+        },
+        {
+          "nid": "a5",
+          "lane": "Claims Adjuster",
+          "col": 3,
+          "title": "Calculate settlement",
+          "sub": "less excess & co-pay",
+          "kind": "standard"
+        }
+      ],
+      "edges": [
+        {
+          "src": "a1",
+          "dst": "a2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a3",
+          "label": "cx",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a3",
+          "dst": "a5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a1",
+          "dst": "a4",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "a4",
+          "dst": "a5",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        }
+      ],
+      "note": "Routine claims auto-assess against PAS benefit configuration; complex claims get Medical Advisor review. All claims are fraud-screened in parallel."
+    },
+    {
+      "pid": "3",
+      "name": "Decision & settlement",
+      "subtitle": "Steps 9–12 · decision, payment, close",
+      "lanes": [
+        "Manager / Adjuster",
+        "Claims Processor",
+        "Finance / System"
+      ],
+      "nodes": [
+        {
+          "nid": "d1",
+          "lane": "Manager / Adjuster",
+          "col": 0,
+          "title": "Claims decision",
+          "sub": "approve / partial / reject",
+          "kind": "decision"
+        },
+        {
+          "nid": "d2",
+          "lane": "Claims Processor",
+          "col": 1,
+          "title": "Notify claimant",
+          "sub": "letter / notice",
+          "kind": "standard"
+        },
+        {
+          "nid": "d3",
+          "lane": "Manager / Adjuster",
+          "col": 1,
+          "title": "Reject → 30-day appeal",
+          "sub": "Claims Manager",
+          "kind": "exception"
+        },
+        {
+          "nid": "d4",
+          "lane": "Finance / System",
+          "col": 2,
+          "title": "Payment processed",
+          "sub": "SAP · ≤5 days",
+          "kind": "standard"
+        },
+        {
+          "nid": "d5",
+          "lane": "Claims Processor",
+          "col": 3,
+          "title": "Close & GL update",
+          "sub": "reserve adjusted",
+          "kind": "standard"
+        }
+      ],
+      "edges": [
+        {
+          "src": "d1",
+          "dst": "d2",
+          "label": "ok",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d1",
+          "dst": "d3",
+          "label": "rej",
+          "dashed": true,
+          "kind": "exception"
+        },
+        {
+          "src": "d2",
+          "dst": "d4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d4",
+          "dst": "d5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Approved claims are paid within 5 business days. Rejections cite the specific policy clause and open a 30-day appeal to the Claims Manager."
+    }
+  ],
+  "n_phases": 3,
+  "n_steps": 12,
+  "n_roles": 6,
+  "n_gateways": 3,
+  "fitgap": {
+    "overall_fit": 71,
+    "partial_pct": 13,
+    "fits": 8,
+    "gaps": 5,
+    "partials": 3,
+    "steps_analysed": 16,
+    "phases_count": 3,
+    "summary_line": "Overall alignment of SOP-INS-011 against the Guidewire ClaimCenter health-claims catalog",
+    "metrics": [
+      [
+        "Steps analysed",
+        "16 steps across 3 phases"
+      ],
+      [
+        "Fits confirmed",
+        "8 steps aligned to catalog"
+      ],
+      [
+        "Gaps identified",
+        "5 steps — remediation required"
+      ],
+      [
+        "Partial fits",
+        "3 steps — enhancement recommended"
+      ],
+      [
+        "Highest risk area",
+        "Coordination of benefits (missing)"
+      ],
+      [
+        "Reserving",
+        "No case reserve set at FNOL"
+      ],
+      [
+        "Ref standard",
+        "Guidewire ClaimCenter Health Catalog"
+      ]
+    ],
+    "phase_bars": [
+      {
+        "line1": "Phase 1",
+        "line2": "Receipt",
+        "value": 80,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 2",
+        "line2": "Assessment",
+        "value": 66,
+        "colour": ""
+      },
+      {
+        "line1": "Fraud /",
+        "line2": "SIU",
+        "value": 64,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 3",
+        "line2": "Settlement",
+        "value": 72,
+        "colour": ""
+      }
+    ],
+    "phase_cards": [
+      {
+        "label": "Phase 1",
+        "value": 80,
+        "sub": "Receipt & registration"
+      },
+      {
+        "label": "Phase 2",
+        "value": 66,
+        "sub": "Assessment"
+      },
+      {
+        "label": "Fraud",
+        "value": 64,
+        "sub": "Screening & SIU"
+      },
+      {
+        "label": "Phase 3",
+        "value": 72,
+        "sub": "Decision & settlement"
+      }
+    ],
+    "detail_slides": [
+      [
+        "Phase 1 — Receipt & registration",
+        "Steps 1–6 vs Guidewire ClaimCenter health-claims catalog",
+        [
+          "p1"
+        ]
+      ],
+      [
+        "Phase 2 — Assessment & adjudication",
+        "Steps 7–12 vs Guidewire ClaimCenter health-claims catalog",
+        [
+          "p2"
+        ]
+      ],
+      [
+        "Phase 3 — Decision, settlement & recovery",
+        "Steps 13–16 vs Guidewire ClaimCenter health-claims catalog",
+        [
+          "p3"
+        ]
+      ]
+    ],
+    "items": [
+      {
+        "num": "1",
+        "name": "Multi-channel claim intake",
+        "status": "FIT",
+        "detail": "Portal, app, hotline and post intake aligns with ClaimCenter FNOL multi-channel capture.",
+        "owner": "Claims Processor",
+        "ref": "GW-CC-FNOL-01",
+        "group": "p1"
+      },
+      {
+        "num": "2",
+        "name": "Claim registration & ID",
+        "status": "FIT",
+        "detail": "Same-day registration with a unique Claim ID and dated audit aligns with ClaimCenter claim setup.",
+        "owner": "Claims Processor",
+        "ref": "GW-CC-FNOL-02",
+        "group": "p1"
+      },
+      {
+        "num": "3",
+        "name": "Eligibility verification",
+        "status": "FIT",
+        "detail": "Policy-active and covered-member checks via PAS align with ClaimCenter policy verification.",
+        "owner": "Claims Processor / PAS",
+        "ref": "GW-CC-FNOL-03",
+        "group": "p1"
+      },
+      {
+        "num": "4",
+        "name": "Duplicate & coordination-of-benefits check",
+        "status": "GAP",
+        "detail": "ClaimCenter requires duplicate-claim detection and a coordination-of-benefits (other-insurer) check at FNOL. SOP performs neither — risk of double payment.",
+        "owner": "Claims Processor",
+        "ref": "GW-CC-FNOL-05",
+        "group": "p1"
+      },
+      {
+        "num": "5",
+        "name": "Case reserve at registration",
+        "status": "GAP",
+        "detail": "ClaimCenter sets an initial case reserve when a claim is created. SOP only adjusts reserves at closure (step 12), understating outstanding-liability reporting.",
+        "owner": "Claims Processor / Finance",
+        "ref": "GW-CC-FIN-01",
+        "group": "p1"
+      },
+      {
+        "num": "6",
+        "name": "Document completeness & follow-up",
+        "status": "PARTIAL",
+        "detail": "Completeness check and 7-day request present, but no automated diary/escalation when documents arrive late — relies on manual follow-up.",
+        "owner": "Claims Processor",
+        "ref": "GW-CC-FNOL-04",
+        "group": "p1"
+      },
+      {
+        "num": "7",
+        "name": "Benefit & sub-limit calculation",
+        "status": "FIT",
+        "detail": "Benefit, sub-limit, excess, co-payment and exclusion checks via PAS align with ClaimCenter coverage evaluation.",
+        "owner": "Claims Adjuster / PAS",
+        "ref": "GW-CC-COV-01",
+        "group": "p2"
+      },
+      {
+        "num": "8",
+        "name": "Auto-adjudication of routine claims",
+        "status": "PARTIAL",
+        "detail": "Routine claims are routed to manual assessment. ClaimCenter recommends a straight-through auto-adjudication rules engine for low-value, in-network, rules-clear claims.",
+        "owner": "Claims System",
+        "ref": "GW-CC-ADJ-02",
+        "group": "p2"
+      },
+      {
+        "num": "9",
+        "name": "Clinical / medical necessity review",
+        "status": "FIT",
+        "detail": "Adjuster and Medical Advisor review of necessity, standard of care and reasonableness aligns with ClaimCenter clinical review.",
+        "owner": "Adjuster / Medical Advisor",
+        "ref": "GW-CC-ADJ-03",
+        "group": "p2"
+      },
+      {
+        "num": "10",
+        "name": "Provider network & tariff validation",
+        "status": "GAP",
+        "detail": "ClaimCenter validates billed charges against contracted provider tariffs/network agreements. SOP assesses 'reasonableness' subjectively with no tariff table — a key leakage driver.",
+        "owner": "Claims Adjuster",
+        "ref": "GW-CC-ADJ-05",
+        "group": "p2"
+      },
+      {
+        "num": "11",
+        "name": "Fraud screening depth",
+        "status": "PARTIAL",
+        "detail": "Automated scoring and SIU review present, but no provider-level fraud profiling or network/link analytics recommended by the catalog.",
+        "owner": "Claims System / SIU",
+        "ref": "GW-CC-SIU-01",
+        "group": "p2"
+      },
+      {
+        "num": "12",
+        "name": "Concurrent / utilisation review",
+        "status": "GAP",
+        "detail": "Pre-authorisation is point-in-time only. ClaimCenter recommends concurrent (utilisation) review for ongoing inpatient stays to control length-of-stay and cost.",
+        "owner": "Claims Adjuster",
+        "ref": "GW-CC-ADJ-06",
+        "group": "p2"
+      },
+      {
+        "num": "13",
+        "name": "Settlement calculation & accumulators",
+        "status": "FIT",
+        "detail": "Settlement net of excess/co-pay with itemised breakdown aligns; benefit accumulators tracked in PAS.",
+        "owner": "Claims Adjuster / System",
+        "ref": "GW-CC-COV-03",
+        "group": "p3"
+      },
+      {
+        "num": "14",
+        "name": "Decision & authority matrix",
+        "status": "FIT",
+        "detail": "Tiered approve/partial/reject decisioning with documented rationale and authority thresholds aligns with ClaimCenter decisioning.",
+        "owner": "Adjuster / Claims Manager",
+        "ref": "GW-CC-DEC-01",
+        "group": "p3"
+      },
+      {
+        "num": "15",
+        "name": "Claimant notification & appeals",
+        "status": "FIT",
+        "detail": "1-day notification, policy-clause rejection reasons and a 30-day appeal window align with the catalog communications & appeals standard.",
+        "owner": "Claims Processor",
+        "ref": "GW-CC-DEC-03",
+        "group": "p3"
+      },
+      {
+        "num": "16",
+        "name": "Overpayment & COB recovery",
+        "status": "GAP",
+        "detail": "No recovery process for overpayments or amounts recoverable from other insurers/third parties. ClaimCenter includes a recovery/subrogation step after settlement.",
+        "owner": "Finance / Claims Manager",
+        "ref": "GW-CC-REC-01",
+        "group": "p3"
+      }
+    ],
+    "groups": [
+      [
+        "p1",
+        "PHASE 1 — RECEIPT & REGISTRATION"
+      ],
+      [
+        "p2",
+        "PHASE 2 — ASSESSMENT & ADJUDICATION"
+      ],
+      [
+        "p3",
+        "PHASE 3 — DECISION, SETTLEMENT & RECOVERY"
+      ]
+    ],
+    "critical_missing": [
+      {
+        "title": "Coordination of benefits (COB)",
+        "detail": "ClaimCenter requires an other-insurance / COB check at FNOL and recovery of amounts payable by other insurers. SOP-INS-011 has neither, creating double-payment and leakage exposure."
+      },
+      {
+        "title": "Case reserving at FNOL",
+        "detail": "No initial case reserve is set when a claim is registered; reserves are only touched at closure. Outstanding-claim liability and IBNR inputs are understated between registration and settlement."
+      },
+      {
+        "title": "Provider tariff / network pricing",
+        "detail": "Billed charges are assessed for 'reasonableness' with no contracted-tariff reference table — a primary source of claims leakage versus the catalog's network-pricing control."
+      },
+      {
+        "title": "Recovery & subrogation",
+        "detail": "No post-settlement recovery process for overpayments, third-party liability or COB amounts."
+      }
+    ],
+    "radar": [
+      [
+        "Intake / FNOL",
+        85
+      ],
+      [
+        "Coverage eval",
+        80
+      ],
+      [
+        "Adjudication",
+        60
+      ],
+      [
+        "Clinical review",
+        78
+      ],
+      [
+        "Fraud / SIU",
+        64
+      ],
+      [
+        "Reserving",
+        30
+      ],
+      [
+        "Recovery / COB",
+        25
+      ]
+    ],
+    "control_bars": [
+      {
+        "name": "Intake controls",
+        "value": 85,
+        "note": "Strong multi-channel FNOL with dated audit"
+      },
+      {
+        "name": "Coverage evaluation",
+        "value": 80,
+        "note": "Benefit/sub-limit checks solid; accumulators tracked"
+      },
+      {
+        "name": "Auto-adjudication",
+        "value": 55,
+        "note": "Routine claims manually assessed; no STP engine"
+      },
+      {
+        "name": "Clinical review",
+        "value": 78,
+        "note": "Adjuster + Medical Advisor for complex claims"
+      },
+      {
+        "name": "Fraud & SIU",
+        "value": 64,
+        "note": "Scoring present; no provider/network analytics"
+      },
+      {
+        "name": "Reserving",
+        "value": 30,
+        "note": "No FNOL reserve; closure-only adjustment"
+      },
+      {
+        "name": "Recovery / COB",
+        "value": 25,
+        "note": "No COB or subrogation recovery process"
+      }
+    ],
+    "remediations": [
+      {
+        "rank": 1,
+        "title": "Add duplicate & coordination-of-benefits check at FNOL",
+        "detail": "Insert a duplicate-claim and other-insurer (COB) check at registration; query prior claims and declared other cover before assessment and route COB-eligible claims for apportionment. Effort: 3 weeks (Majesco config + PAS link).",
+        "priority": "High"
+      },
+      {
+        "rank": 2,
+        "title": "Introduce case reserving at registration",
+        "detail": "Set an initial case reserve when each claim is created, derived from benefit type and claimed amount; adjust through the lifecycle. Aligns outstanding-liability and IBNR reporting. Effort: 4 weeks (Majesco + SAP).",
+        "priority": "High"
+      },
+      {
+        "rank": 3,
+        "title": "Validate charges against provider tariffs / network",
+        "detail": "Add a contracted-tariff / network-pricing reference table; flag charges above tariff for adjuster review. Primary leakage control. Effort: 5 weeks (tariff data + rules).",
+        "priority": "High"
+      },
+      {
+        "rank": 4,
+        "title": "Add concurrent / utilisation review for inpatient stays",
+        "detail": "Extend pre-authorisation into concurrent review for stays beyond a threshold length, with periodic clinical updates. Effort: 3 weeks.",
+        "priority": "Medium"
+      },
+      {
+        "rank": 5,
+        "title": "Stand up auto-adjudication for routine claims",
+        "detail": "Configure a straight-through rules engine to auto-settle low-value, in-network, rules-clear claims, routing only exceptions to adjusters. Effort: 6 weeks.",
+        "priority": "Medium"
+      }
+    ],
+    "risk_impact": [
+      [
+        "Coordination of benefits",
+        95
+      ],
+      [
+        "Reserving accuracy",
+        80
+      ],
+      [
+        "Provider tariff leakage",
+        78
+      ],
+      [
+        "Auto-adjudication",
+        60
+      ],
+      [
+        "Utilisation review",
+        58
+      ],
+      [
+        "Fraud analytics",
+        55
+      ]
+    ],
+    "projected_fit": 92
+  },
+  "opt_phases": [
+    {
+      "pid": "1",
+      "name": "Receipt, registration & reserving",
+      "subtitle": "Duplicate/COB check; case reserve set",
+      "circle": "blue",
+      "roles": "Claimant · Processor · PAS",
+      "step_range": "Steps 1–6",
+      "summary": "6 steps + 1 decision"
+    },
+    {
+      "pid": "2",
+      "name": "Assessment & adjudication",
+      "subtitle": "Auto-adjudication; tariff; concurrent; fraud",
+      "circle": "green",
+      "roles": "Processor · Adjuster · Advisor · SIU",
+      "step_range": "Steps 7–13",
+      "summary": "7 steps"
+    },
+    {
+      "pid": "3",
+      "name": "Decision, settlement & recovery",
+      "subtitle": "Decision, payment, recovery, close",
+      "circle": "amber",
+      "roles": "Adjuster · Manager · Finance",
+      "step_range": "Steps 14–18",
+      "summary": "5 steps + 1 decision"
+    }
+  ],
+  "opt_steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Claim received via portal, app, email, or post",
+      "responsible": "Claims Processor / System",
+      "output": "Claim ID assigned; acknowledgement sent within 1 business day",
+      "timeline": "T+1 day",
+      "controls": "Standard",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Eligibility verification",
+      "responsible": "Claims Processor / PAS",
+      "output": "Policy active; covered member; waiting periods checked",
+      "timeline": "T+1 day",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Duplicate & coordination-of-benefits (COB) check",
+      "responsible": "Claims Processor / System",
+      "output": "Prior-claim and other-insurer check; COB-eligible claims routed for apportionment",
+      "timeline": "T+1 day",
+      "controls": "NEW (v3.0) — prevents double payment",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Set initial case reserve",
+      "responsible": "Claims Processor / Finance",
+      "output": "Case reserve raised in Majesco/SAP from benefit type and claimed amount",
+      "timeline": "T+1 day",
+      "controls": "NEW (v3.0) — aligns outstanding liability",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "5",
+      "phase": "1",
+      "activity": "Document completeness check with automated diary",
+      "responsible": "Claims Processor",
+      "output": "Completeness check; missing-item request with automated 7/14/28-day diary and escalation",
+      "timeline": "T+2 days",
+      "controls": "ENHANCED (v3.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "1",
+      "activity": "Claim type determination and routing",
+      "responsible": "Claims Processor",
+      "output": "Categorised: routine (auto-adjudicate), complex, high-value, suspicious (SIU)",
+      "timeline": "T+2 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "1",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Routing rules",
+      "kind": "decision",
+      "decision": "Claim category?",
+      "branches": [
+        "Routine → auto-adjudication",
+        "Complex / high-value → adjuster",
+        "Suspicious → SIU"
+      ]
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Policy coverage and benefit limit verification",
+      "responsible": "Adjuster / PAS",
+      "output": "Benefit, sub-limit, excess, co-payment and exclusions calculated",
+      "timeline": "T+3 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Auto-adjudication of routine claims",
+      "responsible": "Claims System",
+      "output": "Straight-through rules engine settles low-value, in-network, rules-clear claims",
+      "timeline": "Same day",
+      "controls": "ENHANCED (v3.0) — STP engine",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "2",
+      "activity": "Clinical / medical necessity review (complex)",
+      "responsible": "Adjuster / Medical Advisor",
+      "output": "Necessity, standard of care and reasonableness assessed",
+      "timeline": "T+5 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "2",
+      "activity": "Provider network & tariff validation",
+      "responsible": "Claims Adjuster",
+      "output": "Billed charges validated against contracted tariffs; above-tariff items flagged",
+      "timeline": "T+5 days",
+      "controls": "NEW (v3.0) — leakage control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "2",
+      "activity": "Fraud screening with provider & network analytics",
+      "responsible": "Claims System / SIU",
+      "output": "Claim scoring plus provider-profiling and link analytics; SIU review within 3 days",
+      "timeline": "Parallel",
+      "controls": "ENHANCED (v3.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "2",
+      "activity": "Concurrent / utilisation review (inpatient)",
+      "responsible": "Claims Adjuster",
+      "output": "Ongoing inpatient stays reviewed periodically against length-of-stay norms",
+      "timeline": "Ongoing",
+      "controls": "NEW (v3.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "13",
+      "phase": "2",
+      "activity": "Settlement amount calculated",
+      "responsible": "Claims Adjuster / System",
+      "output": "Covered charges less excess and co-payment; itemised breakdown; accumulators updated",
+      "timeline": "T+5 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "14",
+      "phase": "3",
+      "activity": "Claims decision made and documented",
+      "responsible": "Adjuster / Claims Manager",
+      "output": "Approve, partial or reject; rationale documented; per authority matrix",
+      "timeline": "T+6 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "3",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Authority matrix",
+      "kind": "decision",
+      "decision": "Decision outcome?",
+      "branches": [
+        "Approve / partial → settlement",
+        "Reject → notice + 30-day appeal"
+      ]
+    },
+    {
+      "num": "15",
+      "phase": "3",
+      "activity": "Claimant notified of decision",
+      "responsible": "Claims Processor",
+      "output": "Settlement letter or rejection notice within 1 business day",
+      "timeline": "T+7 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "16",
+      "phase": "3",
+      "activity": "Payment processed",
+      "responsible": "Finance / Claims System",
+      "output": "Bank transfer or cheque within 5 business days; remittance advice sent",
+      "timeline": "T+10 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "17",
+      "phase": "3",
+      "activity": "Recovery — overpayment, COB & subrogation",
+      "responsible": "Finance / Claims Manager",
+      "output": "Recoverable amounts (overpayment, other-insurer, third-party) identified and pursued",
+      "timeline": "Post-settlement",
+      "controls": "NEW (v3.0) — recovers leakage",
+      "kind": "control",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "18",
+      "phase": "3",
+      "activity": "Claim closed and GL updated",
+      "responsible": "Claims Processor / Finance",
+      "output": "Status set; case reserve released or adjusted; GL journal posted",
+      "timeline": "T+10 days",
+      "controls": "Reserve true-up; immutable audit trail",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "opt_swim_phases": [
+    {
+      "pid": "1",
+      "name": "Receipt, registration & reserving",
+      "subtitle": "Steps 1–6 · v3.0 adds COB check & reserving",
+      "lanes": [
+        "Claimant",
+        "Claims Processor",
+        "Claims System / PAS"
+      ],
+      "nodes": [
+        {
+          "nid": "o1",
+          "lane": "Claimant",
+          "col": 0,
+          "title": "Submit claim",
+          "sub": "Portal · app · hotline",
+          "kind": "standard"
+        },
+        {
+          "nid": "o2",
+          "lane": "Claims Processor",
+          "col": 1,
+          "title": "Register & assign ID",
+          "sub": "auto-acknowledge",
+          "kind": "standard"
+        },
+        {
+          "nid": "o3",
+          "lane": "Claims Processor",
+          "col": 2,
+          "title": "Eligibility verification",
+          "sub": "via PAS",
+          "kind": "standard"
+        },
+        {
+          "nid": "o4",
+          "lane": "Claims Processor",
+          "col": 3,
+          "title": "Document completeness",
+          "sub": "auto diary 7/14/28d",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "o7",
+          "lane": "Claims Processor",
+          "col": 4,
+          "title": "Determine type & route",
+          "sub": "routine / complex / SIU",
+          "kind": "decision"
+        },
+        {
+          "nid": "o5",
+          "lane": "Claims System / PAS",
+          "col": 2,
+          "title": "Duplicate & COB check",
+          "sub": "Majesco · PAS",
+          "kind": "new"
+        },
+        {
+          "nid": "o6",
+          "lane": "Claims System / PAS",
+          "col": 3,
+          "title": "Set case reserve",
+          "sub": "Majesco · SAP",
+          "kind": "new"
+        }
+      ],
+      "edges": [
+        {
+          "src": "o1",
+          "dst": "o2",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "o2",
+          "dst": "o3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o3",
+          "dst": "o4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o4",
+          "dst": "o7",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o3",
+          "dst": "o5",
+          "label": "COB",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "o4",
+          "dst": "o6",
+          "label": "rsv",
+          "dashed": true,
+          "kind": "new"
+        }
+      ],
+      "note": "v3.0 adds duplicate/COB detection and case reserving at registration, with an automated missing-document diary."
+    },
+    {
+      "pid": "2",
+      "name": "Assessment & adjudication",
+      "subtitle": "Steps 7–13 · auto-adjudication, tariff & concurrent review",
+      "lanes": [
+        "Processor / System",
+        "Claims Adjuster",
+        "Medical Advisor / SIU"
+      ],
+      "nodes": [
+        {
+          "nid": "p1",
+          "lane": "Processor / System",
+          "col": 0,
+          "title": "Coverage & benefit check",
+          "sub": "via PAS",
+          "kind": "standard"
+        },
+        {
+          "nid": "p2",
+          "lane": "Processor / System",
+          "col": 1,
+          "title": "Auto-adjudication",
+          "sub": "STP rules engine",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "p3",
+          "lane": "Claims Adjuster",
+          "col": 1,
+          "title": "Clinical review",
+          "sub": "complex claims",
+          "kind": "standard"
+        },
+        {
+          "nid": "p4",
+          "lane": "Claims Adjuster",
+          "col": 2,
+          "title": "Provider tariff validation",
+          "sub": "contracted tariffs",
+          "kind": "new"
+        },
+        {
+          "nid": "p5",
+          "lane": "Claims Adjuster",
+          "col": 3,
+          "title": "Concurrent / utilisation review",
+          "sub": "inpatient",
+          "kind": "new"
+        },
+        {
+          "nid": "p7",
+          "lane": "Medical Advisor / SIU",
+          "col": 1,
+          "title": "Fraud screening + analytics",
+          "sub": "provider profiling",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "p8",
+          "lane": "Claims Adjuster",
+          "col": 4,
+          "title": "Calculate settlement",
+          "sub": "less excess & co-pay",
+          "kind": "standard"
+        }
+      ],
+      "edges": [
+        {
+          "src": "p1",
+          "dst": "p2",
+          "label": "rtn",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p1",
+          "dst": "p3",
+          "label": "cx",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p3",
+          "dst": "p4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p4",
+          "dst": "p5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p5",
+          "dst": "p8",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p2",
+          "dst": "p8",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "p1",
+          "dst": "p7",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        },
+        {
+          "src": "p7",
+          "dst": "p8",
+          "label": "",
+          "dashed": true,
+          "kind": "standard"
+        }
+      ],
+      "note": "Routine claims auto-adjudicate (STP). Complex claims add provider-tariff validation and concurrent review; enhanced fraud analytics run in parallel."
+    },
+    {
+      "pid": "3",
+      "name": "Decision, settlement & recovery",
+      "subtitle": "Steps 14–18 · v3.0 adds recovery step",
+      "lanes": [
+        "Manager / Adjuster",
+        "Claims Processor",
+        "Finance / System"
+      ],
+      "nodes": [
+        {
+          "nid": "q1",
+          "lane": "Manager / Adjuster",
+          "col": 0,
+          "title": "Claims decision",
+          "sub": "approve / partial / reject",
+          "kind": "decision"
+        },
+        {
+          "nid": "q2",
+          "lane": "Claims Processor",
+          "col": 1,
+          "title": "Notify claimant",
+          "sub": "letter / notice",
+          "kind": "standard"
+        },
+        {
+          "nid": "q3",
+          "lane": "Manager / Adjuster",
+          "col": 1,
+          "title": "Reject → 30-day appeal",
+          "sub": "Claims Manager",
+          "kind": "exception"
+        },
+        {
+          "nid": "q4",
+          "lane": "Finance / System",
+          "col": 2,
+          "title": "Payment processed",
+          "sub": "SAP · ≤5 days",
+          "kind": "standard"
+        },
+        {
+          "nid": "q5",
+          "lane": "Finance / System",
+          "col": 3,
+          "title": "Recovery: overpayment / COB",
+          "sub": "subrogation",
+          "kind": "new"
+        },
+        {
+          "nid": "q6",
+          "lane": "Claims Processor",
+          "col": 4,
+          "title": "Close & GL update",
+          "sub": "reserve true-up",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "q1",
+          "dst": "q2",
+          "label": "ok",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q1",
+          "dst": "q3",
+          "label": "rej",
+          "dashed": true,
+          "kind": "exception"
+        },
+        {
+          "src": "q2",
+          "dst": "q4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q4",
+          "dst": "q5",
+          "label": "rec",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "q4",
+          "dst": "q6",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q5",
+          "dst": "q6",
+          "label": "",
+          "dashed": true,
+          "kind": "new"
+        }
+      ],
+      "note": "v3.0 adds a post-settlement recovery step for overpayments, coordination-of-benefits and subrogation before closure."
+    }
+  ],
+  "opt_n_phases": 3,
+  "opt_n_steps": 18,
+  "opt_n_gateways": 3,
+  "opt_fit": 92,
+  "optimised_doc": {
+    "subtitle": "Optimised per Fit-Gap Analysis against the Guidewire ClaimCenter Health Claims Catalog",
+    "sections": [
+      {
+        "title": "",
+        "blocks": [
+          [
+            "meta",
+            [
+              [
+                "Document Reference",
+                "SOP-INS-011"
+              ],
+              [
+                "Version",
+                "3.0 (Optimised)"
+              ],
+              [
+                "Effective Date",
+                "01 September 2026"
+              ],
+              [
+                "Supersedes",
+                "v2.3 dated 01 March 2025"
+              ],
+              [
+                "Owner",
+                "Medical Claims — Claims Operations"
+              ],
+              [
+                "Approved By",
+                "Chief Claims Officer"
+              ],
+              [
+                "Optimisation Reference",
+                "Fit-Gap Report FG-INS-011 dated 18 June 2026"
+              ],
+              [
+                "Catalog Alignment Score",
+                "92% (up from 71% in v2.3)"
+              ],
+              [
+                "Classification",
+                "Internal Use Only — Claims Restricted"
+              ]
+            ]
+          ],
+          [
+            "summary",
+            "OPTIMISATION SUMMARY — What changed in v3.0",
+            [
+              "This version incorporates 5 remediation actions from Fit-Gap Report FG-INS-011. Alignment to the Guidewire ClaimCenter health-claims catalog increased from 71% to 92%. Critical additions: duplicate & coordination-of-benefits (COB) checking, case reserving at registration, provider tariff/network validation, concurrent utilisation review, and a post-settlement recovery process. Routine claims now auto-adjudicate."
+            ],
+            [
+              "NEW STEP (green) — step added to close a gap vs the ClaimCenter catalog",
+              "ENHANCED (amber) — existing step updated with additional controls or automation"
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "1. Purpose",
+        "blocks": [
+          [
+            "para",
+            "This Standard Operating Procedure defines the end-to-end process for receiving, validating, assessing, and settling medical insurance claims submitted by Meridian policyholders. Version 3.0 incorporates optimisations identified through fit-gap analysis against the Guidewire ClaimCenter Health Claims Best-Practice Catalog, achieving 92% alignment (up from 71% in v2.3)."
+          ],
+          [
+            "para",
+            "Key additions in v3.0: duplicate and coordination-of-benefits checking at first notification, case reserving at registration, provider tariff validation, concurrent utilisation review for inpatient stays, straight-through auto-adjudication of routine claims, and a post-settlement recovery process for overpayments, COB and subrogation."
+          ]
+        ]
+      },
+      {
+        "title": "2. Scope",
+        "blocks": [
+          [
+            "para",
+            "This procedure applies to all medical claims submitted under individual and group health, hospitalisation, and critical illness policies, including cashless treatment authorisations, reimbursement claims, pre-authorisation requests, and claim appeals."
+          ],
+          [
+            "banner",
+            "new",
+            "Scope extended: coordination-of-benefits (Section 5) now precedes assessment. Claims with other applicable cover are apportioned before settlement."
+          ],
+          [
+            "para",
+            "This procedure does NOT cover property or casualty claims (SOP-INS-012), life insurance claims (SOP-INS-013), or internal employee health benefit claims processed by HR."
+          ]
+        ]
+      },
+      {
+        "title": "3. Authority Matrix",
+        "blocks": [
+          [
+            "para",
+            "All claim settlements must be approved in accordance with the claims authority matrix. Unchanged from v2.3."
+          ],
+          [
+            "table",
+            [
+              "Settlement Value",
+              "First Authority",
+              "Second Authority"
+            ],
+            [
+              [
+                "Up to SGD 5,000",
+                "Claims Processor",
+                "—"
+              ],
+              [
+                "SGD 5,001–25,000",
+                "Claims Adjuster",
+                "—"
+              ],
+              [
+                "SGD 25,001–100,000",
+                "Claims Manager",
+                "Adjuster recommendation"
+              ],
+              [
+                "SGD 100,001–250,000",
+                "Claims Manager",
+                "Medical Advisor sign-off"
+              ],
+              [
+                "Above SGD 250,000",
+                "Chief Claims Officer",
+                "Claims Manager"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "4. Roles and Responsibilities",
+        "blocks": [
+          [
+            "table",
+            [
+              "Role",
+              "Responsibilities"
+            ],
+            [
+              [
+                "Claims Processor",
+                "Registers claims; verifies eligibility; performs duplicate/COB check; sets initial reserve; checks completeness; routes claims; notifies claimants."
+              ],
+              [
+                "Claims Adjuster",
+                "Assesses complex claims; validates provider tariffs; conducts concurrent review; calculates settlement within authority."
+              ],
+              [
+                "Claims Manager",
+                "Approves above adjuster authority; reviews rejections; manages appeals and escalations; oversees loss ratio and recovery."
+              ],
+              [
+                "Medical Advisor (Consulting)",
+                "Provides clinical opinion on complex, contested or high-value claims; advises on necessity and reasonable cost."
+              ],
+              [
+                "Fraud & SIU",
+                "Reviews scored/flagged claims; runs provider-profiling and network analytics; investigates and recommends rejection, recovery or referral."
+              ],
+              [
+                "Finance",
+                "Executes payment runs; maintains case reserves; pursues recoveries; posts GL."
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "5. Coordination of Benefits & Reserving (New Section — v3.0)",
+        "blocks": [
+          [
+            "banner",
+            "crit",
+            "New section. Required by the ClaimCenter catalog. A duplicate/COB check and an initial case reserve must be completed at registration before a claim proceeds to assessment."
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "C1",
+                "Duplicate-claim check against Claims System",
+                "Claims Processor",
+                "Prior claims for same event/period identified; potential duplicates flagged",
+                "T+1 day"
+              ],
+              [
+                "C2",
+                "Coordination-of-benefits declaration check",
+                "Claims Processor",
+                "Other applicable cover (employer, government, other insurer) identified; primary/secondary payer set",
+                "T+1 day"
+              ],
+              [
+                "C3",
+                "Apportionment for COB-eligible claims",
+                "Claims Adjuster",
+                "Liability apportioned; secondary-payer amount calculated per policy COB clause",
+                "T+2 days"
+              ],
+              [
+                "C4",
+                "Set initial case reserve",
+                "Claims Processor / Finance",
+                "Case reserve raised in Majesco/SAP from benefit type and claimed amount",
+                "T+1 day"
+              ]
+            ],
+            {
+              "0": "new",
+              "1": "new",
+              "2": "new",
+              "3": "new"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "6. Claim Processing Steps",
+        "blocks": [
+          [
+            "h3",
+            "6.1 Receipt, Registration & Reserving"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "1",
+                "Claim received (portal, app, email, post)",
+                "Claims Processor",
+                "Claim ID assigned; acknowledgement within 1 business day",
+                "T+1 day"
+              ],
+              [
+                "2",
+                "Eligibility verification",
+                "Claims Processor / PAS",
+                "Policy active; covered member; waiting periods checked",
+                "T+1 day"
+              ],
+              [
+                "3",
+                "Duplicate & COB check",
+                "Claims Processor",
+                "Per Section 5; double-payment risk removed",
+                "T+1 day"
+              ],
+              [
+                "4",
+                "Set initial case reserve",
+                "Claims Processor / Finance",
+                "Case reserve raised at registration",
+                "T+1 day"
+              ],
+              [
+                "5",
+                "Document completeness with automated diary",
+                "Claims Processor",
+                "Missing items requested; automated 7/14/28-day diary and escalation",
+                "T+2 days"
+              ],
+              [
+                "6",
+                "Claim type determination and routing",
+                "Claims Processor",
+                "Routine (auto-adjudicate), complex, high-value, suspicious (SIU)",
+                "T+2 days"
+              ]
+            ],
+            {
+              "2": "new",
+              "3": "new",
+              "4": "enh"
+            }
+          ],
+          [
+            "h3",
+            "6.2 Assessment & Adjudication"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "7",
+                "Coverage & benefit limit verification",
+                "Adjuster / PAS",
+                "Benefit, sub-limit, excess, co-payment, exclusions",
+                "T+3 days"
+              ],
+              [
+                "8",
+                "Auto-adjudication of routine claims",
+                "Claims System",
+                "Straight-through settlement of low-value, in-network, rules-clear claims",
+                "Same day"
+              ],
+              [
+                "9",
+                "Clinical / medical necessity review (complex)",
+                "Adjuster / Medical Advisor",
+                "Necessity, standard of care, reasonableness assessed",
+                "T+5 days"
+              ],
+              [
+                "10",
+                "Provider network & tariff validation",
+                "Claims Adjuster",
+                "Charges validated against contracted tariffs; above-tariff items flagged",
+                "T+5 days"
+              ],
+              [
+                "11",
+                "Fraud screening with provider & network analytics",
+                "Claims System / SIU",
+                "Scoring plus provider profiling and link analytics; SIU review ≤3 days",
+                "Parallel"
+              ],
+              [
+                "12",
+                "Concurrent / utilisation review (inpatient)",
+                "Claims Adjuster",
+                "Ongoing stays reviewed against length-of-stay norms",
+                "Ongoing"
+              ],
+              [
+                "13",
+                "Settlement amount calculated",
+                "Claims Adjuster / System",
+                "Covered charges less excess and co-payment; accumulators updated",
+                "T+5 days"
+              ]
+            ],
+            {
+              "1": "enh",
+              "3": "new",
+              "4": "enh",
+              "5": "new"
+            }
+          ],
+          [
+            "h3",
+            "6.3 Decision, Settlement & Recovery"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "14",
+                "Claims decision made and documented",
+                "Adjuster / Claims Manager",
+                "Approve, partial, or reject; rationale recorded; per authority matrix",
+                "T+6 days"
+              ],
+              [
+                "15",
+                "Claimant notified of decision",
+                "Claims Processor",
+                "Settlement letter or rejection notice within 1 business day",
+                "T+7 days"
+              ],
+              [
+                "16",
+                "Payment processed",
+                "Finance / Claims System",
+                "Bank transfer or cheque within 5 business days; remittance advice",
+                "T+10 days"
+              ],
+              [
+                "17",
+                "Recovery — overpayment, COB & subrogation",
+                "Finance / Claims Manager",
+                "Recoverable amounts identified and pursued post-settlement",
+                "Post-settlement"
+              ],
+              [
+                "18",
+                "Claim closed and GL updated",
+                "Claims Processor / Finance",
+                "Status set; reserve released/adjusted; GL journal posted",
+                "T+10 days"
+              ]
+            ],
+            {
+              "3": "new"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "7. Exception Handling",
+        "blocks": [
+          [
+            "h3",
+            "7.1 Claim Rejection & Appeals"
+          ],
+          [
+            "numbered",
+            [
+              "Rejection notice states the specific reason with reference to the policy wording clause; issued within 1 business day of decision.",
+              "Claimant has 30 calendar days to lodge an appeal with the Claims Manager.",
+              "Appeals reviewed within 10 business days; outcome communicated in writing."
+            ]
+          ],
+          [
+            "h3",
+            "7.2 Suspected Fraud"
+          ],
+          [
+            "numbered_from",
+            4,
+            [
+              "SIU takes over the claim file; normal settlement is suspended.",
+              "Claimant notified that additional information is required, without disclosing the investigation.",
+              "SIU provides an investigation report to the Claims Manager within 20 business days; the Claims Manager determines next action including recovery or referral."
+            ]
+          ],
+          [
+            "h3",
+            "7.3 Pre-Authorisation & Concurrent Review"
+          ],
+          [
+            "numbered_from",
+            7,
+            [
+              "Medical facility submits a pre-authorisation request via the provider portal at least 48 hours before scheduled admission; the Adjuster responds within 4 business hours.",
+              "Approval triggers a direct-billing arrangement; no cash payment is required at point of care.",
+              "For inpatient stays beyond the approved length, concurrent review (step 12) requires periodic clinical updates before further days are authorised."
+            ]
+          ],
+          [
+            "h3",
+            "7.4 Missing Documents (Enhanced — v3.0)"
+          ],
+          [
+            "banner",
+            "enh",
+            "Document follow-up is now driven by an automated diary with escalation at 14 and 28 days, replacing manual tracking."
+          ],
+          [
+            "numbered_from",
+            10,
+            [
+              "Written request issued with an itemised list of missing items; claimant given 14 calendar days.",
+              "Day 14 without response: automated follow-up notice; claim held a further 14 days.",
+              "Day 28 without response: claim closed as 'Insufficient Documentation'; reopenable within 12 months."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "8. Systems and Tools",
+        "blocks": [
+          [
+            "table",
+            [
+              "System",
+              "Purpose",
+              "Primary Users"
+            ],
+            [
+              [
+                "Claims Management System (Majesco)",
+                "Registration, reserving, adjudication workflow, settlement, recovery, reporting",
+                "All Claims roles"
+              ],
+              [
+                "Policy Administration System (PAS)",
+                "Eligibility, benefit limits, COB, accumulators",
+                "Processor, Adjuster"
+              ],
+              [
+                "Provider Portal",
+                "Pre-authorisation, concurrent review, direct billing, document submission",
+                "Facilities, Adjuster"
+              ],
+              [
+                "Fraud Detection System",
+                "Claim scoring, provider profiling, network/link analytics",
+                "Automated / SIU"
+              ],
+              [
+                "Provider Tariff / Network Catalog",
+                "Contracted tariffs and network pricing for charge validation",
+                "Claims Adjuster"
+              ],
+              [
+                "SAP S/4HANA",
+                "Payment, case reserves, recoveries, GL",
+                "Finance, Claims Manager"
+              ],
+              [
+                "Medical Advisor Platform (TPA)",
+                "Secure clinical document sharing",
+                "Adjuster, Medical Advisor"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "9. Key Controls and Audit Points",
+        "blocks": [
+          [
+            "banner",
+            "enh",
+            "Controls expanded in v3.0: COB/duplicate gate, FNOL reserving, tariff validation, concurrent review, and post-settlement recovery."
+          ],
+          [
+            "bullets",
+            [
+              "Duplicate & COB gate: every claim is checked for prior claims and other cover before assessment.",
+              "Case reserving: an initial reserve is raised at registration and trued-up at closure.",
+              "Provider tariff validation: billed charges are validated against contracted tariffs to control leakage.",
+              "Segregation of duties: assessor ≠ payment approver ≠ recovery owner.",
+              "Auto-adjudication audit: STP-settled claims sampled monthly by the Claims Manager.",
+              "Fraud analytics: provider-profiling and network analytics supplement claim scoring; SIU review ≥2%.",
+              "Recovery: overpayments, COB and subrogation amounts identified and pursued after settlement.",
+              "Immutable audit trail: all registration, decision, payment and recovery actions logged with user ID and timestamp."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "10. Key Performance Indicators",
+        "blocks": [
+          [
+            "table",
+            [
+              "KPI",
+              "v2.3 Target",
+              "v3.0 Target",
+              "Measurement"
+            ],
+            [
+              [
+                "Straight-through settlement",
+                "N/A (new)",
+                "≥40% of routine claims",
+                "Majesco auto-adjudication rate"
+              ],
+              [
+                "Claims processing cycle time",
+                "90% ≤10 business days",
+                "90% ≤7 business days",
+                "Receipt to settlement"
+              ],
+              [
+                "First-pass accuracy",
+                "≥92%",
+                "≥95%",
+                "Claims assessed without rework"
+              ],
+              [
+                "Claims leakage vs expected",
+                "≤3 ppts",
+                "≤1.5 ppts",
+                "Paid vs expected loss ratio"
+              ],
+              [
+                "Recovery capture",
+                "N/A (new)",
+                "≥80% of identified recoverables",
+                "SAP recovery ledger"
+              ],
+              [
+                "Reserving accuracy",
+                "N/A (new)",
+                "Reserve set at FNOL on 100%",
+                "Majesco reserve date vs registration"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "11. Document Control",
+        "blocks": [
+          [
+            "table",
+            [
+              "Version",
+              "Date",
+              "Author",
+              "Summary of Changes"
+            ],
+            [
+              [
+                "2.3",
+                "01 Mar 2025",
+                "R. Nair, Claims Manager",
+                "Added cashless pre-auth sub-steps; updated KPIs for leakage control"
+              ],
+              [
+                "3.0",
+                "01 Sep 2026",
+                "R. Nair, Claims Manager",
+                "OPTIMISED: COB & duplicate check; FNOL reserving; provider tariff validation; concurrent review; auto-adjudication; post-settlement recovery; catalog alignment 71% → 92%"
+              ]
+            ],
+            {}
+          ]
+        ]
+      }
+    ]
+  },
+  "swim_cover_tags": "Receipt · Assessment · Settlement · Fraud screening · Exception handling",
+  "hierarchy_cover_sub": "Phase breakdown with claim tracks, authority thresholds, and exception paths"
+}

@@ -1,0 +1,1988 @@
+{
+  "meta": {
+    "sop_id": "SOP-INS-008",
+    "slug": "Auto_and_Home_Sales",
+    "title": "Auto and Home Insurance Sales",
+    "short_title": "Auto & home sales",
+    "version": "2.2",
+    "owner": "Personal Lines Distribution",
+    "org": "Meridian Insurance Group",
+    "catalog": "Guidewire PolicyCenter — Agent-Channel Personal Lines Catalog",
+    "catalog_short": "Guidewire PolicyCenter",
+    "new_version": "3.0",
+    "effective_date": "01 October 2026",
+    "supersedes": "v2.2 dated 01 March 2025",
+    "approved_by": "Head of Personal Lines",
+    "classification": "Internal Use Only"
+  },
+  "phases": [
+    {
+      "pid": "1",
+      "name": "Prospect & needs analysis",
+      "subtitle": "Source, contact, needs, bundle",
+      "circle": "blue",
+      "roles": "Agent · Customer Service",
+      "step_range": "Steps 1–4",
+      "summary": "4 steps"
+    },
+    {
+      "pid": "2",
+      "name": "Quotation",
+      "subtitle": "Rate, present, underwrite",
+      "circle": "green",
+      "roles": "Agent · Rating Engine · Underwriting",
+      "step_range": "Steps 5–8",
+      "summary": "4 steps + 1 decision"
+    },
+    {
+      "pid": "3",
+      "name": "Conversion & issuance",
+      "subtitle": "Finalise, pay, issue, fulfil",
+      "circle": "amber",
+      "roles": "Agent · Payment Gateway · PAS",
+      "step_range": "Steps 9–13",
+      "summary": "5 steps"
+    }
+  ],
+  "steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Prospect identified (referral, campaign, inbound)",
+      "responsible": "Agent / Customer Service",
+      "output": "Prospect record created in CRM; source code recorded",
+      "timeline": "Day 0",
+      "controls": "Pipeline entry",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Initial contact made and appointment scheduled",
+      "responsible": "Agent",
+      "output": "Contact within 1 business day of lead assignment; appointment confirmed",
+      "timeline": "Day 0–1",
+      "controls": "Contact SLA",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Needs analysis conducted",
+      "responsible": "Agent",
+      "output": "Current insurer, coverage gaps, claims history and risk characteristics; notes in CRM",
+      "timeline": "Day 1–3",
+      "controls": "Needs analysis",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Multi-product opportunity assessed",
+      "responsible": "Agent",
+      "output": "Bundled auto + home discount opportunity presented if applicable",
+      "timeline": "Day 1–3",
+      "controls": "Cross-sell",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "5",
+      "phase": "2",
+      "activity": "Application data entered into agent portal",
+      "responsible": "Agent",
+      "output": "Vehicle/property, personal and claims history entered; address verified",
+      "timeline": "Day 3",
+      "controls": "Application capture",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "2",
+      "activity": "Rating engine generates premium",
+      "responsible": "Agent Portal / Rating Engine",
+      "output": "Instant quote for auto-accept; referral cases routed to Underwriting",
+      "timeline": "Instant",
+      "controls": "Auto-accept rules",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "Quote presented and explained to prospect",
+      "responsible": "Agent",
+      "output": "Benefits, exclusions, excess and payment options explained per disclosure obligations",
+      "timeline": "Day 3",
+      "controls": "Disclosure obligations",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Underwriting review (if referred)",
+      "responsible": "Underwriter",
+      "output": "Decision within 2 business hours; agent notified of outcome and revised terms",
+      "timeline": "≤2 hours",
+      "controls": "Referral SLA",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "2",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Rating + underwriter outcome",
+      "kind": "decision",
+      "decision": "Auto-accept or referral?",
+      "branches": [
+        "Auto-accept → conversion",
+        "Referral → underwriter (high-risk hold, Sec 6.2)"
+      ]
+    },
+    {
+      "num": "9",
+      "phase": "3",
+      "activity": "Prospect agrees; application finalised and signed",
+      "responsible": "Agent / Prospect",
+      "output": "Application signed; agent confirms scope of cover and prospect understanding",
+      "timeline": "Day 3–5",
+      "controls": "Sales conduct",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "3",
+      "activity": "First premium payment collected",
+      "responsible": "Agent / Payment Gateway",
+      "output": "Payment processed via agent portal; receipt issued",
+      "timeline": "Day 5",
+      "controls": "Payment",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "3",
+      "activity": "Policy issued in PAS",
+      "responsible": "Agent Portal / PAS",
+      "output": "Policy number generated; coverage effective from agreed start date",
+      "timeline": "Day 5",
+      "controls": "Issuance",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Policy documents dispatched to policyholder",
+      "responsible": "PAS (auto)",
+      "output": "Schedule, certificate and PDS dispatched within 2 business days",
+      "timeline": "≤2 days",
+      "controls": "Document SLA",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "13",
+      "phase": "3",
+      "activity": "CRM updated with sale outcome",
+      "responsible": "Agent",
+      "output": "Policy number, premium, product type and commission logged",
+      "timeline": "Day 5",
+      "controls": "Sale logged",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "authority": [
+    {
+      "band": "Auto-accept (rules-clear)",
+      "first": "Rating Engine",
+      "second": "—"
+    },
+    {
+      "band": "Standard referral",
+      "first": "Underwriter",
+      "second": "—"
+    },
+    {
+      "band": "High-risk property/vehicle",
+      "first": "Senior Underwriter",
+      "second": "Underwriter"
+    },
+    {
+      "band": "Non-standard terms / exclusions",
+      "first": "Senior Underwriter",
+      "second": "—"
+    },
+    {
+      "band": "Misrepresentation (void/voidable)",
+      "first": "Compliance",
+      "second": "Underwriting Manager"
+    }
+  ],
+  "swim_phases": [
+    {
+      "pid": "1",
+      "name": "Prospect & needs analysis",
+      "subtitle": "Steps 1–4 · source to bundle",
+      "lanes": [
+        "Prospect",
+        "Agent",
+        "Customer Service"
+      ],
+      "nodes": [
+        {
+          "nid": "s1",
+          "lane": "Agent",
+          "col": 0,
+          "title": "Prospect identified",
+          "sub": "source code",
+          "kind": "standard"
+        },
+        {
+          "nid": "s2",
+          "lane": "Agent",
+          "col": 1,
+          "title": "Contact & appointment",
+          "sub": "≤1 business day",
+          "kind": "standard"
+        },
+        {
+          "nid": "s3",
+          "lane": "Agent",
+          "col": 2,
+          "title": "Needs analysis",
+          "sub": "gaps · claims history",
+          "kind": "standard"
+        },
+        {
+          "nid": "s4",
+          "lane": "Agent",
+          "col": 3,
+          "title": "Multi-product assessment",
+          "sub": "bundle discount",
+          "kind": "standard"
+        }
+      ],
+      "edges": [
+        {
+          "src": "s1",
+          "dst": "s2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s2",
+          "dst": "s3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "s3",
+          "dst": "s4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "Leads are contacted within a day; needs analysis identifies coverage gaps and auto+home bundling opportunities."
+    },
+    {
+      "pid": "2",
+      "name": "Quotation",
+      "subtitle": "Steps 5–8 · rate, present, underwrite",
+      "lanes": [
+        "Agent",
+        "Rating Engine / Portal",
+        "Underwriting"
+      ],
+      "nodes": [
+        {
+          "nid": "a1",
+          "lane": "Agent",
+          "col": 0,
+          "title": "Enter application",
+          "sub": "address verified",
+          "kind": "standard"
+        },
+        {
+          "nid": "a2",
+          "lane": "Rating Engine / Portal",
+          "col": 1,
+          "title": "Rating engine quote",
+          "sub": "auto-accept / refer",
+          "kind": "decision"
+        },
+        {
+          "nid": "a3",
+          "lane": "Agent",
+          "col": 2,
+          "title": "Present & explain quote",
+          "sub": "disclosure",
+          "kind": "standard"
+        },
+        {
+          "nid": "a4",
+          "lane": "Underwriting",
+          "col": 2,
+          "title": "Underwriting review",
+          "sub": "referred · ≤2h",
+          "kind": "standard"
+        },
+        {
+          "nid": "a5",
+          "lane": "Underwriting",
+          "col": 3,
+          "title": "High-risk hold",
+          "sub": "no verbal bind",
+          "kind": "exception"
+        }
+      ],
+      "edges": [
+        {
+          "src": "a1",
+          "dst": "a2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a3",
+          "label": "auto",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a2",
+          "dst": "a4",
+          "label": "ref",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a4",
+          "dst": "a3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "a4",
+          "dst": "a5",
+          "label": "hi-risk",
+          "dashed": true,
+          "kind": "exception"
+        }
+      ],
+      "note": "The rating engine auto-accepts or refers; high-risk applications are held for written underwriting approval before any bind."
+    },
+    {
+      "pid": "3",
+      "name": "Conversion & issuance",
+      "subtitle": "Steps 9–13 · finalise to fulfil",
+      "lanes": [
+        "Prospect",
+        "Agent",
+        "Payment / PAS"
+      ],
+      "nodes": [
+        {
+          "nid": "d1",
+          "lane": "Agent",
+          "col": 0,
+          "title": "Finalise & sign application",
+          "sub": "scope confirmed",
+          "kind": "standard"
+        },
+        {
+          "nid": "d2",
+          "lane": "Payment / PAS",
+          "col": 1,
+          "title": "Collect first payment",
+          "sub": "receipt issued",
+          "kind": "standard"
+        },
+        {
+          "nid": "d3",
+          "lane": "Payment / PAS",
+          "col": 2,
+          "title": "Issue policy in PAS",
+          "sub": "policy number",
+          "kind": "standard"
+        },
+        {
+          "nid": "d4",
+          "lane": "Payment / PAS",
+          "col": 3,
+          "title": "Dispatch documents",
+          "sub": "schedule · cert · PDS",
+          "kind": "standard"
+        },
+        {
+          "nid": "d5",
+          "lane": "Agent",
+          "col": 4,
+          "title": "Update CRM",
+          "sub": "commission logged",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "d1",
+          "dst": "d2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d2",
+          "dst": "d3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d3",
+          "dst": "d4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "d4",
+          "dst": "d5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "On agreement the application is signed and paid, the policy issues, documents dispatch, and the sale is logged in CRM."
+    }
+  ],
+  "n_phases": 3,
+  "n_steps": 13,
+  "n_roles": 4,
+  "n_gateways": 2,
+  "fitgap": {
+    "overall_fit": 68,
+    "partial_pct": 16,
+    "fits": 8,
+    "gaps": 3,
+    "partials": 3,
+    "steps_analysed": 13,
+    "phases_count": 3,
+    "summary_line": "Overall alignment of SOP-INS-008 against the Guidewire PolicyCenter agent-channel catalog",
+    "metrics": [
+      [
+        "Steps analysed",
+        "13 steps across 3 phases"
+      ],
+      [
+        "Fits confirmed",
+        "8 steps aligned to catalog"
+      ],
+      [
+        "Gaps identified",
+        "3 steps — remediation required"
+      ],
+      [
+        "Partial fits",
+        "3 steps — enhancement recommended"
+      ],
+      [
+        "Highest risk area",
+        "No ready-to-sell enforcement"
+      ],
+      [
+        "Pricing gap",
+        "No risk-data enrichment / telematics"
+      ],
+      [
+        "Ref standard",
+        "Guidewire PolicyCenter Agent Catalog"
+      ]
+    ],
+    "phase_bars": [
+      {
+        "line1": "Phase 1",
+        "line2": "Needs",
+        "value": 68,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 2",
+        "line2": "Quotation",
+        "value": 60,
+        "colour": ""
+      },
+      {
+        "line1": "Phase 3",
+        "line2": "Issuance",
+        "value": 80,
+        "colour": ""
+      },
+      {
+        "line1": "Screening /",
+        "line2": "data",
+        "value": 46,
+        "colour": ""
+      }
+    ],
+    "phase_cards": [
+      {
+        "label": "Phase 1",
+        "value": 68,
+        "sub": "Prospect & needs"
+      },
+      {
+        "label": "Phase 2",
+        "value": 60,
+        "sub": "Quotation"
+      },
+      {
+        "label": "Phase 3",
+        "value": 80,
+        "sub": "Conversion & issue"
+      },
+      {
+        "label": "Screening",
+        "value": 46,
+        "sub": "RTS, KYC & data"
+      }
+    ],
+    "detail_slides": [
+      [
+        "Phase 1 — Prospect & needs analysis",
+        "Steps 1–4 vs Guidewire PolicyCenter agent catalog",
+        [
+          "p1"
+        ]
+      ],
+      [
+        "Phase 2 — Quotation",
+        "Steps 5–10 vs Guidewire PolicyCenter agent catalog",
+        [
+          "p2"
+        ]
+      ],
+      [
+        "Phase 3 — Conversion & issuance",
+        "Steps 11–13 vs Guidewire PolicyCenter agent catalog",
+        [
+          "p3"
+        ]
+      ]
+    ],
+    "items": [
+      {
+        "num": "1",
+        "name": "Lead capture & contact SLA",
+        "status": "FIT",
+        "detail": "CRM lead capture with a 1-day contact SLA aligns with PolicyCenter agent lead management.",
+        "owner": "Agent / Customer Service",
+        "ref": "GW-PC-LED-01",
+        "group": "p1"
+      },
+      {
+        "num": "2",
+        "name": "Needs analysis",
+        "status": "PARTIAL",
+        "detail": "Needs are discussed and noted, but not captured as a structured, auditable suitability record as the catalog requires for conduct compliance.",
+        "owner": "Agent",
+        "ref": "GW-PC-SUI-01",
+        "group": "p1"
+      },
+      {
+        "num": "3",
+        "name": "Multi-product cross-sell",
+        "status": "FIT",
+        "detail": "Auto+home bundling assessment aligns with PolicyCenter account-rounding/cross-sell prompts.",
+        "owner": "Agent",
+        "ref": "GW-PC-XSL-01",
+        "group": "p1"
+      },
+      {
+        "num": "4",
+        "name": "Agent ready-to-sell enforcement",
+        "status": "GAP",
+        "detail": "Licensing is a stated prerequisite but not enforced at point of sale. PolicyCenter blocks quote/bind for agents not currently licensed and appointed for the product/territory.",
+        "owner": "Agent / PAS",
+        "ref": "GW-PC-RTS-01",
+        "group": "p1"
+      },
+      {
+        "num": "5",
+        "name": "Application capture & address verify",
+        "status": "FIT",
+        "detail": "Portal capture with address verification aligns with PolicyCenter submission intake.",
+        "owner": "Agent",
+        "ref": "GW-PC-SUB-01",
+        "group": "p2"
+      },
+      {
+        "num": "6",
+        "name": "Risk-data enrichment",
+        "status": "GAP",
+        "detail": "Rating uses entered data only. PolicyCenter enriches with property/flood, VIN and prior-claims data (and a telematics option for auto) for pricing accuracy and anti-selection control.",
+        "owner": "Rating Engine",
+        "ref": "GW-PC-QTE-08",
+        "group": "p2"
+      },
+      {
+        "num": "7",
+        "name": "Auto-accept rules engine",
+        "status": "PARTIAL",
+        "detail": "Rules-based auto-accept present, but no predictive risk-model score to widen straight-through binding.",
+        "owner": "Rating Engine",
+        "ref": "GW-PC-UW-02",
+        "group": "p2"
+      },
+      {
+        "num": "8",
+        "name": "Disclosure at quote",
+        "status": "FIT",
+        "detail": "Benefits, exclusions and excess explained per disclosure obligations align with PolicyCenter conduct controls.",
+        "owner": "Agent",
+        "ref": "GW-PC-DIS-01",
+        "group": "p2"
+      },
+      {
+        "num": "9",
+        "name": "Underwriting referral & SLAs",
+        "status": "FIT",
+        "detail": "2-hour referral with revised-terms handling aligns with PolicyCenter referral workflow.",
+        "owner": "Underwriter",
+        "ref": "GW-PC-UW-03",
+        "group": "p2"
+      },
+      {
+        "num": "10",
+        "name": "KYC / application-fraud screening",
+        "status": "GAP",
+        "detail": "No KYC/sanctions or application-fraud screening at sale; misrepresentation is only handled post-issuance. PolicyCenter screens and fraud-scores applications before binding.",
+        "owner": "Underwriting / Compliance",
+        "ref": "GW-PC-FR-01",
+        "group": "p2"
+      },
+      {
+        "num": "11",
+        "name": "Signed application & e-signature",
+        "status": "PARTIAL",
+        "detail": "Application is 'digital or paper'; the catalog mandates an auditable e-signature with a captured disclosure acknowledgement before issuance.",
+        "owner": "Agent / Prospect",
+        "ref": "GW-PC-ISS-04",
+        "group": "p3"
+      },
+      {
+        "num": "12",
+        "name": "Payment & instant issuance",
+        "status": "FIT",
+        "detail": "Portal payment and instant issuance with effective date align with PolicyCenter billing and issuance.",
+        "owner": "Agent / Payment Gateway",
+        "ref": "GW-PC-ISS-01",
+        "group": "p3"
+      },
+      {
+        "num": "13",
+        "name": "Document dispatch & sale logging",
+        "status": "FIT",
+        "detail": "2-day document dispatch and CRM sale logging align with PolicyCenter fulfilment and reporting.",
+        "owner": "PAS / Agent",
+        "ref": "GW-PC-ISS-06",
+        "group": "p3"
+      }
+    ],
+    "groups": [
+      [
+        "p1",
+        "PHASE 1 — PROSPECT & NEEDS ANALYSIS"
+      ],
+      [
+        "p2",
+        "PHASE 2 — QUOTATION"
+      ],
+      [
+        "p3",
+        "PHASE 3 — CONVERSION & ISSUANCE"
+      ]
+    ],
+    "critical_missing": [
+      {
+        "title": "Agent ready-to-sell enforcement",
+        "detail": "Licensing is a stated prerequisite but not enforced in the portal. The catalog blocks quote/bind for agents not currently licensed and appointed for the product and territory (links to SOP-INS-005)."
+      },
+      {
+        "title": "Third-party risk-data enrichment",
+        "detail": "Rating relies on entered data only, with no property/flood, VIN or prior-claims enrichment and no telematics option for auto — a pricing-accuracy and anti-selection gap."
+      },
+      {
+        "title": "KYC / application-fraud screening",
+        "detail": "No identity/sanctions or application-fraud screening at sale; misrepresentation is only addressed after issuance, increasing fraud and conduct exposure."
+      },
+      {
+        "title": "Mandatory e-signature & suitability",
+        "detail": "Application acceptance is 'digital or paper' with no mandated e-signature or structured suitability record, a conduct and dispute exposure."
+      }
+    ],
+    "radar": [
+      [
+        "Lead & needs",
+        70
+      ],
+      [
+        "Ready-to-sell",
+        40
+      ],
+      [
+        "Risk data",
+        46
+      ],
+      [
+        "Auto-accept",
+        60
+      ],
+      [
+        "KYC / fraud",
+        42
+      ],
+      [
+        "Issuance",
+        82
+      ],
+      [
+        "Conduct / e-sign",
+        55
+      ]
+    ],
+    "control_bars": [
+      {
+        "name": "Lead & needs",
+        "value": 70,
+        "note": "CRM capture and needs analysis"
+      },
+      {
+        "name": "Ready-to-sell",
+        "value": 40,
+        "note": "Licensing not enforced at point of sale"
+      },
+      {
+        "name": "Risk-data enrichment",
+        "value": 46,
+        "note": "Entered data only; no enrichment/telematics"
+      },
+      {
+        "name": "Auto-accept rules",
+        "value": 60,
+        "note": "Rules-based; no predictive model"
+      },
+      {
+        "name": "KYC / fraud screening",
+        "value": 42,
+        "note": "No screening before binding"
+      },
+      {
+        "name": "Issuance & fulfilment",
+        "value": 82,
+        "note": "Instant issuance with 2-day documents"
+      },
+      {
+        "name": "Conduct / e-signature",
+        "value": 55,
+        "note": "Disclosure good; e-signature not mandated"
+      }
+    ],
+    "remediations": [
+      {
+        "rank": 1,
+        "title": "Enforce agent ready-to-sell at point of sale",
+        "detail": "Block quote/bind for agents not currently licensed and appointed for the product/territory, integrated with the licensing system (SOP-INS-005). Effort: 3 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 2,
+        "title": "Enrich rating with risk data & telematics",
+        "detail": "Append property/flood, VIN and prior-claims data and offer a telematics rating option for auto. Effort: 6 weeks (data partners).",
+        "priority": "High"
+      },
+      {
+        "rank": 3,
+        "title": "Add KYC / application-fraud screening",
+        "detail": "Screen identity/sanctions and fraud-score applications before binding; route hits to Compliance. Effort: 4 weeks.",
+        "priority": "High"
+      },
+      {
+        "rank": 4,
+        "title": "Mandate e-signature & structured suitability",
+        "detail": "Require an auditable e-signature with captured disclosure acknowledgement and a structured suitability record before issuance. Effort: 3 weeks.",
+        "priority": "Medium"
+      },
+      {
+        "rank": 5,
+        "title": "Add predictive risk scoring",
+        "detail": "Layer a predictive risk-model score over the rules engine to widen straight-through binding for low-risk applications. Effort: 5 weeks.",
+        "priority": "Medium"
+      }
+    ],
+    "risk_impact": [
+      [
+        "Ready-to-sell",
+        85
+      ],
+      [
+        "KYC / fraud",
+        80
+      ],
+      [
+        "Risk-data enrichment",
+        75
+      ],
+      [
+        "E-signature / suitability",
+        62
+      ],
+      [
+        "Predictive scoring",
+        55
+      ],
+      [
+        "Telematics",
+        50
+      ]
+    ],
+    "projected_fit": 91
+  },
+  "opt_phases": [
+    {
+      "pid": "1",
+      "name": "Prospect, readiness & needs",
+      "subtitle": "Ready-to-sell, needs, bundle",
+      "circle": "blue",
+      "roles": "Agent · Customer Service · Licensing",
+      "step_range": "Steps 1–5",
+      "summary": "5 steps"
+    },
+    {
+      "pid": "2",
+      "name": "Quotation & screening",
+      "subtitle": "Enrich, rate, screen, underwrite",
+      "circle": "green",
+      "roles": "Agent · Rating · Underwriting · Compliance",
+      "step_range": "Steps 6–11",
+      "summary": "6 steps + 1 decision"
+    },
+    {
+      "pid": "3",
+      "name": "Conversion & issuance",
+      "subtitle": "E-sign, pay, issue, fulfil",
+      "circle": "amber",
+      "roles": "Agent · Payment Gateway · PAS",
+      "step_range": "Steps 12–16",
+      "summary": "5 steps"
+    }
+  ],
+  "opt_steps": [
+    {
+      "num": "1",
+      "phase": "1",
+      "activity": "Prospect identified (referral, campaign, inbound)",
+      "responsible": "Agent / Customer Service",
+      "output": "Prospect record in CRM; source code",
+      "timeline": "Day 0",
+      "controls": "Standard",
+      "kind": "trigger",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "2",
+      "phase": "1",
+      "activity": "Agent ready-to-sell check",
+      "responsible": "Licensing System / PAS",
+      "output": "Quote/bind enabled only if agent is currently licensed and appointed",
+      "timeline": "Day 0",
+      "controls": "NEW (v3.0) — point-of-sale gate",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "3",
+      "phase": "1",
+      "activity": "Initial contact and appointment",
+      "responsible": "Agent",
+      "output": "Contact within 1 business day; appointment confirmed",
+      "timeline": "Day 0–1",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "4",
+      "phase": "1",
+      "activity": "Structured needs analysis & suitability",
+      "responsible": "Agent",
+      "output": "Auditable suitability record captured; coverage gaps identified",
+      "timeline": "Day 1–3",
+      "controls": "ENHANCED (v3.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "5",
+      "phase": "1",
+      "activity": "Multi-product opportunity assessed",
+      "responsible": "Agent",
+      "output": "Bundled auto+home discount presented if applicable",
+      "timeline": "Day 1–3",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "6",
+      "phase": "2",
+      "activity": "Application entered with risk-data enrichment",
+      "responsible": "Agent / Rating Engine",
+      "output": "Property/flood, VIN and prior-claims data appended; address verified",
+      "timeline": "Day 3",
+      "controls": "NEW (v3.0) — pricing accuracy",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "7",
+      "phase": "2",
+      "activity": "KYC / application-fraud screening",
+      "responsible": "Underwriting / Compliance",
+      "output": "Identity/sanctions screened and application fraud-scored before binding",
+      "timeline": "Instant",
+      "controls": "NEW (v3.0) — fraud & conduct control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "8",
+      "phase": "2",
+      "activity": "Rating engine quote with predictive score",
+      "responsible": "Rating + Model Engine",
+      "output": "Rules plus predictive score widen straight-through binding; refer otherwise",
+      "timeline": "Instant",
+      "controls": "ENHANCED (v3.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "9",
+      "phase": "2",
+      "activity": "Quote presented and explained",
+      "responsible": "Agent",
+      "output": "Benefits, exclusions, excess and payment options per disclosure",
+      "timeline": "Day 3",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "10",
+      "phase": "2",
+      "activity": "Underwriting review (if referred)",
+      "responsible": "Underwriter",
+      "output": "Decision within 2 business hours; revised terms communicated",
+      "timeline": "≤2 hours",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "11",
+      "phase": "2",
+      "activity": "Telematics rating option (auto)",
+      "responsible": "Agent / Rating Engine",
+      "output": "Opt-in usage-based rating offered for auto with safe-driving discount",
+      "timeline": "Day 3",
+      "controls": "NEW (v3.0)",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "",
+      "phase": "2",
+      "activity": "",
+      "responsible": "",
+      "output": "",
+      "timeline": "",
+      "controls": "Outcome",
+      "kind": "decision",
+      "decision": "Auto-accept or referral?",
+      "branches": [
+        "Auto-accept → conversion",
+        "Referral / high-risk → underwriter (Sec 6.2)"
+      ]
+    },
+    {
+      "num": "12",
+      "phase": "3",
+      "activity": "Application finalised with mandatory e-signature",
+      "responsible": "Agent / Prospect",
+      "output": "Auditable e-signature and disclosure acknowledgement captured",
+      "timeline": "Day 3–5",
+      "controls": "ENHANCED (v3.0) — conduct control",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "13",
+      "phase": "3",
+      "activity": "First premium payment collected",
+      "responsible": "Agent / Payment Gateway",
+      "output": "Payment via portal; receipt issued",
+      "timeline": "Day 5",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "14",
+      "phase": "3",
+      "activity": "Policy issued in PAS",
+      "responsible": "Agent Portal / PAS",
+      "output": "Policy number; coverage effective from start date",
+      "timeline": "Day 5",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "15",
+      "phase": "3",
+      "activity": "Policy documents dispatched",
+      "responsible": "PAS (auto)",
+      "output": "Schedule, certificate, PDS within 2 business days",
+      "timeline": "≤2 days",
+      "controls": "Standard",
+      "kind": "process",
+      "decision": null,
+      "branches": []
+    },
+    {
+      "num": "16",
+      "phase": "3",
+      "activity": "CRM updated with sale outcome",
+      "responsible": "Agent",
+      "output": "Policy number, premium, product and commission logged",
+      "timeline": "Day 5",
+      "controls": "Standard",
+      "kind": "complete",
+      "decision": null,
+      "branches": []
+    }
+  ],
+  "opt_swim_phases": [
+    {
+      "pid": "1",
+      "name": "Prospect, readiness & needs",
+      "subtitle": "Steps 1–5 · v3.0 adds ready-to-sell gate",
+      "lanes": [
+        "Prospect",
+        "Agent",
+        "Licensing System"
+      ],
+      "nodes": [
+        {
+          "nid": "o1",
+          "lane": "Agent",
+          "col": 0,
+          "title": "Prospect identified",
+          "sub": "source code",
+          "kind": "standard"
+        },
+        {
+          "nid": "o2",
+          "lane": "Licensing System",
+          "col": 1,
+          "title": "Ready-to-sell check",
+          "sub": "licensed & appointed",
+          "kind": "new"
+        },
+        {
+          "nid": "o3",
+          "lane": "Agent",
+          "col": 2,
+          "title": "Contact & appointment",
+          "sub": "≤1 business day",
+          "kind": "standard"
+        },
+        {
+          "nid": "o4",
+          "lane": "Agent",
+          "col": 3,
+          "title": "Structured needs & suitability",
+          "sub": "auditable record",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "o5",
+          "lane": "Agent",
+          "col": 4,
+          "title": "Multi-product assessment",
+          "sub": "bundle discount",
+          "kind": "standard"
+        }
+      ],
+      "edges": [
+        {
+          "src": "o1",
+          "dst": "o2",
+          "label": "RTS",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "o2",
+          "dst": "o3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o3",
+          "dst": "o4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "o4",
+          "dst": "o5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "v3.0 enforces a ready-to-sell gate before any selling activity and captures a structured suitability record."
+    },
+    {
+      "pid": "2",
+      "name": "Quotation & screening",
+      "subtitle": "Steps 6–11 · enrichment, KYC, model",
+      "lanes": [
+        "Agent",
+        "Rating / Model",
+        "Underwriting / Compliance"
+      ],
+      "nodes": [
+        {
+          "nid": "p1",
+          "lane": "Agent",
+          "col": 0,
+          "title": "Enter application + enrichment",
+          "sub": "property · VIN · claims",
+          "kind": "new"
+        },
+        {
+          "nid": "p2",
+          "lane": "Underwriting / Compliance",
+          "col": 1,
+          "title": "KYC / fraud screening",
+          "sub": "before bind",
+          "kind": "new"
+        },
+        {
+          "nid": "p3",
+          "lane": "Rating / Model",
+          "col": 1,
+          "title": "Quote + predictive score",
+          "sub": "auto-accept / refer",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "p4",
+          "lane": "Agent",
+          "col": 2,
+          "title": "Present & explain quote",
+          "sub": "disclosure",
+          "kind": "standard"
+        },
+        {
+          "nid": "p5",
+          "lane": "Underwriting / Compliance",
+          "col": 2,
+          "title": "Underwriting review",
+          "sub": "referred · ≤2h",
+          "kind": "standard"
+        },
+        {
+          "nid": "p6",
+          "lane": "Rating / Model",
+          "col": 3,
+          "title": "Telematics option (auto)",
+          "sub": "usage-based",
+          "kind": "new"
+        }
+      ],
+      "edges": [
+        {
+          "src": "p1",
+          "dst": "p2",
+          "label": "",
+          "dashed": true,
+          "kind": "new"
+        },
+        {
+          "src": "p2",
+          "dst": "p3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p3",
+          "dst": "p4",
+          "label": "auto",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p3",
+          "dst": "p5",
+          "label": "ref",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "p4",
+          "dst": "p6",
+          "label": "telem",
+          "dashed": true,
+          "kind": "new"
+        }
+      ],
+      "note": "v3.0 enriches rating, screens applications for KYC/fraud, scores risk predictively, and offers a telematics option."
+    },
+    {
+      "pid": "3",
+      "name": "Conversion & issuance",
+      "subtitle": "Steps 12–16 · v3.0 mandates e-signature",
+      "lanes": [
+        "Prospect",
+        "Agent",
+        "Payment / PAS"
+      ],
+      "nodes": [
+        {
+          "nid": "q1",
+          "lane": "Agent",
+          "col": 0,
+          "title": "Finalise + e-signature",
+          "sub": "audited acceptance",
+          "kind": "enhanced"
+        },
+        {
+          "nid": "q2",
+          "lane": "Payment / PAS",
+          "col": 1,
+          "title": "Collect first payment",
+          "sub": "receipt",
+          "kind": "standard"
+        },
+        {
+          "nid": "q3",
+          "lane": "Payment / PAS",
+          "col": 2,
+          "title": "Issue policy in PAS",
+          "sub": "policy number",
+          "kind": "standard"
+        },
+        {
+          "nid": "q4",
+          "lane": "Payment / PAS",
+          "col": 3,
+          "title": "Dispatch documents",
+          "sub": "schedule · cert · PDS",
+          "kind": "standard"
+        },
+        {
+          "nid": "q5",
+          "lane": "Agent",
+          "col": 4,
+          "title": "Update CRM",
+          "sub": "commission logged",
+          "kind": "terminal"
+        }
+      ],
+      "edges": [
+        {
+          "src": "q1",
+          "dst": "q2",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q2",
+          "dst": "q3",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q3",
+          "dst": "q4",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        },
+        {
+          "src": "q4",
+          "dst": "q5",
+          "label": "",
+          "dashed": false,
+          "kind": "standard"
+        }
+      ],
+      "note": "v3.0 mandates an auditable e-signature acceptance before payment and issuance."
+    }
+  ],
+  "opt_n_phases": 3,
+  "opt_n_steps": 16,
+  "opt_n_gateways": 2,
+  "opt_fit": 91,
+  "optimised_doc": {
+    "subtitle": "Optimised per Fit-Gap Analysis against the Guidewire PolicyCenter Agent-Channel Catalog",
+    "sections": [
+      {
+        "title": "",
+        "blocks": [
+          [
+            "meta",
+            [
+              [
+                "Document Reference",
+                "SOP-INS-008"
+              ],
+              [
+                "Version",
+                "3.0 (Optimised)"
+              ],
+              [
+                "Effective Date",
+                "01 October 2026"
+              ],
+              [
+                "Supersedes",
+                "v2.2 dated 01 March 2025"
+              ],
+              [
+                "Owner",
+                "Personal Lines Distribution"
+              ],
+              [
+                "Approved By",
+                "Head of Personal Lines"
+              ],
+              [
+                "Optimisation Reference",
+                "Fit-Gap Report FG-INS-008 dated 18 June 2026"
+              ],
+              [
+                "Catalog Alignment Score",
+                "91% (up from 68% in v2.2)"
+              ],
+              [
+                "Classification",
+                "Internal Use Only"
+              ]
+            ]
+          ],
+          [
+            "summary",
+            "OPTIMISATION SUMMARY — What changed in v3.0",
+            [
+              "This version incorporates 5 remediation actions from Fit-Gap Report FG-INS-008. Alignment to the Guidewire PolicyCenter agent-channel catalog increased from 68% to 91%. Critical additions: agent ready-to-sell enforcement, third-party risk-data enrichment with telematics, KYC/application-fraud screening, mandatory e-signature with structured suitability, and predictive risk scoring."
+            ],
+            [
+              "NEW STEP (green) — step added to close a gap vs the PolicyCenter catalog",
+              "ENHANCED (amber) — existing step updated with additional controls or automation"
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "1. Purpose",
+        "blocks": [
+          [
+            "para",
+            "This Standard Operating Procedure defines the process for quoting and converting prospects into auto and home policyholders through the Meridian agent channel. Version 3.0 incorporates optimisations from fit-gap analysis against the Guidewire PolicyCenter Agent-Channel Personal Lines Catalog, achieving 91% alignment (up from 68% in v2.2)."
+          ]
+        ]
+      },
+      {
+        "title": "2. Scope",
+        "blocks": [
+          [
+            "para",
+            "This procedure applies to agent-sourced and inbound auto and home enquiries, new business, cross-sales and account rounding, via the agent portal or telephony channel."
+          ],
+          [
+            "banner",
+            "new",
+            "Scope extended: a ready-to-sell gate and KYC/application-fraud screening now apply to every agent-assisted sale before binding."
+          ],
+          [
+            "para",
+            "This procedure does NOT cover online direct sales (SOP-INS-001), commercial vehicle fleets, or landlord insurance beyond standard residential."
+          ]
+        ]
+      },
+      {
+        "title": "3. Underwriting Authority Matrix",
+        "blocks": [
+          [
+            "table",
+            [
+              "Decision",
+              "First Authority",
+              "Second Authority"
+            ],
+            [
+              [
+                "Auto-accept (rules + model clear)",
+                "Rating + Model Engine",
+                "—"
+              ],
+              [
+                "Standard referral",
+                "Underwriter",
+                "—"
+              ],
+              [
+                "High-risk property/vehicle",
+                "Senior Underwriter",
+                "Underwriter"
+              ],
+              [
+                "Non-standard terms / exclusions",
+                "Senior Underwriter",
+                "—"
+              ],
+              [
+                "Misrepresentation (void/voidable)",
+                "Compliance",
+                "Underwriting Manager"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "4. Roles and Responsibilities",
+        "blocks": [
+          [
+            "table",
+            [
+              "Role",
+              "Responsibilities"
+            ],
+            [
+              [
+                "Personal Lines Agent",
+                "Identifies prospects; runs needs/suitability; presents options; completes and e-signs application."
+              ],
+              [
+                "Underwriter",
+                "Reviews referrals; sets non-standard terms; approves high-risk cases in writing."
+              ],
+              [
+                "Compliance",
+                "Owns KYC/sanctions and application-fraud dispositions and misrepresentation handling."
+              ],
+              [
+                "Customer Service",
+                "Handles inbound enquiries and channel-assisted applications."
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "5. Readiness & Screening (New Section — v3.0)",
+        "blocks": [
+          [
+            "banner",
+            "crit",
+            "New section. Required by the PolicyCenter catalog. A ready-to-sell gate and KYC/application-fraud screening now precede any bind."
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Control",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "R1",
+                "Agent ready-to-sell check",
+                "Licensing / PAS",
+                "Quote/bind blocked if not licensed/appointed",
+                "At sale start"
+              ],
+              [
+                "R2",
+                "KYC / sanctions screening",
+                "Compliance",
+                "Identity and watchlist screened before bind",
+                "Pre-bind"
+              ],
+              [
+                "R3",
+                "Application-fraud scoring",
+                "Underwriting",
+                "Application fraud-scored; misrepresentation flagged",
+                "Pre-bind"
+              ],
+              [
+                "R4",
+                "Mandatory e-signature & suitability",
+                "Agent / Prospect",
+                "Audited e-signature and suitability record",
+                "Pre-issue"
+              ]
+            ],
+            {
+              "0": "new",
+              "1": "new",
+              "2": "new",
+              "3": "new"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "6. Process Steps",
+        "blocks": [
+          [
+            "h3",
+            "6.1 Prospect, Readiness & Needs"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "1",
+                "Prospect identified",
+                "Agent / Customer Service",
+                "CRM record; source code",
+                "Day 0"
+              ],
+              [
+                "2",
+                "Agent ready-to-sell check",
+                "Licensing / PAS",
+                "Quote/bind enabled if eligible",
+                "Day 0"
+              ],
+              [
+                "3",
+                "Initial contact and appointment",
+                "Agent",
+                "Contact within 1 business day",
+                "Day 0–1"
+              ],
+              [
+                "4",
+                "Structured needs analysis & suitability",
+                "Agent",
+                "Auditable suitability record",
+                "Day 1–3"
+              ],
+              [
+                "5",
+                "Multi-product opportunity assessed",
+                "Agent",
+                "Bundle discount presented",
+                "Day 1–3"
+              ]
+            ],
+            {
+              "1": "new",
+              "3": "enh"
+            }
+          ],
+          [
+            "h3",
+            "6.2 Quotation & Screening"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "6",
+                "Application entered with risk-data enrichment",
+                "Agent / Rating Engine",
+                "Property/VIN/claims appended",
+                "Day 3"
+              ],
+              [
+                "7",
+                "KYC / application-fraud screening",
+                "Compliance",
+                "Screened and fraud-scored before bind",
+                "Instant"
+              ],
+              [
+                "8",
+                "Rating engine quote with predictive score",
+                "Rating + Model Engine",
+                "STP binding widened",
+                "Instant"
+              ],
+              [
+                "9",
+                "Quote presented and explained",
+                "Agent",
+                "Disclosure obligations met",
+                "Day 3"
+              ],
+              [
+                "10",
+                "Underwriting review (if referred)",
+                "Underwriter",
+                "Decision within 2 business hours",
+                "≤2 hours"
+              ],
+              [
+                "11",
+                "Telematics rating option (auto)",
+                "Agent / Rating Engine",
+                "Usage-based discount opt-in",
+                "Day 3"
+              ]
+            ],
+            {
+              "0": "new",
+              "1": "new",
+              "2": "enh",
+              "5": "new"
+            }
+          ],
+          [
+            "h3",
+            "6.3 Conversion & Issuance"
+          ],
+          [
+            "table",
+            [
+              "#",
+              "Step / Activity",
+              "Responsible",
+              "Output / System",
+              "Timeline"
+            ],
+            [
+              [
+                "12",
+                "Application finalised with mandatory e-signature",
+                "Agent / Prospect",
+                "Audited e-signature & disclosure",
+                "Day 3–5"
+              ],
+              [
+                "13",
+                "First premium payment collected",
+                "Agent / Payment Gateway",
+                "Receipt issued",
+                "Day 5"
+              ],
+              [
+                "14",
+                "Policy issued in PAS",
+                "Agent Portal / PAS",
+                "Policy number; effective date",
+                "Day 5"
+              ],
+              [
+                "15",
+                "Policy documents dispatched",
+                "PAS",
+                "Schedule, cert, PDS within 2 days",
+                "≤2 days"
+              ],
+              [
+                "16",
+                "CRM updated with sale outcome",
+                "Agent",
+                "Premium, product, commission logged",
+                "Day 5"
+              ]
+            ],
+            {
+              "0": "enh"
+            }
+          ]
+        ]
+      },
+      {
+        "title": "7. Exception Handling",
+        "blocks": [
+          [
+            "h3",
+            "7.1 Prospect Declines Quote"
+          ],
+          [
+            "numbered",
+            [
+              "Agent records declination with reason code in CRM; follow-up task set for 30 days.",
+              "If price was the objection, the agent may request a pricing review where the risk profile warrants an exception."
+            ]
+          ],
+          [
+            "h3",
+            "7.2 High-Risk Property or Vehicle"
+          ],
+          [
+            "numbered_from",
+            3,
+            [
+              "Applications outside standard guidelines are held for underwriting review before any verbal commitment.",
+              "The agent must not communicate binding confirmation until written underwriting approval is received."
+            ]
+          ],
+          [
+            "h3",
+            "7.3 Misrepresentation (Enhanced — v3.0)"
+          ],
+          [
+            "banner",
+            "enh",
+            "Application-fraud scoring now flags likely misrepresentation before binding, not only after issuance."
+          ],
+          [
+            "numbered_from",
+            5,
+            [
+              "Pre-bind: a high fraud score routes the application to Compliance before any cover is bound.",
+              "Post-issuance: material misrepresentation is notified to Underwriting and Compliance within 1 business day.",
+              "Compliance determines whether the policy is void or voidable and advises required action."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "8. Systems and Tools",
+        "blocks": [
+          [
+            "table",
+            [
+              "System",
+              "Purpose",
+              "Primary Users"
+            ],
+            [
+              [
+                "Agent Portal (Meridian Connect)",
+                "Quotation, submission, issuance, documents",
+                "Agent"
+              ],
+              [
+                "Policy Administration System (PAS)",
+                "Policy record, documents, endorsements, ready-to-sell gate",
+                "Agent, Customer Service, Underwriting"
+              ],
+              [
+                "CRM (Salesforce)",
+                "Prospect/customer records and pipeline",
+                "Agent, Customer Service"
+              ],
+              [
+                "Rating + Model Engine",
+                "Premium calculation, enrichment, predictive scoring, telematics",
+                "Automated"
+              ],
+              [
+                "KYC / Fraud Screening",
+                "Identity/sanctions and application-fraud scoring",
+                "Compliance, Underwriting"
+              ],
+              [
+                "E-Signature Service",
+                "Audited application acceptance",
+                "Agent, Prospect"
+              ],
+              [
+                "Payment Gateway",
+                "Premium collection and receipts",
+                "Agent, Customer Service"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "9. Key Controls and Audit Points",
+        "blocks": [
+          [
+            "banner",
+            "enh",
+            "Controls expanded in v3.0: ready-to-sell enforcement, risk-data enrichment, KYC/fraud screening, e-signature and predictive scoring."
+          ],
+          [
+            "bullets",
+            [
+              "Ready-to-sell gate: no quote/bind by an unlicensed or unappointed agent.",
+              "Risk-data enrichment: property/flood, VIN and claims data improve pricing.",
+              "KYC/fraud screening: identity, sanctions and fraud scored before binding.",
+              "E-signature: audited acceptance with disclosure acknowledgement before issuance.",
+              "Suitability: structured needs/suitability record captured for conduct compliance.",
+              "Predictive scoring: rules-engine binding refined by a governed risk model.",
+              "Immutable audit trail: needs, screening, quote, acceptance and issuance events logged."
+            ]
+          ]
+        ]
+      },
+      {
+        "title": "10. Key Performance Indicators",
+        "blocks": [
+          [
+            "table",
+            [
+              "KPI",
+              "v2.2 Target",
+              "v3.0 Target",
+              "Measurement"
+            ],
+            [
+              [
+                "Lead-to-quote",
+                "≥70%",
+                "≥72%",
+                "Quotes per assigned lead"
+              ],
+              [
+                "Quote-to-bind",
+                "≥28%",
+                "≥32%",
+                "Bound / quoted"
+              ],
+              [
+                "Cross-product attach",
+                "≥35%",
+                "≥40%",
+                "Auto with home attached"
+              ],
+              [
+                "Ready-to-sell breaches",
+                "N/A (new)",
+                "Zero (blocked)",
+                "Gate enforcement"
+              ],
+              [
+                "E-signature acceptance",
+                "N/A (new)",
+                "≥90%",
+                "E-sign vs paper"
+              ],
+              [
+                "Sales-conduct complaints",
+                "Zero upheld /1,000",
+                "Zero upheld /1,000",
+                "Complaints register"
+              ]
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "title": "11. Document Control",
+        "blocks": [
+          [
+            "table",
+            [
+              "Version",
+              "Date",
+              "Author",
+              "Summary of Changes"
+            ],
+            [
+              [
+                "2.2",
+                "01 Mar 2025",
+                "B. Osei, Underwriting",
+                "Aligned to revised product disclosure obligations; updated payment gateway steps"
+              ],
+              [
+                "3.0",
+                "01 Oct 2026",
+                "B. Osei, Underwriting",
+                "OPTIMISED: ready-to-sell enforcement; risk-data enrichment & telematics; KYC/fraud screening; mandatory e-signature & suitability; predictive scoring; catalog alignment 68% → 91%"
+              ]
+            ],
+            {}
+          ]
+        ]
+      }
+    ]
+  },
+  "swim_cover_tags": "Needs · Quotation · Underwriting · Issuance · Exception handling",
+  "hierarchy_cover_sub": "Phase breakdown with agent sales tracks, underwriting authority, and exception paths"
+}

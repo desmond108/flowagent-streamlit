@@ -1,0 +1,20 @@
+# Secrets — never commit. Set real values in Streamlit Cloud → Settings → Secrets.
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Generated deliverables (regenerable; produced at runtime into temp dirs)
+2_*/
+2a_*/
+2b_*/
+3_*/
+4_*/
+5_*/
+_output/
+
+# macOS
+.DS_Store
