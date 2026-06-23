@@ -174,7 +174,7 @@ else:
 has_key = bool(os.environ.get("ANTHROPIC_API_KEY"))
 mode = st.sidebar.radio(
     "Mode",
-    ["Demo — frozen SOPs (free)", "Live — upload a SOP (uses Claude API)"],
+    ["Demo — frozen SOPs (free)", "Live — upload a SOP (uses API)"],
 )
 
 
