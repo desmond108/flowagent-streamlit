@@ -45,6 +45,20 @@ MODEL = "claude-opus-4-8"
 
 st.set_page_config(page_title="FlowAgent", page_icon="🟠", layout="wide")
 
+# Hide Streamlit's developer chrome (GitHub/fork/edit-pencil badges + options menu)
+# so the customer gets a clean, read-only view. Pairs with client.toolbarMode in
+# .streamlit/config.toml.
+st.markdown(
+    """
+    <style>
+      [data-testid="stToolbar"] { display: none !important; }
+      [data-testid="stAppDeployButton"] { display: none !important; }
+      #MainMenu { visibility: hidden !important; }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 
 # --- Helpers ----------------------------------------------------------------
 def chrome_ok() -> str | None:

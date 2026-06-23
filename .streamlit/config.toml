@@ -8,3 +8,8 @@ textColor = "#FFFFFF"
 
 [server]
 maxUploadSize = 25
+
+[client]
+# Hide the developer toolbar (GitHub source, fork, edit-in-Codespaces pencil,
+# rerun/settings menu) so customers get a clean, read-only view.
+toolbarMode = "minimal"
