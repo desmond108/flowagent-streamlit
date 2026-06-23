@@ -172,21 +172,27 @@ def show_results(sop_id: str, paths: list[str], source: str | None = None) -> No
             return "text/plain"
         return "application/octet-stream"
 
-    cols = st.columns(3)
-    for i, (label, p) in enumerate(items):
-        with cols[i % 3]:
-            with open(p, "rb") as fh:
-                st.download_button(
-                    label,
-                    data=fh.read(),
-                    file_name=os.path.basename(p),
-                    mime=_mime(p),
-                    key=f"dl_{i}_{os.path.basename(p)}",
-                )
+    by_label = {label: p for label, p in items}
+    labels = list(by_label)
+
+    # Pick one document with the radio list, then download it.
+    sel_key = f"docsel_{sop_id}"
+    selected = st.session_state.get(sel_key, labels[0])
+    if selected not in by_label:
+        selected = labels[0]
+    sel_path = by_label[selected]
+    with open(sel_path, "rb") as fh:
+        st.download_button(
+            "⬇️  Download selected",
+            data=fh.read(),
+            file_name=os.path.basename(sel_path),
+            mime=_mime(sel_path),
+            key=f"dlsel_{sop_id}",
+        )
+    st.radio("Documents", labels, key=sel_key)
 
     st.divider()
-    by_label = {label: p for label, p in items}
-    choice = st.selectbox("Preview", list(by_label), key=f"prev_{sop_id}")
+    choice = st.selectbox("Preview", labels, key=f"prev_{sop_id}")
     if choice:
         p = by_label[choice]
         if p.lower().endswith(".pdf"):
