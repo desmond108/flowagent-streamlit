@@ -45,17 +45,17 @@ MODEL = "claude-opus-4-8"
 
 st.set_page_config(page_title="FlowAgent", page_icon="🟠", layout="wide")
 
-# Hide Streamlit's developer chrome (GitHub/fork/edit-pencil badges + options menu)
-# so the customer gets a clean, read-only view. Pairs with client.toolbarMode in
-# .streamlit/config.toml.
+# Hide Streamlit's developer chrome (options menu + deploy button) so the customer
+# gets a clean view. NOTE: keep this on ONE line with no indentation — indented
+# HTML in st.markdown is rendered as a literal code block. The GitHub source/fork/
+# edit badges are Community Cloud chrome shown for PUBLIC repos; they go away when
+# the repo is private.
 st.markdown(
-    """
-    <style>
-      [data-testid="stToolbar"] { display: none !important; }
-      [data-testid="stAppDeployButton"] { display: none !important; }
-      #MainMenu { visibility: hidden !important; }
-    </style>
-    """,
+    '<style>'
+    '[data-testid="stToolbar"]{display:none!important;}'
+    '[data-testid="stAppDeployButton"]{display:none!important;}'
+    '#MainMenu{visibility:hidden!important;}'
+    '</style>',
     unsafe_allow_html=True,
 )
 
