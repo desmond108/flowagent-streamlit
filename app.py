@@ -163,7 +163,7 @@ def show_results(sop_id: str, paths: list[str]) -> None:
         try:
             pages = pdf_page_images(choice)
             for n, png in enumerate(pages, 1):
-                st.image(png, use_container_width=True, caption=f"Page {n}")
+                st.image(png, width="stretch", caption=f"Page {n}")
         except Exception:
             st.info(
                 "Inline preview unavailable here — use the download button above "
