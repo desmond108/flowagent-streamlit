@@ -49,6 +49,29 @@ def _list(cls, items):
     return [cls(**x) for x in items]
 
 
+# The fit-gap templates unpack some plain lists with a FIXED arity. Authored
+# data always matches; these coerce loosely-shaped LLM output to the exact shape
+# so a stray extra/missing element can't crash the renderer.
+def _pair(x):
+    x = list(x)
+    return (x[0] if x else "", x[1] if len(x) > 1 else "")
+
+
+def _kv(x):
+    x = list(x)
+    if not x:
+        return ("", "")
+    return (x[0], " ".join(str(s) for s in x[1:]) if len(x) > 1 else "")
+
+
+def _triple(x):
+    x = list(x)
+    title = x[0] if x else ""
+    sub = x[1] if len(x) > 1 else ""
+    keys = x[2] if len(x) > 2 else []
+    return (title, sub, keys if isinstance(keys, list) else [keys])
+
+
 def _swim_phase(d):
     d = dict(d)
     d["nodes"] = _list(M.SwimNode, d["nodes"])
@@ -64,8 +87,13 @@ def _fitgap(d):
     d["critical_missing"] = _list(M.CriticalGap, d["critical_missing"])
     d["control_bars"] = _list(M.ControlBar, d["control_bars"])
     d["remediations"] = _list(M.Remediation, d["remediations"])
-    # metrics / detail_slides / groups / radar / risk_impact stay as lists;
-    # the templates unpack them positionally, so list-vs-tuple is irrelevant.
+    # These stay as plain lists but the templates unpack them with a fixed arity,
+    # so coerce each row to the exact shape it expects.
+    d["metrics"] = [_kv(x) for x in d.get("metrics", [])]
+    d["groups"] = [_pair(x) for x in d.get("groups", [])]
+    d["risk_impact"] = [_pair(x) for x in d.get("risk_impact", [])]
+    d["radar"] = [_pair(x) for x in d.get("radar", [])]
+    d["detail_slides"] = [_triple(x) for x in d.get("detail_slides", [])]
     return M.FitGap(**d)
 
 
