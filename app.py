@@ -259,8 +259,10 @@ def require_auth() -> None:
 
     st.markdown("## 🟠 FlowAgent")
     st.caption("Enter the access password to continue.")
-    entered = st.text_input("Password", type="password", key="pw_in")
-    if entered:
+    with st.form("auth_form"):
+        entered = st.text_input("Password", type="password")
+        submitted = st.form_submit_button("Enter")
+    if submitted:
         if hmac.compare_digest(entered, pw):
             st.session_state["auth_ok"] = True
             st.rerun()
