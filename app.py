@@ -319,8 +319,8 @@ if mode.startswith("Demo"):
 else:
     st.header("Live — upload a SOP")
     st.caption(
-        "FlowAgent reads your SOP, builds the canonical analysis, validates it "
-        "against the contract, then renders the deliverables."
+        "FlowAgent reads your SOP, builds the analysis, checks it is complete "
+        "and well-formed, then renders the deliverables."
     )
 
     if not has_key:
@@ -352,11 +352,11 @@ else:
                 pkg_dict = analyzer.analyze(sop_id, text)
                 st.write(f"Authored in {time.time() - t0:.0f}s.")
 
-                st.write("Validating against the contract …")
+                st.write("Checking the analysis is complete and well-formed …")
                 errors = contract.validate(pkg_dict)
                 if errors:
                     status.update(label="Contract validation failed", state="error")
-                    st.error("Model output failed validation:")
+                    st.error("The analysis was incomplete or malformed:")
                     st.code("\n".join(errors[:10]))
                     st.stop()
 
