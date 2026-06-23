@@ -14,6 +14,7 @@ Deploy:        see DEPLOY.md (Streamlit Community Cloud + chromium via packages.
 """
 from __future__ import annotations
 
+import hmac
 import io
 import os
 import re
@@ -243,6 +244,31 @@ def render_stored(mode: str) -> None:
     if res.get("payload") is not None:
         with st.expander("Canonical JSON (review before trusting)"):
             st.json(res["payload"])
+
+
+# --- Access gate (optional) -------------------------------------------------
+def require_auth() -> None:
+    """Password gate. Disabled (open access) if no APP_PASSWORD secret is set;
+    otherwise prompt once per session. The password lives only in Secrets."""
+    try:
+        pw = str(st.secrets.get("APP_PASSWORD", "") or "")
+    except Exception:
+        pw = ""
+    if not pw or st.session_state.get("auth_ok"):
+        return  # gate off, or already authenticated this session
+
+    st.markdown("## 🟠 FlowAgent")
+    st.caption("Enter the access password to continue.")
+    entered = st.text_input("Password", type="password", key="pw_in")
+    if entered:
+        if hmac.compare_digest(entered, pw):
+            st.session_state["auth_ok"] = True
+            st.rerun()
+        st.error("Incorrect password.")
+    st.stop()
+
+
+require_auth()
 
 
 # --- Sidebar ----------------------------------------------------------------
