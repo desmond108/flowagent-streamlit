@@ -46,8 +46,7 @@ SRC_DIR = REPO / "1_Example_Original_Input_SOPs"  # original SOPs the demo deriv
 # Single model used for all authoring (backend detail; not shown to the client).
 MODEL = "claude-opus-4-8"
 
-st.set_page_config(page_title="FlowAgent", page_icon="🟠", layout="wide",
-                   initial_sidebar_state="expanded")
+st.set_page_config(page_title="FlowAgent", page_icon="🟠", layout="wide")
 
 # Hide Streamlit's developer chrome (options menu + deploy button) so the customer
 # gets a clean view. NOTE: keep this on ONE line with no indentation — indented
@@ -59,9 +58,6 @@ st.markdown(
     '[data-testid="stToolbar"]{display:none!important;}'
     '[data-testid="stAppDeployButton"]{display:none!important;}'
     '#MainMenu{visibility:hidden!important;}'
-    # keep the "reopen sidebar" arrow available after the sidebar is collapsed
-    '[data-testid="stSidebarCollapsedControl"],[data-testid="collapsedControl"]'
-    '{display:flex!important;visibility:visible!important;opacity:1!important;}'
     '</style>',
     unsafe_allow_html=True,
 )
@@ -277,25 +273,25 @@ def require_auth() -> None:
 require_auth()
 
 
-# --- Sidebar ----------------------------------------------------------------
-st.sidebar.title("🟠 FlowAgent")
-st.sidebar.caption("SOP → swimlane · hierarchy · fit-gap · optimised flows + SOP")
+# --- Header (top of the main page; no sidebar, so nothing can be collapsed) --
+st.title("🟠 FlowAgent")
+st.caption("SOP → swimlane · hierarchy · fit-gap · optimised flows + SOP")
 
 chrome = chrome_ok()
-if chrome:
-    st.sidebar.success("Chrome/Chromium found", icon="✅")
-else:
-    st.sidebar.error(
+if not chrome:
+    st.error(
         "No Chrome/Chromium — PDF rendering will fail. "
         "On Streamlit Cloud add `chromium` to packages.txt.",
         icon="⚠️",
     )
 
 has_key = bool(os.environ.get("ANTHROPIC_API_KEY"))
-mode = st.sidebar.radio(
+mode = st.radio(
     "Mode",
     ["Demo — frozen SOPs (free)", "Live — upload a SOP (uses API)"],
+    horizontal=True,
 )
+st.divider()
 
 
 # --- Demo mode --------------------------------------------------------------
