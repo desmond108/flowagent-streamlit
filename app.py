@@ -156,14 +156,6 @@ def show_results(sop_id: str, paths: list[str], source: str | None = None) -> No
 
     st.success(f"Generated {len(pdfs)} deliverables for {sop_id}.")
 
-    st.download_button(
-        "⬇️  Download all (.zip)",
-        data=zip_bytes([p for _, p in items]),
-        file_name=f"{sop_id}_FlowAgent.zip",
-        mime="application/zip",
-        type="primary",
-    )
-
     def _mime(p: str) -> str:
         pl = p.lower()
         if pl.endswith(".pdf"):
@@ -175,21 +167,38 @@ def show_results(sop_id: str, paths: list[str], source: str | None = None) -> No
     by_label = {label: p for label, p in items}
     labels = list(by_label)
 
-    # Pick one document with the radio list, then download it.
-    sel_key = f"docsel_{sop_id}"
-    selected = st.session_state.get(sel_key, labels[0])
-    if selected not in by_label:
-        selected = labels[0]
-    sel_path = by_label[selected]
-    with open(sel_path, "rb") as fh:
+    # Documents checked in the list below (state read from session_state).
+    chosen = [(label, p) for i, (label, p) in enumerate(items)
+              if st.session_state.get(f"chk_{sop_id}_{i}")]
+
+    left, right = st.columns(2)
+    with left:
+        if len(chosen) == 1:  # single file → download it directly
+            _, p = chosen[0]
+            with open(p, "rb") as fh:
+                st.download_button(
+                    "⬇️  Download selected (1)",
+                    data=fh.read(), file_name=os.path.basename(p),
+                    mime=_mime(p), key=f"dlsel_{sop_id}",
+                )
+        else:  # zero (disabled) or many → zip
+            st.download_button(
+                f"⬇️  Download selected ({len(chosen)})",
+                data=zip_bytes([p for _, p in chosen]) if chosen else b"",
+                file_name=f"{sop_id}_selected.zip", mime="application/zip",
+                key=f"dlsel_{sop_id}", disabled=not chosen,
+            )
+    with right:
         st.download_button(
-            "⬇️  Download selected",
-            data=fh.read(),
-            file_name=os.path.basename(sel_path),
-            mime=_mime(sel_path),
-            key=f"dlsel_{sop_id}",
+            "⬇️  Download all (.zip)",
+            data=zip_bytes([p for _, p in items]),
+            file_name=f"{sop_id}_FlowAgent.zip", mime="application/zip",
+            type="primary", key=f"dlall_{sop_id}",
         )
-    st.radio("Documents", labels, key=sel_key)
+
+    st.caption("Select documents to download:")
+    for i, (label, p) in enumerate(items):
+        st.checkbox(label, key=f"chk_{sop_id}_{i}")
 
     st.divider()
     choice = st.selectbox("Preview", labels, key=f"prev_{sop_id}")
