@@ -5,9 +5,9 @@ Analyzer boundary (generator/analyzer.py) to a browser UI:
 
   * Demo mode  — render the 6 deliverables for a frozen, authored SOP. No API
                  call, no cost, fully deterministic (uses sop_data/).
-  * Live mode  — upload a SOP (PDF / text); LLMAnalyzer authors the canonical
-                 JSON via the Claude API, it is validated against the contract,
-                 then rendered. Needs ANTHROPIC_API_KEY + Google Chrome/Chromium.
+  * Live mode  — upload a SOP (PDF / text); the LLM analyzer authors the
+                 canonical JSON, it is validated against the contract, then
+                 rendered. Needs an API key + Google Chrome/Chromium.
 
 Run locally:   streamlit run app.py
 Deploy:        see DEPLOY.md (Streamlit Community Cloud + chromium via packages.txt)
@@ -41,14 +41,10 @@ from generator.render import find_chrome
 REPO = Path(__file__).parent
 LEGEND = REPO / "Swimlane_Flow_Legend.md"
 
-# Cost estimate per SOP (one authoring run): see the chat thread / DEPLOY.md.
-MODELS = {
-    "Opus 4.8 — best analysis (~$1.00/SOP)": "claude-opus-4-8",
-    "Sonnet 4.6 — balanced (~$0.60/SOP)": "claude-sonnet-4-6",
-    "Haiku 4.5 — cheapest (~$0.20/SOP)": "claude-haiku-4-5",
-}
+# Single model used for all authoring (backend detail; not shown to the client).
+MODEL = "claude-opus-4-8"
 
-st.set_page_config(page_title="FlowAgent", page_icon="🟡", layout="wide")
+st.set_page_config(page_title="FlowAgent", page_icon="🟠", layout="wide")
 
 
 # --- Helpers ----------------------------------------------------------------
@@ -142,7 +138,7 @@ def show_results(sop_id: str, paths: list[str]) -> None:
 
 
 # --- Sidebar ----------------------------------------------------------------
-st.sidebar.title("🟡 FlowAgent")
+st.sidebar.title("🟠 FlowAgent")
 st.sidebar.caption("SOP → swimlane · hierarchy · fit-gap · optimised flows + SOP")
 
 chrome = chrome_ok()
@@ -186,22 +182,19 @@ if mode.startswith("Demo"):
 else:
     st.header("Live — upload a SOP")
     st.caption(
-        "Claude authors the canonical analysis from your SOP, it is validated "
-        "against the contract, then rendered. ⚠️ This makes a billed API call."
+        "FlowAgent reads your SOP, builds the canonical analysis, validates it "
+        "against the contract, then renders the deliverables."
     )
 
     if not has_key:
         st.warning(
-            "No `ANTHROPIC_API_KEY` found. Set it in **Streamlit Cloud → Settings "
-            "→ Secrets**, or in `.streamlit/secrets.toml` for local dev.",
+            "The analysis service isn't configured yet. Add the API key in the "
+            "app settings to enable Live mode.",
             icon="🔑",
         )
 
     uploaded = st.file_uploader("SOP document", type=["pdf", "txt", "md"])
-    c1, c2 = st.columns(2)
-    sop_id = c1.text_input("SOP id", value="SOP-UPLOAD-001")
-    model_label = c2.selectbox("Model", list(MODELS))
-    model = MODELS[model_label]
+    sop_id = st.text_input("SOP id", value="SOP-UPLOAD-001")
 
     go = st.button(
         "Analyze & generate",
@@ -215,8 +208,8 @@ else:
                 text = extract_text(uploaded)
                 st.write(f"Extracted {len(text):,} characters.")
 
-                st.write(f"Authoring analysis with {model} (this can take 30s–2min) …")
-                analyzer = LLMAnalyzer(model=model, max_tokens=64000)
+                st.write("Building the analysis (this can take 30s–2min) …")
+                analyzer = LLMAnalyzer(model=MODEL, max_tokens=64000)
                 t0 = time.time()
                 pkg_dict = analyzer.analyze(sop_id, text)
                 st.write(f"Authored in {time.time() - t0:.0f}s.")
