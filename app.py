@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import io
 import os
+import re
 import shutil
 import tempfile
 import time
@@ -39,6 +40,7 @@ from generator.render import find_chrome
 
 REPO = Path(__file__).parent
 LEGEND = REPO / "Swimlane_Flow_Legend.md"
+SRC_DIR = REPO / "1_Example_Original_Input_SOPs"  # original SOPs the demo derives from
 
 # Single model used for all authoring (backend detail; not shown to the client).
 MODEL = "claude-opus-4-8"
@@ -122,6 +124,19 @@ def pdf_page_images(path: str, zoom: float = 1.6, max_pages: int = 12) -> list[b
     return out
 
 
+def source_pdf_for(sop_id: str) -> str | None:
+    """Locate the original SOP PDF in 1_… for a given sop_id (e.g. SOP-INS-011
+    matches SOP_INS_011_*.pdf). Returns None if not found."""
+    norm = lambda s: re.sub(r"[^A-Za-z0-9]", "", s).upper()
+    target = norm(sop_id)
+    if not SRC_DIR.exists():
+        return None
+    for f in sorted(SRC_DIR.glob("*.pdf")):
+        if norm(f.stem).startswith(target):
+            return str(f)
+    return None
+
+
 def zip_bytes(paths: list[str]) -> bytes:
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
@@ -130,25 +145,33 @@ def zip_bytes(paths: list[str]) -> bytes:
     return buf.getvalue()
 
 
-def show_results(sop_id: str, paths: list[str]) -> None:
-    """Download buttons, a zip, and an inline preview of one PDF."""
+def show_results(sop_id: str, paths: list[str], source: str | None = None) -> None:
+    """Download buttons, a zip, and an inline preview. If `source` (the original
+    SOP PDF) is given, it's offered first as a preview/download option."""
     pdfs = [p for p in paths if p.lower().endswith(".pdf")]
+
+    # Ordered (label, path): the source SOP first, then the generated deliverables.
+    items: list[tuple[str, str]] = []
+    if source and os.path.exists(source):
+        items.append(("📄 Source SOP (original)", source))
+    items += [(os.path.basename(p), p) for p in sorted(pdfs)]
+
     st.success(f"Generated {len(pdfs)} deliverables for {sop_id}.")
 
     st.download_button(
         "⬇️  Download all (.zip)",
-        data=zip_bytes(pdfs),
+        data=zip_bytes([p for _, p in items]),
         file_name=f"{sop_id}_FlowAgent.zip",
         mime="application/zip",
         type="primary",
     )
 
     cols = st.columns(3)
-    for i, p in enumerate(sorted(pdfs)):
+    for i, (label, p) in enumerate(items):
         with cols[i % 3]:
             with open(p, "rb") as fh:
                 st.download_button(
-                    os.path.basename(p),
+                    label,
                     data=fh.read(),
                     file_name=os.path.basename(p),
                     mime="application/pdf",
@@ -156,13 +179,11 @@ def show_results(sop_id: str, paths: list[str]) -> None:
                 )
 
     st.divider()
-    choice = st.selectbox(
-        "Preview", sorted(pdfs), format_func=os.path.basename, key=f"prev_{sop_id}"
-    )
+    by_label = {label: p for label, p in items}
+    choice = st.selectbox("Preview", list(by_label), key=f"prev_{sop_id}")
     if choice:
         try:
-            pages = pdf_page_images(choice)
-            for n, png in enumerate(pages, 1):
+            for n, png in enumerate(pdf_page_images(by_label[choice]), 1):
                 st.image(png, width="stretch", caption=f"Page {n}")
         except Exception:
             st.info(
@@ -171,7 +192,7 @@ def show_results(sop_id: str, paths: list[str]) -> None:
             )
 
 
-def remember_results(mode, sop_id, tmp, paths, elapsed=None, payload=None) -> None:
+def remember_results(mode, sop_id, tmp, paths, elapsed=None, payload=None, source=None) -> None:
     """Persist the last render so it survives Streamlit re-runs (e.g. when the
     user changes the preview dropdown). Cleans up the previous temp dir."""
     old = st.session_state.get("results")
@@ -179,7 +200,7 @@ def remember_results(mode, sop_id, tmp, paths, elapsed=None, payload=None) -> No
         shutil.rmtree(old["tmp"], ignore_errors=True)
     st.session_state["results"] = {
         "mode": mode, "sop_id": sop_id, "tmp": tmp,
-        "paths": paths, "elapsed": elapsed, "payload": payload,
+        "paths": paths, "elapsed": elapsed, "payload": payload, "source": source,
     }
 
 
@@ -190,7 +211,7 @@ def render_stored(mode: str) -> None:
         return
     if res.get("elapsed") is not None:
         st.caption(f"Rendered in {res['elapsed']:.1f}s")
-    show_results(res["sop_id"], res["paths"])
+    show_results(res["sop_id"], res["paths"], source=res.get("source"))
     if res.get("payload") is not None:
         with st.expander("Canonical JSON (review before trusting)"):
             st.json(res["payload"])
@@ -233,7 +254,8 @@ if mode.startswith("Demo"):
             t0 = time.time()
             pkg = sop_data.load(sid)
             tmp, paths = render_package(pkg)
-        remember_results("demo", sid, tmp, paths, elapsed=time.time() - t0)
+        remember_results("demo", sid, tmp, paths, elapsed=time.time() - t0,
+                         source=source_pdf_for(sid))
     render_stored("demo")
 
 
