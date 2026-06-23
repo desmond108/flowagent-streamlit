@@ -21,6 +21,15 @@ _BANNER = {"new": ("new", "NEW STEP"), "enh": ("enh", "ENHANCED"),
 
 
 def _block(b):
+    try:
+        return _render_block(b)
+    except Exception:
+        return ""  # skip a malformed block rather than crash the whole document
+
+
+def _render_block(b):
+    if not b:
+        return ""
     tag = b[0]
     if tag == "para":
         return f"<p>{T.esc(b[1])}</p>"
@@ -79,8 +88,8 @@ def render(pkg) -> str:
             parts.append(f"<h2>{T.esc(sec.title)}</h2>")
         for blk in sec.blocks:
             # allow ("h3", text) inline sub-headings
-            if blk[0] == "h3":
-                parts.append(f"<h3>{T.esc(blk[1])}</h3>")
+            if blk and blk[0] == "h3":
+                parts.append(f"<h3>{T.esc(blk[1]) if len(blk) > 1 else ''}</h3>")
             else:
                 parts.append(_block(blk))
     parts.append("<div class='endmark'>— END OF DOCUMENT —</div>")
