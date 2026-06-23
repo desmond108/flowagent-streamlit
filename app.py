@@ -171,6 +171,31 @@ def show_results(sop_id: str, paths: list[str]) -> None:
             )
 
 
+def remember_results(mode, sop_id, tmp, paths, elapsed=None, payload=None) -> None:
+    """Persist the last render so it survives Streamlit re-runs (e.g. when the
+    user changes the preview dropdown). Cleans up the previous temp dir."""
+    old = st.session_state.get("results")
+    if old and old.get("tmp") and old["tmp"] != tmp:
+        shutil.rmtree(old["tmp"], ignore_errors=True)
+    st.session_state["results"] = {
+        "mode": mode, "sop_id": sop_id, "tmp": tmp,
+        "paths": paths, "elapsed": elapsed, "payload": payload,
+    }
+
+
+def render_stored(mode: str) -> None:
+    """Re-draw the most recent results for this mode on every run."""
+    res = st.session_state.get("results")
+    if not (res and res.get("mode") == mode):
+        return
+    if res.get("elapsed") is not None:
+        st.caption(f"Rendered in {res['elapsed']:.1f}s")
+    show_results(res["sop_id"], res["paths"])
+    if res.get("payload") is not None:
+        with st.expander("Canonical JSON (review before trusting)"):
+            st.json(res["payload"])
+
+
 # --- Sidebar ----------------------------------------------------------------
 st.sidebar.title("🟠 FlowAgent")
 st.sidebar.caption("SOP → swimlane · hierarchy · fit-gap · optimised flows + SOP")
@@ -208,8 +233,8 @@ if mode.startswith("Demo"):
             t0 = time.time()
             pkg = sop_data.load(sid)
             tmp, paths = render_package(pkg)
-        st.caption(f"Rendered in {time.time() - t0:.1f}s")
-        show_results(sid, paths)
+        remember_results("demo", sid, tmp, paths, elapsed=time.time() - t0)
+    render_stored("demo")
 
 
 # --- Live mode --------------------------------------------------------------
@@ -261,8 +286,8 @@ else:
                 tmp, paths = render_package(pkg)
                 status.update(label="Done", state="complete")
 
-            show_results(sop_id, paths)
-            with st.expander("Canonical JSON (review before trusting)"):
-                st.json(pkg_dict)
+            remember_results("live", sop_id, tmp, paths, payload=pkg_dict)
         except Exception as e:  # surface SDK / render errors to the user
             st.exception(e)
+
+    render_stored("live")
