@@ -65,6 +65,12 @@ class AuthorityRow:
 
 
 # Swimlane: lanes are roles; nodes placed on a (lane, col) grid per phase.
+#
+# MANUAL OVERRIDES (x/y on a node, waypoints on an edge) are the editing seam.
+# They are presentation-only: absent => the renderer auto-lays-out exactly as it
+# always has; present => the human's placement wins. Because they carry no
+# process meaning, stripping them yields the SEMANTIC form of a package — which
+# is how an edit is classified as cosmetic vs material (see contract.semantic_sha256).
 @dataclass
 class SwimNode:
     nid: str
@@ -73,6 +79,8 @@ class SwimNode:
     title: str
     sub: str = ""          # subtitle line (role/system/condition)
     kind: str = "standard"  # standard/new/enhanced/exception/decision/terminal
+    x: Optional[float] = None   # manual position override, px. None => auto from col
+    y: Optional[float] = None   # manual position override, px. None => auto from lane
 
 
 @dataclass
@@ -82,6 +90,9 @@ class SwimEdge:
     label: str = ""
     dashed: bool = False
     kind: str = "standard"  # standard/new/exception
+    # Manual route override: [[x, y], ...] intermediate points between the two
+    # boxes. None => auto-route. Endpoints stay attached to the boxes.
+    waypoints: Optional[list] = None
 
 
 @dataclass

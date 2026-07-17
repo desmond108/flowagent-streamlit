@@ -21,9 +21,39 @@ from . import model as M
 # --------------------------------------------------------------------------
 # Serialise: SopPackage -> dict / JSON
 # --------------------------------------------------------------------------
+# Presentation-only fields the editor may write onto swim nodes/edges. They are
+# the ONLY fields that carry no process meaning, which is what makes the
+# cosmetic/material distinction computable — see semantic_json()/classify().
+OVERRIDE_KEYS = ("x", "y", "waypoints")
+
+
+def _strip(o, keys, drop_none_only: bool):
+    """Recursively remove `keys` (if drop_none_only, only when unset) and coerce
+    tuples to lists.
+
+    The tuple coercion matters: several fit-gap fields are authored as tuples
+    (`metrics`, `radar`, `groups`, …). `json.dumps` writes tuples and lists
+    identically, so hashes are unaffected — but `jsonschema` matches "array"
+    against `list` only, so a package straight from `to_dict()` would fail
+    `validate()` while the same package round-tripped through JSON would pass.
+    That inconsistency only surfaced once the editor started validating authored
+    packages rather than just LLM output."""
+    if isinstance(o, dict):
+        return {k: _strip(v, keys, drop_none_only) for k, v in o.items()
+                if not (k in keys and (v is None or not drop_none_only))}
+    if isinstance(o, (list, tuple)):
+        return [_strip(v, keys, drop_none_only) for v in o]
+    return o
+
+
 def to_dict(pkg: M.SopPackage) -> dict:
-    """dataclasses -> plain dict (deep). Field order is definition order."""
-    return dataclasses.asdict(pkg)
+    """dataclasses -> plain dict (deep), JSON-native throughout. Field order is
+    definition order.
+
+    Unset manual overrides are pruned, so a package with no hand-edits serialises
+    byte-identically to how it did before the override fields existed. This is
+    what keeps the frozen sop_data/json hashes (and `build.py verify`) stable."""
+    return _strip(dataclasses.asdict(pkg), OVERRIDE_KEYS, drop_none_only=True)
 
 
 def to_json(pkg: M.SopPackage) -> str:
@@ -41,6 +71,92 @@ def canonical_json(pkg_or_dict) -> str:
 
 def sha256(pkg_or_dict) -> str:
     return hashlib.sha256(canonical_json(pkg_or_dict).encode("utf-8")).hexdigest()
+
+
+# --------------------------------------------------------------------------
+# Cosmetic vs material: the semantic form of a package
+# --------------------------------------------------------------------------
+def semantic_dict(pkg_or_dict) -> dict:
+    """The package with ALL manual placement stripped — i.e. what the process
+    MEANS, independent of how it is drawn."""
+    d = pkg_or_dict if isinstance(pkg_or_dict, dict) else to_dict(pkg_or_dict)
+    return _strip(d, OVERRIDE_KEYS, drop_none_only=False)
+
+
+def semantic_sha256(pkg_or_dict) -> str:
+    """Hash of the meaning. Unchanged across a purely cosmetic edit."""
+    return hashlib.sha256(
+        canonical_json(semantic_dict(pkg_or_dict)).encode("utf-8")).hexdigest()
+
+
+def _swim_index(d: dict) -> dict:
+    """(phase_pid, nid) -> node dict, and (phase_pid, src, dst) -> edge dict."""
+    nodes, edges = {}, {}
+    for key in ("swim_phases", "opt_swim_phases"):
+        for ph in d.get(key, []):
+            for n in ph.get("nodes", []):
+                nodes[(key, ph.get("pid"), n.get("nid"))] = n
+            for e in ph.get("edges", []):
+                edges[(key, ph.get("pid"), e.get("src"), e.get("dst"))] = e
+    return {"nodes": nodes, "edges": edges}
+
+
+def classify(before: dict, after: dict) -> dict:
+    """Decide whether an edit was cosmetic or material, and say why.
+
+    Cosmetic == only manual placement changed (box positions, arrow routes).
+    Material == the process itself changed (wording, steps, connections).
+
+    This is a hash comparison, not a judgement call: the user is told what was
+    found rather than asked to self-assess. Returns a dict with `material`
+    (bool) and human-readable `cosmetic` / `material_changes` lists.
+    """
+    material = semantic_sha256(before) != semantic_sha256(after)
+
+    bi, ai = _swim_index(before), _swim_index(after)
+    moved = rerouted = 0
+    for k, bn in bi["nodes"].items():
+        an = ai["nodes"].get(k)
+        if an and (bn.get("x"), bn.get("y")) != (an.get("x"), an.get("y")):
+            moved += 1
+    for k, be in bi["edges"].items():
+        ae = ai["edges"].get(k)
+        if ae and be.get("waypoints") != ae.get("waypoints"):
+            rerouted += 1
+
+    cosmetic = []
+    if moved:
+        cosmetic.append(f"{moved} box{'es' if moved != 1 else ''} moved")
+    if rerouted:
+        cosmetic.append(f"{rerouted} arrow{'s' if rerouted != 1 else ''} re-routed")
+
+    changes = []
+    if material:
+        added = set(ai["nodes"]) - set(bi["nodes"])
+        removed = set(bi["nodes"]) - set(ai["nodes"])
+        if added:
+            changes.append(f"{len(added)} box{'es' if len(added) != 1 else ''} added")
+        if removed:
+            changes.append(f"{len(removed)} box{'es' if len(removed) != 1 else ''} deleted")
+        retitled = sum(
+            1 for k, bn in bi["nodes"].items()
+            if (an := ai["nodes"].get(k))
+            and (bn.get("title"), bn.get("sub"), bn.get("kind"), bn.get("lane"))
+            != (an.get("title"), an.get("sub"), an.get("kind"), an.get("lane")))
+        if retitled:
+            changes.append(f"{retitled} box{'es' if retitled != 1 else ''} edited")
+        e_added = set(ai["edges"]) - set(bi["edges"])
+        e_removed = set(bi["edges"]) - set(ai["edges"])
+        if e_added:
+            changes.append(f"{len(e_added)} arrow{'s' if len(e_added) != 1 else ''} added")
+        if e_removed:
+            changes.append(f"{len(e_removed)} arrow{'s' if len(e_removed) != 1 else ''} deleted")
+        if not changes:
+            # Semantic hash moved but not in the swimlane — something outside the
+            # flow (steps, fit-gap, meta) changed. Say so rather than stay silent.
+            changes.append("process content changed outside the flow chart")
+
+    return {"material": material, "cosmetic": cosmetic, "material_changes": changes}
 
 
 # --------------------------------------------------------------------------
@@ -201,8 +317,22 @@ _STEP = _obj({"num": _STR, "phase": _STR, "activity": _STR, "responsible": _STR,
               "output": _STR, "timeline": _STR, "controls": _STR, "kind": _STR,
               "decision": {"type": ["string", "null"]},
               "branches": {"type": "array", "items": _STR}})
-_NODE = _obj({"nid": _STR, "lane": _STR, "col": _INT, "title": _STR, "sub": _STR, "kind": _STR})
-_EDGE = _obj({"src": _STR, "dst": _STR, "label": _STR, "dashed": {"type": "boolean"}, "kind": _STR})
+# Manual placement overrides. Optional and NOT required: an authoring model must
+# leave them out (the `description` tells it so) — layout is the renderer's job.
+# They exist so the editor can record a human's hand-placement.
+_XY = {"type": ["number", "null"],
+       "description": "Manual position override written by the UI editor. "
+                      "Do not set when authoring; omit it and the renderer lays out automatically."}
+_WPTS = {"type": ["array", "null"],
+         "items": {"type": "array", "items": {"type": "number"}},
+         "description": "Manual arrow route written by the UI editor. "
+                        "Do not set when authoring; omit it and the renderer routes automatically."}
+_NODE = _obj({"nid": _STR, "lane": _STR, "col": _INT, "title": _STR, "sub": _STR, "kind": _STR,
+              "x": _XY, "y": _XY},
+             ["nid", "lane", "col", "title", "sub", "kind"])
+_EDGE = _obj({"src": _STR, "dst": _STR, "label": _STR, "dashed": {"type": "boolean"}, "kind": _STR,
+              "waypoints": _WPTS},
+             ["src", "dst", "label", "dashed", "kind"])
 _SWIM = _obj({"pid": _STR, "name": _STR, "subtitle": _STR,
               "lanes": {"type": "array", "items": _STR},
               "nodes": {"type": "array", "items": _NODE},

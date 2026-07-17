@@ -34,6 +34,7 @@ try:
 except Exception:
     pass
 
+import flow_editor
 import sop_data
 from generator import contract, outputs
 from generator.analyzer import LLMAnalyzer
@@ -288,7 +289,9 @@ if not chrome:
 has_key = bool(os.environ.get("ANTHROPIC_API_KEY"))
 mode = st.radio(
     "Mode",
-    ["Demo — frozen SOPs (free)", "Live — upload a SOP (uses API)"],
+    ["Demo — frozen SOPs (free)",
+     "Edit — adjust a flow chart (free)",
+     "Live — upload a SOP (uses API)"],
     horizontal=True,
 )
 st.divider()
@@ -313,6 +316,60 @@ if mode.startswith("Demo"):
         remember_results("demo", sid, tmp, paths, elapsed=time.time() - t0,
                          source=source_pdf_for(sid))
     render_stored("demo")
+
+
+# --- Edit mode --------------------------------------------------------------
+elif mode.startswith("Edit"):
+    st.header("Edit — adjust a flow chart")
+    st.caption(
+        "Drag boxes, edit their wording, add or remove boxes and arrows. "
+        "FlowAgent re-draws and re-routes the arrows after every change, and the "
+        "PDF you download is rendered from exactly what you see."
+    )
+
+    catalog = demo_catalog()
+    sources = list(catalog)
+    live = st.session_state.get("results")
+    live_payload = live.get("payload") if live and live.get("mode") == "live" else None
+    if live_payload:
+        sources = ["__live__"] + sources
+
+    def _label(s):
+        return "⬆︎ The SOP you just uploaded" if s == "__live__" else catalog[s]
+
+    a, b = st.columns([3, 1])
+    with a:
+        sid = st.selectbox("Flow chart to edit", sources, format_func=_label)
+    with b:
+        st.write("")
+        if st.button("Open in editor", type="primary"):
+            payload = (live_payload if sid == "__live__"
+                       else contract.to_dict(sop_data.load(sid)))
+            name = live["sop_id"] if sid == "__live__" else sid
+            flow_editor.load(payload, name)
+            st.rerun()
+
+    if not flow_editor.is_loaded():
+        st.info("Pick a flow chart and choose **Open in editor**.")
+    else:
+        st.caption(f"Editing **{st.session_state['ed_sop']}**")
+        flow_editor.render_editor()
+
+        st.divider()
+        if st.button("Generate 6 deliverables from my edited flow",
+                     type="primary", disabled=not chrome):
+            with st.spinner("Rendering …"):
+                t0 = time.time()
+                errors = contract.validate(st.session_state["ed_cur"])
+                if errors:
+                    st.error("The edited analysis is not valid:")
+                    st.code("\n".join(errors[:10]))
+                    st.stop()
+                pkg = contract.from_dict(st.session_state["ed_cur"])
+                tmp, paths = render_package(pkg)
+            remember_results("edit", st.session_state["ed_sop"], tmp, paths,
+                             elapsed=time.time() - t0)
+        render_stored("edit")
 
 
 # --- Live mode --------------------------------------------------------------
