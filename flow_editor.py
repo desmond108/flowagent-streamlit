@@ -115,6 +115,23 @@ def _straighten(ph: dict, i: int) -> None:
         ph["edges"][i]["waypoints"] = None
 
 
+def _route_set(ph: dict, i: int, wp) -> None:
+    """Set an arrow's whole route. The client-side canvas knows exactly which
+    bends exist, so it sends the full list rather than a single point to be
+    guessed at. An empty list means 'back to automatic'."""
+    if 0 <= i < len(ph["edges"]):
+        pts = [[round(float(p[0]), 1), round(float(p[1]), 1)]
+               for p in (wp or []) if len(p) >= 2]
+        ph["edges"][i]["waypoints"] = pts or None
+
+
+def _reconnect(ph: dict, i: int, src: str, dst: str) -> None:
+    """Move an arrow's end onto a different box. The hand-drawn route is dropped:
+    bends chosen for the old geometry are meaningless against the new one."""
+    if 0 <= i < len(ph["edges"]):
+        ph["edges"][i].update(src=src, dst=dst, waypoints=None)
+
+
 def _reset_phase(ph: dict) -> None:
     for n in ph["nodes"]:
         n["x"] = n["y"] = None
@@ -224,6 +241,14 @@ def render_editor() -> None:
             _push_undo()
             drop = set(evt.get("idx") or [])
             ph["edges"] = [e for i, e in enumerate(ph["edges"]) if i not in drop]
+            st.rerun()
+        elif action == "route":
+            _push_undo()
+            _route_set(ph, evt["edge"], evt.get("waypoints"))
+            st.rerun()
+        elif action == "reconnect":
+            _push_undo()
+            _reconnect(ph, evt["edge"], evt["src"], evt["dst"])
             st.rerun()
 
     _properties(ph, view)

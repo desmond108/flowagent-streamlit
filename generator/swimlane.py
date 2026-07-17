@@ -479,6 +479,11 @@ def phase_rf(phase) -> dict:
         "label": e.label, "kind": e.kind, "dashed": bool(e.dashed),
         "colour": EDGE_COLOUR.get(e.kind, T.GOLD),
         "manual": bool(getattr(e, "waypoints", None)),
+        # The hand-drawn bends, so the canvas can show and edit them. Same
+        # coordinate space as node x/y, which is what lets the browser and the
+        # PDF renderer agree about a manual route.
+        "waypoints": [[float(p[0]), float(p[1])]
+                      for p in (getattr(e, "waypoints", None) or []) if len(p) >= 2],
     } for i, e in enumerate(phase.edges)]
     diag_h = DIAG_TOP + n * lane_h
     if rects:

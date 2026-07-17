@@ -15,6 +15,19 @@
     border-bottom:1px solid #16284A; pointer-events:none; }
   .fa-bar b { color:#C7D2E8; }
   .fa-dirty { color:#FF9800; }
+
+  /* Bend handles on arrows. Hollow = drag to create a bend; solid = an existing
+     bend (drag to move, double-click to remove). Faint until hovered so they
+     don't clutter a diagram nobody is editing. */
+  .fa-dot { position:absolute; width:10px; height:10px; border-radius:50%;
+    background:#0A1628; border:2px solid #42A5F5; cursor:grab;
+    pointer-events:all; opacity:.28; touch-action:none; }
+  .fa-dot.solid { background:#42A5F5; opacity:.9; }
+  .fa-dot:hover { opacity:1; width:13px; height:13px; }
+  .fa-dot:active { cursor:grabbing; }
+  .react-flow__edge:hover .fa-dot { opacity:.75; }
+  .fa-elabel { position:absolute; font-size:11px; background:#0A1628;
+    padding:1px 4px; border-radius:3px; pointer-events:none; }
 </style>
 </head>
 <body>
@@ -28,7 +41,9 @@ import * as XY from "https://esm.sh/@xyflow/react@12.3.5?deps=react@18.3.1,react
 
 const html = htm.bind(React.createElement);
 const { ReactFlow, Background, Controls, MiniMap, Handle, Position, MarkerType,
-        applyNodeChanges, applyEdgeChanges, addEdge, ReactFlowProvider } = XY;
+        applyNodeChanges, applyEdgeChanges, addEdge, ReactFlowProvider,
+        BaseEdge, EdgeLabelRenderer, getSmoothStepPath, useReactFlow,
+        reconnectEdge } = XY;
 const { useState, useEffect, useCallback, useMemo, useRef } = React;
 
 // --- Streamlit protocol -----------------------------------------------------
@@ -75,6 +90,107 @@ function LaneNode({ data }) {
 
 const nodeTypes = { fa: FaNode, lane: LaneNode };
 
+// --- arrows -----------------------------------------------------------------
+// React Flow auto-routes edges and has no concept of a hand-placed bend, so the
+// bend handles below are ours. This mirrors generator/swimlane._orthogonalise
+// EXACTLY: same rule, so a route drawn here is the route the PDF prints.
+function orthogonalise(pts) {
+  const out = [pts[0]];
+  for (let i = 1; i < pts.length; i++) {
+    const [px, py] = out[out.length - 1], [cx, cy] = pts[i];
+    if (Math.abs(px - cx) < 0.5 && Math.abs(py - cy) < 0.5) continue;
+    if (Math.abs(px - cx) > 0.5 && Math.abs(py - cy) > 0.5) out.push([cx, py]);
+    out.push([cx, cy]);
+  }
+  return out;
+}
+const toPath = (pts) => pts.map((p, i) => (i ? "L" : "M") + p[0] + "," + p[1]).join(" ");
+const mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+
+// A draggable bend. Follows the cursor live — the whole point is that it feels
+// direct, so nothing waits on the server until you let go.
+function Dot({ x, y, solid, title, onDrag, onDrop, onRemove }) {
+  const rf = useReactFlow();
+  const live = useRef(false);
+  const to = (e) => rf.screenToFlowPosition({ x: e.clientX, y: e.clientY });
+  return html`
+    <div class=${"fa-dot" + (solid ? " solid" : "")}
+      title=${title}
+      style=${{ transform: `translate(-50%,-50%) translate(${x}px,${y}px)` }}
+      onPointerDown=${(e) => { live.current = true; e.target.setPointerCapture(e.pointerId);
+                               e.stopPropagation(); e.preventDefault(); }}
+      onPointerMove=${(e) => { if (live.current) { const p = to(e); onDrag([p.x, p.y]); } }}
+      onPointerUp=${(e) => { if (!live.current) return; live.current = false;
+                             const p = to(e); onDrop([Math.round(p.x), Math.round(p.y)]);
+                             e.stopPropagation(); }}
+      onDoubleClick=${(e) => { e.stopPropagation(); onRemove && onRemove(); }} />`;
+}
+
+function FaEdge(p) {
+  const { id, data, style, markerEnd, selected,
+          sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition } = p;
+  const saved = (data && data.waypoints) || [];
+  const [live, setLive] = useState(null);   // { i, pt } while a bend is dragged
+  const [adding, setAdding] = useState(null); // { i, pt } while a new bend is dragged
+
+  let wps = saved.map(w => [...w]);
+  if (live) wps[live.i] = live.pt;
+  if (adding) wps = [...wps.slice(0, adding.i), adding.pt, ...wps.slice(adding.i)];
+
+  const A = [sourceX, sourceY], B = [targetX, targetY];
+  const manual = wps.length > 0;
+  const pts = manual ? orthogonalise([A, ...wps, B]) : null;
+
+  let d, lx, ly;
+  if (manual) {
+    d = toPath(pts);
+    const m = mid(A, B); lx = m[0]; ly = m[1];
+  } else {
+    const [path, labelX, labelY] = getSmoothStepPath({
+      sourceX, sourceY, sourcePosition, targetX, targetY, targetPosition,
+      borderRadius: 0 });
+    d = path; lx = labelX; ly = labelY;
+  }
+
+  const send = (list) => setValue({ action: "route", edge: data.i,
+    waypoints: list.map(w => [Math.round(w[0]), Math.round(w[1])]), t: Date.now() });
+
+  // Midpoints between consecutive waypoints (with the box ends as bookends) —
+  // dragging one inserts a new bend at that position in the list.
+  const anchors = [A, ...wps, B];
+  const adders = [];
+  for (let i = 0; i < anchors.length - 1; i++) adders.push({ i, pt: mid(anchors[i], anchors[i + 1]) });
+
+  return html`
+    <${BaseEdge} id=${id} path=${d} markerEnd=${markerEnd}
+      style=${{ ...style, strokeWidth: selected ? 3 : (style && style.strokeWidth) || 2 }}
+      interactionWidth=${22} />
+    <${EdgeLabelRenderer}>
+      ${data.label ? html`
+        <div class="fa-elabel" style=${{
+          transform:`translate(-50%,-50%) translate(${lx}px,${ly}px)`,
+          color: data.colour }}>${data.label}</div>` : null}
+
+      ${wps.map((w, i) => html`
+        <${Dot} key=${"w"+i} x=${w[0]} y=${w[1]} solid=${true}
+          title="Drag to move this bend · double-click to remove it"
+          onDrag=${(pt) => setLive({ i, pt })}
+          onDrop=${(pt) => { setLive(null);
+            const next = saved.map(s => [...s]); next[i] = pt; send(next); }}
+          onRemove=${() => { const next = saved.filter((_, k) => k !== i); send(next); }} />`)}
+
+      ${adders.map(a => html`
+        <${Dot} key=${"a"+a.i} x=${a.pt[0]} y=${a.pt[1]} solid=${false}
+          title="Drag to bend this arrow"
+          onDrag=${(pt) => setAdding({ i: a.i, pt })}
+          onDrop=${(pt) => { setAdding(null);
+            const next = saved.map(s => [...s]);
+            next.splice(a.i, 0, pt); send(next); }} />`)}
+    <//>`;
+}
+
+const edgeTypes = { fa: FaEdge };
+
 // Attach each edge to the sensible side of each box, recomputed as boxes move —
 // this is what makes connectors follow naturally while you drag.
 function withHandles(nodes, edges) {
@@ -112,15 +228,13 @@ function toNodes(v) {
 
 function toEdges(v) {
   return (v.edges || []).map(e => ({
-    id: e.id, source: e.source, target: e.target, type: "smoothstep",
-    label: e.label || undefined, data: { i: e.i, kind: e.kind },
+    id: e.id, source: e.source, target: e.target, type: "fa",
+    reconnectable: true,
+    data: { i: e.i, kind: e.kind, label: e.label, colour: e.colour,
+            waypoints: e.waypoints || [] },
     style: { stroke: e.colour, strokeWidth: 2,
              strokeDasharray: e.dashed ? "6 5" : undefined },
-    labelStyle: { fill: e.colour, fontSize: 11 },
-    labelBgStyle: { fill: "#0A1628" },
-    labelBgPadding: [4, 2], labelBgBorderRadius: 3,
     markerEnd: { type: MarkerType.ArrowClosed, color: e.colour, width: 16, height: 16 },
-    pathOptions: { borderRadius: 0 },
   }));
 }
 
@@ -185,6 +299,13 @@ function App() {
     setValue({ action:"select", nid: n ? n.id : null, t: Date.now() });
   }, []);
 
+  // Drag an arrow's end onto a different box.
+  const onReconnect = useCallback((oldEdge, conn) => {
+    setEdges(es => reconnectEdge(oldEdge, conn, es));
+    setValue({ action:"reconnect", edge: oldEdge.data.i,
+               src: conn.source, dst: conn.target, t: Date.now() });
+  }, []);
+
   const wired = useMemo(() => withHandles(nodes, edges), [nodes, edges]);
   if (!view) return html`<div style=${{color:"#7C8DB5",padding:12}}>Loading canvas…</div>`;
 
@@ -195,11 +316,12 @@ function App() {
         scroll to zoom ${dirty ? html`<span class="fa-dirty">· edits pending — press <b>Apply</b> below</span>` : null}
       </div>
       <${ReactFlow} nodes=${nodes} edges=${wired}
-        nodeTypes=${nodeTypes}
+        nodeTypes=${nodeTypes} edgeTypes=${edgeTypes}
         onNodesChange=${onNodesChange} onEdgesChange=${onEdgesChange}
         onNodeDragStop=${onNodeDragStop} onConnect=${onConnect}
         onNodesDelete=${onNodesDelete} onEdgesDelete=${onEdgesDelete}
         onSelectionChange=${onSelectionChange}
+        onReconnect=${onReconnect} edgesReconnectable=${true}
         snapToGrid=${!!view.snap} snapGrid=${[view.snap||1, view.snap||1]}
         minZoom=${0.2} maxZoom=${2} fitView
         proOptions=${{ hideAttribution: true }}
