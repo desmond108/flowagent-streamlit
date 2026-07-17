@@ -80,6 +80,39 @@ def _reset_node(ph: dict, nid: str) -> None:
         n["x"] = n["y"] = None
 
 
+def _bend(ph: dict, i: int, x: float, y: float, view: dict) -> None:
+    """Drag a point on an arrow. The first bend converts an auto-routed arrow to
+    a manual one, seeded from the route it already had, so it doesn't jump."""
+    if not (0 <= i < len(ph["edges"])):
+        return
+    e = ph["edges"][i]
+    ev = next((v for v in view["edges"] if v["i"] == i), None)
+    wp = e.get("waypoints")
+    if not wp:
+        # Seed from the current route's interior points (drop the two endpoints,
+        # which are anchored to the boxes), then add this one.
+        interior = [list(p) for p in (ev["points"][1:-1] if ev else [])]
+        wp = interior
+    # Replace the nearest existing waypoint, or add one.
+    pt = [round(float(x), 1), round(float(y), 1)]
+    if wp:
+        j = min(range(len(wp)),
+                key=lambda k: (wp[k][0] - pt[0]) ** 2 + (wp[k][1] - pt[1]) ** 2)
+        near = (wp[j][0] - pt[0]) ** 2 + (wp[j][1] - pt[1]) ** 2
+        if near < 60 ** 2:
+            wp[j] = pt
+        else:
+            wp.append(pt)
+    else:
+        wp = [pt]
+    e["waypoints"] = wp
+
+
+def _straighten(ph: dict, i: int) -> None:
+    if 0 <= i < len(ph["edges"]):
+        ph["edges"][i]["waypoints"] = None
+
+
 def _reset_phase(ph: dict) -> None:
     for n in ph["nodes"]:
         n["x"] = n["y"] = None
@@ -130,24 +163,37 @@ def render_editor() -> None:
             _reset_phase(ph)
             st.rerun()
 
-    stamp = hashlib.md5(
-        (view["html"] + str(st.session_state.get("ed_sel"))).encode()).hexdigest()
+    # Selection is deliberately NOT in the stamp: the canvas repaints selection
+    # itself, so clicking a box doesn't re-inject the whole diagram.
+    stamp = hashlib.md5(view["html"].encode()).hexdigest()
     evt = _canvas()(
-        html=view["html"], rects=view["rects"], width=view["width"],
-        height=view["height"], snap=snap,
+        html=view["html"], rects=view["rects"], edges=view["edges"],
+        width=view["width"], height=view["height"], snap=snap,
         selected=st.session_state.get("ed_sel"), stamp=stamp,
         key=f"canvas_{sop_id}_{opt}_{idx}", default=None,
     )
 
-    # Apply a drag/select coming back from the browser (guarded so a rerun
-    # doesn't replay the same event).
+    # Apply an event coming back from the browser (guarded so a rerun doesn't
+    # replay the same one).
     if evt and evt.get("t") != st.session_state.get("ed_evt"):
         st.session_state["ed_evt"] = evt["t"]
-        st.session_state["ed_sel"] = evt.get("nid")
-        if evt.get("action") == "move":
+        action = evt.get("action")
+        if action == "select":
+            st.session_state["ed_sel"] = evt.get("nid")
+            st.rerun()
+        elif action == "move":
             _push_undo()
+            st.session_state["ed_sel"] = evt.get("nid")
             _move(ph, evt["nid"], evt["x"], evt["y"])
-        st.rerun()
+            st.rerun()
+        elif action == "bend":
+            _push_undo()
+            _bend(ph, evt["edge"], evt["x"], evt["y"], view)
+            st.rerun()
+        elif action == "straighten":
+            _push_undo()
+            _straighten(ph, evt["edge"])
+            st.rerun()
 
     _properties(ph, view)
     st.divider()

@@ -85,14 +85,34 @@ def _anchor(r, toward):
     return min(sides, key=lambda p: (p[0] - tx) ** 2 + (p[1] - ty) ** 2)
 
 
+def _orthogonalise(pts):
+    """Insert elbows so a hand-drawn route stays axis-aligned.
+
+    A user drags a bend to an arbitrary point, but every connector in the deck is
+    orthogonal — joining waypoints with straight lines would produce diagonals
+    that read as a different diagram (and a diagonal arrowhead). So each pair of
+    consecutive points is connected by an L rather than a line."""
+    out = [pts[0]]
+    for cx, cy in pts[1:]:
+        px, py = out[-1]
+        if abs(px - cx) < 0.5 and abs(py - cy) < 0.5:
+            continue                      # duplicate point
+        if abs(px - cx) > 0.5 and abs(py - cy) > 0.5:
+            out.append((cx, py))          # elbow: travel horizontally, then turn
+        out.append((cx, cy))
+    return out
+
+
 def _route_manual(a, b, wpts):
-    """Honour a hand-drawn route: attach to each box, pass through the waypoints."""
+    """Honour a hand-drawn route: attach to each box, pass through the waypoints,
+    kept orthogonal throughout."""
     pts = [(float(p[0]), float(p[1])) for p in wpts if len(p) >= 2]
     if not pts:
         return None
-    poly = [_anchor(a, pts[0])] + pts + [_anchor(b, pts[-1])]
-    (x1, y1), (x2, y2) = poly[-2], poly[-1]
-    return poly, (x2, y2, x2 - x1, y2 - y1)
+    poly = _orthogonalise([_anchor(a, pts[0])] + pts + [_anchor(b, pts[-1])])
+    if len(poly) < 2:
+        return None
+    return poly, _arrow_of(poly)
 
 
 def _arrow(x, y, dx, dy):
@@ -227,6 +247,25 @@ def _route(a, b, rects, skip, drawn):
     return best, _arrow_of(best)
 
 
+def _routes(phase, rects):
+    """Route every edge of a phase, in order. Yields (edge, points, arrow).
+
+    Shared by the renderer and the editor so the handles you drag sit on the
+    exact polyline the PDF prints — there is no second routing pass to drift."""
+    drawn: list = []
+    out = []
+    for e in phase.edges:
+        if e.src not in rects or e.dst not in rects:
+            raise ValueError(f"[{phase.pid}] edge {e.src!r}->{e.dst!r}: unknown node id")
+        a, b = rects[e.src], rects[e.dst]
+        wp = getattr(e, "waypoints", None)
+        manual = _route_manual(a, b, wp) if wp else None
+        pts, arr = manual if manual else _route(a, b, rects, {e.src, e.dst}, drawn)
+        drawn.extend(_segments(pts))
+        out.append((e, pts, arr))
+    return out
+
+
 def _diagram(phase):
     rects, lane_h, n = _layout(phase)
     diag_w = 1280 - 2 * DIAG_X
@@ -259,17 +298,8 @@ def _diagram(phase):
             print(f"[warn] swimlane phase {phase.pid}: node {nd.nid!r} "
                   f"({nd.title!r}) has no connector", file=sys.stderr)
 
-    # Connectors already drawn on this diagram — the router steers around them.
-    drawn: list = []
     svg = [f"<svg style='position:absolute;left:0;top:0' width='1280' height='{diag_h:.0f}'>"]
-    for e in phase.edges:
-        if e.src not in rects or e.dst not in rects:
-            raise ValueError(f"[{phase.pid}] edge {e.src!r}->{e.dst!r}: unknown node id")
-        a, b = rects[e.src], rects[e.dst]
-        wp = getattr(e, "waypoints", None)
-        manual = _route_manual(a, b, wp) if wp else None
-        pts, arr = manual if manual else _route(a, b, rects, {e.src, e.dst}, drawn)
-        drawn.extend(_segments(pts))
+    for e, pts, arr in _routes(phase, rects):
         colour = EDGE_COLOUR.get(e.kind, T.GOLD)
         d = " ".join(f"{x:.1f},{y:.1f}" for x, y in pts)
         dash = "stroke-dasharray='6 5'" if e.dashed else ""
@@ -396,16 +426,25 @@ def render(pkg, optimised: bool = False) -> str:
 # drag is what the PDF prints. See phase_view().
 # --------------------------------------------------------------------------
 def phase_view(phase) -> dict:
-    """Everything the editor needs to make a phase interactive:
-    the rendered diagram markup, each box's rectangle, and the canvas size."""
+    """Everything the editor needs to make a phase interactive: the rendered
+    markup, each box's rectangle, and every arrow's actual routed polyline."""
     rects, lane_h, n = _layout(phase)
     diag_h = DIAG_TOP + n * lane_h
     if rects:
         diag_h = max(diag_h, max(r.y + r.h for r in rects.values()) + 12)
+    edges = [{
+        "i": i,
+        "src": e.src,
+        "dst": e.dst,
+        "points": [[round(x, 1), round(y, 1)] for x, y in pts],
+        "manual": bool(getattr(e, "waypoints", None)),
+        "kind": e.kind,
+    } for i, (e, pts, _) in enumerate(_routes(phase, rects))]
     return {
         "html": _diagram(phase),
         "rects": {nid: {"x": r.x, "y": r.y, "w": r.w, "h": r.h}
                   for nid, r in rects.items()},
+        "edges": edges,
         "width": 1280,
         "height": diag_h + 70,   # room for the note + legend
         "lane_h": lane_h,

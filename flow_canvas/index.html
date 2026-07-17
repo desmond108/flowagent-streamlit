@@ -3,120 +3,180 @@
 <head>
 <meta charset="utf-8">
 <style>
-  html, body { margin:0; padding:0; background:#0A1628; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+  html, body { margin:0; padding:0; background:#0A1628;
+               font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+               -webkit-user-select:none; user-select:none; }
   #wrap { overflow:auto; }
   #root { position:relative; transform-origin: top left; }
-  .fa-handle {
-    position:absolute; z-index:60; cursor:grab; border-radius:8px;
-    border:2px solid transparent; box-sizing:border-box;
-  }
-  .fa-handle:hover { border-color:#60A5FA; background:rgba(96,165,250,.10); }
-  .fa-handle.sel   { border-color:#60A5FA; background:rgba(96,165,250,.16); }
-  .fa-handle.drag  { cursor:grabbing; border-color:#93C5FD; background:rgba(147,197,253,.22); }
-  #hint {
-    position:sticky; left:0; top:0; z-index:80; padding:5px 10px;
-    font-size:11px; color:#7C8DB5; background:#0A1628; border-bottom:1px solid #16284A;
-  }
+
+  .fa-h { position:absolute; z-index:60; border-radius:8px; box-sizing:border-box;
+          border:2px solid transparent; cursor:grab; touch-action:none; }
+  .fa-h:hover { border-color:#60A5FA; background:rgba(96,165,250,.10); }
+  .fa-h.sel   { border-color:#60A5FA; background:rgba(96,165,250,.16); }
+  .fa-h.drag  { cursor:grabbing; border-color:#93C5FD; background:rgba(147,197,253,.22); }
+
+  /* Arrow bend handles: small dots sitting on the routed polyline. */
+  .fa-b { position:absolute; z-index:70; width:11px; height:11px; margin:-5.5px 0 0 -5.5px;
+          border-radius:50%; background:#0A1628; border:2px solid #60A5FA;
+          cursor:grab; opacity:.30; touch-action:none; }
+  .fa-b:hover  { opacity:1; transform:scale(1.35); }
+  .fa-b.set    { opacity:.95; background:#60A5FA; }
+  .fa-b.drag   { opacity:1; cursor:grabbing; transform:scale(1.35); }
+
+  #bar { position:sticky; left:0; top:0; z-index:80; padding:5px 10px; font-size:11px;
+         color:#7C8DB5; background:#0A1628; border-bottom:1px solid #16284A; }
+  #bar b { color:#C7D2E8; font-weight:600; }
+  #busy { color:#F59E0B; }
 </style>
 </head>
 <body>
-<div id="hint">Drag a box to reposition it · click to select</div>
+<div id="bar">
+  Drag a <b>box</b> to move it · drag a <b>blue dot</b> to bend an arrow ·
+  double-click a dot to straighten it <span id="busy"></span>
+</div>
 <div id="wrap"><div id="root"></div></div>
 
 <script>
-// --- Streamlit component protocol (raw postMessage; no build step needed) ---
-function post(type, extra) {
-  window.parent.postMessage(Object.assign({ isStreamlitMessage: true, type: type }, extra || {}), "*");
-}
-function setValue(value) { post("streamlit:setComponentValue", { value: value, dataType: "json" }); }
-function setHeight(h)    { post("streamlit:setFrameHeight", { height: h }); }
+// --- Streamlit component protocol (raw postMessage; no build step) ----------
+function post(t, x) { window.parent.postMessage(Object.assign({isStreamlitMessage:true, type:t}, x||{}), "*"); }
+function setValue(v) { post("streamlit:setComponentValue", { value: v, dataType: "json" }); }
+function setHeight(h) { post("streamlit:setFrameHeight", { height: h }); }
 
 const root = document.getElementById("root");
 const wrap = document.getElementById("wrap");
-let state = { rects: {}, snap: 0, selected: null, scale: 1 };
+const busy = document.getElementById("busy");
 
-window.addEventListener("message", function (e) {
-  if (!e.data || e.data.type !== "streamlit:render") return;
-  render(e.data.args || {});
+let S = { rects:{}, edges:[], snap:0, selected:null, scale:1, w:1280, h:720 };
+// One drag at a time, tracked here. Listeners below are registered ONCE for the
+// life of the frame — previously they were added per box per re-render and never
+// removed, so every re-render left dead handlers firing on mousemove.
+let drag = null;
+
+window.addEventListener("message", (e) => {
+  if (e.data && e.data.type === "streamlit:render") render(e.data.args || {});
 });
 
-function render(args) {
-  const stamp = args.stamp || "";
-  state.rects = args.rects || {};
-  state.snap = args.snap || 0;
-  state.selected = args.selected || null;
+function render(a) {
+  S.rects = a.rects || {}; S.edges = a.edges || [];
+  S.snap = a.snap || 0; S.selected = a.selected || null;
+  S.w = a.width || 1280; S.h = a.height || 720;
+  busy.textContent = "";
 
-  // Re-inject only when Python has produced new markup. Python is authoritative:
-  // we move a box locally for feedback, then Python re-renders (re-routing the
-  // arrows) and that render replaces ours.
-  if (root.dataset.stamp !== stamp) {
-    root.innerHTML = args.html || "";
-    root.dataset.stamp = stamp;
-    buildHandles();
+  // Re-inject only when Python produced new markup. Selection is NOT part of the
+  // stamp, so clicking a box no longer rebuilds the whole diagram.
+  if (root.dataset.stamp !== a.stamp) {
+    root.dataset.stamp = a.stamp;
+    root.innerHTML = a.html || "";
+    build();
   } else {
-    // same markup, selection may have changed
-    document.querySelectorAll(".fa-handle").forEach(function (h) {
-      h.classList.toggle("sel", h.dataset.nid === state.selected);
-    });
+    paintSelection();
   }
-
-  // Fit the 1280px-wide diagram into whatever width Streamlit gives us.
-  const avail = wrap.clientWidth || (args.width || 1280);
-  state.scale = Math.min(1, avail / (args.width || 1280));
-  root.style.transform = "scale(" + state.scale + ")";
-  root.style.width  = (args.width  || 1280) + "px";
-  root.style.height = (args.height || 720) + "px";
-  setHeight(Math.ceil((args.height || 720) * state.scale) + 34);
+  fit();
 }
 
-function snap(v) { return state.snap > 0 ? Math.round(v / state.snap) * state.snap : v; }
+function fit() {
+  const avail = wrap.clientWidth || S.w;
+  S.scale = Math.min(1, avail / S.w);
+  root.style.transform = "scale(" + S.scale + ")";
+  root.style.width = S.w + "px";
+  root.style.height = S.h + "px";
+  setHeight(Math.ceil(S.h * S.scale) + 34);
+}
+window.addEventListener("resize", fit);
 
-function buildHandles() {
-  Object.keys(state.rects).forEach(function (nid) {
-    const r = state.rects[nid];
-    const box = root.querySelector('[data-nid="' + (window.CSS && CSS.escape ? CSS.escape(nid) : nid) + '"]');
+function snap(v) { return S.snap > 0 ? Math.round(v / S.snap) * S.snap : v; }
+
+function paintSelection() {
+  root.querySelectorAll(".fa-h").forEach(h =>
+    h.classList.toggle("sel", h.dataset.nid === S.selected));
+}
+
+function build() {
+  // Box handles
+  Object.keys(S.rects).forEach(nid => {
+    const r = S.rects[nid];
     const h = document.createElement("div");
-    h.className = "fa-handle" + (nid === state.selected ? " sel" : "");
+    h.className = "fa-h";
     h.dataset.nid = nid;
-    h.style.left = r.x + "px";
-    h.style.top = r.y + "px";
-    h.style.width = r.w + "px";
-    h.style.height = r.h + "px";
+    h.dataset.kind = "box";
+    Object.assign(h.style, { left:r.x+"px", top:r.y+"px", width:r.w+"px", height:r.h+"px" });
     h.title = nid;
     root.appendChild(h);
-
-    let dragging = false, moved = false, sx = 0, sy = 0, ox = 0, oy = 0;
-
-    h.addEventListener("mousedown", function (ev) {
-      dragging = true; moved = false;
-      sx = ev.clientX; sy = ev.clientY;
-      ox = parseFloat(h.style.left); oy = parseFloat(h.style.top);
-      h.classList.add("drag");
-      ev.preventDefault(); ev.stopPropagation();
-    });
-
-    window.addEventListener("mousemove", function (ev) {
-      if (!dragging) return;
-      // Divide by scale so the box tracks the cursor when the view is zoomed out.
-      const nx = snap(ox + (ev.clientX - sx) / state.scale);
-      const ny = snap(oy + (ev.clientY - sy) / state.scale);
-      if (Math.abs(nx - ox) > 1 || Math.abs(ny - oy) > 1) moved = true;
-      h.style.left = nx + "px"; h.style.top = ny + "px";
-      if (box) { box.style.left = nx + "px"; box.style.top = ny + "px"; }
-    });
-
-    window.addEventListener("mouseup", function () {
-      if (!dragging) return;
-      dragging = false;
-      h.classList.remove("drag");
-      const nx = parseFloat(h.style.left), ny = parseFloat(h.style.top);
-      // A click (no movement) selects; a drag commits a new position.
-      setValue(moved
-        ? { action: "move", nid: nid, x: nx, y: ny, t: Date.now() }
-        : { action: "select", nid: nid, t: Date.now() });
-    });
   });
+
+  // Arrow bend handles: one per segment midpoint of the ACTUAL routed polyline,
+  // so what you grab is what the PDF draws.
+  S.edges.forEach(e => {
+    const p = e.points || [];
+    for (let i = 0; i < p.length - 1; i++) {
+      const mx = (p[i][0] + p[i+1][0]) / 2, my = (p[i][1] + p[i+1][1]) / 2;
+      const b = document.createElement("div");
+      b.className = "fa-b" + (e.manual ? " set" : "");
+      b.dataset.kind = "bend";
+      b.dataset.edge = e.i;
+      Object.assign(b.style, { left:mx+"px", top:my+"px" });
+      b.title = e.src + " → " + e.dst + (e.manual ? " (bent by hand — double-click to straighten)" : "");
+      root.appendChild(b);
+    }
+  });
+  paintSelection();
 }
+
+// --- one delegated pointer pipeline ----------------------------------------
+root.addEventListener("pointerdown", (ev) => {
+  const t = ev.target.closest(".fa-h, .fa-b");
+  if (!t) return;
+  drag = {
+    el: t,
+    kind: t.dataset.kind,
+    nid: t.dataset.nid,
+    edge: t.dataset.edge,
+    sx: ev.clientX, sy: ev.clientY,
+    ox: parseFloat(t.style.left), oy: parseFloat(t.style.top),
+    moved: false,
+    box: t.dataset.kind === "box"
+      ? root.querySelector('[data-nid="' + CSS.escape(t.dataset.nid) + '"]') : null,
+  };
+  t.classList.add("drag");
+  t.setPointerCapture(ev.pointerId);
+  ev.preventDefault();
+});
+
+root.addEventListener("pointermove", (ev) => {
+  if (!drag) return;
+  // Divide by scale so the handle tracks the cursor when the view is zoomed out.
+  const nx = snap(drag.ox + (ev.clientX - drag.sx) / S.scale);
+  const ny = snap(drag.oy + (ev.clientY - drag.sy) / S.scale);
+  if (Math.abs(nx - drag.ox) > 1 || Math.abs(ny - drag.oy) > 1) drag.moved = true;
+  drag.el.style.left = nx + "px";
+  drag.el.style.top = ny + "px";
+  if (drag.box) { drag.box.style.left = nx + "px"; drag.box.style.top = ny + "px"; }
+});
+
+root.addEventListener("pointerup", (ev) => {
+  if (!drag) return;
+  const d = drag; drag = null;
+  d.el.classList.remove("drag");
+  const nx = parseFloat(d.el.style.left), ny = parseFloat(d.el.style.top);
+
+  if (!d.moved) {
+    // A click, not a drag.
+    if (d.kind === "box") { S.selected = d.nid; paintSelection(); send({action:"select", nid:d.nid}); }
+    return;
+  }
+  busy.textContent = "· re-routing…";
+  if (d.kind === "box") send({ action:"move", nid:d.nid, x:nx, y:ny });
+  else send({ action:"bend", edge:Number(d.edge), x:nx, y:ny });
+});
+
+root.addEventListener("dblclick", (ev) => {
+  const b = ev.target.closest(".fa-b");
+  if (!b) return;
+  busy.textContent = "· straightening…";
+  send({ action:"straighten", edge:Number(b.dataset.edge) });
+});
+
+function send(v) { v.t = Date.now(); setValue(v); }
 
 post("streamlit:componentReady", { apiVersion: 1 });
 </script>
