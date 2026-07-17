@@ -24,12 +24,14 @@ from generator import contract, swimlane
 KINDS = ["standard", "new", "enhanced", "exception", "decision", "terminal"]
 EDGE_KINDS = ["standard", "new", "exception"]
 
-# Declared at import time so the component's static files are registered when the
+# Declared at import time so the components' static files are registered when the
 # app starts, not on first use of the editor.
-_CANVAS = components.declare_component(
-    "flow_canvas",
-    path=os.path.join(os.path.dirname(os.path.abspath(__file__)), "flow_canvas"),
-)
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_CANVAS = components.declare_component("flow_canvas", path=os.path.join(_HERE, "flow_canvas"))
+# SPIKE: client-side canvas. React Flow owns interaction; the canonical JSON still
+# owns position; Python still renders the PDF. Loaded from a CDN as ES modules so
+# there is no npm build step — fine for a spike, must be vendored for production.
+_CANVAS_RF = components.declare_component("flow_canvas_rf", path=os.path.join(_HERE, "flow_canvas_rf"))
 
 
 def _canvas():
@@ -149,7 +151,13 @@ def render_editor() -> None:
         st.error(f"Cannot draw this phase: {e}")
         return
 
-    c1, c2, c3 = st.columns([1, 1, 2])
+    c0, c1, c2, c3 = st.columns([1.4, 1, 1, 1.6])
+    with c0:
+        engine = st.radio("Canvas", ["React Flow (spike)", "Classic"],
+                          horizontal=True, label_visibility="collapsed",
+                          help="React Flow: dragging happens in the browser, so it "
+                               "should feel native. Classic: every drop round-trips "
+                               "to Python.")
     with c1:
         snap = st.selectbox("Snap", [0, 5, 10, 20], index=2,
                             format_func=lambda v: "Off" if v == 0 else f"{v}px")
@@ -163,15 +171,18 @@ def render_editor() -> None:
             _reset_phase(ph)
             st.rerun()
 
-    # Selection is deliberately NOT in the stamp: the canvas repaints selection
-    # itself, so clicking a box doesn't re-inject the whole diagram.
-    stamp = hashlib.md5(view["html"].encode()).hexdigest()
-    evt = _canvas()(
-        html=view["html"], rects=view["rects"], edges=view["edges"],
-        width=view["width"], height=view["height"], snap=snap,
-        selected=st.session_state.get("ed_sel"), stamp=stamp,
-        key=f"canvas_{sop_id}_{opt}_{idx}", default=None,
-    )
+    if engine.startswith("React"):
+        evt = _rf_canvas(phase_obj, ph, snap, sop_id, opt, idx)
+    else:
+        # Selection is deliberately NOT in the stamp: the canvas repaints selection
+        # itself, so clicking a box doesn't re-inject the whole diagram.
+        stamp = hashlib.md5(view["html"].encode()).hexdigest()
+        evt = _canvas()(
+            html=view["html"], rects=view["rects"], edges=view["edges"],
+            width=view["width"], height=view["height"], snap=snap,
+            selected=st.session_state.get("ed_sel"), stamp=stamp,
+            key=f"canvas_{sop_id}_{opt}_{idx}", default=None,
+        )
 
     # Apply an event coming back from the browser (guarded so a rerun doesn't
     # replay the same one).
@@ -194,12 +205,54 @@ def render_editor() -> None:
             _push_undo()
             _straighten(ph, evt["edge"])
             st.rerun()
+        # --- events only the React Flow canvas raises ---
+        elif action == "connect":
+            _push_undo()
+            ph["edges"].append({"src": evt["src"], "dst": evt["dst"], "label": "",
+                                "dashed": False, "kind": "standard", "waypoints": None})
+            st.rerun()
+        elif action == "delete_nodes":
+            _push_undo()
+            ids = set(evt.get("ids") or [])
+            ph["nodes"] = [n for n in ph["nodes"] if n["nid"] not in ids]
+            ph["edges"] = [e for e in ph["edges"]
+                           if e["src"] not in ids and e["dst"] not in ids]
+            if st.session_state.get("ed_sel") in ids:
+                st.session_state["ed_sel"] = None
+            st.rerun()
+        elif action == "delete_edges":
+            _push_undo()
+            drop = set(evt.get("idx") or [])
+            ph["edges"] = [e for i, e in enumerate(ph["edges"]) if i not in drop]
+            st.rerun()
 
     _properties(ph, view)
     st.divider()
     _edges(ph)
     st.divider()
     _review(d)
+
+
+def _rf_canvas(phase_obj, ph: dict, snap: int, sop_id: str, opt: bool, idx: int):
+    """SPIKE: the client-side canvas.
+
+    The stamp covers STRUCTURE only (ids, wording, connections) — never position.
+    So a drag sends x/y back, Python stores it, and the returned props don't reset
+    the canvas. That is the whole trick: the browser keeps its state while
+    dragging, and Python is still the only thing that renders the PDF."""
+    v = swimlane.phase_rf(phase_obj)
+    structure = json.dumps(
+        [[(n["id"], n["title"], n["sub"], n["kind"], n["lane"]) for n in v["nodes"]],
+         [(e["source"], e["target"], e["label"], e["kind"], e["dashed"]) for e in v["edges"]],
+         [L["label"] for L in v["lanes"]]], sort_keys=True)
+    return _CANVAS_RF(
+        nodes=v["nodes"], edges=v["edges"], lanes=v["lanes"],
+        laneX=v["laneX"], laneW=v["laneW"], labelW=v["labelW"],
+        palette=v["palette"], snap=snap,
+        frameHeight=int(min(760, max(460, v["height"]))),
+        stamp=hashlib.md5(structure.encode()).hexdigest(),
+        key=f"rf_{sop_id}_{opt}_{idx}", default=None,
+    )
 
 
 def _properties(ph: dict, view: dict) -> None:

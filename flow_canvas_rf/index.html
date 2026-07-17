@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://esm.sh/@xyflow/react@12/dist/style.css">
+<style>
+  html, body, #app { margin:0; padding:0; height:100%; background:#0A1628;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; }
+  .react-flow__attribution { display:none; }
+  .react-flow__handle { opacity:0; width:8px; height:8px; border:none; background:#42A5F5; }
+  .fa-node:hover .react-flow__handle { opacity:.9; }
+  .react-flow__node-fa.selected .fa-box { box-shadow:0 0 0 3px #42A5F5; }
+  .fa-bar { position:absolute; z-index:5; top:0; left:0; right:0; padding:5px 10px;
+    font-size:11px; color:#7C8DB5; background:rgba(10,22,40,.92);
+    border-bottom:1px solid #16284A; pointer-events:none; }
+  .fa-bar b { color:#C7D2E8; }
+  .fa-dirty { color:#FF9800; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script type="module">
+import React from "https://esm.sh/react@18.3.1";
+import { createRoot } from "https://esm.sh/react-dom@18.3.1/client";
+import htm from "https://esm.sh/htm@3.1.1";
+import * as XY from "https://esm.sh/@xyflow/react@12.3.5?deps=react@18.3.1,react-dom@18.3.1";
+
+const html = htm.bind(React.createElement);
+const { ReactFlow, Background, Controls, MiniMap, Handle, Position, MarkerType,
+        applyNodeChanges, applyEdgeChanges, addEdge, ReactFlowProvider } = XY;
+const { useState, useEffect, useCallback, useMemo, useRef } = React;
+
+// --- Streamlit protocol -----------------------------------------------------
+function post(t, x) { window.parent.postMessage(Object.assign({isStreamlitMessage:true, type:t}, x||{}), "*"); }
+const setValue = (v) => post("streamlit:setComponentValue", { value: v, dataType: "json" });
+const setHeight = (h) => post("streamlit:setFrameHeight", { height: h });
+
+const BW = 156, BH = 58;
+
+// A box, styled to match the deck exactly (colours come from generator/theme).
+function FaNode({ data, selected }) {
+  const sides = [["l", Position.Left], ["r", Position.Right],
+                 ["t", Position.Top], ["b", Position.Bottom]];
+  return html`
+    <div class="fa-node" style=${{ width: BW, height: BH }}>
+      ${sides.map(([k, p]) => html`
+        <${Handle} key=${"s-"+k} id=${"s-"+k} type="source" position=${p} />`)}
+      ${sides.map(([k, p]) => html`
+        <${Handle} key=${"t-"+k} id=${"t-"+k} type="target" position=${p} />`)}
+      <div class="fa-box" style=${{
+        width:"100%", height:"100%", background:data.bg,
+        border:`2px solid ${data.border}`, borderRadius:8,
+        display:"flex", flexDirection:"column", alignItems:"center",
+        justifyContent:"center", textAlign:"center", padding:"4px 6px",
+        boxSizing:"border-box" }}>
+        <div style=${{fontSize:14, fontWeight:700, color:data.text, lineHeight:1.15}}>${data.title}</div>
+        ${data.sub ? html`<div style=${{fontSize:11, color:"#A8C0E8", marginTop:3}}>${data.sub}</div>` : null}
+      </div>
+    </div>`;
+}
+
+// Lane band — a non-interactive backdrop node so it pans/zooms with the diagram.
+function LaneNode({ data }) {
+  return html`
+    <div style=${{ width:data.w, height:data.h, background:data.bg,
+                   display:"flex", alignItems:"center" }}>
+      <div style=${{ width:data.labelW, display:"flex", alignItems:"center",
+                     justifyContent:"center", height:"100%" }}>
+        <div style=${{ writingMode:"vertical-rl", transform:"rotate(180deg)",
+                       fontSize:11, color:"#A8C0E8", letterSpacing:".03em" }}>${data.label}</div>
+      </div>
+    </div>`;
+}
+
+const nodeTypes = { fa: FaNode, lane: LaneNode };
+
+// Attach each edge to the sensible side of each box, recomputed as boxes move —
+// this is what makes connectors follow naturally while you drag.
+function withHandles(nodes, edges) {
+  const by = {};
+  nodes.forEach(n => { if (n.type === "fa") by[n.id] = n; });
+  return edges.map(e => {
+    const a = by[e.source], b = by[e.target];
+    if (!a || !b) return e;
+    const dx = (b.position.x - a.position.x), dy = (b.position.y - a.position.y);
+    let sh, th;
+    if (Math.abs(dx) >= Math.abs(dy)) {
+      sh = dx >= 0 ? "s-r" : "s-l"; th = dx >= 0 ? "t-l" : "t-r";
+    } else {
+      sh = dy >= 0 ? "s-b" : "s-t"; th = dy >= 0 ? "t-t" : "t-b";
+    }
+    return { ...e, sourceHandle: sh, targetHandle: th };
+  });
+}
+
+function toNodes(v) {
+  const lanes = (v.lanes || []).map((L, i) => ({
+    id: "lane-" + i, type: "lane", draggable: false, selectable: false,
+    connectable: false, deletable: false, zIndex: -1,
+    position: { x: v.laneX, y: L.y },
+    data: { label: L.label, w: v.laneW, h: L.h, labelW: v.labelW,
+            bg: i % 2 === 0 ? v.palette.navy2 : "#0C1A33" },
+  }));
+  const boxes = (v.nodes || []).map(n => ({
+    id: n.id, type: "fa", position: { x: n.x, y: n.y }, zIndex: 1,
+    data: { title:n.title, sub:n.sub, kind:n.kind, lane:n.lane,
+            bg:n.bg, border:n.border, text:n.text },
+  }));
+  return [...lanes, ...boxes];
+}
+
+function toEdges(v) {
+  return (v.edges || []).map(e => ({
+    id: e.id, source: e.source, target: e.target, type: "smoothstep",
+    label: e.label || undefined, data: { i: e.i, kind: e.kind },
+    style: { stroke: e.colour, strokeWidth: 2,
+             strokeDasharray: e.dashed ? "6 5" : undefined },
+    labelStyle: { fill: e.colour, fontSize: 11 },
+    labelBgStyle: { fill: "#0A1628" },
+    labelBgPadding: [4, 2], labelBgBorderRadius: 3,
+    markerEnd: { type: MarkerType.ArrowClosed, color: e.colour, width: 16, height: 16 },
+    pathOptions: { borderRadius: 0 },
+  }));
+}
+
+function App() {
+  const [view, setView] = useState(null);
+  const [nodes, setNodes] = useState([]);
+  const [edges, setEdges] = useState([]);
+  const [dirty, setDirty] = useState(false);
+  const stamp = useRef(null);
+
+  useEffect(() => {
+    const onMsg = (e) => {
+      if (!e.data || e.data.type !== "streamlit:render") return;
+      const a = e.data.args || {};
+      setView(a);
+      // Reset only when the STRUCTURE changed. Positions arriving back from a
+      // drag must not reset the canvas — that is what makes it feel native.
+      if (stamp.current !== a.stamp) {
+        stamp.current = a.stamp;
+        setNodes(toNodes(a));
+        setEdges(toEdges(a));
+        setDirty(false);
+      }
+      setHeight(a.frameHeight || 640);
+    };
+    window.addEventListener("message", onMsg);
+    post("streamlit:componentReady", { apiVersion: 1 });
+    return () => window.removeEventListener("message", onMsg);
+  }, []);
+
+  const onNodesChange = useCallback((ch) => setNodes(ns => applyNodeChanges(ch, ns)), []);
+  const onEdgesChange = useCallback((ch) => setEdges(es => applyEdgeChanges(ch, es)), []);
+
+  // Dragging is local and immediate; Python hears about it only when you let go.
+  const onNodeDragStop = useCallback((_e, node) => {
+    if (node.type !== "fa") return;
+    setDirty(true);
+    setValue({ action: "move", nid: node.id,
+               x: Math.round(node.position.x), y: Math.round(node.position.y),
+               t: Date.now() });
+  }, []);
+
+  const onConnect = useCallback((c) => {
+    setEdges(es => addEdge({ ...c, type:"smoothstep",
+      style:{ stroke:"#FFD700", strokeWidth:2 },
+      markerEnd:{ type:MarkerType.ArrowClosed, color:"#FFD700", width:16, height:16 } }, es));
+    setValue({ action:"connect", src:c.source, dst:c.target, t:Date.now() });
+  }, []);
+
+  const onNodesDelete = useCallback((ns) => {
+    const ids = ns.filter(n => n.type === "fa").map(n => n.id);
+    if (ids.length) setValue({ action:"delete_nodes", ids, t:Date.now() });
+  }, []);
+
+  const onEdgesDelete = useCallback((es) => {
+    const idx = es.map(e => e.data && e.data.i).filter(i => i !== undefined);
+    if (idx.length) setValue({ action:"delete_edges", idx, t:Date.now() });
+  }, []);
+
+  const onSelectionChange = useCallback(({ nodes: sel }) => {
+    const n = (sel || []).find(x => x.type === "fa");
+    setValue({ action:"select", nid: n ? n.id : null, t: Date.now() });
+  }, []);
+
+  const wired = useMemo(() => withHandles(nodes, edges), [nodes, edges]);
+  if (!view) return html`<div style=${{color:"#7C8DB5",padding:12}}>Loading canvas…</div>`;
+
+  return html`
+    <div style=${{ width:"100%", height:(view.frameHeight||640)+"px", position:"relative" }}>
+      <div class="fa-bar">
+        Drag boxes · drag from a box edge to connect · <b>Backspace</b> deletes ·
+        scroll to zoom ${dirty ? html`<span class="fa-dirty">· edits pending — press <b>Apply</b> below</span>` : null}
+      </div>
+      <${ReactFlow} nodes=${nodes} edges=${wired}
+        nodeTypes=${nodeTypes}
+        onNodesChange=${onNodesChange} onEdgesChange=${onEdgesChange}
+        onNodeDragStop=${onNodeDragStop} onConnect=${onConnect}
+        onNodesDelete=${onNodesDelete} onEdgesDelete=${onEdgesDelete}
+        onSelectionChange=${onSelectionChange}
+        snapToGrid=${!!view.snap} snapGrid=${[view.snap||1, view.snap||1]}
+        minZoom=${0.2} maxZoom=${2} fitView
+        proOptions=${{ hideAttribution: true }}
+        defaultEdgeOptions=${{ type:"smoothstep" }}>
+        <${Background} color="#16284A" gap=${20} />
+        <${Controls} showInteractive=${false} />
+      <//>
+    </div>`;
+}
+
+createRoot(document.getElementById("app")).render(
+  html`<${ReactFlowProvider}><${App} /><//>`);
+</script>
+</body>
+</html>

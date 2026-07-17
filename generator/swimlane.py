@@ -453,6 +453,45 @@ def phase_view(phase) -> dict:
     }
 
 
+def phase_rf(phase) -> dict:
+    """The same phase, shaped for a client-side canvas (React Flow spike).
+
+    Note what is NOT here: any layout decision. Positions come from _layout(),
+    which is the renderer's own placement, and go back as x/y overrides. The
+    browser owns *interaction*; the canonical JSON owns *position*; Python still
+    owns the PDF. That is what keeps two canvases from disagreeing — the
+    positions are stored data, not computed twice."""
+    rects, lane_h, n = _layout(phase)
+    nodes = []
+    for nd in phase.nodes:
+        r = rects[nd.nid]
+        border, bg, text = NODE_STYLE.get(nd.kind, NODE_STYLE["standard"])
+        nodes.append({
+            "id": nd.nid, "x": r.x, "y": r.y, "w": BOX_W, "h": BOX_H,
+            "title": nd.title, "sub": nd.sub, "kind": nd.kind, "lane": nd.lane,
+            "border": border, "bg": bg, "text": text,
+            "placed": getattr(nd, "x", None) is not None or getattr(nd, "y", None) is not None,
+        })
+    lanes = [{"label": ln, "y": DIAG_TOP + i * lane_h, "h": lane_h}
+             for i, ln in enumerate(phase.lanes)]
+    edges = [{
+        "id": f"e{i}", "i": i, "source": e.src, "target": e.dst,
+        "label": e.label, "kind": e.kind, "dashed": bool(e.dashed),
+        "colour": EDGE_COLOUR.get(e.kind, T.GOLD),
+        "manual": bool(getattr(e, "waypoints", None)),
+    } for i, e in enumerate(phase.edges)]
+    diag_h = DIAG_TOP + n * lane_h
+    if rects:
+        diag_h = max(diag_h, max(r.y + r.h for r in rects.values()) + 12)
+    return {
+        "nodes": nodes, "edges": edges, "lanes": lanes,
+        "laneX": DIAG_X, "laneW": 1280 - 2 * DIAG_X, "labelW": LANE_LABEL_W,
+        "width": 1280, "height": diag_h + 20,
+        "palette": {"navy": T.NAVY, "navy2": T.NAVY2, "navy3": T.NAVY3,
+                    "gold": T.GOLD, "sub": T.SUB, "blue": T.BLUE},
+    }
+
+
 def auto_xy(phase, nid: str) -> tuple:
     """Where auto-layout would put this node — used to seed a drag and to
     implement 'reset to automatic'."""
